@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.mybatis;
+package com.jdddata.dockermgr.config.mybatis;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @author Magoo
  */
 @Configuration
-@MapperScan(basePackages = "com.jdddata.dockermgr.mybatis.store.mapper",
+@MapperScan(basePackages = "com.jdddata.dockermgr.config.mybatis.store.mapper",
         sqlSessionTemplateRef = "storeSqlSessionTemplate")
 public class DsConfigOfBackstage {
 
@@ -39,6 +39,7 @@ public class DsConfigOfBackstage {
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
                 "classpath:mybatis/mapper/store/*.xml"));
         return bean.getObject();
+
     }
 
     @Bean(name = "storeTransactionManager")
