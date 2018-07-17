@@ -1,17 +1,22 @@
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+# Global
+target
+*.log
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
+# Eclipse
 .project
+.classpath
 .settings
-.springBeans
-.sts4-cache
+.metadata
 
-### IntelliJ IDEA ###
+# IntelliJ
 .idea
-*.iws
 *.iml
-*.ipr
+
+# Svn
+.svn
+
+# Maven
+release.properties
+*.releaseBackup
+
+.DS_Store
