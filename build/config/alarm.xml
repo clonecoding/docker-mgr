@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<alarm topic="比分直播补充源采集">
+    <emitter level="" class="commons.alarm.emitter.impl.EmailEmitter">
+        <smtp_host>mail.jiangduoduo.com</smtp_host>
+        <smtp_port>25</smtp_port>
+        <username>service@jiangduoduo.com</username>
+        <password>IyGo1bjUXLeP!@#</password>
+        <send_from>service@jiangduoduo.com</send_from>
+        <send_to>mazhiyong@jiangduoduo.com</send_to>
+    </emitter>
+</alarm>
