@@ -4,6 +4,9 @@ package com.jdddata.dockermgr;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
 import org.junit.Test;
+import org.springframework.util.ClassUtils;
+
+import java.net.URL;
 
 /**
  * @Author: zhangheng(赛事)
@@ -16,8 +19,10 @@ public class HttpClientUtilsTest {
 
     @Test
     public void post2() throws Exception {
+        String path =ClassUtils.getDefaultClassLoader().getResource("cert").getPath().substring(1);
+
         String url = "https://10.33.94.5:2376/containers/json?all=1";
-        HttpResponse message = HttpClientUtils.getWithCert(url, "E:\\ideaProject\\docker-mgr\\build\\config\\cert");
+        HttpResponse message = HttpClientUtils.getWithCert(url);
 
         System.out.println(message);
     }

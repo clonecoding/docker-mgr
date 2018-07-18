@@ -13,12 +13,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -33,17 +35,14 @@ import java.util.Map;
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
 /**
- * @version 1.0.0
- * @package：com.ly.fn.core.common.util
- * @des：httpClient请求工具类
- * @autor ：王兵【wb38113】
- * @createTime： 2016/9/7-10:41
+ *
  */
 public class HttpClientUtils {
 
     private static Logger logger = LoggerFactory.getLogger(HttpClientUtils.class);
 
     private static final String DEFAULTCHARSET = "UTF-8";
+
     /**
      * 连接池
      */
@@ -77,68 +76,24 @@ public class HttpClientUtils {
 
     }
 
-    public static HttpResponse getWithCert(String url, String certFilePath) {
+    public static HttpResponse getWithCert(String url) {
         CloseableHttpClient httpClient;
-        HttpResponse httpClientResponse = null;
+        HttpResponse httpResponse = null;
         CloseableHttpResponse response = null;
         HttpGet httpGet = new HttpGet(url);
-        try {
-            httpClient = ClientCustomPemSSL(certFilePath);
-            httpGet.setConfig(requestConfig);
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
-            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    logger.error("关闭HttpClientUtils异常", e);
-                }
-            }
-        }
-        return httpClientResponse;
+        httpGet.setConfig(requestConfig);
+
+        return send(httpGet);
     }
 
-    public static HttpResponse deleteWithCert(String url, String certFilePath) {
-        CloseableHttpClient httpClient;
-        HttpResponse httpClientResponse = null;
-        CloseableHttpResponse response = null;
+    public static HttpResponse deleteWithCert(String url) {
         HttpDelete httpDelete = new HttpDelete(url);
-        try {
-            httpClient = ClientCustomPemSSL(certFilePath);
-            httpDelete.setConfig(requestConfig);
-            response = httpClient.execute(httpDelete);
-            HttpEntity entity = response.getEntity();
-            String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
-            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    logger.error("关闭HttpClientUtils异常", e);
-                }
-            }
-        }
-        return httpClientResponse;
+        httpDelete.setConfig(requestConfig);
+        return send(httpDelete);
     }
 
-    public static HttpResponse putRawWithCert(String url, String stringJson, String certPath) {
-        return putRawWithCert(url, stringJson, null, DEFAULTCHARSET, certPath);
+    public static HttpResponse putRawWithCert(String url, String stringJson) {
+        return putRawWithCert(url, stringJson, null, DEFAULTCHARSET);
     }
 
     /**
@@ -148,9 +103,7 @@ public class HttpClientUtils {
      * @param encode
      * @return
      */
-    public static HttpResponse putRawWithCert(String url, String stringJson, Map<String, String> headers, String encode, String certPath) {
-        HttpResponse response = new HttpResponse();
-        CloseableHttpClient httpClient;
+    public static HttpResponse putRawWithCert(String url, String stringJson, Map<String, String> headers, String encode) {
         HttpPut httpput = new HttpPut(url);
         //设置header
         httpput.setHeader("Content-type", "application/json");
@@ -162,32 +115,11 @@ public class HttpClientUtils {
         //组织请求参数
         StringEntity stringEntity = new StringEntity(stringJson, encode);
         httpput.setEntity(stringEntity);
-        String content = null;
-        CloseableHttpResponse httpResponse = null;
-        try {
-            //响应信息
-            httpClient = ClientCustomPemSSL(certPath);
-            httpResponse = httpClient.execute(httpput);
-            HttpEntity entity = httpResponse.getEntity();
-            content = EntityUtils.toString(entity, encode);
-            response.setBody(content);
-            response.setHeaders(httpResponse.getAllHeaders());
-            response.setStatusCode(httpResponse.getStatusLine().getStatusCode());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                httpResponse.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return response;
+        return send(httpput);
     }
 
-    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params, String certPath) {
-        return postWithCert(apiUrl, params, DEFAULTCHARSET, null, certPath);
+    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params) {
+        return postWithCert(apiUrl, params, DEFAULTCHARSET, null);
     }
 
     /**
@@ -197,41 +129,25 @@ public class HttpClientUtils {
      * @param params 请求参数
      * @return 返回结果string
      */
-    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params, String charset, String contentType, String certFilePath) {
+    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params, String charset, String contentType) {
         HttpResponse httpClientResponse = null;
-        CloseableHttpResponse response = null;
-
         HttpPost httpPost = new HttpPost(apiUrl);
-        try {
-            CloseableHttpClient httpClient = ClientCustomPemSSL(certFilePath);
-            ;
-            httpPost.setConfig(requestConfig);
-            if (params != null && params.size() > 0) {
-                //将map转化为BasicNameValuePair
-                List<BasicNameValuePair> pairList = convertBasicPairList(params);
-                UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(pairList, charset);
-                if (contentType != null) {
-                    urlEncodedFormEntity.setContentType(contentType);
-                }
-                httpPost.setEntity(urlEncodedFormEntity);
+        httpPost.setConfig(requestConfig);
+        if (params != null && params.size() > 0) {
+            //将map转化为BasicNameValuePair
+            List<BasicNameValuePair> pairList = convertBasicPairList(params);
+            UrlEncodedFormEntity urlEncodedFormEntity = null;
+            try {
+                urlEncodedFormEntity = new UrlEncodedFormEntity(pairList, charset);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
-            response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            String httpStr = EntityUtils.toString(entity, charset);
-            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (response != null) {
-                try {
-
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
+            if (contentType != null) {
+                urlEncodedFormEntity.setContentType(contentType);
             }
+            httpPost.setEntity(urlEncodedFormEntity);
         }
-        return httpClientResponse;
+        return send(httpPost);
     }
 
     /**
@@ -242,8 +158,8 @@ public class HttpClientUtils {
      * @param context
      * @return
      */
-    public static String postRawWithCert(String apiUrl, String context, String certFilePath) {
-        return postRawWithCert(apiUrl, context, DEFAULTCHARSET, "application/json", certFilePath);
+    public static HttpResponse postRawWithCert(String apiUrl, String context) {
+        return postRawWithCert(apiUrl, context, DEFAULTCHARSET, "application/json");
     }
 
     /**
@@ -255,39 +171,18 @@ public class HttpClientUtils {
      * @param contentType 头文件格式
      * @return
      */
-    public static String postRawWithCert(String apiUrl, String context, String charset, String contentType, String certFilePath) {
-
-        String httpStr = null;
-        CloseableHttpResponse response = null;
+    public static HttpResponse postRawWithCert(String apiUrl, String context, String charset, String contentType) {
+        HttpResponse httpResponse = null;
         HttpPost httpPost = new HttpPost(apiUrl);
-        try {
-            CloseableHttpClient httpClient = ClientCustomPemSSL(certFilePath);
-            httpPost.setConfig(requestConfig);
-            StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
-            if (!StringUtils.isEmpty(contentType)) {
-                //post传输是json格式数据
-                stringEntity.setContentType(contentType);
-            }
-            httpPost.setEntity(stringEntity);
-            response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, charset);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    //logger.error("关闭HttpClientUtils.doPost()异常", e);
-                }
-            }
+        httpPost.setConfig(requestConfig);
+        StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
+        if (!StringUtils.isEmpty(contentType)) {
+            //post传输是json格式数据
+            stringEntity.setContentType(contentType);
         }
-        return httpStr;
+        httpPost.setEntity(stringEntity);
+        return send(httpPost);
+
     }
 
     /**
@@ -324,7 +219,7 @@ public class HttpClientUtils {
      * @return
      * @throws Exception
      */
-    private static CloseableHttpClient ClientCustomSSL(File file) throws Exception {
+    private static CloseableHttpClient clientCustomSSL(File file) throws Exception {
 
         KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
         FileInputStream instream = new FileInputStream(file);
@@ -344,8 +239,9 @@ public class HttpClientUtils {
         return httpclient;
     }
 
-    private static CloseableHttpClient ClientCustomPemSSL(String filepath) throws Exception {
-        LocalDirectorySSLConfig localDirectorySSLConfig = new LocalDirectorySSLConfig(filepath);
+    private static CloseableHttpClient clientCustomPemSSL() throws Exception {
+        String filePath = ClassUtils.getDefaultClassLoader().getResource("cert").getPath().substring(1);
+        LocalDirectorySSLConfig localDirectorySSLConfig = new LocalDirectorySSLConfig(filePath);
         SSLContext sslcontext = localDirectorySSLConfig.getSSLContext();
         // Allow TLSv1 protocol only
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1.2"}, null,
@@ -362,5 +258,30 @@ public class HttpClientUtils {
             pairList.add(pair);
         }
         return pairList;
+    }
+
+    private static HttpResponse send(HttpUriRequest request) {
+        HttpResponse httpResponse = null;
+        CloseableHttpResponse response = null;
+        try {
+            CloseableHttpClient httpClient = clientCustomPemSSL();
+            response = httpClient.execute(request);
+            HttpEntity entity = response.getEntity();
+            String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
+            httpResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        } finally {
+            if (response != null) {
+                try {
+
+                    EntityUtils.consume(response.getEntity());
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+
+        return httpResponse;
     }
 }
