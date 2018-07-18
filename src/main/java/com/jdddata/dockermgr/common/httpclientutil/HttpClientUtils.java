@@ -3,9 +3,7 @@ package com.jdddata.dockermgr.common.httpclientutil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ssl.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -57,7 +55,7 @@ public class HttpClientUtils {
     /**
      * 超时时间
      */
-    private static final int MAX_TIMEOUT = 100000;
+    private static final int MAX_TIMEOUT = 20000;
 
     static {
         connectionManager = new PoolingHttpClientConnectionManager();
@@ -72,8 +70,6 @@ public class HttpClientUtils {
         configBuilder.setSocketTimeout(MAX_TIMEOUT);
         //设置从连接池获取连接实例的超时
         configBuilder.setConnectionRequestTimeout(MAX_TIMEOUT);
-        //在提交请求之前 测试连接是否可用
-        configBuilder.setStaleConnectionCheckEnabled(true);
         requestConfig = configBuilder.build();
     }
 
@@ -81,9 +77,9 @@ public class HttpClientUtils {
 
     }
 
-    public static HttpClientResponse getWithCert(String url, String certFilePath) {
+    public static HttpResponse getWithCert(String url, String certFilePath) {
         CloseableHttpClient httpClient;
-        HttpClientResponse httpClientResponse = null;
+        HttpResponse httpClientResponse = null;
         CloseableHttpResponse response = null;
         HttpGet httpGet = new HttpGet(url);
         try {
@@ -92,7 +88,7 @@ public class HttpClientUtils {
             response = httpClient.execute(httpGet);
             HttpEntity entity = response.getEntity();
             String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
-            httpClientResponse = new HttpClientResponse(response.getStatusLine().getStatusCode(), httpStr);
+            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
@@ -111,7 +107,86 @@ public class HttpClientUtils {
         return httpClientResponse;
     }
 
-    public static HttpClientResponse postWithCert(String apiUrl, Map<String, Object> params, String certPath) {
+    public static HttpResponse deleteWithCert(String url, String certFilePath) {
+        CloseableHttpClient httpClient;
+        HttpResponse httpClientResponse = null;
+        CloseableHttpResponse response = null;
+        HttpDelete httpDelete = new HttpDelete(url);
+        try {
+            httpClient = ClientCustomPemSSL(certFilePath);
+            httpDelete.setConfig(requestConfig);
+            response = httpClient.execute(httpDelete);
+            HttpEntity entity = response.getEntity();
+            String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
+            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                try {
+                    EntityUtils.consume(response.getEntity());
+                } catch (IOException e) {
+                    logger.error("关闭HttpClientUtils异常", e);
+                }
+            }
+        }
+        return httpClientResponse;
+    }
+
+    public static HttpResponse putRawWithCert(String url, String stringJson, String certPath) {
+        return putRawWithCert(url, stringJson, null, DEFAULTCHARSET, certPath);
+    }
+
+    /**
+     * 发送 http put 请求，参数以原生字符串进行提交
+     *
+     * @param url
+     * @param encode
+     * @return
+     */
+    public static HttpResponse putRawWithCert(String url, String stringJson, Map<String, String> headers, String encode, String certPath) {
+        HttpResponse response = new HttpResponse();
+        CloseableHttpClient httpClient;
+        HttpPut httpput = new HttpPut(url);
+        //设置header
+        httpput.setHeader("Content-type", "application/json");
+        if (headers != null && headers.size() > 0) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                httpput.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        //组织请求参数
+        StringEntity stringEntity = new StringEntity(stringJson, encode);
+        httpput.setEntity(stringEntity);
+        String content = null;
+        CloseableHttpResponse httpResponse = null;
+        try {
+            //响应信息
+            httpClient = ClientCustomPemSSL(certPath);
+            httpResponse = httpClient.execute(httpput);
+            HttpEntity entity = httpResponse.getEntity();
+            content = EntityUtils.toString(entity, encode);
+            response.setBody(content);
+            response.setHeaders(httpResponse.getAllHeaders());
+            response.setStatusCode(httpResponse.getStatusLine().getStatusCode());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                httpResponse.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return response;
+    }
+
+    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params, String certPath) {
         return postWithCert(apiUrl, params, DEFAULTCHARSET, null, certPath);
     }
 
@@ -122,8 +197,8 @@ public class HttpClientUtils {
      * @param params 请求参数
      * @return 返回结果string
      */
-    public static HttpClientResponse postWithCert(String apiUrl, Map<String, Object> params, String charset, String contentType, String certFilePath) {
-        HttpClientResponse httpClientResponse = null;
+    public static HttpResponse postWithCert(String apiUrl, Map<String, Object> params, String charset, String contentType, String certFilePath) {
+        HttpResponse httpClientResponse = null;
         CloseableHttpResponse response = null;
 
         HttpPost httpPost = new HttpPost(apiUrl);
@@ -143,12 +218,13 @@ public class HttpClientUtils {
             response = httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
             String httpStr = EntityUtils.toString(entity, charset);
-            httpClientResponse = new HttpClientResponse(response.getStatusLine().getStatusCode(), httpStr);
+            httpClientResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         } finally {
             if (response != null) {
                 try {
+
                     EntityUtils.consume(response.getEntity());
                 } catch (IOException e) {
                     logger.error(e.getMessage(), e);
@@ -166,8 +242,8 @@ public class HttpClientUtils {
      * @param context
      * @return
      */
-    public static String doPostWithJson(String apiUrl, String context) {
-        return doPostWithJson(apiUrl, context, DEFAULTCHARSET, "application/json");
+    public static String postRawWithCert(String apiUrl, String context, String certFilePath) {
+        return postRawWithCert(apiUrl, context, DEFAULTCHARSET, "application/json", certFilePath);
     }
 
     /**
@@ -179,17 +255,18 @@ public class HttpClientUtils {
      * @param contentType 头文件格式
      * @return
      */
-    public static String doPostWithJson(String apiUrl, String context, String charset, String contentType) {
-        CloseableHttpClient httpClient = createDefault();
+    public static String postRawWithCert(String apiUrl, String context, String charset, String contentType, String certFilePath) {
+
         String httpStr = null;
         CloseableHttpResponse response = null;
         HttpPost httpPost = new HttpPost(apiUrl);
-
         try {
+            CloseableHttpClient httpClient = ClientCustomPemSSL(certFilePath);
             httpPost.setConfig(requestConfig);
             StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
             if (!StringUtils.isEmpty(contentType)) {
-                stringEntity.setContentType(contentType);//post传输是json格式数据
+                //post传输是json格式数据
+                stringEntity.setContentType(contentType);
             }
             httpPost.setEntity(stringEntity);
             response = httpClient.execute(httpPost);
@@ -207,124 +284,6 @@ public class HttpClientUtils {
                     EntityUtils.consume(response.getEntity());
                 } catch (IOException e) {
                     //logger.error("关闭HttpClientUtils.doPost()异常", e);
-                }
-            }
-        }
-        return httpStr;
-    }
-
-    public static String doPostWithHttps(String apiUrl, String context) {
-        return doPostWithHttps(apiUrl, context, "UTF-8", null);
-    }
-
-    /**
-     * @param apiUrl
-     * @param context
-     * @return
-     */
-    public static String doPostWithHttps(String apiUrl, String context, String charset, String contentType) {
-        CloseableHttpClient httpClient = createClientSSLDefault();
-        String httpStr = null;
-        CloseableHttpResponse response = null;
-        HttpPost httpPost = new HttpPost(apiUrl);
-        try {
-            httpPost.setConfig(requestConfig);
-            StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
-            if (!StringUtils.isEmpty(contentType)) {
-                stringEntity.setContentType(contentType);//post传输是json格式数据
-            }
-            httpPost.setEntity(stringEntity);
-            response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, charset);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    //logger.error("关闭HttpClientUtils.doPost()异常", e);
-                }
-            }
-        }
-        return httpStr;
-    }
-
-    public static String doPostCertHttps(String apiUrl, String filePath) {
-        CloseableHttpClient httpClient;
-        String httpStr = null;
-        CloseableHttpResponse response = null;
-        HttpGet httpGet = new HttpGet(apiUrl);
-        try {
-            httpClient = ClientCustomPemSSL(filePath);
-            httpGet.setConfig(requestConfig);
-//           StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
-//            if (!StringUtils.isEmpty(contentType)) {
-//                stringEntity.setContentType(contentType);//post传输是json格式数据
-//            }
-//            httpPost.setEntity(stringEntity);
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, "UTF-8");
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    //logger.error("关闭HttpClientUtils.doPost()异常", e);
-                }
-            }
-        }
-        return httpStr;
-    }
-
-    /**
-     * 方法描述：https请求数据，采用form形式表达数据传输
-     * 作者：zhd37930
-     *
-     * @param apiUrl
-     * @param params
-     * @param charset
-     * @param contentType
-     * @return
-     */
-    public static String doPostWithHttps(String apiUrl, Map<String, Object> params, String charset, String contentType) {
-        CloseableHttpClient httpClient = createClientSSLDefault();
-        String httpStr = null;
-        CloseableHttpResponse response = null;
-        HttpPost httpPost = new HttpPost(apiUrl);
-        try {
-            httpPost.setConfig(requestConfig);
-            if (params != null && params.size() > 0) {
-                List<BasicNameValuePair> pairList = convertBasicPairList(params);//将map转化为BasicNameValuePair
-                UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(pairList, charset);
-                if (contentType != null) {
-                    urlEncodedFormEntity.setContentType(contentType);
-                }
-                httpPost.setEntity(urlEncodedFormEntity);
-            }
-            response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, charset);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
                 }
             }
         }

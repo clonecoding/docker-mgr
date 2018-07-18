@@ -1,7 +1,8 @@
 package com.jdddata.dockermgr;
 
-import com.jdddata.dockermgr.common.httpclientutil.HttpClientResponse;
+
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
+import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
 import org.junit.Test;
 
 /**
@@ -16,7 +17,7 @@ public class HttpClientUtilsTest {
     @Test
     public void post2() throws Exception {
         String url = "https://10.33.94.5:2376/containers/json?all=1";
-        HttpClientResponse message = HttpClientUtils.getWithCert(url, "E:\\ideaProject\\docker-mgr\\build\\config\\cert");
+        HttpResponse message = HttpClientUtils.getWithCert(url, "E:\\ideaProject\\docker-mgr\\build\\config\\cert");
 
         System.out.println(message);
     }
