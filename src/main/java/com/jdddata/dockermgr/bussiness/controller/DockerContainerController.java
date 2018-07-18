@@ -19,18 +19,27 @@ public class DockerContainerController {
         return null;
     }
 
-
-    @PostMapping("/containers/start")
-    public ResultVo start(String id,String serverInfo) {
-        return null;
-    }
-    @PostMapping("/containers/stop")
-    public ResultVo stop(String id,String serverInfo) {
-        return null;
-    }
-    @PostMapping("/containers/list")
-    public ResultVo list(String serverInfo) {
-        return null;
+    @GetMapping("/{serverInfo}/{name}/start")
+    public ResultVo startContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.startContainer(serverInfo, name);
     }
 
+    @GetMapping("/{serverInfo}/{name}/start")
+    public ResultVo stopContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.stopContainer(serverInfo, name);
+    }
+
+    @DeleteMapping("/{serverInfo}/{name}/delete")
+    public ResultVo deleteContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.deleteContainer(serverInfo, name);
+    }
+
+    @GetMapping("/{serverInfo}/{name}/get")
+    public ResultVo getContainerByName(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.getSpecContainer(serverInfo, name);
+    }
+//    @PostMapping("/list")
+//    public ResultVo listContainer(@RequestBody String containerCreatePyDto) {
+//        return dockerContainerService.listContainer(containerCreatePyDto);
+//    }
 }
