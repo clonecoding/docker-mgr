@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.bussiness.service;
 
 import com.jdddata.dockermgr.bussiness.controller.dto.container.ContainerCreatePyDto;
+import com.jdddata.dockermgr.vo.ResultVo;
 
 /**
  * @Author: zhangheng(赛事)
@@ -9,5 +10,15 @@ import com.jdddata.dockermgr.bussiness.controller.dto.container.ContainerCreateP
  * @modified By:
  */
 public interface DockerContainerService {
-    void createContainer(ContainerCreatePyDto containerCreatePyDto);
+    ResultVo createContainer(ContainerCreatePyDto containerCreatePyDto);
+
+    ResultVo listContainer(String serverInfo);
+
+    ResultVo startContainer(String serverInfo, String name);
+
+    ResultVo stopContainer(String serverInfo, String name);
+
+    ResultVo deleteContainer(String serverInfo, String name);
+
+    ResultVo getSpecContainer(String serverInfo, String name);
 }

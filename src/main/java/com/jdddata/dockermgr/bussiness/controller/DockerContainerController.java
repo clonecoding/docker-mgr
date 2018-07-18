@@ -2,11 +2,9 @@ package com.jdddata.dockermgr.bussiness.controller;
 
 import com.jdddata.dockermgr.bussiness.controller.dto.container.ContainerCreatePyDto;
 import com.jdddata.dockermgr.bussiness.service.DockerContainerService;
+import com.jdddata.dockermgr.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/docker/container")
@@ -16,8 +14,31 @@ public class DockerContainerController {
     private DockerContainerService dockerContainerService;
 
     @PostMapping("/create")
-    public String createContainer(@RequestBody ContainerCreatePyDto containerCreatePyDto) {
-        dockerContainerService.createContainer(containerCreatePyDto);
-        return null;
+    public ResultVo createContainer(@RequestBody ContainerCreatePyDto containerCreatePyDto) {
+        return dockerContainerService.createContainer(containerCreatePyDto);
     }
+
+    @GetMapping("/{serverInfo}/{name}/start")
+    public ResultVo startContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.startContainer(serverInfo, name);
+    }
+
+    @GetMapping("/{serverInfo}/{name}/start")
+    public ResultVo stopContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.stopContainer(serverInfo, name);
+    }
+
+    @DeleteMapping("/{serverInfo}/{name}/delete")
+    public ResultVo deleteContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.deleteContainer(serverInfo, name);
+    }
+
+    @GetMapping("/{serverInfo}/{name}/get")
+    public ResultVo getContainerByName(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.getSpecContainer(serverInfo, name);
+    }
+//    @PostMapping("/list")
+//    public ResultVo listContainer(@RequestBody String containerCreatePyDto) {
+//        return dockerContainerService.listContainer(containerCreatePyDto);
+//    }
 }
