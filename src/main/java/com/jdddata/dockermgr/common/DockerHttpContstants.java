@@ -23,6 +23,21 @@ public class DockerHttpContstants {
     public static final String DOCKER_CONTAINER_FILTER = "https://{0}:2376/containers/json?filter=%7b%22name%22%3a%5b%22{1}%22%5d%7d";
 
     /**
+     * docker start container
+     */
+    public static final String DOCKER_CONTAINER_START = "https://{0}:2376/{id}/start";
+
+    /**
+     * docker stop container
+     */
+    public static final String DOCKER_CONTAINER_STOP = "https://{0}:2376/{id}/stop";
+
+    /**
+     * 删除一个container
+     */
+    public static final String DOCKER_CONTAINER_DELETE = "https://{0}:2376/container/{1}";
+
+    /**
      * @author zhangheng(赛事)
      * @description docker image 接口
      */
@@ -31,29 +46,30 @@ public class DockerHttpContstants {
      * @author zhangheng(赛事)
      * @description docker image 列表
      */
-    public static final String DOCKER_IMAGE_LIST= "https://{0}:2376/images/json";
+    public static final String DOCKER_IMAGE_LIST = "https://{0}:2376/images/json";
 
     /**
      * @author zhangheng(赛事)
      * @description docker image 创建
      */
-    public static final String DOCKER_IMAGE_CREATE= "https://{0}:2376/images/create";
+    public static final String DOCKER_IMAGE_CREATE = "https://{0}:2376/images/create";
 
     /**
      * @author zhangheng(赛事)
      * @description docker image psuh
      */
-    public static final String DOCKER_IMAGE_PUSH= "https://{0}:2376/images/{1}/push";
+    public static final String DOCKER_IMAGE_PUSH = "https://{0}:2376/images/{1}/push";
 
     /**
      * @author zhangheng(赛事)
      * @description 删除无效的 iamge
      */
-    public static final String DOCKER_IMAGE_PRUNE= "https://{0}:2376/images/prune";
+    public static final String DOCKER_IMAGE_PRUNE = "https://{0}:2376/images/prune";
 
     /**
      * @author zhangheng(赛事)
      * @description 删除无效的 iamge
      */
-    public static final String DOCKER_IMAGE_INSPECT= "https://{0}:2376/images/{1}/json";
+    public static final String DOCKER_IMAGE_INSPECT = "https://{0}:2376/images/{1}/json";
+
 }

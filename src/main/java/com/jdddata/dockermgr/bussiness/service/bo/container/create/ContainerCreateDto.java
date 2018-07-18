@@ -1,7 +1,6 @@
 
 package com.jdddata.dockermgr.bussiness.service.bo.container.create;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,47 +17,47 @@ public class ContainerCreateDto {
     private Boolean stdinOnce;
     /**
      * "Env": [
-     * 		"FOO=bar",
-     * 		"BAZ=quux"
-     * 	],
+     * "FOO=bar",
+     * "BAZ=quux"
+     * ],
      */
     private List<String> env = null;
     /**
-     * 	"Cmd": [
-     * 		"date","cmd"
-     * 	],
+     * "Cmd": [
+     * "date","cmd"
+     * ],
      */
     private List<String> cmd = null;
     private String entrypoint;
     private String image;
     /**
      * "Labels": {
-     * 		"com.example.vendor": "Acme",
-     * 		"com.example.license": "GPL",
-     * 		"com.example.version": "1.0"
-     *        }
+     * "com.example.vendor": "Acme",
+     * "com.example.license": "GPL",
+     * "com.example.version": "1.0"
+     * }
      */
-    private Map<String,String> labels;
+    private Map<String, String> labels;
     /**
-     * 	"Volumes": {
-     * 		"/volumes/data": {}
-     *        },
+     * "Volumes": {
+     * "/volumes/data": {}
+     * },
      */
-    private Map<String,Object> volumes;
+    private Map<String, Object> volumes;
     private String workingDir;
     private Boolean networkDisabled;
     private String macAddress;
     /**
-     * 	"ExposedPorts": {
-     * 		"22/tcp": {}
-     *        },
+     * "ExposedPorts": {
+     * "22/tcp": {},
+     * "80/tcp":{}
+     * },
      */
-    private Map<String,Object> exposedPorts;
+    private Map<String, Object> exposedPorts;
     private String stopSignal;
     private Integer stopTimeout;
     private HostConfig hostConfig;
     private NetworkingConfig networkingConfig;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getHostname() {
         return hostname;
@@ -244,11 +243,4 @@ public class ContainerCreateDto {
         this.networkingConfig = networkingConfig;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return additionalProperties;
-    }
-
-    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-    }
 }

@@ -2,16 +2,38 @@ package com.jdddata.dockermgr.bussiness.controller.dto.container;
 
 public class ContainerCreatePyDto {
     private String name;
+
+    /**
+     * image:tag
+     */
     private String image;
+
+    /**
+     *  -p host:container
+     *  host:container,host:container
+     */
     private String ports;
     private String volumes;
-    private String entrypoint;
-    private String hostconfig;
-    private String exportPort;
-    private String memory;
-    private String memorySwap;
-    private String memoryReservation;
+
+    /**
+     * http,3
+     */
+    private String entryPoint;
+    private String hostConfig;
+    private Integer memory;
+    private Integer memorySwap;
+    private Integer memoryReservation;
     private String cpusetCpus;
+
+    /**
+     * env: ENV=FOO,TEST=10.356
+     */
+    private String env;
+
+    /**
+     * cmd: ENV=FOO,TEST=10.356
+     */
+    private String cmd;
 
     public String getName() {
         return name;
@@ -45,51 +67,43 @@ public class ContainerCreatePyDto {
         this.volumes = volumes;
     }
 
-    public String getEntrypoint() {
-        return entrypoint;
+    public String getEntryPoint() {
+        return entryPoint;
     }
 
-    public void setEntrypoint(String entrypoint) {
-        this.entrypoint = entrypoint;
+    public void setEntryPoint(String entryPoint) {
+        this.entryPoint = entryPoint;
     }
 
-    public String getHostconfig() {
-        return hostconfig;
+    public String getHostConfig() {
+        return hostConfig;
     }
 
-    public void setHostconfig(String hostconfig) {
-        this.hostconfig = hostconfig;
+    public void setHostConfig(String hostConfig) {
+        this.hostConfig = hostConfig;
     }
 
-    public String getExportPort() {
-        return exportPort;
-    }
-
-    public void setExportPort(String exportPort) {
-        this.exportPort = exportPort;
-    }
-
-    public String getMemory() {
+    public Integer getMemory() {
         return memory;
     }
 
-    public void setMemory(String memory) {
+    public void setMemory(Integer memory) {
         this.memory = memory;
     }
 
-    public String getMemorySwap() {
+    public Integer getMemorySwap() {
         return memorySwap;
     }
 
-    public void setMemorySwap(String memorySwap) {
+    public void setMemorySwap(Integer memorySwap) {
         this.memorySwap = memorySwap;
     }
 
-    public String getMemoryReservation() {
+    public Integer getMemoryReservation() {
         return memoryReservation;
     }
 
-    public void setMemoryReservation(String memoryReservation) {
+    public void setMemoryReservation(Integer memoryReservation) {
         this.memoryReservation = memoryReservation;
     }
 
@@ -99,5 +113,21 @@ public class ContainerCreatePyDto {
 
     public void setCpusetCpus(String cpusetCpus) {
         this.cpusetCpus = cpusetCpus;
+    }
+
+    public String getEnv() {
+        return env;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
+    }
+
+    public String getCmd() {
+        return cmd;
+    }
+
+    public void setCmd(String cmd) {
+        this.cmd = cmd;
     }
 }
