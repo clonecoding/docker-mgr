@@ -12,16 +12,8 @@ import java.util.List;
  * @modified By:
  */
 public interface DockerImageService {
-    String LIST_URL = "/images/json";
-    String BUILD_URL = "/build";
-
-    String CREATE_IMAGE ="/images/create";
-
-    String PUSH_IMAGE ="/images/{name}/push";
-
 
     ResultVo list();
-
 
     ResultVo buildImage(String cmd);
 

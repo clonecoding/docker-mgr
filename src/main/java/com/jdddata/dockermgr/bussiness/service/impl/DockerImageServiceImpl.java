@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.bussiness.service.impl;
 
 import com.jdddata.dockermgr.bussiness.service.DockerImageService;
+import com.jdddata.dockermgr.common.DockerHttpContstants;
 import com.jdddata.dockermgr.common.exception.DockerApiReqException;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
@@ -23,11 +24,12 @@ import java.util.Map;
 @Service
 public class DockerImageServiceImpl implements DockerImageService {
 
-    private String url = "https://10.33.94.5:2376";
+    private String IP = "10.33.94.5";
 
     @Override
     public ResultVo list() {
-        HttpResponse httpResponse = HttpClientUtils.getWithCert(url + DockerImageService.LIST_URL);
+        HttpResponse httpResponse = HttpClientUtils.getWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_LIST, IP));
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
@@ -38,7 +40,6 @@ public class DockerImageServiceImpl implements DockerImageService {
 
     @Override
     public ResultVo createImage(String fromImage, String tag) {
-        String createUrl = url + DockerImageService.CREATE_IMAGE;
         Map<String, Object> param = new HashMap<>();
         if (StringUtils.isEmpty(fromImage)) {
             return ResultGenerator.getFail("参数不能为空");
@@ -47,7 +48,8 @@ public class DockerImageServiceImpl implements DockerImageService {
         if (!StringUtils.isEmpty(tag)) {
             param.put("tag", tag);
         }
-        HttpResponse httpResponse = HttpClientUtils.postWithCert(createUrl, param);
+        HttpResponse httpResponse = HttpClientUtils.postWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_CREATE, IP), param);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
@@ -61,8 +63,8 @@ public class DockerImageServiceImpl implements DockerImageService {
         if (StringUtils.isEmpty(imageNameOrId)) {
             return ResultGenerator.getFail("参数不能为空");
         }
-        String removeUrl = url + "/images/" + imageNameOrId;
-        HttpResponse httpResponse = HttpClientUtils.deleteWithCert(removeUrl);
+        HttpResponse httpResponse = HttpClientUtils.deleteWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE + imageNameOrId, IP));
         return ResultGenerator.getByDockerResponse(httpResponse);
 
     }
