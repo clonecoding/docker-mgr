@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *
@@ -79,6 +80,21 @@ public final class DockerClient {
         HttpResponse httpResponse = HttpClientUtils.getWithCert(
                 MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_LIST, serverInfo));
         return httpResponse;
+    }
+
+    /**
+     * @return
+     * @author zhangheng(赛事)
+     * @description 判断image是否存在
+     */
+    public static boolean imageNameOrIdExist(String serverInfo,String imageNameOrId) {
+        HttpResponse httpResponse = HttpClientUtils.getWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_INSPECT, serverInfo,imageNameOrId));
+        if(Objects.equals(HttpStatus.OK.value(),httpResponse.getStatusCode())){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public static HttpResponse pruneImage(String filters, String serverInfo) {

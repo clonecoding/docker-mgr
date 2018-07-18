@@ -50,4 +50,10 @@ public class DockerHttpContstants {
      * @description 删除无效的 iamge
      */
     public static final String DOCKER_IMAGE_PRUNE= "https://{0}:2376/images/prune";
+
+    /**
+     * @author zhangheng(赛事)
+     * @description 删除无效的 iamge
+     */
+    public static final String DOCKER_IMAGE_INSPECT= "https://{0}:2376/images/{1}/json";
 }
