@@ -29,7 +29,13 @@ public class DockerContainerServiceImpl implements DockerContainerService {
 
             return ResultGenerator.getFail("容器命名已经存在，请更换");
         }
-        // TODO 判断image在当前节点是否存在
+        // 判断image在当前节点是否存在
+        if (!DockerClient.imageNameOrIdExist("", name)) {
+            String image = containerCreatePyDto.getImage();
+            String[] split = image.split(":");
+            DockerClient.createImage(split[0], split[1], "");
+        }
+
         ContainerCreateDto containerCreateDto = getContainerCreateDto(containerCreatePyDto);
 
 
