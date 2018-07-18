@@ -22,7 +22,7 @@ public class DockerIamgeTest {
 
     @Test
     public void List() {
-        dockerImageService.list();
+        dockerImageService.list(ip);
     }
 
     public String buildImage(String cmd) {
@@ -32,17 +32,16 @@ public class DockerIamgeTest {
     @Test
     public void createIamge() {
 
-        dockerImageService.createImage("redis", "4.0.5");
+        dockerImageService.createImage(ip, "redis", "4.0.5");
 
     }
 
     @Test
     public void imageNameOrIdExist() {
 
-        boolean flag = DockerClient.imageNameOrIdExist(ip,"nginx");
+        boolean flag = DockerClient.imageNameOrIdExist(ip, "nginx");
         System.out.println(flag);
     }
-
 
     public String pushImage() {
         return null;

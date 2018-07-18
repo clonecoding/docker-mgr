@@ -23,7 +23,7 @@ public class DockerContainerController {
         return dockerContainerService.startContainer(serverInfo, name);
     }
 
-    @GetMapping("/{serverInfo}/{name}/start")
+    @GetMapping("/{serverInfo}/{name}/stop")
     public ResultVo stopContainer(@PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
         return dockerContainerService.stopContainer(serverInfo, name);
     }

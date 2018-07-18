@@ -21,18 +21,21 @@ public class DockerImageController {
     @Autowired
     DockerImageService dockerImageService;
 
-    @PostMapping("/create")
-    public ResultVo createImage(String fromImage, String tag) {
-        return dockerImageService.createImage(fromImage, tag);
+    @GetMapping("/{serverInfo}/{fromImage}/{tag}/create")
+    public ResultVo createImage(@PathVariable("serverInfo") String serverInfo,
+                                @PathVariable("fromImage") String fromImage,
+                                @PathVariable("tag") String tag) {
+        return dockerImageService.createImage(serverInfo, fromImage, tag);
     }
 
-    @GetMapping("/list")
-    public ResultVo List() {
-        return dockerImageService.list();
+    @GetMapping("{serverInfo}/list")
+    public ResultVo List(@PathVariable("serverInfo") String serverInfo) {
+        return dockerImageService.list(serverInfo);
     }
 
-    @DeleteMapping("/remove/{imageNameOrId}")
-    public ResultVo remove(@PathVariable("imageNameOrId") String imageNameOrId) {
-        return dockerImageService.removeImage(imageNameOrId);
+    @DeleteMapping("/{serverInfo}/{name}/remove/")
+    public ResultVo remove(@PathVariable("serverInfo") String serverInfo,
+                           @PathVariable("name") String name) {
+        return dockerImageService.removeImage(serverInfo,name);
     }
 }

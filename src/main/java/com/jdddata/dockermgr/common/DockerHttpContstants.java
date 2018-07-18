@@ -25,12 +25,12 @@ public class DockerHttpContstants {
     /**
      * docker start container
      */
-    public static final String DOCKER_CONTAINER_START = "https://{0}:2376/{id}/start";
+    public static final String DOCKER_CONTAINER_START = "https://{0}:2376/containers/{1}/start";
 
     /**
      * docker stop container
      */
-    public static final String DOCKER_CONTAINER_STOP = "https://{0}:2376/{id}/stop";
+    public static final String DOCKER_CONTAINER_STOP = "https://{0}:2376/containers/{1}/stop";
 
     /**
      * 删除一个container

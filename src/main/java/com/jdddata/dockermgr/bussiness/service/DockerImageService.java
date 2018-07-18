@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface DockerImageService {
 
-    ResultVo list();
+    ResultVo list(String serverInfo);
 
-    ResultVo buildImage(String cmd);
+    ResultVo buildImage(String serverInfo,String cmd);
 
-    ResultVo createImage(String iamge, String tag);
+    ResultVo createImage(String serverInfo,String iamge, String tag);
 
-    ResultVo pushImage();
+    ResultVo pushImage(String serverInfo);
 
-    ResultVo removeImage(String imageNameOrId);
+    ResultVo removeImage(String serverInfo,String imageNameOrId);
 
-    ResultVo pruneImage(String filters);
+    ResultVo pruneImage(String serverInfo,String filters);
 }

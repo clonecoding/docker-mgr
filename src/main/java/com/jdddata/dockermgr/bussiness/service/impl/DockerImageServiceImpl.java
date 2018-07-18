@@ -25,48 +25,46 @@ import java.util.Map;
 @Service
 public class DockerImageServiceImpl implements DockerImageService {
 
-    private String IP = "10.33.94.5";
-
     @Override
-    public ResultVo list() {
-        HttpResponse httpResponse = DockerClient.listImage(IP);
+    public ResultVo list(String serverInfo) {
+        HttpResponse httpResponse = DockerClient.listImage(serverInfo);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
     @Override
-    public ResultVo buildImage(String cmd) {
+    public ResultVo buildImage(String serverInfo, String cmd) {
         return null;
     }
 
     @Override
-    public ResultVo createImage(String fromImage, String tag) {
+    public ResultVo createImage(String serverInfo, String fromImage, String tag) {
         if (StringUtils.isEmpty(fromImage)) {
             return ResultGenerator.getFail("参数不能为空");
         }
-        HttpResponse httpResponse = DockerClient.createImage(fromImage, tag, IP);
+        HttpResponse httpResponse = DockerClient.createImage(fromImage, tag, serverInfo);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
     @Override
-    public ResultVo pushImage() {
+    public ResultVo pushImage(String serverInfo) {
         return null;
     }
 
     @Override
-    public ResultVo removeImage(String imageNameOrId) {
+    public ResultVo removeImage(String serverInfo, String imageNameOrId) {
         if (StringUtils.isEmpty(imageNameOrId)) {
             return ResultGenerator.getFail("参数不能为空");
         }
-        HttpResponse httpResponse = DockerClient.removeImage(imageNameOrId, IP);
+        HttpResponse httpResponse = DockerClient.removeImage(imageNameOrId, serverInfo);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
     @Override
-    public ResultVo pruneImage(String filters) {
+    public ResultVo pruneImage(String serverInfo, String filters) {
         if (StringUtils.isEmpty(filters)) {
             return ResultGenerator.getFail("参数不能为空");
         }
-        HttpResponse httpResponse = DockerClient.pruneImage(filters, IP);
+        HttpResponse httpResponse = DockerClient.pruneImage(filters, serverInfo);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 }
