@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr;
 
 
+import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
 import org.junit.Test;
@@ -19,12 +20,10 @@ public class HttpClientUtilsTest {
 
     @Test
     public void post2() throws Exception {
-        String path =ClassUtils.getDefaultClassLoader().getResource("cert").getPath().substring(1);
+        String url = "https://10.33.94.5:2376/containers/gezhiwei/start";
+        HttpResponse message = HttpClientUtils.postWithCert(url,null);
 
-        String url = "https://10.33.94.5:2376/containers/json?all=1";
-        HttpResponse message = HttpClientUtils.getWithCert(url);
 
-        System.out.println(message);
     }
 
 }

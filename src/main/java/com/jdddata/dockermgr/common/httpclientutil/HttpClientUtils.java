@@ -31,6 +31,7 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
@@ -267,7 +268,10 @@ public class HttpClientUtils {
             CloseableHttpClient httpClient = clientCustomPemSSL();
             response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
-            String httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
+            String httpStr =null;
+            if(!Objects.isNull(entity)){
+                httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
+            }
             httpResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
