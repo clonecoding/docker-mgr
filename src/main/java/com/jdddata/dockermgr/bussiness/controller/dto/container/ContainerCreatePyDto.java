@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.bussiness.controller.dto.container;
 
 public class ContainerCreatePyDto {
+    private String name;
     private String image;
     private String ports;
     private String volumes;
@@ -11,6 +12,14 @@ public class ContainerCreatePyDto {
     private String memorySwap;
     private String memoryReservation;
     private String cpusetCpus;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getImage() {
         return image;
