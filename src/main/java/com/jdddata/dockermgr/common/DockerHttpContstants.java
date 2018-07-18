@@ -45,5 +45,9 @@ public class DockerHttpContstants {
      */
     public static final String DOCKER_IMAGE_PUSH= "https://{0}:2376/images/{1}/push";
 
-
+    /**
+     * @author zhangheng(赛事)
+     * @description 删除无效的 iamge
+     */
+    public static final String DOCKER_IMAGE_PRUNE= "https://{0}:2376/images/prune";
 }

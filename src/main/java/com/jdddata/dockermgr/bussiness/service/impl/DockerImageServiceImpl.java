@@ -29,8 +29,7 @@ public class DockerImageServiceImpl implements DockerImageService {
 
     @Override
     public ResultVo list() {
-        HttpResponse httpResponse = HttpClientUtils.getWithCert(
-                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_LIST, IP));
+        HttpResponse httpResponse = DockerClient.listImage(IP);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 
@@ -55,7 +54,19 @@ public class DockerImageServiceImpl implements DockerImageService {
 
     @Override
     public ResultVo removeImage(String imageNameOrId) {
+        if (StringUtils.isEmpty(imageNameOrId)) {
+            return ResultGenerator.getFail("参数不能为空");
+        }
         HttpResponse httpResponse = DockerClient.removeImage(imageNameOrId, IP);
+        return ResultGenerator.getByDockerResponse(httpResponse);
+    }
+
+    @Override
+    public ResultVo pruneImage(String filters) {
+        if (StringUtils.isEmpty(filters)) {
+            return ResultGenerator.getFail("参数不能为空");
+        }
+        HttpResponse httpResponse = DockerClient.pruneImage(filters, IP);
         return ResultGenerator.getByDockerResponse(httpResponse);
     }
 }

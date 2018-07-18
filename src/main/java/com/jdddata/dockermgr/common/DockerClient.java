@@ -36,6 +36,14 @@ public final class DockerClient {
         return response.getStatusCode() == HttpStatus.OK.value();
     }
 
+    /**
+     * 创建Images
+     *
+     * @param fromImage
+     * @param tag
+     * @param serverInfo
+     * @return
+     */
     public static HttpResponse createImage(String fromImage, String tag, String serverInfo) {
         Map<String, Object> param = new HashMap<>();
         if (!StringUtils.isEmpty(fromImage)) {
@@ -44,15 +52,41 @@ public final class DockerClient {
         if (!StringUtils.isEmpty(tag)) {
             param.put("tag", tag);
         }
-        return  HttpClientUtils.postWithCert(
+        return HttpClientUtils.postWithCert(
                 MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_CREATE, serverInfo), param);
 
     }
 
+    /**
+     * @param imageNameOrId
+     * @param serverInfo
+     * @return
+     * @author zhangheng(赛事)
+     * @description 删除 image
+     */
     public static HttpResponse removeImage(String imageNameOrId, String serverInfo) {
         HttpResponse httpResponse = HttpClientUtils.deleteWithCert(
                 MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE + imageNameOrId, serverInfo));
         return httpResponse;
+    }
+
+    /**
+     * @return
+     * @author zhangheng(赛事)
+     * @description image List
+     */
+    public static HttpResponse listImage(String serverInfo) {
+        HttpResponse httpResponse = HttpClientUtils.getWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_LIST, serverInfo));
+        return httpResponse;
+    }
+
+    public static HttpResponse pruneImage(String filters, String serverInfo) {
+        Map<String, String> map = new HashMap<>();
+        map.put("filters", filters);
+        return HttpClientUtils.postWithCert(
+                MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_PRUNE, serverInfo),null);
+
     }
 
 }

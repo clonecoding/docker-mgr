@@ -6,6 +6,7 @@ import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
 import com.jdddata.dockermgr.vo.ResultGenerator;
 import com.jdddata.dockermgr.vo.ResultVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,8 @@ public class DockerImageController {
         return dockerImageService.list();
     }
 
-    @DeleteMapping("/remove")
-    public ResultVo remove(String imageNameOrId) {
+    @DeleteMapping("/remove/{imageNameOrId}")
+    public ResultVo remove(@PathVariable("imageNameOrId") String imageNameOrId) {
         return dockerImageService.removeImage(imageNameOrId);
     }
 }
