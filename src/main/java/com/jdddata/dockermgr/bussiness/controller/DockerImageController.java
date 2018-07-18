@@ -2,11 +2,17 @@ package com.jdddata.dockermgr.bussiness.controller;
 
 import com.jdddata.dockermgr.bussiness.service.DockerImageService;
 import com.jdddata.dockermgr.common.exception.DockerApiReqException;
+import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
+import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.vo.ResultGenerator;
+import com.jdddata.dockermgr.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author zhangheng(赛事)
+ * @description docker Image 接口
+ */
 @RestController
 @RequestMapping("/docker/image")
 public class DockerImageController {
@@ -14,17 +20,18 @@ public class DockerImageController {
     @Autowired
     DockerImageService dockerImageService;
 
-    @RequestMapping("/create")
-    @ResponseBody
-    public String createImage(String fromImage, String tag){
-        String responseMsg = null;
-        try {
-              responseMsg = dockerImageService.createImage(fromImage,tag);
-        } catch (DockerApiReqException e) {
-            responseMsg = "error";
-            e.printStackTrace();
+    @PostMapping("/create")
+    public ResultVo createImage(String fromImage, String tag) {
+        return dockerImageService.createImage(fromImage, tag);
+    }
 
-        }
-        return responseMsg;
+    @GetMapping("/list")
+    public ResultVo List() {
+        return dockerImageService.list();
+    }
+
+    @DeleteMapping("/remove")
+    public ResultVo remove(String imageNameOrId) {
+        return dockerImageService.removeImage(imageNameOrId);
     }
 }

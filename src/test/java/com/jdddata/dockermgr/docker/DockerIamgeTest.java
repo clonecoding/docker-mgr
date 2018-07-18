@@ -15,11 +15,11 @@ import org.junit.Test;
  */
 public class DockerIamgeTest {
 
-    DockerImageService dockerImageService =new DockerImageServiceImpl();
+    DockerImageService dockerImageService = new DockerImageServiceImpl();
 
     @Test
     public void List() {
-        dockerImageService.List();
+        dockerImageService.list();
     }
 
     public String buildImage(String cmd) {
@@ -28,11 +28,8 @@ public class DockerIamgeTest {
 
     @Test
     public void createIamge() {
-        try {
-            String message = dockerImageService.createImage("redis","4.0.5");
-        } catch (DockerApiReqException e) {
-            e.printStackTrace();
-        }
+
+        dockerImageService.createImage("redis", "4.0.5");
 
     }
 

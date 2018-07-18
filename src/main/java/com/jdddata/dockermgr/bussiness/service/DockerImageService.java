@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.bussiness.service;
 
 import com.jdddata.dockermgr.common.exception.DockerApiReqException;
+import com.jdddata.dockermgr.vo.ResultVo;
 
 import java.util.List;
 
@@ -19,12 +20,14 @@ public interface DockerImageService {
     String PUSH_IMAGE ="/images/{name}/push";
 
 
-    String List();
+    ResultVo list();
 
 
-    String buildImage(String cmd);
+    ResultVo buildImage(String cmd);
 
-    String createImage(String iamge,String tag) throws DockerApiReqException;
+    ResultVo createImage(String iamge,String tag) ;
 
-    String pushImage();
+    ResultVo pushImage();
+
+    ResultVo removeImage(String imageNameOrId) ;
 }

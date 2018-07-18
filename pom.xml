@@ -135,6 +135,11 @@
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>1.54</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
     </dependencies>
     <!--依赖管理-->
     <dependencyManagement>
