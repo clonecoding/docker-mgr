@@ -6,5 +6,5 @@ package com.jdddata.dockermgr.bussiness.mapper;
  * @Date: 2018/7/18 17:47
  * @modified By:
  */
-public class ProjectMgrMapper {
+public interface ProjectMgrMapper {
 }
