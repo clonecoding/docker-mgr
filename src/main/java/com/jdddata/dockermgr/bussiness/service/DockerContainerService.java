@@ -10,7 +10,7 @@ import com.jdddata.dockermgr.vo.ResultVo;
  * @modified By:
  */
 public interface DockerContainerService {
-    ResultVo createContainer(ContainerCreatePyDto containerCreatePyDto);
+    ResultVo createContainer(String serverInfo, String name, ContainerCreatePyDto containerCreatePyDto);
 
     ResultVo listContainer(String serverInfo);
 

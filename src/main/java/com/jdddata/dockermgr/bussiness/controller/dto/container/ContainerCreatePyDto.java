@@ -1,7 +1,6 @@
 package com.jdddata.dockermgr.bussiness.controller.dto.container;
 
 public class ContainerCreatePyDto {
-    private String name;
 
     /**
      * image:tag
@@ -9,8 +8,8 @@ public class ContainerCreatePyDto {
     private String image;
 
     /**
-     *  -p host:container
-     *  host:container,host:container
+     * -p host:container
+     * host:container,host:container
      */
     private String ports;
     private String volumes;
@@ -34,14 +33,6 @@ public class ContainerCreatePyDto {
      * cmd: ENV=FOO,TEST=10.356
      */
     private String cmd;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getImage() {
         return image;

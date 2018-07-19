@@ -13,9 +13,9 @@ public class DockerContainerController {
     @Autowired
     private DockerContainerService dockerContainerService;
 
-    @PostMapping("/create")
-    public ResultVo createContainer(@RequestBody ContainerCreatePyDto containerCreatePyDto) {
-        return dockerContainerService.createContainer(containerCreatePyDto);
+    @PostMapping("/{serverInfo}/{name}/create")
+    public ResultVo createContainer(@RequestBody ContainerCreatePyDto containerCreatePyDto, @PathVariable("serverInfo") String serverInfo, @PathVariable("name") String name) {
+        return dockerContainerService.createContainer(serverInfo, name, containerCreatePyDto);
     }
 
     @GetMapping("/{serverInfo}/{name}/start")

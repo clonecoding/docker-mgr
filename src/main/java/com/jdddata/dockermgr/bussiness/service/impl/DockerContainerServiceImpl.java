@@ -21,9 +21,7 @@ import java.util.*;
 @Service
 public class DockerContainerServiceImpl implements DockerContainerService {
     @Override
-    public ResultVo createContainer(ContainerCreatePyDto containerCreatePyDto) {
-
-        String name = containerCreatePyDto.getName();
+    public ResultVo createContainer(String serverInfo, String name, ContainerCreatePyDto containerCreatePyDto) {
 
         if (DockerClient.containerNameExist("", name)) {
 
@@ -39,7 +37,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
         ContainerCreateDto containerCreateDto = getContainerCreateDto(containerCreatePyDto);
 
 
-        return ResultGenerator.getByDockerResponse(DockerClient.createContainer("", "", containerCreateDto));
+        return ResultGenerator.getByDockerResponse(DockerClient.createContainer(serverInfo, name, containerCreateDto));
     }
 
     @Override
