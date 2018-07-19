@@ -33,7 +33,7 @@ public class DockerImageController {
         return dockerImageService.list(serverInfo);
     }
 
-    @DeleteMapping("/{serverInfo}/{name}/remove/")
+    @DeleteMapping("/{serverInfo}/{name}/remove")
     public ResultVo remove(@PathVariable("serverInfo") String serverInfo,
                            @PathVariable("name") String name) {
         return dockerImageService.removeImage(serverInfo,name);
