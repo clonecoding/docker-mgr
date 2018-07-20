@@ -29,7 +29,7 @@ public class DockerImageController {
     }
 
     @PostMapping("/list")
-    public ResultVo List(@RequestBody DockerImageDto dockerImageDto) {
+    public ResultVo list(@RequestBody DockerImageDto dockerImageDto) {
         return dockerImageService.list(dockerImageDto.getServerInfo());
     }
 
