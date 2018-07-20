@@ -57,7 +57,7 @@ public class HttpClientUtils {
     /**
      * 超时时间
      */
-    private static final int MAX_TIMEOUT = 60000;
+    private static final int MAX_TIMEOUT = 360000;
 
     static {
         connectionManager = new PoolingHttpClientConnectionManager();
