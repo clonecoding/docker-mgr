@@ -53,6 +53,7 @@ public final class DockerClient {
 
     public static HttpResponse deleteContainer(String serverInfo, String name) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_DELETE, serverInfo, name);
+        LOGGER.info("#deleteContainer url: {}", url);
         return HttpClientUtils.deleteWithCert(url);
     }
 

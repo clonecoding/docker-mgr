@@ -28,7 +28,7 @@ public class ContainerCreateDto {
      * ],
      */
     private List<String> cmd = null;
-    private String entrypoint;
+    private List<String> entrypoint = null;
     private String image;
     /**
      * "Labels": {
@@ -147,11 +147,11 @@ public class ContainerCreateDto {
         this.cmd = cmd;
     }
 
-    public String getEntrypoint() {
+    public List<String> getEntrypoint() {
         return entrypoint;
     }
 
-    public void setEntrypoint(String entrypoint) {
+    public void setEntrypoint(List<String> entrypoint) {
         this.entrypoint = entrypoint;
     }
 

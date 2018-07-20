@@ -87,7 +87,9 @@ public class DockerContainerServiceImpl implements DockerContainerService {
         if (StringUtils.isNotBlank(containerCreatePyDto.getCmd())) {
             setterCmd(containerCreateDto, containerCreatePyDto.getCmd());
         }
-        containerCreateDto.setEntrypoint(containerCreatePyDto.getEntryPoint());
+        if (StringUtils.isNotBlank(containerCreatePyDto.getEntryPoint())) {
+            setterEntrypoint(containerCreateDto, containerCreatePyDto.getEntryPoint());
+        }
         containerCreateDto.setImage(containerCreatePyDto.getImage().trim());
 //        containerCreateDto.setLabels();
 //        containerCreateDto.setVolumes();
@@ -105,6 +107,10 @@ public class DockerContainerServiceImpl implements DockerContainerService {
 //        containerCreateDto.setNetworkingConfig();
 //        containerCreateDto.setAdditionalProperties();
         return containerCreateDto;
+    }
+
+    private void setterEntrypoint(ContainerCreateDto containerCreateDto, String entryPoint) {
+        containerCreateDto.setEntrypoint(Arrays.asList(entryPoint.split(",")));
     }
 
     private void setterHostConfig(ContainerCreateDto containerCreateDto, ContainerCreatePyDto containerCreatePyDto) {
