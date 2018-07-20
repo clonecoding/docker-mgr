@@ -35,7 +35,7 @@ public class DockerHttpContstants {
     /**
      * 删除一个container
      */
-    public static final String DOCKER_CONTAINER_DELETE = "https://{0}:2376/container/{1}";
+    public static final String DOCKER_CONTAINER_DELETE = "https://{0}:2376/containers/{1}";
 
     /**
      * @author zhangheng(赛事)
