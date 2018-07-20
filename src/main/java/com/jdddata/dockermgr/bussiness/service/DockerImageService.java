@@ -17,7 +17,7 @@ public interface DockerImageService {
 
     ResultVo buildImage(String serverInfo,String cmd);
 
-    ResultVo createImage(String serverInfo,String iamge, String tag);
+    ResultVo createImage(String serverInfo,String fromImage, String tag);
 
     ResultVo pushImage(String serverInfo);
 

@@ -43,6 +43,14 @@ public class DockerIamgeTest {
         System.out.println(flag);
     }
 
+    @Test
+    public void removeImage() {
+
+        HttpResponse httpResponse =
+                DockerClient.removeImage("docker-registry.jdddata.com/jdddata/dac-schedule:test-1.0.0",ip);
+        System.out.println(httpResponse.getBody());
+    }
+
     public String pushImage() {
         return null;
     }

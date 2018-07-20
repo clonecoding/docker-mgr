@@ -1,5 +1,6 @@
 package com.jdddata.dockermgr.bussiness.controller;
 
+import com.jdddata.dockermgr.bussiness.controller.dto.image.DockerImageDto;
 import com.jdddata.dockermgr.bussiness.service.DockerImageService;
 import com.jdddata.dockermgr.common.exception.DockerApiReqException;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
@@ -21,21 +22,19 @@ public class DockerImageController {
     @Autowired
     DockerImageService dockerImageService;
 
-    @GetMapping("/{serverInfo}/{fromImage}/{tag}/create")
-    public ResultVo createImage(@PathVariable("serverInfo") String serverInfo,
-                                @PathVariable("fromImage") String fromImage,
-                                @PathVariable("tag") String tag) {
-        return dockerImageService.createImage(serverInfo, fromImage, tag);
+    @PostMapping("/create")
+    public ResultVo createImage(@RequestBody DockerImageDto dockerImageDto) {
+
+        return dockerImageService.createImage(dockerImageDto.getServerInfo(),dockerImageDto.getFromImage(),dockerImageDto.getTag());
     }
 
-    @GetMapping("{serverInfo}/list")
-    public ResultVo List(@PathVariable("serverInfo") String serverInfo) {
-        return dockerImageService.list(serverInfo);
+    @PostMapping("/list")
+    public ResultVo List(@RequestBody DockerImageDto dockerImageDto) {
+        return dockerImageService.list(dockerImageDto.getServerInfo());
     }
 
-    @DeleteMapping("/{serverInfo}/{name}/remove")
-    public ResultVo remove(@PathVariable("serverInfo") String serverInfo,
-                           @PathVariable("name") String name) {
-        return dockerImageService.removeImage(serverInfo,name);
+    @PostMapping("/remove")
+    public ResultVo remove(@RequestBody DockerImageDto dockerImageDto) {
+        return dockerImageService.removeImage(dockerImageDto.getServerInfo(), dockerImageDto.getName());
     }
 }
