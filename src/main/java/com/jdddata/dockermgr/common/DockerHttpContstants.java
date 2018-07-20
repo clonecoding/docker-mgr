@@ -5,7 +5,7 @@ public class DockerHttpContstants {
     /**
      * docker 创建容器
      */
-    public static final String DOCKER_CONTAINER_CREATE = "https://{0}:2376/create?name={1}";
+    public static final String DOCKER_CONTAINER_CREATE = "https://{0}:2376/containers/create?name={1}";
 
     /**
      * docker 获取节点上所有的容器包括停止的
@@ -20,7 +20,7 @@ public class DockerHttpContstants {
     /**
      * docker 获取指定容器
      */
-    public static final String DOCKER_CONTAINER_FILTER = "https://{0}:2376/containers/json?filter=%7b%22name%22%3a%5b%22{1}%22%5d%7d";
+    public static final String DOCKER_CONTAINER_FILTER = "https://{0}:2376/containers/json?filter=\\{\"name\":[\"{1}\"]\\}";
 
     /**
      * docker start container

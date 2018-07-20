@@ -8,6 +8,8 @@ import com.jdddata.dockermgr.common.DockerClient;
 import com.jdddata.dockermgr.vo.ResultGenerator;
 import com.jdddata.dockermgr.vo.ResultVo;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,18 +22,21 @@ import java.util.*;
  */
 @Service
 public class DockerContainerServiceImpl implements DockerContainerService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
+
     @Override
     public ResultVo createContainer(String serverInfo, String name, ContainerCreatePyDto containerCreatePyDto) {
 
-        if (DockerClient.containerNameExist("", name)) {
-
-            return ResultGenerator.getFail("容器命名已经存在，请更换");
-        }
+//        if (DockerClient.containerNameExist(serverInfo, name)) {
+//
+//            return ResultGenerator.getFail("容器命名已经存在，请更换");
+//        }
         // 判断image在当前节点是否存在
-        if (!DockerClient.imageNameOrIdExist("", name)) {
+        if (!DockerClient.imageNameOrIdExist(serverInfo, name)) {
             String image = containerCreatePyDto.getImage();
             String[] split = image.split(":");
-            DockerClient.createImage(split[0], split[1], "");
+            DockerClient.createImage(split[0], split[1], serverInfo);
         }
 
         ContainerCreateDto containerCreateDto = getContainerCreateDto(containerCreatePyDto);

@@ -2,8 +2,11 @@ package com.jdddata.dockermgr.common;
 
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.bussiness.service.bo.container.create.ContainerCreateDto;
+import com.jdddata.dockermgr.bussiness.service.impl.DockerContainerServiceImpl;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 
@@ -17,13 +20,19 @@ import java.util.Objects;
  */
 public final class DockerClient {
 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
+
     public static HttpResponse createContainer(String serverInfo, String name, ContainerCreateDto containerCreateDto) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_CREATE, serverInfo, name);
-        return HttpClientUtils.postRawWithCert(url, JSON.toJSONString(containerCreateDto));
+        String json = JSON.toJSONString(containerCreateDto);
+        LOGGER.info("#containerNameExist url: {},json: {}", url, json);
+        return HttpClientUtils.postRawWithCert(url, json);
     }
 
     public static Boolean containerNameExist(String serverInfo, String name) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_FILTER, serverInfo, name);
+        LOGGER.info("#containerNameExist url: {}", url);
         HttpResponse response = HttpClientUtils.getWithCert(url);
         if (null == response) {
             return false;
@@ -51,6 +60,7 @@ public final class DockerClient {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_FILTER, serverInfo, name);
         return HttpClientUtils.getWithCert(url);
     }
+
     /**
      * 创建Images
      *
@@ -118,7 +128,6 @@ public final class DockerClient {
                 MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_PRUNE, serverInfo), null);
 
     }
-
 
 
 }
