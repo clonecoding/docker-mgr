@@ -6,6 +6,7 @@ import com.jdddata.dockermgr.common.DockerClient;
 import com.jdddata.dockermgr.common.exception.DockerApiReqException;
 import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
 import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.vo.ResultVo;
 import org.junit.Test;
 
 /**
@@ -32,7 +33,7 @@ public class DockerIamgeTest {
     @Test
     public void createIamge() {
 
-        dockerImageService.createImage(ip, "redis", "4.0.5");
+     ResultVo resultVo = dockerImageService.createImage(ip, "docker-registry.jdddata.com/jdddata/dac-schedule:test-1.0.0", "4.0.5");
 
     }
 

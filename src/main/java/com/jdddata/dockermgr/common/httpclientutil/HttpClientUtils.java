@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -40,7 +42,7 @@ import static org.apache.http.impl.client.HttpClients.createDefault;
  */
 public class HttpClientUtils {
 
-    private static Logger logger = LoggerFactory.getLogger(HttpClientUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(HttpClientUtils.class);
 
     private static final String DEFAULTCHARSET = "UTF-8";
 
@@ -55,7 +57,7 @@ public class HttpClientUtils {
     /**
      * 超时时间
      */
-    private static final int MAX_TIMEOUT = 20000;
+    private static final int MAX_TIMEOUT = 60000;
 
     static {
         connectionManager = new PoolingHttpClientConnectionManager();
@@ -78,13 +80,28 @@ public class HttpClientUtils {
     }
 
     public static HttpResponse getWithCert(String url) {
-        CloseableHttpClient httpClient;
-        HttpResponse httpResponse = null;
-        CloseableHttpResponse response = null;
         HttpGet httpGet = new HttpGet(url);
         httpGet.setConfig(requestConfig);
-
         return send(httpGet);
+    }
+    public static HttpResponse getWithCert(String url, Map<String, Object> params) {
+
+        HttpResponse response = null;
+        try {
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.setConfig(requestConfig);
+            if (params != null && params.size() > 0) {
+                //将map转化为BasicNameValuePair
+                List<BasicNameValuePair> pairList = convertBasicPairList(params);
+                UrlEncodedFormEntity urlEncodedFormEntity=new UrlEncodedFormEntity(pairList, DEFAULTCHARSET);
+                String str = EntityUtils.toString(urlEncodedFormEntity);
+                httpGet.setURI(new URI(httpGet.getURI().toString() + "?" + str));
+            }
+            response = send(httpGet);
+        }catch (Exception e){
+            LOG.error("参数解析出错",e);
+        }
+        return response;
     }
 
     public static HttpResponse deleteWithCert(String url) {
@@ -274,14 +291,14 @@ public class HttpClientUtils {
             }
             httpResponse = new HttpResponse(response.getStatusLine().getStatusCode(), httpStr, response.getAllHeaders());
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         } finally {
             if (response != null) {
                 try {
 
                     EntityUtils.consume(response.getEntity());
                 } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
+                    LOG.error(e.getMessage(), e);
                 }
             }
         }
