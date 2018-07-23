@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.adapter.docker;
 
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.ContainerCreateDto;
+import com.jdddata.dockermgr.common.constant.DockerHttpContstants;
 import com.jdddata.dockermgr.service.impl.DockerContainerServiceImpl;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;

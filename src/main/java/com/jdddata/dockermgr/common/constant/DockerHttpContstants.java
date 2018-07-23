@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.adapter.docker;
+package com.jdddata.dockermgr.common.constant;
 
 public class DockerHttpContstants {
 
