@@ -1,5 +1,6 @@
-package com.jdddata.dockermgr.common.httpclientutil;
+package com.jdddata.dockermgr.common.util.httpclientutil;
 
+import com.jdddata.dockermgr.common.util.httpclientutil.sslconfig.LocalDirectorySSLConfig;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -34,8 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static org.apache.http.impl.client.HttpClients.createDefault;
 
 /**
  *

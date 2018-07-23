@@ -1,6 +1,6 @@
 package com.jdddata.dockermgr.vo;
 
-import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
 import org.apache.http.HttpStatus;
 
 import java.util.Objects;

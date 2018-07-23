@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.httpclientutil;
+package com.jdddata.dockermgr.common.util.httpclientutil;
 
 import org.apache.http.Header;
 

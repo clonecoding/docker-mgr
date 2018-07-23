@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.httpclientutil;
+package com.jdddata.dockermgr.common.util.httpclientutil.sslconfig;
 
 import javax.net.ssl.SSLContext;
 

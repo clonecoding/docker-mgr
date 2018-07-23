@@ -1,13 +1,9 @@
 package com.jdddata.dockermgr;
 
 
-import com.alibaba.fastjson.JSON;
-import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
-import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpClientUtils;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
 import org.junit.Test;
-import org.springframework.util.ClassUtils;
-
-import java.net.URL;
 
 /**
  * @Author: zhangheng(赛事)

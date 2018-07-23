@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.bussiness.service.bo.container.create.ContainerCreateDto;
 import com.jdddata.dockermgr.bussiness.service.bo.container.create.HostConfig;
 import com.jdddata.dockermgr.bussiness.service.bo.container.list.ContainerListDto;
-import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
-import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpClientUtils;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
 import org.junit.Test;
 
 import java.util.Arrays;

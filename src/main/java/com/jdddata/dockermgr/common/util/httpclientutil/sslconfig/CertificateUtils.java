@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.httpclientutil;
+package com.jdddata.dockermgr.common.util.httpclientutil.sslconfig;
 
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdddata.dockermgr.bussiness.mapper.EnvMgrMapper">
+
+
+    <insert id="insertEnvMgr" >
+        INSERT INTO `env_mgr`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="serverAddress!=null">
+                        `serverAddress`,
+                    </if>
+                    <if test="startTime!=null">
+                        `startTime`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="serverAddress!=null">
+                    #{serverAddress},
+                </if>
+                <if test="startTime!=null">
+                    #{startTime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateEnvMgr">
+        UPDATE `env_mgr`
+        SET
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                `id` = #{id},
+            </if>
+            <if test="serverAddress != null and serverAddress!=''">
+                `serverAddress` = #{serverAddress},
+            </if>
+            <if test="startTime != null">
+                `startTime` = #{startTime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `env_mgr`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.id != null and set.id!=''">
+            `id` = #{set.id},
+        </if>
+        <if test="set.serverAddress != null and set.serverAddress!=''">
+            `serverAddress` = #{set.serverAddress},
+        </if>
+        <if test="set.startTime != null">
+            `startTime` = #{set.startTime},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyId!=null and where.fuzzyId.size()>0">
+                (
+                <foreach collection="where.fuzzyId"  separator="or" item="item">
+                    `Id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyId!=null and where.rightFuzzyId.size()>0">
+                (
+                <foreach collection="where.rightFuzzyId"  separator="or" item="item">
+                    `Id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.serverAddressList != null">
+                    `serverAddress` in
+                    <foreach collection="where.serverAddressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyServerAddress!=null and where.fuzzyServerAddress.size()>0">
+                (
+                <foreach collection="where.fuzzyServerAddress"  separator="or" item="item">
+                    `ServerAddress` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyServerAddress!=null and where.rightFuzzyServerAddress.size()>0">
+                (
+                <foreach collection="where.rightFuzzyServerAddress"  separator="or" item="item">
+                    `ServerAddress` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.startTimeList != null">
+                    `startTime` in
+                    <foreach collection="where.startTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.startTimeSt !=null">
+                `startTime` >= #{where.startTimeSt} and
+            </if>
+            <if test="where.startTimeEd!=null">
+                `startTime` &lt;= #{where.startTimeEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.jdddata.dockermgr.bussiness.modle.EnvMgr" id="EnvMgrMap">
+        <result property="id" column="id"/>
+        <result property="serverAddress" column="serverAddress"/>
+        <result property="startTime" column="startTime"/>
+    </resultMap>
+
+
+    <select id="queryEnvMgr" resultMap="EnvMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `env_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="serverAddress != null and serverAddress!=''">
+                `serverAddress` = #{serverAddress} and
+            </if>
+            <if test="startTime != null">
+                `startTime` = #{startTime} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="serverAddressList != null">
+                    `serverAddress` in
+                    <foreach collection="serverAddressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyServerAddress!=null and fuzzyServerAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyServerAddress"  separator="or" item="item">
+                        `ServerAddress` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyServerAddress!=null and rightFuzzyServerAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyServerAddress"  separator="or" item="item">
+                        `ServerAddress` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="startTimeList != null">
+                    `startTime` in
+                    <foreach collection="startTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="startTimeSt !=null">
+                    `startTime` >= #{startTimeSt} and
+                </if>
+                <if test="startTimeEd!=null">
+                    `startTime` &lt;= #{startTimeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryEnvMgrLimit1" resultMap="EnvMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `env_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="serverAddress != null and serverAddress!=''">
+                `serverAddress` = #{serverAddress} and
+            </if>
+            <if test="startTime != null">
+                `startTime` = #{startTime} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="serverAddressList != null">
+                        `serverAddress` in
+                        <foreach collection="serverAddressList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyServerAddress!=null and fuzzyServerAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyServerAddress"  separator="or" item="item">
+                        `ServerAddress` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyServerAddress!=null and rightFuzzyServerAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyServerAddress"  separator="or" item="item">
+                        `ServerAddress` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="startTimeList != null">
+                        `startTime` in
+                        <foreach collection="startTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="startTimeSt !=null">
+                    `startTime` >= #{startTimeSt} and
+                </if>
+                <if test="startTimeEd!=null">
+                    `startTime` &lt;= #{startTimeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `serverAddress`,
+        `startTime`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.serverAddress==true">
+                        `serverAddress`,
+                    </if>
+                    <if test="fetchFields.fetchFields.startTime==true">
+                        `startTime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.serverAddress==null">
+                        `serverAddress`,
+                    </if>
+                    <if test="fetchFields.excludeFields.startTime==null">
+                        `startTime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

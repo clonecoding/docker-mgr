@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdddata.dockermgr.bussiness.mapper.ProjectMgrMapper">
+
+
+    <insert id="insertProjectMgr"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `project_mgr`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="projectId!=null">
+                        `project_id`,
+                    </if>
+                    <if test="projectName!=null">
+                        `project_name`,
+                    </if>
+                    <if test="projectGroup!=null">
+                        `project_group`,
+                    </if>
+                    <if test="contactName!=null">
+                        `contact_name`,
+                    </if>
+                    <if test="contactMobile!=null">
+                        `contact_mobile`,
+                    </if>
+                    <if test="createTime!=null">
+                        `create_time`,
+                    </if>
+                    <if test="createUser!=null">
+                        `create_user`,
+                    </if>
+                    <if test="updateTime!=null">
+                        `update_time`,
+                    </if>
+                    <if test="updateUser!=null">
+                        `update_user`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="projectId!=null">
+                    #{projectId},
+                </if>
+                <if test="projectName!=null">
+                    #{projectName},
+                </if>
+                <if test="projectGroup!=null">
+                    #{projectGroup},
+                </if>
+                <if test="contactName!=null">
+                    #{contactName},
+                </if>
+                <if test="contactMobile!=null">
+                    #{contactMobile},
+                </if>
+                <if test="createTime!=null">
+                    #{createTime},
+                </if>
+                <if test="createUser!=null">
+                    #{createUser},
+                </if>
+                <if test="updateTime!=null">
+                    #{updateTime},
+                </if>
+                <if test="updateUser!=null">
+                    #{updateUser},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateProjectMgr">
+        UPDATE `project_mgr`
+        SET
+        <trim suffixOverrides=",">
+            <if test="projectId != null and projectId!=''">
+                `project_id` = #{projectId},
+            </if>
+            <if test="projectName != null and projectName!=''">
+                `project_name` = #{projectName},
+            </if>
+            <if test="projectGroup != null and projectGroup!=''">
+                `project_group` = #{projectGroup},
+            </if>
+            <if test="contactName != null and contactName!=''">
+                `contact_name` = #{contactName},
+            </if>
+            <if test="contactMobile != null and contactMobile!=''">
+                `contact_mobile` = #{contactMobile},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="createUser != null and createUser!=''">
+                `create_user` = #{createUser},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime},
+            </if>
+            <if test="updateUser != null and updateUser!=''">
+                `update_user` = #{updateUser},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `project_mgr`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.projectId != null and set.projectId!=''">
+            `project_id` = #{set.projectId},
+        </if>
+        <if test="set.projectName != null and set.projectName!=''">
+            `project_name` = #{set.projectName},
+        </if>
+        <if test="set.projectGroup != null and set.projectGroup!=''">
+            `project_group` = #{set.projectGroup},
+        </if>
+        <if test="set.contactName != null and set.contactName!=''">
+            `contact_name` = #{set.contactName},
+        </if>
+        <if test="set.contactMobile != null and set.contactMobile!=''">
+            `contact_mobile` = #{set.contactMobile},
+        </if>
+        <if test="set.createTime != null">
+            `create_time` = #{set.createTime},
+        </if>
+        <if test="set.createUser != null and set.createUser!=''">
+            `create_user` = #{set.createUser},
+        </if>
+        <if test="set.updateTime != null">
+            `update_time` = #{set.updateTime},
+        </if>
+        <if test="set.updateUser != null and set.updateUser!=''">
+            `update_user` = #{set.updateUser},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.projectIdList != null">
+                    `project_id` in
+                    <foreach collection="where.projectIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProjectId!=null and where.fuzzyProjectId.size()>0">
+                (
+                <foreach collection="where.fuzzyProjectId"  separator="or" item="item">
+                    `Project_id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProjectId!=null and where.rightFuzzyProjectId.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProjectId"  separator="or" item="item">
+                    `Project_id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.projectNameList != null">
+                    `project_name` in
+                    <foreach collection="where.projectNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProjectName!=null and where.fuzzyProjectName.size()>0">
+                (
+                <foreach collection="where.fuzzyProjectName"  separator="or" item="item">
+                    `Project_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProjectName!=null and where.rightFuzzyProjectName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProjectName"  separator="or" item="item">
+                    `Project_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.projectGroupList != null">
+                    `project_group` in
+                    <foreach collection="where.projectGroupList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProjectGroup!=null and where.fuzzyProjectGroup.size()>0">
+                (
+                <foreach collection="where.fuzzyProjectGroup"  separator="or" item="item">
+                    `Project_group` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProjectGroup!=null and where.rightFuzzyProjectGroup.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProjectGroup"  separator="or" item="item">
+                    `Project_group` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.contactNameList != null">
+                    `contact_name` in
+                    <foreach collection="where.contactNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyContactName!=null and where.fuzzyContactName.size()>0">
+                (
+                <foreach collection="where.fuzzyContactName"  separator="or" item="item">
+                    `Contact_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyContactName!=null and where.rightFuzzyContactName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyContactName"  separator="or" item="item">
+                    `Contact_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.contactMobileList != null">
+                    `contact_mobile` in
+                    <foreach collection="where.contactMobileList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyContactMobile!=null and where.fuzzyContactMobile.size()>0">
+                (
+                <foreach collection="where.fuzzyContactMobile"  separator="or" item="item">
+                    `Contact_mobile` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyContactMobile!=null and where.rightFuzzyContactMobile.size()>0">
+                (
+                <foreach collection="where.rightFuzzyContactMobile"  separator="or" item="item">
+                    `Contact_mobile` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.createTimeList != null">
+                    `create_time` in
+                    <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createTimeSt !=null">
+                `create_time` >= #{where.createTimeSt} and
+            </if>
+            <if test="where.createTimeEd!=null">
+                `create_time` &lt;= #{where.createTimeEd} and
+            </if>
+                <if test="where.createUserList != null">
+                    `create_user` in
+                    <foreach collection="where.createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCreateUser!=null and where.fuzzyCreateUser.size()>0">
+                (
+                <foreach collection="where.fuzzyCreateUser"  separator="or" item="item">
+                    `Create_user` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCreateUser!=null and where.rightFuzzyCreateUser.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCreateUser"  separator="or" item="item">
+                    `Create_user` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updateTimeSt !=null">
+                `update_time` >= #{where.updateTimeSt} and
+            </if>
+            <if test="where.updateTimeEd!=null">
+                `update_time` &lt;= #{where.updateTimeEd} and
+            </if>
+                <if test="where.updateUserList != null">
+                    `update_user` in
+                    <foreach collection="where.updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUpdateUser!=null and where.fuzzyUpdateUser.size()>0">
+                (
+                <foreach collection="where.fuzzyUpdateUser"  separator="or" item="item">
+                    `Update_user` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUpdateUser!=null and where.rightFuzzyUpdateUser.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUpdateUser"  separator="or" item="item">
+                    `Update_user` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.jdddata.dockermgr.bussiness.modle.ProjectMgr" id="ProjectMgrMap">
+        <result property="id" column="id"/>
+        <result property="projectId" column="project_id"/>
+        <result property="projectName" column="project_name"/>
+        <result property="projectGroup" column="project_group"/>
+        <result property="contactName" column="contact_name"/>
+        <result property="contactMobile" column="contact_mobile"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateUser" column="update_user"/>
+    </resultMap>
+
+
+    <select id="queryProjectMgr" resultMap="ProjectMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `project_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="projectId != null and projectId!=''">
+                `project_id` = #{projectId} and
+            </if>
+            <if test="projectName != null and projectName!=''">
+                `project_name` = #{projectName} and
+            </if>
+            <if test="projectGroup != null and projectGroup!=''">
+                `project_group` = #{projectGroup} and
+            </if>
+            <if test="contactName != null and contactName!=''">
+                `contact_name` = #{contactName} and
+            </if>
+            <if test="contactMobile != null and contactMobile!=''">
+                `contact_mobile` = #{contactMobile} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="createUser != null and createUser!=''">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="updateUser != null and updateUser!=''">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ProjectMgr$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="projectIdList != null">
+                    `project_id` in
+                    <foreach collection="projectIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProjectId!=null and fuzzyProjectId.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectId"  separator="or" item="item">
+                        `Project_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectId!=null and rightFuzzyProjectId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectId"  separator="or" item="item">
+                        `Project_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="projectNameList != null">
+                    `project_name` in
+                    <foreach collection="projectNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProjectName!=null and fuzzyProjectName.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectName"  separator="or" item="item">
+                        `Project_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectName!=null and rightFuzzyProjectName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectName"  separator="or" item="item">
+                        `Project_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="projectGroupList != null">
+                    `project_group` in
+                    <foreach collection="projectGroupList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProjectGroup!=null and fuzzyProjectGroup.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectGroup"  separator="or" item="item">
+                        `Project_group` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectGroup!=null and rightFuzzyProjectGroup.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectGroup"  separator="or" item="item">
+                        `Project_group` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="contactNameList != null">
+                    `contact_name` in
+                    <foreach collection="contactNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContactName!=null and fuzzyContactName.size()>0">
+                    (
+                    <foreach collection="fuzzyContactName"  separator="or" item="item">
+                        `Contact_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactName!=null and rightFuzzyContactName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactName"  separator="or" item="item">
+                        `Contact_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="contactMobileList != null">
+                    `contact_mobile` in
+                    <foreach collection="contactMobileList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContactMobile!=null and fuzzyContactMobile.size()>0">
+                    (
+                    <foreach collection="fuzzyContactMobile"  separator="or" item="item">
+                        `Contact_mobile` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactMobile!=null and rightFuzzyContactMobile.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactMobile"  separator="or" item="item">
+                        `Contact_mobile` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                <if test="createUserList != null">
+                    `create_user` in
+                    <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
+                    (
+                    <foreach collection="fuzzyCreateUser"  separator="or" item="item">
+                        `Create_user` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCreateUser"  separator="or" item="item">
+                        `Create_user` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                <if test="updateUserList != null">
+                    `update_user` in
+                    <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
+                    (
+                    <foreach collection="fuzzyUpdateUser"  separator="or" item="item">
+                        `Update_user` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUpdateUser"  separator="or" item="item">
+                        `Update_user` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryProjectMgrLimit1" resultMap="ProjectMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `project_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="projectId != null and projectId!=''">
+                `project_id` = #{projectId} and
+            </if>
+            <if test="projectName != null and projectName!=''">
+                `project_name` = #{projectName} and
+            </if>
+            <if test="projectGroup != null and projectGroup!=''">
+                `project_group` = #{projectGroup} and
+            </if>
+            <if test="contactName != null and contactName!=''">
+                `contact_name` = #{contactName} and
+            </if>
+            <if test="contactMobile != null and contactMobile!=''">
+                `contact_mobile` = #{contactMobile} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="createUser != null and createUser!=''">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="updateUser != null and updateUser!=''">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ProjectMgr$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="projectIdList != null">
+                        `project_id` in
+                        <foreach collection="projectIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProjectId!=null and fuzzyProjectId.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectId"  separator="or" item="item">
+                        `Project_id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectId!=null and rightFuzzyProjectId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectId"  separator="or" item="item">
+                        `Project_id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="projectNameList != null">
+                        `project_name` in
+                        <foreach collection="projectNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProjectName!=null and fuzzyProjectName.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectName"  separator="or" item="item">
+                        `Project_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectName!=null and rightFuzzyProjectName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectName"  separator="or" item="item">
+                        `Project_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="projectGroupList != null">
+                        `project_group` in
+                        <foreach collection="projectGroupList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProjectGroup!=null and fuzzyProjectGroup.size()>0">
+                    (
+                    <foreach collection="fuzzyProjectGroup"  separator="or" item="item">
+                        `Project_group` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProjectGroup!=null and rightFuzzyProjectGroup.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProjectGroup"  separator="or" item="item">
+                        `Project_group` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="contactNameList != null">
+                        `contact_name` in
+                        <foreach collection="contactNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContactName!=null and fuzzyContactName.size()>0">
+                    (
+                    <foreach collection="fuzzyContactName"  separator="or" item="item">
+                        `Contact_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactName!=null and rightFuzzyContactName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactName"  separator="or" item="item">
+                        `Contact_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="contactMobileList != null">
+                        `contact_mobile` in
+                        <foreach collection="contactMobileList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContactMobile!=null and fuzzyContactMobile.size()>0">
+                    (
+                    <foreach collection="fuzzyContactMobile"  separator="or" item="item">
+                        `Contact_mobile` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactMobile!=null and rightFuzzyContactMobile.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactMobile"  separator="or" item="item">
+                        `Contact_mobile` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="createTimeList != null">
+                        `create_time` in
+                        <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                    <if test="createUserList != null">
+                        `create_user` in
+                        <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
+                    (
+                    <foreach collection="fuzzyCreateUser"  separator="or" item="item">
+                        `Create_user` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCreateUser"  separator="or" item="item">
+                        `Create_user` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="updateTimeList != null">
+                        `update_time` in
+                        <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                    <if test="updateUserList != null">
+                        `update_user` in
+                        <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
+                    (
+                    <foreach collection="fuzzyUpdateUser"  separator="or" item="item">
+                        `Update_user` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUpdateUser"  separator="or" item="item">
+                        `Update_user` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `project_id`,
+        `project_name`,
+        `project_group`,
+        `contact_name`,
+        `contact_mobile`,
+        `create_time`,
+        `create_user`,
+        `update_time`,
+        `update_user`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ProjectMgr$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.projectId==true">
+                        `project_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.projectName==true">
+                        `project_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.projectGroup==true">
+                        `project_group`,
+                    </if>
+                    <if test="fetchFields.fetchFields.contactName==true">
+                        `contact_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.contactMobile==true">
+                        `contact_mobile`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createTime==true">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createUser==true">
+                        `create_user`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updateTime==true">
+                        `update_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updateUser==true">
+                        `update_user`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.projectId==null">
+                        `project_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.projectName==null">
+                        `project_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.projectGroup==null">
+                        `project_group`,
+                    </if>
+                    <if test="fetchFields.excludeFields.contactName==null">
+                        `contact_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.contactMobile==null">
+                        `contact_mobile`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createTime==null">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createUser==null">
+                        `create_user`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updateTime==null">
+                        `update_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updateUser==null">
+                        `update_user`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ProjectMgr$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

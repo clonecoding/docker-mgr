@@ -1,10 +1,11 @@
-package com.jdddata.dockermgr.common;
+package com.jdddata.dockermgr.common.docker;
 
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.bussiness.service.bo.container.create.ContainerCreateDto;
+import com.jdddata.dockermgr.bussiness.service.bo.container.list.ContainerListDto;
 import com.jdddata.dockermgr.bussiness.service.impl.DockerContainerServiceImpl;
-import com.jdddata.dockermgr.common.httpclientutil.HttpClientUtils;
-import com.jdddata.dockermgr.common.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpClientUtils;
+import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,8 +42,11 @@ public final class DockerClient {
         return response.getStatusCode() == HttpStatus.OK.value();
     }
 
+    public static HttpResponse listContainers() {
+        return HttpClientUtils.getWithCert(DockerHttpContstants.DCOKER_CONTAINER_LIST_ALL);
+    }
 
-    public static HttpResponse startContainer(String serverInfo, String name) {
+        public static HttpResponse startContainer(String serverInfo, String name) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_START, serverInfo, name);
         return HttpClientUtils.postWithCert(url, null);
     }
