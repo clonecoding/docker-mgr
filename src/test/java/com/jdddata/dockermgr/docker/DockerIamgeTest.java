@@ -1,10 +1,10 @@
 package com.jdddata.dockermgr.docker;
 
-import com.jdddata.dockermgr.bussiness.service.DockerImageService;
-import com.jdddata.dockermgr.bussiness.service.impl.DockerImageServiceImpl;
-import com.jdddata.dockermgr.common.docker.DockerClient;
-import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
-import com.jdddata.dockermgr.vo.ResultVo;
+import com.jdddata.dockermgr.service.DockerImageService;
+import com.jdddata.dockermgr.service.impl.DockerImageServiceImpl;
+import com.jdddata.dockermgr.adapter.docker.DockerClient;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
+import com.jdddata.dockermgr.common.vo.ResultVo;
 import org.junit.Test;
 
 /**

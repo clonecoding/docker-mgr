@@ -1,11 +1,11 @@
 package com.jdddata.dockermgr.docker;
 
 import com.alibaba.fastjson.JSON;
-import com.jdddata.dockermgr.bussiness.service.bo.container.create.ContainerCreateDto;
-import com.jdddata.dockermgr.bussiness.service.bo.container.create.HostConfig;
-import com.jdddata.dockermgr.bussiness.service.bo.container.list.ContainerListDto;
-import com.jdddata.dockermgr.common.util.httpclientutil.HttpClientUtils;
-import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.ContainerCreateDto;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.HostConfig;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jdddata.dockermgr.bussiness.mapper.EnvMgrMapper">
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.EnvMgrMapper">
 
 
     <insert id="insertEnvMgr" >
@@ -128,7 +128,7 @@
     </update>
 
 
-    <resultMap type="com.jdddata.dockermgr.bussiness.modle.EnvMgr" id="EnvMgrMap">
+    <resultMap type="com.jdddata.dockermgr.dao.modle.EnvMgr" id="EnvMgrMap">
         <result property="id" column="id"/>
         <result property="serverAddress" column="serverAddress"/>
         <result property="startTime" column="startTime"/>
@@ -149,7 +149,7 @@
             <if test="startTime != null">
                 `startTime` = #{startTime} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.EnvMgr$QueryBuilder) == true">
                 <if test="idList != null">
                     `id` in
                     <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -220,7 +220,7 @@
             <if test="startTime != null">
                 `startTime` = #{startTime} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.EnvMgr$QueryBuilder) == true">
                     <if test="idList != null">
                         `id` in
                         <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -290,7 +290,7 @@
 
     <sql id="baseResult">
         <trim suffixOverrides=",">
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.EnvMgr$QueryBuilder) == true">
 
                 <if test="fetchFields==null">
                     <include refid="allResult"></include>
@@ -331,7 +331,7 @@
                     </if>
                 </if>
             </if>
-            <if test="(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.EnvMgr$QueryBuilder) == false" >
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.EnvMgr$QueryBuilder) == false" >
                 <include refid="allResult"></include>
             </if>
 

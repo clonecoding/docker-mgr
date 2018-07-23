@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @author Magoo
  */
 @Configuration
-@MapperScan(basePackages = "com.jdddata.dockermgr.bussiness.mapper",
+@MapperScan(basePackages = "com.jdddata.dockermgr.dao.mapper",
         sqlSessionTemplateRef = "storeSqlSessionTemplate")
 public class DsConfigOfBackstage {
 

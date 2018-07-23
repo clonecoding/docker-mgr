@@ -1,8 +1,8 @@
 package com.jdddata.dockermgr;
 
 
-import com.jdddata.dockermgr.common.util.httpclientutil.HttpClientUtils;
-import com.jdddata.dockermgr.common.util.httpclientutil.HttpResponse;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import org.junit.Test;
 
 /**

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jdddata.dockermgr.bussiness.mapper.ImagesMgrMapper">
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.ImagesMgrMapper">
 
 
     <insert id="insertImagesMgr" >
@@ -160,7 +160,7 @@
     </update>
 
 
-    <resultMap type="com.jdddata.dockermgr.bussiness.modle.ImagesMgr" id="ImagesMgrMap">
+    <resultMap type="com.jdddata.dockermgr.dao.modle.ImagesMgr" id="ImagesMgrMap">
         <result property="id" column="id"/>
         <result property="imageName" column="imageName"/>
         <result property="imageTag" column="imageTag"/>
@@ -185,7 +185,7 @@
             <if test="createTime != null">
                 `createTime` = #{createTime} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ImagesMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ImagesMgr$QueryBuilder) == true">
                 <if test="idList != null">
                     `id` in
                     <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -279,7 +279,7 @@
             <if test="createTime != null">
                 `createTime` = #{createTime} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ImagesMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ImagesMgr$QueryBuilder) == true">
                     <if test="idList != null">
                         `id` in
                         <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -370,7 +370,7 @@
 
     <sql id="baseResult">
         <trim suffixOverrides=",">
-            <if test = "(_parameter instanceof .com.jdddata.dockermgr.bussiness.modle.ImagesMgr$QueryBuilder) == true">
+            <if test = "(_parameter instanceof .com.jdddata.dockermgr.dao.modle.ImagesMgr$QueryBuilder) == true">
 
                 <if test="fetchFields==null">
                     <include refid="allResult"></include>
@@ -417,7 +417,7 @@
                     </if>
                 </if>
             </if>
-            <if test="(_parameter instanceof .com.jdddata.dockermgr.bussiness.modle.ImagesMgr$QueryBuilder) == false" >
+            <if test="(_parameter instanceof .com.jdddata.dockermgr.dao.modle.ImagesMgr$QueryBuilder) == false" >
                 <include refid="allResult"></include>
             </if>
 

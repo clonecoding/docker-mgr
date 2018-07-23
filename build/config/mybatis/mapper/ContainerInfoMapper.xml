@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jdddata.dockermgr.bussiness.mapper.ContainerInfoMapper">
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper">
 
 
     <insert id="insertContainerInfo"  useGeneratedKeys="true" keyProperty="id">
@@ -587,7 +587,7 @@
     </update>
 
 
-    <resultMap type="com.jdddata.dockermgr.bussiness.modle.ContainerInfo" id="ContainerInfoMap">
+    <resultMap type="com.jdddata.dockermgr.dao.modle.ContainerInfo" id="ContainerInfoMap">
         <result property="id" column="id"/>
         <result property="deployId" column="deploy_id"/>
         <result property="containerId" column="container_id"/>
@@ -672,7 +672,7 @@
             <if test="updateUser != null and updateUser!=''">
                 `update_user` = #{updateUser} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ContainerInfo$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
                 <if test="idList != null">
                     `id` in
                     <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -1063,7 +1063,7 @@
             <if test="updateUser != null and updateUser!=''">
                 `update_user` = #{updateUser} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.bussiness.modle.ContainerInfo$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
                     <if test="idList != null">
                         `id` in
                         <foreach collection="idList" close=")" open="(" separator="," item="item">
