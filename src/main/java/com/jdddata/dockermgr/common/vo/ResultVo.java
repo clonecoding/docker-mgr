@@ -15,10 +15,14 @@ public class ResultVo<T> {
     private T data;
 
     public ResultVo(String code, String message) {
-        this.code = code;
-        this.message = message;
+        this(code, message, null);
     }
 
+    public ResultVo(String code, String message,T data) {
+        this.code=code;
+        this.message=message;
+        this.data = data;
+    }
     public String getCode() {
         return code;
     }
@@ -36,5 +40,11 @@ public class ResultVo<T> {
         this.message = message;
     }
 
+    public T getData() {
+        return data;
+    }
 
+    public void setData(T data) {
+        this.data = data;
+    }
 }
