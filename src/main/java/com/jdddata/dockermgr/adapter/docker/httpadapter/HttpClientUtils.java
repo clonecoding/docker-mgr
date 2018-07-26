@@ -201,6 +201,38 @@ public class HttpClientUtils {
 
     }
 
+    public static String doPostWithHttps(String apiUrl, String context,String charset,String contentType ) {
+        CloseableHttpClient httpClient = createClientSSLDefault();
+        String httpStr = null;
+        CloseableHttpResponse response = null;
+        HttpPost httpPost = new HttpPost(apiUrl);
+        try {
+            httpPost.setConfig(requestConfig);
+            StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
+            if(!StringUtils.isEmpty(contentType)){
+                /*post传输是json格式数据*/
+                stringEntity.setContentType(contentType);
+            }
+            httpPost.setEntity(stringEntity);
+            response = httpClient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            httpStr = EntityUtils.toString(entity, charset);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                try {
+                    EntityUtils.consume(response.getEntity());
+                } catch (IOException e) {
+
+                }
+            }
+        }
+        return httpStr;
+    }
+
     /**
      * 无证书验证 CloseableHttpClient
      *
