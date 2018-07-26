@@ -9,6 +9,9 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * 对称加密，例如密码字段放入数据库，或者从配置文件读取加密字段
+ */
 public class CryptoUtil {
 
 
