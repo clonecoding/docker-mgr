@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.List;
 /**
 *
-*  @author author
+*  @author zhangheng
 */
 public class ProjectMgr implements Serializable {
 
-    private static final long serialVersionUID = 1532314048179L;
+    private static final long serialVersionUID = 1532582466178L;
 
 
     /**
@@ -28,31 +28,43 @@ public class ProjectMgr implements Serializable {
 
     /**
     * 项目名称
-    * isNullAble:1
+    * isNullAble:1,defaultVal:
     */
     private String projectName;
 
     /**
     * 项目组名
-    * isNullAble:1
+    * isNullAble:1,defaultVal:
     */
     private String projectGroup;
 
     /**
     * 联系人名称
-    * isNullAble:1
+    * isNullAble:1,defaultVal:
     */
     private String contactName;
 
     /**
     * 联系人手机
-    * isNullAble:1
+    * isNullAble:1,defaultVal:
     */
     private String contactMobile;
 
     /**
+    * 联系人邮箱
+    * isNullAble:1,defaultVal:
+    */
+    private String contactEmail;
+
+    /**
+    * 报警邮件地址
+    * isNullAble:1,defaultVal:
+    */
+    private String alarmEmailAddress;
+
+    /**
     * 创建时间
-    * isNullAble:1
+    * isNullAble:1,defaultVal:CURRENT_TIMESTAMP
     */
     private java.time.LocalDateTime createTime;
 
@@ -64,7 +76,7 @@ public class ProjectMgr implements Serializable {
 
     /**
     * 更新时间
-    * isNullAble:1
+    * isNullAble:1,defaultVal:CURRENT_TIMESTAMP
     */
     private java.time.LocalDateTime updateTime;
 
@@ -99,6 +111,14 @@ public class ProjectMgr implements Serializable {
 
     public String getContactMobile(){return this.contactMobile;}
 
+    public void setContactEmail(String contactEmail){this.contactEmail = contactEmail;}
+
+    public String getContactEmail(){return this.contactEmail;}
+
+    public void setAlarmEmailAddress(String alarmEmailAddress){this.alarmEmailAddress = alarmEmailAddress;}
+
+    public String getAlarmEmailAddress(){return this.alarmEmailAddress;}
+
     public void setCreateTime(java.time.LocalDateTime createTime){this.createTime = createTime;}
 
     public java.time.LocalDateTime getCreateTime(){return this.createTime;}
@@ -123,6 +143,8 @@ public class ProjectMgr implements Serializable {
                 "projectGroup='" + projectGroup + '\'' +
                 "contactName='" + contactName + '\'' +
                 "contactMobile='" + contactMobile + '\'' +
+                "contactEmail='" + contactEmail + '\'' +
+                "alarmEmailAddress='" + alarmEmailAddress + '\'' +
                 "createTime='" + createTime + '\'' +
                 "createUser='" + createUser + '\'' +
                 "updateTime='" + updateTime + '\'' +
@@ -247,6 +269,30 @@ public class ProjectMgr implements Serializable {
         private List<String> rightFuzzyContactMobile;
 
         public List<String> getRightFuzzyContactMobile(){return this.rightFuzzyContactMobile;}
+        private List<String> contactEmailList;
+
+        public List<String> getContactEmailList(){return this.contactEmailList;}
+
+
+        private List<String> fuzzyContactEmail;
+
+        public List<String> getFuzzyContactEmail(){return this.fuzzyContactEmail;}
+
+        private List<String> rightFuzzyContactEmail;
+
+        public List<String> getRightFuzzyContactEmail(){return this.rightFuzzyContactEmail;}
+        private List<String> alarmEmailAddressList;
+
+        public List<String> getAlarmEmailAddressList(){return this.alarmEmailAddressList;}
+
+
+        private List<String> fuzzyAlarmEmailAddress;
+
+        public List<String> getFuzzyAlarmEmailAddress(){return this.fuzzyAlarmEmailAddress;}
+
+        private List<String> rightFuzzyAlarmEmailAddress;
+
+        public List<String> getRightFuzzyAlarmEmailAddress(){return this.rightFuzzyAlarmEmailAddress;}
         private List<java.time.LocalDateTime> createTimeList;
 
         public List<java.time.LocalDateTime> getCreateTimeList(){return this.createTimeList;}
@@ -565,6 +611,96 @@ public class ProjectMgr implements Serializable {
             return this;
         }
 
+        public QueryBuilder fuzzyContactEmail (List<String> fuzzyContactEmail){
+            this.fuzzyContactEmail = fuzzyContactEmail;
+            return this;
+        }
+
+        public QueryBuilder fuzzyContactEmail (String ... fuzzyContactEmail){
+            this.fuzzyContactEmail = solveNullList(fuzzyContactEmail);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyContactEmail (List<String> rightFuzzyContactEmail){
+            this.rightFuzzyContactEmail = rightFuzzyContactEmail;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyContactEmail (String ... rightFuzzyContactEmail){
+            this.rightFuzzyContactEmail = solveNullList(rightFuzzyContactEmail);
+            return this;
+        }
+
+        public QueryBuilder contactEmail(String contactEmail){
+            setContactEmail(contactEmail);
+            return this;
+        }
+
+        public QueryBuilder contactEmailList(String ... contactEmail){
+            this.contactEmailList = solveNullList(contactEmail);
+            return this;
+        }
+
+        public QueryBuilder contactEmailList(List<String> contactEmail){
+            this.contactEmailList = contactEmail;
+            return this;
+        }
+
+        public QueryBuilder fetchContactEmail(){
+            setFetchFields("fetchFields","contactEmail");
+            return this;
+        }
+
+        public QueryBuilder excludeContactEmail(){
+            setFetchFields("excludeFields","contactEmail");
+            return this;
+        }
+
+        public QueryBuilder fuzzyAlarmEmailAddress (List<String> fuzzyAlarmEmailAddress){
+            this.fuzzyAlarmEmailAddress = fuzzyAlarmEmailAddress;
+            return this;
+        }
+
+        public QueryBuilder fuzzyAlarmEmailAddress (String ... fuzzyAlarmEmailAddress){
+            this.fuzzyAlarmEmailAddress = solveNullList(fuzzyAlarmEmailAddress);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyAlarmEmailAddress (List<String> rightFuzzyAlarmEmailAddress){
+            this.rightFuzzyAlarmEmailAddress = rightFuzzyAlarmEmailAddress;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyAlarmEmailAddress (String ... rightFuzzyAlarmEmailAddress){
+            this.rightFuzzyAlarmEmailAddress = solveNullList(rightFuzzyAlarmEmailAddress);
+            return this;
+        }
+
+        public QueryBuilder alarmEmailAddress(String alarmEmailAddress){
+            setAlarmEmailAddress(alarmEmailAddress);
+            return this;
+        }
+
+        public QueryBuilder alarmEmailAddressList(String ... alarmEmailAddress){
+            this.alarmEmailAddressList = solveNullList(alarmEmailAddress);
+            return this;
+        }
+
+        public QueryBuilder alarmEmailAddressList(List<String> alarmEmailAddress){
+            this.alarmEmailAddressList = alarmEmailAddress;
+            return this;
+        }
+
+        public QueryBuilder fetchAlarmEmailAddress(){
+            setFetchFields("fetchFields","alarmEmailAddress");
+            return this;
+        }
+
+        public QueryBuilder excludeAlarmEmailAddress(){
+            setFetchFields("excludeFields","alarmEmailAddress");
+            return this;
+        }
+
         public QueryBuilder createTimeBetWeen(java.time.LocalDateTime createTimeSt,java.time.LocalDateTime createTimeEd){
             this.createTimeSt = createTimeSt;
             this.createTimeEd = createTimeEd;
@@ -851,6 +987,30 @@ public class ProjectMgr implements Serializable {
         private List<String> rightFuzzyContactMobile;
 
         public List<String> getRightFuzzyContactMobile(){return this.rightFuzzyContactMobile;}
+        private List<String> contactEmailList;
+
+        public List<String> getContactEmailList(){return this.contactEmailList;}
+
+
+        private List<String> fuzzyContactEmail;
+
+        public List<String> getFuzzyContactEmail(){return this.fuzzyContactEmail;}
+
+        private List<String> rightFuzzyContactEmail;
+
+        public List<String> getRightFuzzyContactEmail(){return this.rightFuzzyContactEmail;}
+        private List<String> alarmEmailAddressList;
+
+        public List<String> getAlarmEmailAddressList(){return this.alarmEmailAddressList;}
+
+
+        private List<String> fuzzyAlarmEmailAddress;
+
+        public List<String> getFuzzyAlarmEmailAddress(){return this.fuzzyAlarmEmailAddress;}
+
+        private List<String> rightFuzzyAlarmEmailAddress;
+
+        public List<String> getRightFuzzyAlarmEmailAddress(){return this.rightFuzzyAlarmEmailAddress;}
         private List<java.time.LocalDateTime> createTimeList;
 
         public List<java.time.LocalDateTime> getCreateTimeList(){return this.createTimeList;}
@@ -1076,6 +1236,66 @@ public class ProjectMgr implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyContactEmail (List<String> fuzzyContactEmail){
+            this.fuzzyContactEmail = fuzzyContactEmail;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyContactEmail (String ... fuzzyContactEmail){
+            this.fuzzyContactEmail = solveNullList(fuzzyContactEmail);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyContactEmail (List<String> rightFuzzyContactEmail){
+            this.rightFuzzyContactEmail = rightFuzzyContactEmail;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyContactEmail (String ... rightFuzzyContactEmail){
+            this.rightFuzzyContactEmail = solveNullList(rightFuzzyContactEmail);
+            return this;
+        }
+
+        public ConditionBuilder contactEmailList(String ... contactEmail){
+            this.contactEmailList = solveNullList(contactEmail);
+            return this;
+        }
+
+        public ConditionBuilder contactEmailList(List<String> contactEmail){
+            this.contactEmailList = contactEmail;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyAlarmEmailAddress (List<String> fuzzyAlarmEmailAddress){
+            this.fuzzyAlarmEmailAddress = fuzzyAlarmEmailAddress;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyAlarmEmailAddress (String ... fuzzyAlarmEmailAddress){
+            this.fuzzyAlarmEmailAddress = solveNullList(fuzzyAlarmEmailAddress);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyAlarmEmailAddress (List<String> rightFuzzyAlarmEmailAddress){
+            this.rightFuzzyAlarmEmailAddress = rightFuzzyAlarmEmailAddress;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyAlarmEmailAddress (String ... rightFuzzyAlarmEmailAddress){
+            this.rightFuzzyAlarmEmailAddress = solveNullList(rightFuzzyAlarmEmailAddress);
+            return this;
+        }
+
+        public ConditionBuilder alarmEmailAddressList(String ... alarmEmailAddress){
+            this.alarmEmailAddressList = solveNullList(alarmEmailAddress);
+            return this;
+        }
+
+        public ConditionBuilder alarmEmailAddressList(List<String> alarmEmailAddress){
+            this.alarmEmailAddressList = alarmEmailAddress;
+            return this;
+        }
+
         public ConditionBuilder createTimeBetWeen(java.time.LocalDateTime createTimeSt,java.time.LocalDateTime createTimeEd){
             this.createTimeSt = createTimeSt;
             this.createTimeEd = createTimeEd;
@@ -1234,6 +1454,14 @@ public class ProjectMgr implements Serializable {
         }
         public Builder contactMobile(String contactMobile){
             this.obj.setContactMobile(contactMobile);
+            return this;
+        }
+        public Builder contactEmail(String contactEmail){
+            this.obj.setContactEmail(contactEmail);
+            return this;
+        }
+        public Builder alarmEmailAddress(String alarmEmailAddress){
+            this.obj.setAlarmEmailAddress(alarmEmailAddress);
             return this;
         }
         public Builder createTime(java.time.LocalDateTime createTime){

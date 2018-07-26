@@ -14,17 +14,35 @@
                     <if test="projectId!=null">
                         `project_id`,
                     </if>
-                    <if test="containerIp!=null">
-                        `container_ip`,
+                    <if test="hostIp!=null">
+                        `host_ip`,
                     </if>
-                    <if test="env!=null">
-                        `env`,
+                    <if test="dockerEnv!=null">
+                        `docker_env`,
                     </if>
                     <if test="deployMode!=null">
                         `deploy_mode`,
                     </if>
                     <if test="containerName!=null">
                         `container_name`,
+                    </if>
+                    <if test="gitBranch!=null">
+                        `git_branch`,
+                    </if>
+                    <if test="nexusTargetUrl!=null">
+                        `nexus_target_url`,
+                    </if>
+                    <if test="dockerImageName!=null">
+                        `docker_image_name`,
+                    </if>
+                    <if test="entrypoint!=null">
+                        `entrypoint`,
+                    </if>
+                    <if test="dockerMount!=null">
+                        `docker_mount`,
+                    </if>
+                    <if test="dockerLink!=null">
+                        `docker_link`,
                     </if>
                     <if test="isValid!=null">
                         `is_valid`,
@@ -55,17 +73,35 @@
                 <if test="projectId!=null">
                     #{projectId},
                 </if>
-                <if test="containerIp!=null">
-                    #{containerIp},
+                <if test="hostIp!=null">
+                    #{hostIp},
                 </if>
-                <if test="env!=null">
-                    #{env},
+                <if test="dockerEnv!=null">
+                    #{dockerEnv},
                 </if>
                 <if test="deployMode!=null">
                     #{deployMode},
                 </if>
                 <if test="containerName!=null">
                     #{containerName},
+                </if>
+                <if test="gitBranch!=null">
+                    #{gitBranch},
+                </if>
+                <if test="nexusTargetUrl!=null">
+                    #{nexusTargetUrl},
+                </if>
+                <if test="dockerImageName!=null">
+                    #{dockerImageName},
+                </if>
+                <if test="entrypoint!=null">
+                    #{entrypoint},
+                </if>
+                <if test="dockerMount!=null">
+                    #{dockerMount},
+                </if>
+                <if test="dockerLink!=null">
+                    #{dockerLink},
                 </if>
                 <if test="isValid!=null">
                     #{isValid},
@@ -99,17 +135,35 @@
             <if test="projectId != null and projectId!=''">
                 `project_id` = #{projectId},
             </if>
-            <if test="containerIp != null and containerIp!=''">
-                `container_ip` = #{containerIp},
+            <if test="hostIp != null and hostIp!=''">
+                `host_ip` = #{hostIp},
             </if>
-            <if test="env != null and env!=''">
-                `env` = #{env},
+            <if test="dockerEnv != null and dockerEnv!=''">
+                `docker_env` = #{dockerEnv},
             </if>
             <if test="deployMode != null">
                 `deploy_mode` = #{deployMode},
             </if>
             <if test="containerName != null and containerName!=''">
                 `container_name` = #{containerName},
+            </if>
+            <if test="gitBranch != null and gitBranch!=''">
+                `git_branch` = #{gitBranch},
+            </if>
+            <if test="nexusTargetUrl != null and nexusTargetUrl!=''">
+                `nexus_target_url` = #{nexusTargetUrl},
+            </if>
+            <if test="dockerImageName != null and dockerImageName!=''">
+                `docker_image_name` = #{dockerImageName},
+            </if>
+            <if test="entrypoint != null and entrypoint!=''">
+                `entrypoint` = #{entrypoint},
+            </if>
+            <if test="dockerMount != null and dockerMount!=''">
+                `docker_mount` = #{dockerMount},
+            </if>
+            <if test="dockerLink != null and dockerLink!=''">
+                `docker_link` = #{dockerLink},
             </if>
             <if test="isValid != null">
                 `is_valid` = #{isValid},
@@ -143,17 +197,35 @@
         <if test="set.projectId != null and set.projectId!=''">
             `project_id` = #{set.projectId},
         </if>
-        <if test="set.containerIp != null and set.containerIp!=''">
-            `container_ip` = #{set.containerIp},
+        <if test="set.hostIp != null and set.hostIp!=''">
+            `host_ip` = #{set.hostIp},
         </if>
-        <if test="set.env != null and set.env!=''">
-            `env` = #{set.env},
+        <if test="set.dockerEnv != null and set.dockerEnv!=''">
+            `docker_env` = #{set.dockerEnv},
         </if>
         <if test="set.deployMode != null">
             `deploy_mode` = #{set.deployMode},
         </if>
         <if test="set.containerName != null and set.containerName!=''">
             `container_name` = #{set.containerName},
+        </if>
+        <if test="set.gitBranch != null and set.gitBranch!=''">
+            `git_branch` = #{set.gitBranch},
+        </if>
+        <if test="set.nexusTargetUrl != null and set.nexusTargetUrl!=''">
+            `nexus_target_url` = #{set.nexusTargetUrl},
+        </if>
+        <if test="set.dockerImageName != null and set.dockerImageName!=''">
+            `docker_image_name` = #{set.dockerImageName},
+        </if>
+        <if test="set.entrypoint != null and set.entrypoint!=''">
+            `entrypoint` = #{set.entrypoint},
+        </if>
+        <if test="set.dockerMount != null and set.dockerMount!=''">
+            `docker_mount` = #{set.dockerMount},
+        </if>
+        <if test="set.dockerLink != null and set.dockerLink!=''">
+            `docker_link` = #{set.dockerLink},
         </if>
         <if test="set.isValid != null">
             `is_valid` = #{set.isValid},
@@ -207,43 +279,43 @@
                 </foreach>
                 ) and
             </if>
-                <if test="where.containerIpList != null">
-                    `container_ip` in
-                    <foreach collection="where.containerIpList" close=")" open="(" separator="," item="item">
+                <if test="where.hostIpList != null">
+                    `host_ip` in
+                    <foreach collection="where.hostIpList" close=")" open="(" separator="," item="item">
                         #{item}
                     </foreach> and
                 </if>
-            <if test ="where.fuzzyContainerIp!=null and where.fuzzyContainerIp.size()>0">
+            <if test ="where.fuzzyHostIp!=null and where.fuzzyHostIp.size()>0">
                 (
-                <foreach collection="where.fuzzyContainerIp"  separator="or" item="item">
-                    `Container_ip` like concat('%',#{item},'%')
+                <foreach collection="where.fuzzyHostIp"  separator="or" item="item">
+                    `Host_ip` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyContainerIp!=null and where.rightFuzzyContainerIp.size()>0">
+            <if test ="where.rightFuzzyHostIp!=null and where.rightFuzzyHostIp.size()>0">
                 (
-                <foreach collection="where.rightFuzzyContainerIp"  separator="or" item="item">
-                    `Container_ip` like concat(#{item},'%')
+                <foreach collection="where.rightFuzzyHostIp"  separator="or" item="item">
+                    `Host_ip` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.envList != null">
-                    `env` in
-                    <foreach collection="where.envList" close=")" open="(" separator="," item="item">
+                <if test="where.dockerEnvList != null">
+                    `docker_env` in
+                    <foreach collection="where.dockerEnvList" close=")" open="(" separator="," item="item">
                         #{item}
                     </foreach> and
                 </if>
-            <if test ="where.fuzzyEnv!=null and where.fuzzyEnv.size()>0">
+            <if test ="where.fuzzyDockerEnv!=null and where.fuzzyDockerEnv.size()>0">
                 (
-                <foreach collection="where.fuzzyEnv"  separator="or" item="item">
-                    `Env` like concat('%',#{item},'%')
+                <foreach collection="where.fuzzyDockerEnv"  separator="or" item="item">
+                    `Docker_env` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyEnv!=null and where.rightFuzzyEnv.size()>0">
+            <if test ="where.rightFuzzyDockerEnv!=null and where.rightFuzzyDockerEnv.size()>0">
                 (
-                <foreach collection="where.rightFuzzyEnv"  separator="or" item="item">
-                    `Env` like concat(#{item},'%')
+                <foreach collection="where.rightFuzzyDockerEnv"  separator="or" item="item">
+                    `Docker_env` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
@@ -276,6 +348,126 @@
                 (
                 <foreach collection="where.rightFuzzyContainerName"  separator="or" item="item">
                     `Container_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.gitBranchList != null">
+                    `git_branch` in
+                    <foreach collection="where.gitBranchList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyGitBranch!=null and where.fuzzyGitBranch.size()>0">
+                (
+                <foreach collection="where.fuzzyGitBranch"  separator="or" item="item">
+                    `Git_branch` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyGitBranch!=null and where.rightFuzzyGitBranch.size()>0">
+                (
+                <foreach collection="where.rightFuzzyGitBranch"  separator="or" item="item">
+                    `Git_branch` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.nexusTargetUrlList != null">
+                    `nexus_target_url` in
+                    <foreach collection="where.nexusTargetUrlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNexusTargetUrl!=null and where.fuzzyNexusTargetUrl.size()>0">
+                (
+                <foreach collection="where.fuzzyNexusTargetUrl"  separator="or" item="item">
+                    `Nexus_target_url` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNexusTargetUrl!=null and where.rightFuzzyNexusTargetUrl.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNexusTargetUrl"  separator="or" item="item">
+                    `Nexus_target_url` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.dockerImageNameList != null">
+                    `docker_image_name` in
+                    <foreach collection="where.dockerImageNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDockerImageName!=null and where.fuzzyDockerImageName.size()>0">
+                (
+                <foreach collection="where.fuzzyDockerImageName"  separator="or" item="item">
+                    `Docker_image_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDockerImageName!=null and where.rightFuzzyDockerImageName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDockerImageName"  separator="or" item="item">
+                    `Docker_image_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.entrypointList != null">
+                    `entrypoint` in
+                    <foreach collection="where.entrypointList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyEntrypoint!=null and where.fuzzyEntrypoint.size()>0">
+                (
+                <foreach collection="where.fuzzyEntrypoint"  separator="or" item="item">
+                    `Entrypoint` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyEntrypoint!=null and where.rightFuzzyEntrypoint.size()>0">
+                (
+                <foreach collection="where.rightFuzzyEntrypoint"  separator="or" item="item">
+                    `Entrypoint` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.dockerMountList != null">
+                    `docker_mount` in
+                    <foreach collection="where.dockerMountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDockerMount!=null and where.fuzzyDockerMount.size()>0">
+                (
+                <foreach collection="where.fuzzyDockerMount"  separator="or" item="item">
+                    `Docker_mount` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDockerMount!=null and where.rightFuzzyDockerMount.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDockerMount"  separator="or" item="item">
+                    `Docker_mount` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.dockerLinkList != null">
+                    `docker_link` in
+                    <foreach collection="where.dockerLinkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDockerLink!=null and where.fuzzyDockerLink.size()>0">
+                (
+                <foreach collection="where.fuzzyDockerLink"  separator="or" item="item">
+                    `Docker_link` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDockerLink!=null and where.rightFuzzyDockerLink.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDockerLink"  separator="or" item="item">
+                    `Docker_link` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
@@ -374,10 +566,16 @@
     <resultMap type="com.jdddata.dockermgr.dao.modle.ProjectDeployInfo" id="ProjectDeployInfoMap">
         <result property="id" column="id"/>
         <result property="projectId" column="project_id"/>
-        <result property="containerIp" column="container_ip"/>
-        <result property="env" column="env"/>
+        <result property="hostIp" column="host_ip"/>
+        <result property="dockerEnv" column="docker_env"/>
         <result property="deployMode" column="deploy_mode"/>
         <result property="containerName" column="container_name"/>
+        <result property="gitBranch" column="git_branch"/>
+        <result property="nexusTargetUrl" column="nexus_target_url"/>
+        <result property="dockerImageName" column="docker_image_name"/>
+        <result property="entrypoint" column="entrypoint"/>
+        <result property="dockerMount" column="docker_mount"/>
+        <result property="dockerLink" column="docker_link"/>
         <result property="isValid" column="is_valid"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
@@ -398,17 +596,35 @@
             <if test="projectId != null and projectId!=''">
                 `project_id` = #{projectId} and
             </if>
-            <if test="containerIp != null and containerIp!=''">
-                `container_ip` = #{containerIp} and
+            <if test="hostIp != null and hostIp!=''">
+                `host_ip` = #{hostIp} and
             </if>
-            <if test="env != null and env!=''">
-                `env` = #{env} and
+            <if test="dockerEnv != null and dockerEnv!=''">
+                `docker_env` = #{dockerEnv} and
             </if>
             <if test="deployMode != null">
                 `deploy_mode` = #{deployMode} and
             </if>
             <if test="containerName != null and containerName!=''">
                 `container_name` = #{containerName} and
+            </if>
+            <if test="gitBranch != null and gitBranch!=''">
+                `git_branch` = #{gitBranch} and
+            </if>
+            <if test="nexusTargetUrl != null and nexusTargetUrl!=''">
+                `nexus_target_url` = #{nexusTargetUrl} and
+            </if>
+            <if test="dockerImageName != null and dockerImageName!=''">
+                `docker_image_name` = #{dockerImageName} and
+            </if>
+            <if test="entrypoint != null and entrypoint!=''">
+                `entrypoint` = #{entrypoint} and
+            </if>
+            <if test="dockerMount != null and dockerMount!=''">
+                `docker_mount` = #{dockerMount} and
+            </if>
+            <if test="dockerLink != null and dockerLink!=''">
+                `docker_link` = #{dockerLink} and
             </if>
             <if test="isValid != null">
                 `is_valid` = #{isValid} and
@@ -461,43 +677,43 @@
                     </foreach>
                     ) and
                 </if>
-                <if test="containerIpList != null">
-                    `container_ip` in
-                    <foreach collection="containerIpList" close=")" open="(" separator="," item="item">
+                <if test="hostIpList != null">
+                    `host_ip` in
+                    <foreach collection="hostIpList" close=")" open="(" separator="," item="item">
                         #{item}
                     </foreach> and
                 </if>
-                <if test ="fuzzyContainerIp!=null and fuzzyContainerIp.size()>0">
+                <if test ="fuzzyHostIp!=null and fuzzyHostIp.size()>0">
                     (
-                    <foreach collection="fuzzyContainerIp"  separator="or" item="item">
-                        `Container_ip` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyHostIp"  separator="or" item="item">
+                        `Host_ip` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerIp!=null and rightFuzzyContainerIp.size()>0">
+                <if test ="rightFuzzyHostIp!=null and rightFuzzyHostIp.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerIp"  separator="or" item="item">
-                        `Container_ip` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyHostIp"  separator="or" item="item">
+                        `Host_ip` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test="envList != null">
-                    `env` in
-                    <foreach collection="envList" close=")" open="(" separator="," item="item">
+                <if test="dockerEnvList != null">
+                    `docker_env` in
+                    <foreach collection="dockerEnvList" close=")" open="(" separator="," item="item">
                         #{item}
                     </foreach> and
                 </if>
-                <if test ="fuzzyEnv!=null and fuzzyEnv.size()>0">
+                <if test ="fuzzyDockerEnv!=null and fuzzyDockerEnv.size()>0">
                     (
-                    <foreach collection="fuzzyEnv"  separator="or" item="item">
-                        `Env` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyDockerEnv"  separator="or" item="item">
+                        `Docker_env` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyEnv!=null and rightFuzzyEnv.size()>0">
+                <if test ="rightFuzzyDockerEnv!=null and rightFuzzyDockerEnv.size()>0">
                     (
-                    <foreach collection="rightFuzzyEnv"  separator="or" item="item">
-                        `Env` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyDockerEnv"  separator="or" item="item">
+                        `Docker_env` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
@@ -530,6 +746,126 @@
                     (
                     <foreach collection="rightFuzzyContainerName"  separator="or" item="item">
                         `Container_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="gitBranchList != null">
+                    `git_branch` in
+                    <foreach collection="gitBranchList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyGitBranch!=null and fuzzyGitBranch.size()>0">
+                    (
+                    <foreach collection="fuzzyGitBranch"  separator="or" item="item">
+                        `Git_branch` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGitBranch!=null and rightFuzzyGitBranch.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGitBranch"  separator="or" item="item">
+                        `Git_branch` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="nexusTargetUrlList != null">
+                    `nexus_target_url` in
+                    <foreach collection="nexusTargetUrlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNexusTargetUrl!=null and fuzzyNexusTargetUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyNexusTargetUrl"  separator="or" item="item">
+                        `Nexus_target_url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNexusTargetUrl!=null and rightFuzzyNexusTargetUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNexusTargetUrl"  separator="or" item="item">
+                        `Nexus_target_url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="dockerImageNameList != null">
+                    `docker_image_name` in
+                    <foreach collection="dockerImageNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyDockerImageName!=null and fuzzyDockerImageName.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerImageName"  separator="or" item="item">
+                        `Docker_image_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerImageName!=null and rightFuzzyDockerImageName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerImageName"  separator="or" item="item">
+                        `Docker_image_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="entrypointList != null">
+                    `entrypoint` in
+                    <foreach collection="entrypointList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyEntrypoint!=null and fuzzyEntrypoint.size()>0">
+                    (
+                    <foreach collection="fuzzyEntrypoint"  separator="or" item="item">
+                        `Entrypoint` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyEntrypoint!=null and rightFuzzyEntrypoint.size()>0">
+                    (
+                    <foreach collection="rightFuzzyEntrypoint"  separator="or" item="item">
+                        `Entrypoint` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="dockerMountList != null">
+                    `docker_mount` in
+                    <foreach collection="dockerMountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyDockerMount!=null and fuzzyDockerMount.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerMount"  separator="or" item="item">
+                        `Docker_mount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerMount!=null and rightFuzzyDockerMount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerMount"  separator="or" item="item">
+                        `Docker_mount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="dockerLinkList != null">
+                    `docker_link` in
+                    <foreach collection="dockerLinkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyDockerLink!=null and fuzzyDockerLink.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerLink"  separator="or" item="item">
+                        `Docker_link` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerLink!=null and rightFuzzyDockerLink.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerLink"  separator="or" item="item">
+                        `Docker_link` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
@@ -636,17 +972,35 @@
             <if test="projectId != null and projectId!=''">
                 `project_id` = #{projectId} and
             </if>
-            <if test="containerIp != null and containerIp!=''">
-                `container_ip` = #{containerIp} and
+            <if test="hostIp != null and hostIp!=''">
+                `host_ip` = #{hostIp} and
             </if>
-            <if test="env != null and env!=''">
-                `env` = #{env} and
+            <if test="dockerEnv != null and dockerEnv!=''">
+                `docker_env` = #{dockerEnv} and
             </if>
             <if test="deployMode != null">
                 `deploy_mode` = #{deployMode} and
             </if>
             <if test="containerName != null and containerName!=''">
                 `container_name` = #{containerName} and
+            </if>
+            <if test="gitBranch != null and gitBranch!=''">
+                `git_branch` = #{gitBranch} and
+            </if>
+            <if test="nexusTargetUrl != null and nexusTargetUrl!=''">
+                `nexus_target_url` = #{nexusTargetUrl} and
+            </if>
+            <if test="dockerImageName != null and dockerImageName!=''">
+                `docker_image_name` = #{dockerImageName} and
+            </if>
+            <if test="entrypoint != null and entrypoint!=''">
+                `entrypoint` = #{entrypoint} and
+            </if>
+            <if test="dockerMount != null and dockerMount!=''">
+                `docker_mount` = #{dockerMount} and
+            </if>
+            <if test="dockerLink != null and dockerLink!=''">
+                `docker_link` = #{dockerLink} and
             </if>
             <if test="isValid != null">
                 `is_valid` = #{isValid} and
@@ -699,43 +1053,43 @@
                     </foreach>
                     ) and
                 </if>
-                    <if test="containerIpList != null">
-                        `container_ip` in
-                        <foreach collection="containerIpList" close=")" open="(" separator="," item="item">
+                    <if test="hostIpList != null">
+                        `host_ip` in
+                        <foreach collection="hostIpList" close=")" open="(" separator="," item="item">
                             #{item}
                         </foreach> and
                     </if>
-                <if test ="fuzzyContainerIp!=null and fuzzyContainerIp.size()>0">
+                <if test ="fuzzyHostIp!=null and fuzzyHostIp.size()>0">
                     (
-                    <foreach collection="fuzzyContainerIp"  separator="or" item="item">
-                        `Container_ip` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyHostIp"  separator="or" item="item">
+                        `Host_ip` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerIp!=null and rightFuzzyContainerIp.size()>0">
+                <if test ="rightFuzzyHostIp!=null and rightFuzzyHostIp.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerIp"  separator="or" item="item">
-                        `Container_ip` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyHostIp"  separator="or" item="item">
+                        `Host_ip` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="envList != null">
-                        `env` in
-                        <foreach collection="envList" close=")" open="(" separator="," item="item">
+                    <if test="dockerEnvList != null">
+                        `docker_env` in
+                        <foreach collection="dockerEnvList" close=")" open="(" separator="," item="item">
                             #{item}
                         </foreach> and
                     </if>
-                <if test ="fuzzyEnv!=null and fuzzyEnv.size()>0">
+                <if test ="fuzzyDockerEnv!=null and fuzzyDockerEnv.size()>0">
                     (
-                    <foreach collection="fuzzyEnv"  separator="or" item="item">
-                        `Env` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyDockerEnv"  separator="or" item="item">
+                        `Docker_env` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyEnv!=null and rightFuzzyEnv.size()>0">
+                <if test ="rightFuzzyDockerEnv!=null and rightFuzzyDockerEnv.size()>0">
                     (
-                    <foreach collection="rightFuzzyEnv"  separator="or" item="item">
-                        `Env` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyDockerEnv"  separator="or" item="item">
+                        `Docker_env` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
@@ -768,6 +1122,126 @@
                     (
                     <foreach collection="rightFuzzyContainerName"  separator="or" item="item">
                         `Container_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="gitBranchList != null">
+                        `git_branch` in
+                        <foreach collection="gitBranchList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyGitBranch!=null and fuzzyGitBranch.size()>0">
+                    (
+                    <foreach collection="fuzzyGitBranch"  separator="or" item="item">
+                        `Git_branch` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyGitBranch!=null and rightFuzzyGitBranch.size()>0">
+                    (
+                    <foreach collection="rightFuzzyGitBranch"  separator="or" item="item">
+                        `Git_branch` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="nexusTargetUrlList != null">
+                        `nexus_target_url` in
+                        <foreach collection="nexusTargetUrlList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNexusTargetUrl!=null and fuzzyNexusTargetUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyNexusTargetUrl"  separator="or" item="item">
+                        `Nexus_target_url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNexusTargetUrl!=null and rightFuzzyNexusTargetUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNexusTargetUrl"  separator="or" item="item">
+                        `Nexus_target_url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="dockerImageNameList != null">
+                        `docker_image_name` in
+                        <foreach collection="dockerImageNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyDockerImageName!=null and fuzzyDockerImageName.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerImageName"  separator="or" item="item">
+                        `Docker_image_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerImageName!=null and rightFuzzyDockerImageName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerImageName"  separator="or" item="item">
+                        `Docker_image_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="entrypointList != null">
+                        `entrypoint` in
+                        <foreach collection="entrypointList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyEntrypoint!=null and fuzzyEntrypoint.size()>0">
+                    (
+                    <foreach collection="fuzzyEntrypoint"  separator="or" item="item">
+                        `Entrypoint` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyEntrypoint!=null and rightFuzzyEntrypoint.size()>0">
+                    (
+                    <foreach collection="rightFuzzyEntrypoint"  separator="or" item="item">
+                        `Entrypoint` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="dockerMountList != null">
+                        `docker_mount` in
+                        <foreach collection="dockerMountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyDockerMount!=null and fuzzyDockerMount.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerMount"  separator="or" item="item">
+                        `Docker_mount` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerMount!=null and rightFuzzyDockerMount.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerMount"  separator="or" item="item">
+                        `Docker_mount` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="dockerLinkList != null">
+                        `docker_link` in
+                        <foreach collection="dockerLinkList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyDockerLink!=null and fuzzyDockerLink.size()>0">
+                    (
+                    <foreach collection="fuzzyDockerLink"  separator="or" item="item">
+                        `Docker_link` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDockerLink!=null and rightFuzzyDockerLink.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDockerLink"  separator="or" item="item">
+                        `Docker_link` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
@@ -868,10 +1342,16 @@
         <trim suffixOverrides=",">
         `id`,
         `project_id`,
-        `container_ip`,
-        `env`,
+        `host_ip`,
+        `docker_env`,
         `deploy_mode`,
         `container_name`,
+        `git_branch`,
+        `nexus_target_url`,
+        `docker_image_name`,
+        `entrypoint`,
+        `docker_mount`,
+        `docker_link`,
         `is_valid`,
         `is_delete`,
         `create_time`,
@@ -904,17 +1384,35 @@
                     <if test="fetchFields.fetchFields.projectId==true">
                         `project_id`,
                     </if>
-                    <if test="fetchFields.fetchFields.containerIp==true">
-                        `container_ip`,
+                    <if test="fetchFields.fetchFields.hostIp==true">
+                        `host_ip`,
                     </if>
-                    <if test="fetchFields.fetchFields.env==true">
-                        `env`,
+                    <if test="fetchFields.fetchFields.dockerEnv==true">
+                        `docker_env`,
                     </if>
                     <if test="fetchFields.fetchFields.deployMode==true">
                         `deploy_mode`,
                     </if>
                     <if test="fetchFields.fetchFields.containerName==true">
                         `container_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.gitBranch==true">
+                        `git_branch`,
+                    </if>
+                    <if test="fetchFields.fetchFields.nexusTargetUrl==true">
+                        `nexus_target_url`,
+                    </if>
+                    <if test="fetchFields.fetchFields.dockerImageName==true">
+                        `docker_image_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.entrypoint==true">
+                        `entrypoint`,
+                    </if>
+                    <if test="fetchFields.fetchFields.dockerMount==true">
+                        `docker_mount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.dockerLink==true">
+                        `docker_link`,
                     </if>
                     <if test="fetchFields.fetchFields.isValid==true">
                         `is_valid`,
@@ -942,17 +1440,35 @@
                     <if test="fetchFields.excludeFields.projectId==null">
                         `project_id`,
                     </if>
-                    <if test="fetchFields.excludeFields.containerIp==null">
-                        `container_ip`,
+                    <if test="fetchFields.excludeFields.hostIp==null">
+                        `host_ip`,
                     </if>
-                    <if test="fetchFields.excludeFields.env==null">
-                        `env`,
+                    <if test="fetchFields.excludeFields.dockerEnv==null">
+                        `docker_env`,
                     </if>
                     <if test="fetchFields.excludeFields.deployMode==null">
                         `deploy_mode`,
                     </if>
                     <if test="fetchFields.excludeFields.containerName==null">
                         `container_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.gitBranch==null">
+                        `git_branch`,
+                    </if>
+                    <if test="fetchFields.excludeFields.nexusTargetUrl==null">
+                        `nexus_target_url`,
+                    </if>
+                    <if test="fetchFields.excludeFields.dockerImageName==null">
+                        `docker_image_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.entrypoint==null">
+                        `entrypoint`,
+                    </if>
+                    <if test="fetchFields.excludeFields.dockerMount==null">
+                        `docker_mount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.dockerLink==null">
+                        `docker_link`,
                     </if>
                     <if test="fetchFields.excludeFields.isValid==null">
                         `is_valid`,

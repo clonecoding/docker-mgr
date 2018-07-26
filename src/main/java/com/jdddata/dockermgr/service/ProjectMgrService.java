@@ -4,8 +4,6 @@ import com.jdddata.dockermgr.common.vo.ResultVo;
 import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 
-import java.util.List;
-
 /**
  * @Author: zhangheng(赛事)
  * @Description:

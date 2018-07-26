@@ -4,20 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.adapter.docker.DockerClient;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
-import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
 import com.jdddata.dockermgr.service.ProjectMgrService;
-import com.jdddata.dockermgr.service.impl.ProjectMgrServiceImpl;
-import lombok.Data;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.logging.LogLevel;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -48,9 +40,9 @@ public class ContainerInfoJob {
         Map<String, ContainerListDto> containerListDtoMap = new HashMap<>(16);
         List<ProjectDeployInfo> deployInfos = projectDeployInfoMapper.queryProjectDeployInfo(new ProjectDeployInfo());
         for (ProjectDeployInfo item : deployInfos) {
-            ContainerListDto dto = containerListDtoMap.get(item.getContainerIp() + item.getContainerName());
+            ContainerListDto dto = containerListDtoMap.get(item.getHostIp() + item.getContainerName());
             if (Objects.isNull(dto)) {
-                String ip = item.getContainerIp();
+                String ip = item.getHostIp();
                 HttpResponse httpResponse = DockerClient.listContainers(ip);
                 if (httpResponse != null && httpResponse.getStatusCode() == 200) {
                     String body = httpResponse.getBody();

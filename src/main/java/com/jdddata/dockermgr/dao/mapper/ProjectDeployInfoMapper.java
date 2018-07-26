@@ -1,12 +1,13 @@
 package com.jdddata.dockermgr.dao.mapper;
 
-import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
-
 import java.util.List;
 
+import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
+import org.apache.ibatis.annotations.Param;
+
 /**
- * @author zhangheng
- */
+*  @author zhangheng
+*/
 public interface ProjectDeployInfoMapper {
 
     int insertProjectDeployInfo(ProjectDeployInfo object);

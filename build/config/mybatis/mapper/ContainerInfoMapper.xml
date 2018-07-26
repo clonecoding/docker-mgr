@@ -640,8 +640,8 @@
         <result property="state" column="state"/>
         <result property="status" column="status"/>
         <result property="networkMode" column="network_mode"/>
-        <result property="containerIp" column="container_ip"/>
-        <result property="env" column="env"/>
+        <result property="hostIp" column="host_ip"/>
+        <result property="dockerEnv" column="docker_env"/>
         <result property="deployMode" column="deploy_mode"/>
         <result property="projectName" column="project_name"/>
         <result property="projectGroup" column="project_group"/>
@@ -1494,7 +1494,7 @@
 
     <select id="queryContainerDetailInfo" resultMap="ContainerDetailInfoMap">
         SELECT c.`deploy_id`,c.`container_id`,c.`container_name`,c.`image_name`,c.`image_tag`,c.`image_id`,c.`command`,c.`container_create_time`,
-        c.`container_ports`,c.`state`,c.`status`,c.`network_mode`,p.`deploy_mode`,p.container_ip,p.`env`,pro.`project_name`,pro.`project_group` FROM `container_info` c LEFT JOIN `project_deploy_info` p ON c.`deploy_id` = p.`id`
+        c.`container_ports`,c.`state`,c.`status`,c.`network_mode`,p.`deploy_mode`,p.`host_ip`,p.`docker_env`,pro.`project_name`,pro.`project_group` FROM `container_info` c LEFT JOIN `project_deploy_info` p ON c.`deploy_id` = p.`id`
         LEFT JOIN `project_mgr` pro ON p.`project_id` = pro.`project_id`
     </select>
 

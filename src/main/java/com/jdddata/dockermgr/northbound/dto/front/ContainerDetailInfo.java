@@ -36,13 +36,13 @@ public class ContainerDetailInfo {
 
     private String deployMode;
 
-    private String env;
+    private String dockerEnv;
 
     private String projectName;
 
     private String projectGroup;
 
-    private String containerIp;
+    private String hostIp;
 
     public Long getDeployId() {
         return deployId;
@@ -140,13 +140,20 @@ public class ContainerDetailInfo {
         this.networkMode = networkMode;
     }
 
-
-    public String getEnv() {
-        return env;
+    public String getDockerEnv() {
+        return dockerEnv;
     }
 
-    public void setEnv(String env) {
-        this.env = env;
+    public void setDockerEnv(String dockerEnv) {
+        this.dockerEnv = dockerEnv;
+    }
+
+    public String getHostIp() {
+        return hostIp;
+    }
+
+    public void setHostIp(String hostIp) {
+        this.hostIp = hostIp;
     }
 
     public String getProjectName() {
@@ -173,11 +180,5 @@ public class ContainerDetailInfo {
         this.deployMode = deployMode;
     }
 
-    public String getContainerIp() {
-        return containerIp;
-    }
 
-    public void setContainerIp(String containerIp) {
-        this.containerIp = containerIp;
-    }
 }

@@ -3,7 +3,6 @@ package com.jdddata.dockermgr.service.impl;
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
 import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
-import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
 import com.jdddata.dockermgr.service.ContainerService;
 import org.springframework.beans.factory.annotation.Autowired;

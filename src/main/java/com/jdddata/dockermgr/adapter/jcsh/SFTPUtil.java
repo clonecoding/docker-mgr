@@ -47,7 +47,7 @@ public class SFTPUtil {
     /**
      * 构造基于密码认证的sftp对象
      *
-     * @param userName
+     * @param username
      * @param password
      * @param host
      * @param port
@@ -62,7 +62,7 @@ public class SFTPUtil {
     /**
      * 构造基于秘钥认证的sftp对象
      *
-     * @param userName
+     * @param username
      * @param host
      * @param port
      * @param privateKey
@@ -137,7 +137,7 @@ public class SFTPUtil {
      *
      * @param directory    上传到该目录
      * @param sftpFileName sftp端文件名
-     * @param in           输入流
+     * @param input           输入流
      * @throws SftpException
      * @throws Exception
      */

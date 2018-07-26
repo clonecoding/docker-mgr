@@ -26,6 +26,12 @@
                     <if test="contactMobile!=null">
                         `contact_mobile`,
                     </if>
+                    <if test="contactEmail!=null">
+                        `contact_email`,
+                    </if>
+                    <if test="alarmEmailAddress!=null">
+                        `alarm_email_address`,
+                    </if>
                     <if test="createTime!=null">
                         `create_time`,
                     </if>
@@ -60,6 +66,12 @@
                 </if>
                 <if test="contactMobile!=null">
                     #{contactMobile},
+                </if>
+                <if test="contactEmail!=null">
+                    #{contactEmail},
+                </if>
+                <if test="alarmEmailAddress!=null">
+                    #{alarmEmailAddress},
                 </if>
                 <if test="createTime!=null">
                     #{createTime},
@@ -99,6 +111,12 @@
             <if test="contactMobile != null and contactMobile!=''">
                 `contact_mobile` = #{contactMobile},
             </if>
+            <if test="contactEmail != null and contactEmail!=''">
+                `contact_email` = #{contactEmail},
+            </if>
+            <if test="alarmEmailAddress != null and alarmEmailAddress!=''">
+                `alarm_email_address` = #{alarmEmailAddress},
+            </if>
             <if test="createTime != null">
                 `create_time` = #{createTime},
             </if>
@@ -136,6 +154,12 @@
         </if>
         <if test="set.contactMobile != null and set.contactMobile!=''">
             `contact_mobile` = #{set.contactMobile},
+        </if>
+        <if test="set.contactEmail != null and set.contactEmail!=''">
+            `contact_email` = #{set.contactEmail},
+        </if>
+        <if test="set.alarmEmailAddress != null and set.alarmEmailAddress!=''">
+            `alarm_email_address` = #{set.alarmEmailAddress},
         </if>
         <if test="set.createTime != null">
             `create_time` = #{set.createTime},
@@ -263,6 +287,46 @@
                 </foreach>
                 ) and
             </if>
+                <if test="where.contactEmailList != null">
+                    `contact_email` in
+                    <foreach collection="where.contactEmailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyContactEmail!=null and where.fuzzyContactEmail.size()>0">
+                (
+                <foreach collection="where.fuzzyContactEmail"  separator="or" item="item">
+                    `Contact_email` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyContactEmail!=null and where.rightFuzzyContactEmail.size()>0">
+                (
+                <foreach collection="where.rightFuzzyContactEmail"  separator="or" item="item">
+                    `Contact_email` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.alarmEmailAddressList != null">
+                    `alarm_email_address` in
+                    <foreach collection="where.alarmEmailAddressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAlarmEmailAddress!=null and where.fuzzyAlarmEmailAddress.size()>0">
+                (
+                <foreach collection="where.fuzzyAlarmEmailAddress"  separator="or" item="item">
+                    `Alarm_email_address` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAlarmEmailAddress!=null and where.rightFuzzyAlarmEmailAddress.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAlarmEmailAddress"  separator="or" item="item">
+                    `Alarm_email_address` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
                 <if test="where.createTimeList != null">
                     `create_time` in
                     <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
@@ -338,6 +402,8 @@
         <result property="projectGroup" column="project_group"/>
         <result property="contactName" column="contact_name"/>
         <result property="contactMobile" column="contact_mobile"/>
+        <result property="contactEmail" column="contact_email"/>
+        <result property="alarmEmailAddress" column="alarm_email_address"/>
         <result property="createTime" column="create_time"/>
         <result property="createUser" column="create_user"/>
         <result property="updateTime" column="update_time"/>
@@ -367,6 +433,12 @@
             </if>
             <if test="contactMobile != null and contactMobile!=''">
                 `contact_mobile` = #{contactMobile} and
+            </if>
+            <if test="contactEmail != null and contactEmail!=''">
+                `contact_email` = #{contactEmail} and
+            </if>
+            <if test="alarmEmailAddress != null and alarmEmailAddress!=''">
+                `alarm_email_address` = #{alarmEmailAddress} and
             </if>
             <if test="createTime != null">
                 `create_time` = #{createTime} and
@@ -493,6 +565,46 @@
                     </foreach>
                     ) and
                 </if>
+                <if test="contactEmailList != null">
+                    `contact_email` in
+                    <foreach collection="contactEmailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContactEmail!=null and fuzzyContactEmail.size()>0">
+                    (
+                    <foreach collection="fuzzyContactEmail"  separator="or" item="item">
+                        `Contact_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactEmail!=null and rightFuzzyContactEmail.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactEmail"  separator="or" item="item">
+                        `Contact_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="alarmEmailAddressList != null">
+                    `alarm_email_address` in
+                    <foreach collection="alarmEmailAddressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAlarmEmailAddress!=null and fuzzyAlarmEmailAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyAlarmEmailAddress"  separator="or" item="item">
+                        `Alarm_email_address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlarmEmailAddress!=null and rightFuzzyAlarmEmailAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlarmEmailAddress"  separator="or" item="item">
+                        `Alarm_email_address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
                 <if test="createTimeList != null">
                     `create_time` in
                     <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
@@ -583,6 +695,12 @@
             </if>
             <if test="contactMobile != null and contactMobile!=''">
                 `contact_mobile` = #{contactMobile} and
+            </if>
+            <if test="contactEmail != null and contactEmail!=''">
+                `contact_email` = #{contactEmail} and
+            </if>
+            <if test="alarmEmailAddress != null and alarmEmailAddress!=''">
+                `alarm_email_address` = #{alarmEmailAddress} and
             </if>
             <if test="createTime != null">
                 `create_time` = #{createTime} and
@@ -709,6 +827,46 @@
                     </foreach>
                     ) and
                 </if>
+                    <if test="contactEmailList != null">
+                        `contact_email` in
+                        <foreach collection="contactEmailList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContactEmail!=null and fuzzyContactEmail.size()>0">
+                    (
+                    <foreach collection="fuzzyContactEmail"  separator="or" item="item">
+                        `Contact_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContactEmail!=null and rightFuzzyContactEmail.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContactEmail"  separator="or" item="item">
+                        `Contact_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="alarmEmailAddressList != null">
+                        `alarm_email_address` in
+                        <foreach collection="alarmEmailAddressList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAlarmEmailAddress!=null and fuzzyAlarmEmailAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyAlarmEmailAddress"  separator="or" item="item">
+                        `Alarm_email_address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAlarmEmailAddress!=null and rightFuzzyAlarmEmailAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAlarmEmailAddress"  separator="or" item="item">
+                        `Alarm_email_address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
                     <if test="createTimeList != null">
                         `create_time` in
                         <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
@@ -786,6 +944,8 @@
         `project_group`,
         `contact_name`,
         `contact_mobile`,
+        `contact_email`,
+        `alarm_email_address`,
         `create_time`,
         `create_user`,
         `update_time`,
@@ -828,6 +988,12 @@
                     <if test="fetchFields.fetchFields.contactMobile==true">
                         `contact_mobile`,
                     </if>
+                    <if test="fetchFields.fetchFields.contactEmail==true">
+                        `contact_email`,
+                    </if>
+                    <if test="fetchFields.fetchFields.alarmEmailAddress==true">
+                        `alarm_email_address`,
+                    </if>
                     <if test="fetchFields.fetchFields.createTime==true">
                         `create_time`,
                     </if>
@@ -859,6 +1025,12 @@
                     </if>
                     <if test="fetchFields.excludeFields.contactMobile==null">
                         `contact_mobile`,
+                    </if>
+                    <if test="fetchFields.excludeFields.contactEmail==null">
+                        `contact_email`,
+                    </if>
+                    <if test="fetchFields.excludeFields.alarmEmailAddress==null">
+                        `alarm_email_address`,
                     </if>
                     <if test="fetchFields.excludeFields.createTime==null">
                         `create_time`,
