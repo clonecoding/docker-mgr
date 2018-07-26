@@ -26,11 +26,11 @@ public class JGitTest {
     }
 
     public static void main(String[] args) {
-        String localPath = "E:\\TEST_JGIT";
-        String url = "https://gitlab.jdddata.com/project/dac/dac";
-
-        cloneRepository(url, localPath);
-
+//        String localPath = "E:\\TEST_JGIT";
+//        String url = "https://gitlab.jdddata.com/project/dac/dac.git";
+//
+//        cloneRepository(url, localPath);
+        System.out.println(System.getProperty("os.name"));
 
     }
 }

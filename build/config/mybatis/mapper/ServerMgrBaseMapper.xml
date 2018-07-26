@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.ServerM.grMapper">
+
+
+    <insert id="insertServerMgr" >
+        INSERT INTO `server_mgr`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="typeName!=null">
+                        `typeName`,
+                    </if>
+                    <if test="addTime!=null">
+                        `addTime`,
+                    </if>
+                    <if test="belong!=null">
+                        `belong`,
+                    </if>
+                    <if test="ip!=null">
+                        `ip`,
+                    </if>
+                    <if test="port!=null">
+                        `port`,
+                    </if>
+                    <if test="username!=null">
+                        `username`,
+                    </if>
+                    <if test="password!=null">
+                        `password`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="typeName!=null">
+                    #{typeName},
+                </if>
+                <if test="addTime!=null">
+                    #{addTime},
+                </if>
+                <if test="belong!=null">
+                    #{belong},
+                </if>
+                <if test="ip!=null">
+                    #{ip},
+                </if>
+                <if test="port!=null">
+                    #{port},
+                </if>
+                <if test="username!=null">
+                    #{username},
+                </if>
+                <if test="password!=null">
+                    #{password},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateServerMgr">
+        UPDATE `server_mgr`
+        SET
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                `id` = #{id},
+            </if>
+            <if test="typeName != null and typeName!=''">
+                `typeName` = #{typeName},
+            </if>
+            <if test="addTime != null">
+                `addTime` = #{addTime},
+            </if>
+            <if test="belong != null and belong!=''">
+                `belong` = #{belong},
+            </if>
+            <if test="ip != null and ip!=''">
+                `ip` = #{ip},
+            </if>
+            <if test="port != null">
+                `port` = #{port},
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username},
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `server_mgr`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.id != null and set.id!=''">
+            `id` = #{set.id},
+        </if>
+        <if test="set.typeName != null and set.typeName!=''">
+            `typeName` = #{set.typeName},
+        </if>
+        <if test="set.addTime != null">
+            `addTime` = #{set.addTime},
+        </if>
+        <if test="set.belong != null and set.belong!=''">
+            `belong` = #{set.belong},
+        </if>
+        <if test="set.ip != null and set.ip!=''">
+            `ip` = #{set.ip},
+        </if>
+        <if test="set.port != null">
+            `port` = #{set.port},
+        </if>
+        <if test="set.username != null and set.username!=''">
+            `username` = #{set.username},
+        </if>
+        <if test="set.password != null and set.password!=''">
+            `password` = #{set.password},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyId!=null and where.fuzzyId.size()>0">
+                (
+                <foreach collection="where.fuzzyId"  separator="or" item="item">
+                    `Id` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyId!=null and where.rightFuzzyId.size()>0">
+                (
+                <foreach collection="where.rightFuzzyId"  separator="or" item="item">
+                    `Id` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.typeNameList != null">
+                    `typeName` in
+                    <foreach collection="where.typeNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTypeName!=null and where.fuzzyTypeName.size()>0">
+                (
+                <foreach collection="where.fuzzyTypeName"  separator="or" item="item">
+                    `TypeName` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTypeName!=null and where.rightFuzzyTypeName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTypeName"  separator="or" item="item">
+                    `TypeName` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.addTimeList != null">
+                    `addTime` in
+                    <foreach collection="where.addTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.addTimeSt !=null">
+                `addTime` >= #{where.addTimeSt} and
+            </if>
+            <if test="where.addTimeEd!=null">
+                `addTime` &lt;= #{where.addTimeEd} and
+            </if>
+                <if test="where.belongList != null">
+                    `belong` in
+                    <foreach collection="where.belongList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyBelong!=null and where.fuzzyBelong.size()>0">
+                (
+                <foreach collection="where.fuzzyBelong"  separator="or" item="item">
+                    `Belong` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyBelong!=null and where.rightFuzzyBelong.size()>0">
+                (
+                <foreach collection="where.rightFuzzyBelong"  separator="or" item="item">
+                    `Belong` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.ipList != null">
+                    `ip` in
+                    <foreach collection="where.ipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyIp!=null and where.fuzzyIp.size()>0">
+                (
+                <foreach collection="where.fuzzyIp"  separator="or" item="item">
+                    `Ip` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyIp!=null and where.rightFuzzyIp.size()>0">
+                (
+                <foreach collection="where.rightFuzzyIp"  separator="or" item="item">
+                    `Ip` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.portList != null">
+                    `port` in
+                    <foreach collection="where.portList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.portSt !=null">
+                `port` >= #{where.portSt} and
+            </if>
+            <if test="where.portEd!=null">
+                `port` &lt;= #{where.portEd} and
+            </if>
+                <if test="where.usernameList != null">
+                    `username` in
+                    <foreach collection="where.usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUsername!=null and where.fuzzyUsername.size()>0">
+                (
+                <foreach collection="where.fuzzyUsername"  separator="or" item="item">
+                    `Username` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUsername!=null and where.rightFuzzyUsername.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUsername"  separator="or" item="item">
+                    `Username` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.passwordList != null">
+                    `password` in
+                    <foreach collection="where.passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPassword!=null and where.fuzzyPassword.size()>0">
+                (
+                <foreach collection="where.fuzzyPassword"  separator="or" item="item">
+                    `Password` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPassword!=null and where.rightFuzzyPassword.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPassword"  separator="or" item="item">
+                    `Password` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.jdddata.dockermgr.dao.modle.ServerMgr" id="ServerMgrMap">
+        <result property="id" column="id"/>
+        <result property="typeName" column="typeName"/>
+        <result property="addTime" column="addTime"/>
+        <result property="belong" column="belong"/>
+        <result property="ip" column="ip"/>
+        <result property="port" column="port"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+
+    <select id="queryServerMgr" resultMap="ServerMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `server_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="typeName != null and typeName!=''">
+                `typeName` = #{typeName} and
+            </if>
+            <if test="addTime != null">
+                `addTime` = #{addTime} and
+            </if>
+            <if test="belong != null and belong!=''">
+                `belong` = #{belong} and
+            </if>
+            <if test="ip != null and ip!=''">
+                `ip` = #{ip} and
+            </if>
+            <if test="port != null">
+                `port` = #{port} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ServerMgr$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="typeNameList != null">
+                    `typeName` in
+                    <foreach collection="typeNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTypeName!=null and fuzzyTypeName.size()>0">
+                    (
+                    <foreach collection="fuzzyTypeName"  separator="or" item="item">
+                        `TypeName` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTypeName!=null and rightFuzzyTypeName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTypeName"  separator="or" item="item">
+                        `TypeName` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="addTimeList != null">
+                    `addTime` in
+                    <foreach collection="addTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="addTimeSt !=null">
+                    `addTime` >= #{addTimeSt} and
+                </if>
+                <if test="addTimeEd!=null">
+                    `addTime` &lt;= #{addTimeEd} and
+                </if>
+                <if test="belongList != null">
+                    `belong` in
+                    <foreach collection="belongList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyBelong!=null and fuzzyBelong.size()>0">
+                    (
+                    <foreach collection="fuzzyBelong"  separator="or" item="item">
+                        `Belong` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBelong!=null and rightFuzzyBelong.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBelong"  separator="or" item="item">
+                        `Belong` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="ipList != null">
+                    `ip` in
+                    <foreach collection="ipList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyIp!=null and fuzzyIp.size()>0">
+                    (
+                    <foreach collection="fuzzyIp"  separator="or" item="item">
+                        `Ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIp!=null and rightFuzzyIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIp"  separator="or" item="item">
+                        `Ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="portList != null">
+                    `port` in
+                    <foreach collection="portList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="portSt !=null">
+                    `port` >= #{portSt} and
+                </if>
+                <if test="portEd!=null">
+                    `port` &lt;= #{portEd} and
+                </if>
+                <if test="usernameList != null">
+                    `username` in
+                    <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="passwordList != null">
+                    `password` in
+                    <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryServerMgrLimit1" resultMap="ServerMgrMap">
+        select
+        <include refid="baseResult"></include>
+        from  `server_mgr`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null and id!=''">
+                `id` = #{id} and
+            </if>
+            <if test="typeName != null and typeName!=''">
+                `typeName` = #{typeName} and
+            </if>
+            <if test="addTime != null">
+                `addTime` = #{addTime} and
+            </if>
+            <if test="belong != null and belong!=''">
+                `belong` = #{belong} and
+            </if>
+            <if test="ip != null and ip!=''">
+                `ip` = #{ip} and
+            </if>
+            <if test="port != null">
+                `port` = #{port} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ServerMgr$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyId!=null and fuzzyId.size()>0">
+                    (
+                    <foreach collection="fuzzyId"  separator="or" item="item">
+                        `Id` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyId!=null and rightFuzzyId.size()>0">
+                    (
+                    <foreach collection="rightFuzzyId"  separator="or" item="item">
+                        `Id` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="typeNameList != null">
+                        `typeName` in
+                        <foreach collection="typeNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTypeName!=null and fuzzyTypeName.size()>0">
+                    (
+                    <foreach collection="fuzzyTypeName"  separator="or" item="item">
+                        `TypeName` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTypeName!=null and rightFuzzyTypeName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTypeName"  separator="or" item="item">
+                        `TypeName` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="addTimeList != null">
+                        `addTime` in
+                        <foreach collection="addTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="addTimeSt !=null">
+                    `addTime` >= #{addTimeSt} and
+                </if>
+                <if test="addTimeEd!=null">
+                    `addTime` &lt;= #{addTimeEd} and
+                </if>
+                    <if test="belongList != null">
+                        `belong` in
+                        <foreach collection="belongList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyBelong!=null and fuzzyBelong.size()>0">
+                    (
+                    <foreach collection="fuzzyBelong"  separator="or" item="item">
+                        `Belong` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyBelong!=null and rightFuzzyBelong.size()>0">
+                    (
+                    <foreach collection="rightFuzzyBelong"  separator="or" item="item">
+                        `Belong` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="ipList != null">
+                        `ip` in
+                        <foreach collection="ipList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyIp!=null and fuzzyIp.size()>0">
+                    (
+                    <foreach collection="fuzzyIp"  separator="or" item="item">
+                        `Ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIp!=null and rightFuzzyIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIp"  separator="or" item="item">
+                        `Ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="portList != null">
+                        `port` in
+                        <foreach collection="portList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="portSt !=null">
+                    `port` >= #{portSt} and
+                </if>
+                <if test="portEd!=null">
+                    `port` &lt;= #{portEd} and
+                </if>
+                    <if test="usernameList != null">
+                        `username` in
+                        <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="passwordList != null">
+                        `password` in
+                        <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `typeName`,
+        `addTime`,
+        `belong`,
+        `ip`,
+        `port`,
+        `username`,
+        `password`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ServerMgr$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.typeName==true">
+                        `typeName`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addTime==true">
+                        `addTime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.belong==true">
+                        `belong`,
+                    </if>
+                    <if test="fetchFields.fetchFields.ip==true">
+                        `ip`,
+                    </if>
+                    <if test="fetchFields.fetchFields.port==true">
+                        `port`,
+                    </if>
+                    <if test="fetchFields.fetchFields.username==true">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.fetchFields.password==true">
+                        `password`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.typeName==null">
+                        `typeName`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addTime==null">
+                        `addTime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.belong==null">
+                        `belong`,
+                    </if>
+                    <if test="fetchFields.excludeFields.ip==null">
+                        `ip`,
+                    </if>
+                    <if test="fetchFields.excludeFields.port==null">
+                        `port`,
+                    </if>
+                    <if test="fetchFields.excludeFields.username==null">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.excludeFields.password==null">
+                        `password`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.ServerMgr$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

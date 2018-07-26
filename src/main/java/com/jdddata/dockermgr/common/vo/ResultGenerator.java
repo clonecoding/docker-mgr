@@ -51,4 +51,8 @@ public class ResultGenerator {
         }
 
     }
+
+    public static ResultVo getSuccessDto(Object object) {
+        return new ResultVo(SUCCESS_CODE, null, object);
+    }
 }
