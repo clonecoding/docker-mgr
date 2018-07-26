@@ -1,22 +1,30 @@
 package com.jdddata.dockermgr.dao.mapper;
 
+import com.jdddata.dockermgr.dao.entity.ProjectMgr;
+import com.jdddata.dockermgr.dao.entity.ProjectMgrExample;
 import java.util.List;
-
-import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 import org.apache.ibatis.annotations.Param;
 
-/**
-*  @author zhangheng
-*/
 public interface ProjectMgrMapper {
+    int countByExample(ProjectMgrExample example);
 
-    int insertProjectMgr(ProjectMgr object);
+    int deleteByExample(ProjectMgrExample example);
 
-    int updateProjectMgr(ProjectMgr object);
+    int deleteByPrimaryKey(Long id);
 
-    int update(ProjectMgr.UpdateBuilder object);
+    int insert(ProjectMgr record);
 
-    List<ProjectMgr> queryProjectMgr(ProjectMgr object);
+    int insertSelective(ProjectMgr record);
 
-    ProjectMgr queryProjectMgrLimit1(ProjectMgr object);
+    List<ProjectMgr> selectByExample(ProjectMgrExample example);
+
+    ProjectMgr selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") ProjectMgr record, @Param("example") ProjectMgrExample example);
+
+    int updateByExample(@Param("record") ProjectMgr record, @Param("example") ProjectMgrExample example);
+
+    int updateByPrimaryKeySelective(ProjectMgr record);
+
+    int updateByPrimaryKey(ProjectMgr record);
 }

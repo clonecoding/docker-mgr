@@ -1,22 +1,22 @@
 package com.jdddata.dockermgr.dao.mapper;
 
+import com.jdddata.dockermgr.dao.entity.EnvMgr;
+import com.jdddata.dockermgr.dao.entity.EnvMgrExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-import com.jdddata.dockermgr.dao.modle.EnvMgr;
-
-/**
-*  @author author
-*/
 public interface EnvMgrMapper {
+    int countByExample(EnvMgrExample example);
 
-    int insertEnvMgr(EnvMgr object);
+    int deleteByExample(EnvMgrExample example);
 
-    int updateEnvMgr(EnvMgr object);
+    int insert(EnvMgr record);
 
-    int update(EnvMgr.UpdateBuilder object);
+    int insertSelective(EnvMgr record);
 
-    List<EnvMgr> queryEnvMgr(EnvMgr object);
+    List<EnvMgr> selectByExample(EnvMgrExample example);
 
-    EnvMgr queryEnvMgrLimit1(EnvMgr object);
+    int updateByExampleSelective(@Param("record") EnvMgr record, @Param("example") EnvMgrExample example);
 
+    int updateByExample(@Param("record") EnvMgr record, @Param("example") EnvMgrExample example);
 }

@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.northbound;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.northbound.dto.git.GitDto;
 import com.jdddata.dockermgr.service.DeployService;
 import com.jdddata.dockermgr.service.PomParseService;
@@ -28,4 +29,8 @@ public class DeployPreController {
         return pomParseService.parseFromGit(gitDto);
     }
 
+    @PostMapping("/create")
+    public ResultVo create(@RequestBody DeployInfoDto deployInfoDto) {
+        return deployService.create(deployInfoDto);
+    }
 }

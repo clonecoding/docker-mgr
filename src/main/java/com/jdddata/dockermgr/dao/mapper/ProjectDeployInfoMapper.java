@@ -1,23 +1,30 @@
 package com.jdddata.dockermgr.dao.mapper;
 
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoExample;
 import java.util.List;
-
-import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
 import org.apache.ibatis.annotations.Param;
 
-/**
-*  @author zhangheng
-*/
 public interface ProjectDeployInfoMapper {
+    int countByExample(ProjectDeployInfoExample example);
 
-    int insertProjectDeployInfo(ProjectDeployInfo object);
+    int deleteByExample(ProjectDeployInfoExample example);
 
-    int updateProjectDeployInfo(ProjectDeployInfo object);
+    int deleteByPrimaryKey(Long id);
 
-    int update(ProjectDeployInfo.UpdateBuilder object);
+    int insert(ProjectDeployInfo record);
 
-    List<ProjectDeployInfo> queryProjectDeployInfo(ProjectDeployInfo object);
+    int insertSelective(ProjectDeployInfo record);
 
-    ProjectDeployInfo queryProjectDeployInfoLimit1(ProjectDeployInfo object);
+    List<ProjectDeployInfo> selectByExample(ProjectDeployInfoExample example);
 
+    ProjectDeployInfo selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") ProjectDeployInfo record, @Param("example") ProjectDeployInfoExample example);
+
+    int updateByExample(@Param("record") ProjectDeployInfo record, @Param("example") ProjectDeployInfoExample example);
+
+    int updateByPrimaryKeySelective(ProjectDeployInfo record);
+
+    int updateByPrimaryKey(ProjectDeployInfo record);
 }

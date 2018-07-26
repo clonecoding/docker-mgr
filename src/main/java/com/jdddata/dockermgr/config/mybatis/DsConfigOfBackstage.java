@@ -37,7 +37,7 @@ public class DsConfigOfBackstage {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
-                "classpath:mybatis/mapper/*.xml"));
+                "classpath:mybatis/mapper/mybatis/*.xml"));
         return bean.getObject();
 
     }

@@ -1,22 +1,22 @@
 package com.jdddata.dockermgr.dao.mapper;
 
-import com.jdddata.dockermgr.dao.modle.ServerMgr;
-
+import com.jdddata.dockermgr.dao.entity.ServerMgr;
+import com.jdddata.dockermgr.dao.entity.ServerMgrExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * @author gzw
- */
 public interface ServerMgrMapper {
+    int countByExample(ServerMgrExample example);
 
+    int deleteByExample(ServerMgrExample example);
 
-    int insertServerMgr(ServerMgr object);
+    int insert(ServerMgr record);
 
-    int updateServerMgr(ServerMgr object);
+    int insertSelective(ServerMgr record);
 
-    int update(ServerMgr.UpdateBuilder object);
+    List<ServerMgr> selectByExample(ServerMgrExample example);
 
-    List<ServerMgr> queryServerMgr(ServerMgr object);
+    int updateByExampleSelective(@Param("record") ServerMgr record, @Param("example") ServerMgrExample example);
 
-    ServerMgr queryServerMgrLimit1(ServerMgr object);
+    int updateByExample(@Param("record") ServerMgr record, @Param("example") ServerMgrExample example);
 }

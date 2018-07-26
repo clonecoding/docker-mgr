@@ -1,5 +1,7 @@
 package com.jdddata.dockermgr.northbound.dto.deploy;
 
+import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
+
 public class DeployInfoDto {
 
     private String id;
@@ -186,5 +188,12 @@ public class DeployInfoDto {
 
     public void setGitVersion(String gitVersion) {
         this.gitVersion = gitVersion;
+    }
+
+    public ProjectDeployInfo convert() {
+        ProjectDeployInfo projectDeployInfo = new ProjectDeployInfo();
+
+
+        return null;
     }
 }

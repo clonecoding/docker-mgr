@@ -1,24 +1,30 @@
 package com.jdddata.dockermgr.dao.mapper;
 
+import com.jdddata.dockermgr.dao.entity.ContainerInfo;
+import com.jdddata.dockermgr.dao.entity.ContainerInfoExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-import com.jdddata.dockermgr.dao.modle.ContainerInfo;
-import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
-
-/**
-*  @author zhangheng
-*/
 public interface ContainerInfoMapper {
+    int countByExample(ContainerInfoExample example);
 
-    int insertContainerInfo(ContainerInfo object);
+    int deleteByExample(ContainerInfoExample example);
 
-    int updateContainerInfo(ContainerInfo object);
+    int deleteByPrimaryKey(Long id);
 
-    int update(ContainerInfo.UpdateBuilder object);
+    int insert(ContainerInfo record);
 
-    List<ContainerInfo> queryContainerInfo(ContainerInfo object);
+    int insertSelective(ContainerInfo record);
 
-    ContainerInfo queryContainerInfoLimit1(ContainerInfo object);
+    List<ContainerInfo> selectByExample(ContainerInfoExample example);
 
-    List<ContainerDetailInfo> queryContainerDetailInfo();
+    ContainerInfo selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") ContainerInfo record, @Param("example") ContainerInfoExample example);
+
+    int updateByExample(@Param("record") ContainerInfo record, @Param("example") ContainerInfoExample example);
+
+    int updateByPrimaryKeySelective(ContainerInfo record);
+
+    int updateByPrimaryKey(ContainerInfo record);
 }

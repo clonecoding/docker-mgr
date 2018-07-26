@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 
 public interface DeployService {
     /**
@@ -11,4 +12,6 @@ public interface DeployService {
      * @return
      */
     ResultVo fetchPreInfo(String projectId);
+
+    ResultVo create(DeployInfoDto deployInfoDto);
 }

@@ -1,22 +1,22 @@
 package com.jdddata.dockermgr.dao.mapper;
 
+import com.jdddata.dockermgr.dao.entity.ImagesMgr;
+import com.jdddata.dockermgr.dao.entity.ImagesMgrExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-import com.jdddata.dockermgr.dao.modle.ImagesMgr;
-
-/**
-*  @author author
-*/
 public interface ImagesMgrMapper {
+    int countByExample(ImagesMgrExample example);
 
-    int insertImagesMgr(ImagesMgr object);
+    int deleteByExample(ImagesMgrExample example);
 
-    int updateImagesMgr(ImagesMgr object);
+    int insert(ImagesMgr record);
 
-    int update(ImagesMgr.UpdateBuilder object);
+    int insertSelective(ImagesMgr record);
 
-    List<ImagesMgr> queryImagesMgr(ImagesMgr object);
+    List<ImagesMgr> selectByExample(ImagesMgrExample example);
 
-    ImagesMgr queryImagesMgrLimit1(ImagesMgr object);
+    int updateByExampleSelective(@Param("record") ImagesMgr record, @Param("example") ImagesMgrExample example);
 
+    int updateByExample(@Param("record") ImagesMgr record, @Param("example") ImagesMgrExample example);
 }
