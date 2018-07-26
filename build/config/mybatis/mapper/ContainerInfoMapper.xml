@@ -1495,7 +1495,7 @@
     <select id="queryContainerDetailInfo" resultMap="ContainerDetailInfoMap">
         SELECT c.`deploy_id`,c.`container_id`,c.`container_name`,c.`image_name`,c.`image_tag`,c.`image_id`,c.`command`,c.`container_create_time`,
         c.`container_ports`,c.`state`,c.`status`,c.`network_mode`,p.`deploy_mode`,p.`host_ip`,p.`docker_env`,pro.`project_name`,pro.`project_group` FROM `container_info` c LEFT JOIN `project_deploy_info` p ON c.`deploy_id` = p.`id`
-        LEFT JOIN `project_mgr` pro ON p.`project_id` = pro.`project_id`
+        LEFT JOIN `project_mgr` pro ON p.`project_id` = pro.`id`
     </select>
 
     <sql id="baseResult">

@@ -1,7 +1,7 @@
 package com.jdddata.dockermgr.northbound;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.northbound.dto.image.DockerImageDto;
+import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 import com.jdddata.dockermgr.service.ProjectMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,4 +25,13 @@ public class ProjectMgrController {
         return projectMgrService.listProject();
     }
 
+
+    @PostMapping("/saveOrUpdate")
+    public ResultVo saveOrUpdate(ProjectMgr projectMgr) {
+        return projectMgrService.saveOrUpdate(projectMgr);
+    }
+    @DeleteMapping("/deleteById/{id}")
+    public ResultVo saveOrUpdate(@PathVariable("id") Long id) {
+        return projectMgrService.delete(id);
+    }
 }

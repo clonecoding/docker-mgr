@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
 
 import java.util.List;
@@ -14,4 +15,10 @@ import java.util.List;
 public interface ContainerService {
 
     ResultVo<ContainerDetailInfo> list();
+
+    /**
+     * 保存或更新
+     * @return
+     */
+    boolean saveOrUpdateContainerInfo(ContainerInfo containerInfo);
  }

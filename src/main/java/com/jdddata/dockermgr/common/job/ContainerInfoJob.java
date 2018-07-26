@@ -7,6 +7,7 @@ import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.Container
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.dao.modle.ProjectDeployInfo;
+import com.jdddata.dockermgr.service.ContainerService;
 import com.jdddata.dockermgr.service.ProjectMgrService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ContainerInfoJob {
     private ProjectDeployInfoMapper projectDeployInfoMapper;
 
     @Autowired
-    private ProjectMgrService projectMgrService;
+    private ContainerService containerService;
 
     @Scheduled(cron = "0 0/5 * * * *")
     public void updateContainerInfo() {
@@ -52,7 +53,7 @@ public class ContainerInfoJob {
                         if (Objects.equals(item.getContainerName(), containerName)) {
                             ContainerInfo containerInfo = containerListDto.convert();
                             containerInfo.setDeployId(item.getId());
-                            projectMgrService.saveOrUpdateContainerInfo(containerInfo);
+                            containerService.saveOrUpdateContainerInfo(containerInfo);
                         } else {
                             containerListDtoMap.put(ip + containerName, containerListDto);
                         }
@@ -63,7 +64,7 @@ public class ContainerInfoJob {
             } else {
                 ContainerInfo containerInfo = dto.convert();
                 containerInfo.setDeployId(item.getId());
-                projectMgrService.saveOrUpdateContainerInfo(containerInfo);
+                containerService.saveOrUpdateContainerInfo(containerInfo);
             }
 
         }

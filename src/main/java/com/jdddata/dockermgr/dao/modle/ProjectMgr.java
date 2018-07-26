@@ -1,4 +1,6 @@
 package com.jdddata.dockermgr.dao.modle;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +12,7 @@ import java.util.List;
 */
 public class ProjectMgr implements Serializable {
 
-    private static final long serialVersionUID = 1532582466178L;
+    private static final long serialVersionUID = 1532590761822L;
 
 
     /**
@@ -19,12 +21,6 @@ public class ProjectMgr implements Serializable {
     * isNullAble:0
     */
     private Long id;
-
-    /**
-    * 项目Id
-    * isNullAble:0
-    */
-    private String projectId;
 
     /**
     * 项目名称
@@ -63,9 +59,22 @@ public class ProjectMgr implements Serializable {
     private String alarmEmailAddress;
 
     /**
+    * git地址
+    * isNullAble:1,defaultVal:
+    */
+    private String gitUrl;
+
+    /**
+    * 是否删除
+    * isNullAble:1,defaultVal:0
+    */
+    private Integer isDelete;
+
+    /**
     * 创建时间
     * isNullAble:1,defaultVal:CURRENT_TIMESTAMP
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.time.LocalDateTime createTime;
 
     /**
@@ -78,6 +87,7 @@ public class ProjectMgr implements Serializable {
     * 更新时间
     * isNullAble:1,defaultVal:CURRENT_TIMESTAMP
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.time.LocalDateTime updateTime;
 
     /**
@@ -90,10 +100,6 @@ public class ProjectMgr implements Serializable {
     public void setId(Long id){this.id = id;}
 
     public Long getId(){return this.id;}
-
-    public void setProjectId(String projectId){this.projectId = projectId;}
-
-    public String getProjectId(){return this.projectId;}
 
     public void setProjectName(String projectName){this.projectName = projectName;}
 
@@ -119,6 +125,14 @@ public class ProjectMgr implements Serializable {
 
     public String getAlarmEmailAddress(){return this.alarmEmailAddress;}
 
+    public void setGitUrl(String gitUrl){this.gitUrl = gitUrl;}
+
+    public String getGitUrl(){return this.gitUrl;}
+
+    public void setIsDelete(Integer isDelete){this.isDelete = isDelete;}
+
+    public Integer getIsDelete(){return this.isDelete;}
+
     public void setCreateTime(java.time.LocalDateTime createTime){this.createTime = createTime;}
 
     public java.time.LocalDateTime getCreateTime(){return this.createTime;}
@@ -136,15 +150,16 @@ public class ProjectMgr implements Serializable {
     public String getUpdateUser(){return this.updateUser;}
     @Override
     public String toString() {
-        return "com.jdddata.dockermgr.dao.modle.ProjectMgr{" +
+        return "ProjectMgr{" +
                 "id='" + id + '\'' +
-                "projectId='" + projectId + '\'' +
                 "projectName='" + projectName + '\'' +
                 "projectGroup='" + projectGroup + '\'' +
                 "contactName='" + contactName + '\'' +
                 "contactMobile='" + contactMobile + '\'' +
                 "contactEmail='" + contactEmail + '\'' +
                 "alarmEmailAddress='" + alarmEmailAddress + '\'' +
+                "gitUrl='" + gitUrl + '\'' +
+                "isDelete='" + isDelete + '\'' +
                 "createTime='" + createTime + '\'' +
                 "createUser='" + createUser + '\'' +
                 "updateTime='" + updateTime + '\'' +
@@ -209,18 +224,6 @@ public class ProjectMgr implements Serializable {
 
         public Long getIdEd(){return this.idEd;}
 
-        private List<String> projectIdList;
-
-        public List<String> getProjectIdList(){return this.projectIdList;}
-
-
-        private List<String> fuzzyProjectId;
-
-        public List<String> getFuzzyProjectId(){return this.fuzzyProjectId;}
-
-        private List<String> rightFuzzyProjectId;
-
-        public List<String> getRightFuzzyProjectId(){return this.rightFuzzyProjectId;}
         private List<String> projectNameList;
 
         public List<String> getProjectNameList(){return this.projectNameList;}
@@ -293,6 +296,30 @@ public class ProjectMgr implements Serializable {
         private List<String> rightFuzzyAlarmEmailAddress;
 
         public List<String> getRightFuzzyAlarmEmailAddress(){return this.rightFuzzyAlarmEmailAddress;}
+        private List<String> gitUrlList;
+
+        public List<String> getGitUrlList(){return this.gitUrlList;}
+
+
+        private List<String> fuzzyGitUrl;
+
+        public List<String> getFuzzyGitUrl(){return this.fuzzyGitUrl;}
+
+        private List<String> rightFuzzyGitUrl;
+
+        public List<String> getRightFuzzyGitUrl(){return this.rightFuzzyGitUrl;}
+        private List<Integer> isDeleteList;
+
+        public List<Integer> getIsDeleteList(){return this.isDeleteList;}
+
+        private Integer isDeleteSt;
+
+        private Integer isDeleteEd;
+
+        public Integer getIsDeleteSt(){return this.isDeleteSt;}
+
+        public Integer getIsDeleteEd(){return this.isDeleteEd;}
+
         private List<java.time.LocalDateTime> createTimeList;
 
         public List<java.time.LocalDateTime> getCreateTimeList(){return this.createTimeList;}
@@ -383,51 +410,6 @@ public class ProjectMgr implements Serializable {
 
         public QueryBuilder excludeId(){
             setFetchFields("excludeFields","id");
-            return this;
-        }
-
-        public QueryBuilder fuzzyProjectId (List<String> fuzzyProjectId){
-            this.fuzzyProjectId = fuzzyProjectId;
-            return this;
-        }
-
-        public QueryBuilder fuzzyProjectId (String ... fuzzyProjectId){
-            this.fuzzyProjectId = solveNullList(fuzzyProjectId);
-            return this;
-        }
-
-        public QueryBuilder rightFuzzyProjectId (List<String> rightFuzzyProjectId){
-            this.rightFuzzyProjectId = rightFuzzyProjectId;
-            return this;
-        }
-
-        public QueryBuilder rightFuzzyProjectId (String ... rightFuzzyProjectId){
-            this.rightFuzzyProjectId = solveNullList(rightFuzzyProjectId);
-            return this;
-        }
-
-        public QueryBuilder projectId(String projectId){
-            setProjectId(projectId);
-            return this;
-        }
-
-        public QueryBuilder projectIdList(String ... projectId){
-            this.projectIdList = solveNullList(projectId);
-            return this;
-        }
-
-        public QueryBuilder projectIdList(List<String> projectId){
-            this.projectIdList = projectId;
-            return this;
-        }
-
-        public QueryBuilder fetchProjectId(){
-            setFetchFields("fetchFields","projectId");
-            return this;
-        }
-
-        public QueryBuilder excludeProjectId(){
-            setFetchFields("excludeFields","projectId");
             return this;
         }
 
@@ -701,6 +683,92 @@ public class ProjectMgr implements Serializable {
             return this;
         }
 
+        public QueryBuilder fuzzyGitUrl (List<String> fuzzyGitUrl){
+            this.fuzzyGitUrl = fuzzyGitUrl;
+            return this;
+        }
+
+        public QueryBuilder fuzzyGitUrl (String ... fuzzyGitUrl){
+            this.fuzzyGitUrl = solveNullList(fuzzyGitUrl);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyGitUrl (List<String> rightFuzzyGitUrl){
+            this.rightFuzzyGitUrl = rightFuzzyGitUrl;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyGitUrl (String ... rightFuzzyGitUrl){
+            this.rightFuzzyGitUrl = solveNullList(rightFuzzyGitUrl);
+            return this;
+        }
+
+        public QueryBuilder gitUrl(String gitUrl){
+            setGitUrl(gitUrl);
+            return this;
+        }
+
+        public QueryBuilder gitUrlList(String ... gitUrl){
+            this.gitUrlList = solveNullList(gitUrl);
+            return this;
+        }
+
+        public QueryBuilder gitUrlList(List<String> gitUrl){
+            this.gitUrlList = gitUrl;
+            return this;
+        }
+
+        public QueryBuilder fetchGitUrl(){
+            setFetchFields("fetchFields","gitUrl");
+            return this;
+        }
+
+        public QueryBuilder excludeGitUrl(){
+            setFetchFields("excludeFields","gitUrl");
+            return this;
+        }
+
+        public QueryBuilder isDeleteBetWeen(Integer isDeleteSt,Integer isDeleteEd){
+            this.isDeleteSt = isDeleteSt;
+            this.isDeleteEd = isDeleteEd;
+            return this;
+        }
+
+        public QueryBuilder isDeleteGreaterEqThan(Integer isDeleteSt){
+            this.isDeleteSt = isDeleteSt;
+            return this;
+        }
+        public QueryBuilder isDeleteLessEqThan(Integer isDeleteEd){
+            this.isDeleteEd = isDeleteEd;
+            return this;
+        }
+
+
+        public QueryBuilder isDelete(Integer isDelete){
+            setIsDelete(isDelete);
+            return this;
+        }
+
+        public QueryBuilder isDeleteList(Integer ... isDelete){
+            this.isDeleteList = solveNullList(isDelete);
+            return this;
+        }
+
+        public QueryBuilder isDeleteList(List<Integer> isDelete){
+            this.isDeleteList = isDelete;
+            return this;
+        }
+
+        public QueryBuilder fetchIsDelete(){
+            setFetchFields("fetchFields","isDelete");
+            return this;
+        }
+
+        public QueryBuilder excludeIsDelete(){
+            setFetchFields("excludeFields","isDelete");
+            return this;
+        }
+
         public QueryBuilder createTimeBetWeen(java.time.LocalDateTime createTimeSt,java.time.LocalDateTime createTimeEd){
             this.createTimeSt = createTimeSt;
             this.createTimeEd = createTimeEd;
@@ -927,18 +995,6 @@ public class ProjectMgr implements Serializable {
 
         public Long getIdEd(){return this.idEd;}
 
-        private List<String> projectIdList;
-
-        public List<String> getProjectIdList(){return this.projectIdList;}
-
-
-        private List<String> fuzzyProjectId;
-
-        public List<String> getFuzzyProjectId(){return this.fuzzyProjectId;}
-
-        private List<String> rightFuzzyProjectId;
-
-        public List<String> getRightFuzzyProjectId(){return this.rightFuzzyProjectId;}
         private List<String> projectNameList;
 
         public List<String> getProjectNameList(){return this.projectNameList;}
@@ -1011,6 +1067,30 @@ public class ProjectMgr implements Serializable {
         private List<String> rightFuzzyAlarmEmailAddress;
 
         public List<String> getRightFuzzyAlarmEmailAddress(){return this.rightFuzzyAlarmEmailAddress;}
+        private List<String> gitUrlList;
+
+        public List<String> getGitUrlList(){return this.gitUrlList;}
+
+
+        private List<String> fuzzyGitUrl;
+
+        public List<String> getFuzzyGitUrl(){return this.fuzzyGitUrl;}
+
+        private List<String> rightFuzzyGitUrl;
+
+        public List<String> getRightFuzzyGitUrl(){return this.rightFuzzyGitUrl;}
+        private List<Integer> isDeleteList;
+
+        public List<Integer> getIsDeleteList(){return this.isDeleteList;}
+
+        private Integer isDeleteSt;
+
+        private Integer isDeleteEd;
+
+        public Integer getIsDeleteSt(){return this.isDeleteSt;}
+
+        public Integer getIsDeleteEd(){return this.isDeleteEd;}
+
         private List<java.time.LocalDateTime> createTimeList;
 
         public List<java.time.LocalDateTime> getCreateTimeList(){return this.createTimeList;}
@@ -1083,36 +1163,6 @@ public class ProjectMgr implements Serializable {
 
         public ConditionBuilder idList(List<Long> id){
             this.idList = id;
-            return this;
-        }
-
-        public ConditionBuilder fuzzyProjectId (List<String> fuzzyProjectId){
-            this.fuzzyProjectId = fuzzyProjectId;
-            return this;
-        }
-
-        public ConditionBuilder fuzzyProjectId (String ... fuzzyProjectId){
-            this.fuzzyProjectId = solveNullList(fuzzyProjectId);
-            return this;
-        }
-
-        public ConditionBuilder rightFuzzyProjectId (List<String> rightFuzzyProjectId){
-            this.rightFuzzyProjectId = rightFuzzyProjectId;
-            return this;
-        }
-
-        public ConditionBuilder rightFuzzyProjectId (String ... rightFuzzyProjectId){
-            this.rightFuzzyProjectId = solveNullList(rightFuzzyProjectId);
-            return this;
-        }
-
-        public ConditionBuilder projectIdList(String ... projectId){
-            this.projectIdList = solveNullList(projectId);
-            return this;
-        }
-
-        public ConditionBuilder projectIdList(List<String> projectId){
-            this.projectIdList = projectId;
             return this;
         }
 
@@ -1296,6 +1346,62 @@ public class ProjectMgr implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyGitUrl (List<String> fuzzyGitUrl){
+            this.fuzzyGitUrl = fuzzyGitUrl;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyGitUrl (String ... fuzzyGitUrl){
+            this.fuzzyGitUrl = solveNullList(fuzzyGitUrl);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyGitUrl (List<String> rightFuzzyGitUrl){
+            this.rightFuzzyGitUrl = rightFuzzyGitUrl;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyGitUrl (String ... rightFuzzyGitUrl){
+            this.rightFuzzyGitUrl = solveNullList(rightFuzzyGitUrl);
+            return this;
+        }
+
+        public ConditionBuilder gitUrlList(String ... gitUrl){
+            this.gitUrlList = solveNullList(gitUrl);
+            return this;
+        }
+
+        public ConditionBuilder gitUrlList(List<String> gitUrl){
+            this.gitUrlList = gitUrl;
+            return this;
+        }
+
+        public ConditionBuilder isDeleteBetWeen(Integer isDeleteSt,Integer isDeleteEd){
+            this.isDeleteSt = isDeleteSt;
+            this.isDeleteEd = isDeleteEd;
+            return this;
+        }
+
+        public ConditionBuilder isDeleteGreaterEqThan(Integer isDeleteSt){
+            this.isDeleteSt = isDeleteSt;
+            return this;
+        }
+        public ConditionBuilder isDeleteLessEqThan(Integer isDeleteEd){
+            this.isDeleteEd = isDeleteEd;
+            return this;
+        }
+
+
+        public ConditionBuilder isDeleteList(Integer ... isDelete){
+            this.isDeleteList = solveNullList(isDelete);
+            return this;
+        }
+
+        public ConditionBuilder isDeleteList(List<Integer> isDelete){
+            this.isDeleteList = isDelete;
+            return this;
+        }
+
         public ConditionBuilder createTimeBetWeen(java.time.LocalDateTime createTimeSt,java.time.LocalDateTime createTimeEd){
             this.createTimeSt = createTimeSt;
             this.createTimeEd = createTimeEd;
@@ -1436,10 +1542,6 @@ public class ProjectMgr implements Serializable {
             this.obj.setId(id);
             return this;
         }
-        public Builder projectId(String projectId){
-            this.obj.setProjectId(projectId);
-            return this;
-        }
         public Builder projectName(String projectName){
             this.obj.setProjectName(projectName);
             return this;
@@ -1462,6 +1564,14 @@ public class ProjectMgr implements Serializable {
         }
         public Builder alarmEmailAddress(String alarmEmailAddress){
             this.obj.setAlarmEmailAddress(alarmEmailAddress);
+            return this;
+        }
+        public Builder gitUrl(String gitUrl){
+            this.obj.setGitUrl(gitUrl);
+            return this;
+        }
+        public Builder isDelete(Integer isDelete){
+            this.obj.setIsDelete(isDelete);
             return this;
         }
         public Builder createTime(java.time.LocalDateTime createTime){

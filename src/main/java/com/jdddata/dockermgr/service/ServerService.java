@@ -5,4 +5,6 @@ import com.jdddata.dockermgr.northbound.dto.ServerInfoDto;
 
 public interface ServerService {
     ResultVo addServer(ServerInfoDto serverInfoDto);
+
+    ResultVo list();
 }

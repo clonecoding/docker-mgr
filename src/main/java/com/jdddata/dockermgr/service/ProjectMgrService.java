@@ -1,7 +1,6 @@
 package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 
 /**
@@ -12,16 +11,13 @@ import com.jdddata.dockermgr.dao.modle.ProjectMgr;
  */
 public interface ProjectMgrService {
 
-    /**
-     * 查找所有
-     * @return
-     */
-    boolean saveOrUpdateContainerInfo(ContainerInfo containerInfo);
-
 
     ResultVo<ProjectMgr> listProject();
 
 
+    ResultVo saveOrUpdate(ProjectMgr projectMgr);
+
+    ResultVo delete(Long id);
 
 
 }
