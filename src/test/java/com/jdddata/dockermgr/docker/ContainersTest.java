@@ -9,7 +9,9 @@ import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContainersTest {
 
@@ -39,6 +41,20 @@ public class ContainersTest {
     @Test
     public void fetchContainerInfo() {
         HttpResponse response = HttpClientUtils.getWithCert("https://10.33.94.5:2376/containers/json?all=true");
+        System.out.println(response.getStatusCode());
+        System.out.println(response.getBody());
+        String body = response.getBody();
+        List<ContainerListDto> obj = JSON.parseArray(body, ContainerListDto.class);
+        System.out.println("asdfasf");
+    }
+
+
+    @Test
+    public void getContainerLogs() {
+        Map<String,Object> params =new HashMap<>(16);
+        params.put("follow",true);
+        params.put("stdout",true);
+        HttpResponse response = HttpClientUtils.getWithCert("https://10.33.94.5:2376/containers/dac-download-core/logs",params);
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
         String body = response.getBody();

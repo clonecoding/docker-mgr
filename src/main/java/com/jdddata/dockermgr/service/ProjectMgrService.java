@@ -1,5 +1,7 @@
 package com.jdddata.dockermgr.service;
 
+import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.modle.ContainerInfo;
 import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 
 import java.util.List;
@@ -16,6 +18,12 @@ public interface ProjectMgrService {
      * 查找所有
      * @return
      */
-    List<ProjectMgr> saveOrUpdateContainerInfo();
+    boolean saveOrUpdateContainerInfo(ContainerInfo containerInfo);
+
+
+    ResultVo<ProjectMgr> listProject();
+
+
+
 
 }

@@ -21,7 +21,6 @@ import java.util.Objects;
  */
 public final class DockerClient {
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
 
     public static HttpResponse createContainer(String serverInfo, String name, ContainerCreateDto containerCreateDto) {
@@ -41,13 +40,23 @@ public final class DockerClient {
         return response.getStatusCode() == HttpStatus.OK.value();
     }
 
-    public static HttpResponse listContainers() {
-        return HttpClientUtils.getWithCert(DockerHttpContstants.DCOKER_CONTAINER_LIST_ALL);
+    public static HttpResponse listContainers(String serverInfo) {
+        return HttpClientUtils.getWithCert(
+                MessageFormat.format(DockerHttpContstants.DCOKER_CONTAINER_LIST_ALL, serverInfo));
     }
 
-        public static HttpResponse startContainer(String serverInfo, String name) {
+    public static HttpResponse startContainer(String serverInfo, String name) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_START, serverInfo, name);
         return HttpClientUtils.postWithCert(url, null);
+    }
+
+    public static HttpResponse restartContainer(String serverInfo, String name) {
+        String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_RESTART, serverInfo, name);
+        return HttpClientUtils.postWithCert(url, null);
+    }
+    public static HttpResponse getContainerLogs(String serverInfo, String name,Map<String,Object> params) {
+        String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_LOGS, serverInfo, name);
+        return HttpClientUtils.getWithCert(url, params);
     }
 
     public static HttpResponse stopContainer(String serverInfo, String name) {
@@ -133,6 +142,5 @@ public final class DockerClient {
                 MessageFormat.format(DockerHttpContstants.DOCKER_IMAGE_PRUNE, serverInfo), null);
 
     }
-
 
 }

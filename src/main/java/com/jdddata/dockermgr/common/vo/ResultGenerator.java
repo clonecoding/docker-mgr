@@ -13,12 +13,18 @@ import java.util.Objects;
  */
 public class ResultGenerator {
 
-    private static final String SUCCESS_CODE = "0";
+    private static final Integer SUCCESS_CODE = 0;
 
-    private static final String FAIL_CODE = "1";
+    private static final Integer FAIL_CODE = 1;
+
+    private static final String SUCCESS_MESSAGE = "请求成功";
 
     public static ResultVo getSuccess() {
         return new ResultVo(SUCCESS_CODE, null);
+    }
+
+    public static ResultVo getSuccess(Object data) {
+        return new ResultVo(SUCCESS_CODE, SUCCESS_MESSAGE, data);
     }
 
     public static ResultVo getSuccess(String message) {

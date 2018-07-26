@@ -72,7 +72,7 @@ public class ContainerInfo implements Serializable {
     * 容器开放端口情况
     * isNullAble:1
     */
-    private String contianerPorts;
+    private String containerPorts;
 
     /**
     * 运行情况
@@ -165,9 +165,9 @@ public class ContainerInfo implements Serializable {
 
     public java.time.LocalDateTime getContainerCreateTime(){return this.containerCreateTime;}
 
-    public void setContianerPorts(String contianerPorts){this.contianerPorts = contianerPorts;}
+    public void setContainerPorts(String containerPorts){this.containerPorts = containerPorts;}
 
-    public String getContianerPorts(){return this.contianerPorts;}
+    public String getContainerPorts(){return this.containerPorts;}
 
     public void setState(String state){this.state = state;}
 
@@ -216,7 +216,7 @@ public class ContainerInfo implements Serializable {
                 "imageId='" + imageId + '\'' +
                 "command='" + command + '\'' +
                 "containerCreateTime='" + containerCreateTime + '\'' +
-                "contianerPorts='" + contianerPorts + '\'' +
+                "containerPorts='" + containerPorts + '\'' +
                 "state='" + state + '\'' +
                 "status='" + status + '\'' +
                 "networkMode='" + networkMode + '\'' +
@@ -382,18 +382,18 @@ public class ContainerInfo implements Serializable {
 
         public java.time.LocalDateTime getContainerCreateTimeEd(){return this.containerCreateTimeEd;}
 
-        private List<String> contianerPortsList;
+        private List<String> containerPortsList;
 
-        public List<String> getContianerPortsList(){return this.contianerPortsList;}
+        public List<String> getContainerPortsList(){return this.containerPortsList;}
 
 
-        private List<String> fuzzyContianerPorts;
+        private List<String> fuzzyContainerPorts;
 
-        public List<String> getFuzzyContianerPorts(){return this.fuzzyContianerPorts;}
+        public List<String> getFuzzyContainerPorts(){return this.fuzzyContainerPorts;}
 
-        private List<String> rightFuzzyContianerPorts;
+        private List<String> rightFuzzyContainerPorts;
 
-        public List<String> getRightFuzzyContianerPorts(){return this.rightFuzzyContianerPorts;}
+        public List<String> getRightFuzzyContainerPorts(){return this.rightFuzzyContainerPorts;}
         private List<String> stateList;
 
         public List<String> getStateList(){return this.stateList;}
@@ -899,48 +899,48 @@ public class ContainerInfo implements Serializable {
             return this;
         }
 
-        public QueryBuilder fuzzyContianerPorts (List<String> fuzzyContianerPorts){
-            this.fuzzyContianerPorts = fuzzyContianerPorts;
+        public QueryBuilder fuzzyContainerPorts (List<String> fuzzyContainerPorts){
+            this.fuzzyContainerPorts = fuzzyContainerPorts;
             return this;
         }
 
-        public QueryBuilder fuzzyContianerPorts (String ... fuzzyContianerPorts){
-            this.fuzzyContianerPorts = solveNullList(fuzzyContianerPorts);
+        public QueryBuilder fuzzyContainerPorts (String ... fuzzyContainerPorts){
+            this.fuzzyContainerPorts = solveNullList(fuzzyContainerPorts);
             return this;
         }
 
-        public QueryBuilder rightFuzzyContianerPorts (List<String> rightFuzzyContianerPorts){
-            this.rightFuzzyContianerPorts = rightFuzzyContianerPorts;
+        public QueryBuilder rightFuzzyContainerPorts (List<String> rightFuzzyContainerPorts){
+            this.rightFuzzyContainerPorts = rightFuzzyContainerPorts;
             return this;
         }
 
-        public QueryBuilder rightFuzzyContianerPorts (String ... rightFuzzyContianerPorts){
-            this.rightFuzzyContianerPorts = solveNullList(rightFuzzyContianerPorts);
+        public QueryBuilder rightFuzzyContainerPorts (String ... rightFuzzyContainerPorts){
+            this.rightFuzzyContainerPorts = solveNullList(rightFuzzyContainerPorts);
             return this;
         }
 
-        public QueryBuilder contianerPorts(String contianerPorts){
-            setContianerPorts(contianerPorts);
+        public QueryBuilder containerPorts(String containerPorts){
+            setContainerPorts(containerPorts);
             return this;
         }
 
-        public QueryBuilder contianerPortsList(String ... contianerPorts){
-            this.contianerPortsList = solveNullList(contianerPorts);
+        public QueryBuilder containerPortsList(String ... containerPorts){
+            this.containerPortsList = solveNullList(containerPorts);
             return this;
         }
 
-        public QueryBuilder contianerPortsList(List<String> contianerPorts){
-            this.contianerPortsList = contianerPorts;
+        public QueryBuilder containerPortsList(List<String> containerPorts){
+            this.containerPortsList = containerPorts;
             return this;
         }
 
-        public QueryBuilder fetchContianerPorts(){
-            setFetchFields("fetchFields","contianerPorts");
+        public QueryBuilder fetchContainerPorts(){
+            setFetchFields("fetchFields","containerPorts");
             return this;
         }
 
-        public QueryBuilder excludeContianerPorts(){
-            setFetchFields("excludeFields","contianerPorts");
+        public QueryBuilder excludeContainerPorts(){
+            setFetchFields("excludeFields","containerPorts");
             return this;
         }
 
@@ -1483,18 +1483,18 @@ public class ContainerInfo implements Serializable {
 
         public java.time.LocalDateTime getContainerCreateTimeEd(){return this.containerCreateTimeEd;}
 
-        private List<String> contianerPortsList;
+        private List<String> containerPortsList;
 
-        public List<String> getContianerPortsList(){return this.contianerPortsList;}
+        public List<String> getContainerPortsList(){return this.containerPortsList;}
 
 
-        private List<String> fuzzyContianerPorts;
+        private List<String> fuzzyContainerPorts;
 
-        public List<String> getFuzzyContianerPorts(){return this.fuzzyContianerPorts;}
+        public List<String> getFuzzyContainerPorts(){return this.fuzzyContainerPorts;}
 
-        private List<String> rightFuzzyContianerPorts;
+        private List<String> rightFuzzyContainerPorts;
 
-        public List<String> getRightFuzzyContianerPorts(){return this.rightFuzzyContianerPorts;}
+        public List<String> getRightFuzzyContainerPorts(){return this.rightFuzzyContainerPorts;}
         private List<String> stateList;
 
         public List<String> getStateList(){return this.stateList;}
@@ -1862,33 +1862,33 @@ public class ContainerInfo implements Serializable {
             return this;
         }
 
-        public ConditionBuilder fuzzyContianerPorts (List<String> fuzzyContianerPorts){
-            this.fuzzyContianerPorts = fuzzyContianerPorts;
+        public ConditionBuilder fuzzyContainerPorts (List<String> fuzzyContainerPorts){
+            this.fuzzyContainerPorts = fuzzyContainerPorts;
             return this;
         }
 
-        public ConditionBuilder fuzzyContianerPorts (String ... fuzzyContianerPorts){
-            this.fuzzyContianerPorts = solveNullList(fuzzyContianerPorts);
+        public ConditionBuilder fuzzyContainerPorts (String ... fuzzyContainerPorts){
+            this.fuzzyContainerPorts = solveNullList(fuzzyContainerPorts);
             return this;
         }
 
-        public ConditionBuilder rightFuzzyContianerPorts (List<String> rightFuzzyContianerPorts){
-            this.rightFuzzyContianerPorts = rightFuzzyContianerPorts;
+        public ConditionBuilder rightFuzzyContainerPorts (List<String> rightFuzzyContainerPorts){
+            this.rightFuzzyContainerPorts = rightFuzzyContainerPorts;
             return this;
         }
 
-        public ConditionBuilder rightFuzzyContianerPorts (String ... rightFuzzyContianerPorts){
-            this.rightFuzzyContianerPorts = solveNullList(rightFuzzyContianerPorts);
+        public ConditionBuilder rightFuzzyContainerPorts (String ... rightFuzzyContainerPorts){
+            this.rightFuzzyContainerPorts = solveNullList(rightFuzzyContainerPorts);
             return this;
         }
 
-        public ConditionBuilder contianerPortsList(String ... contianerPorts){
-            this.contianerPortsList = solveNullList(contianerPorts);
+        public ConditionBuilder containerPortsList(String ... containerPorts){
+            this.containerPortsList = solveNullList(containerPorts);
             return this;
         }
 
-        public ConditionBuilder contianerPortsList(List<String> contianerPorts){
-            this.contianerPortsList = contianerPorts;
+        public ConditionBuilder containerPortsList(List<String> containerPorts){
+            this.containerPortsList = containerPorts;
             return this;
         }
 
@@ -2206,8 +2206,8 @@ public class ContainerInfo implements Serializable {
             this.obj.setContainerCreateTime(containerCreateTime);
             return this;
         }
-        public Builder contianerPorts(String contianerPorts){
-            this.obj.setContianerPorts(contianerPorts);
+        public Builder containerPorts(String containerPorts){
+            this.obj.setContainerPorts(containerPorts);
             return this;
         }
         public Builder state(String state){

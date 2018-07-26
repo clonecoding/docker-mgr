@@ -16,9 +16,13 @@ public interface DockerContainerService {
 
     ResultVo startContainer(String serverInfo, String name);
 
+    ResultVo restartContainer(String serverInfo, String name);
+
     ResultVo stopContainer(String serverInfo, String name);
 
     ResultVo deleteContainer(String serverInfo, String name);
 
     ResultVo getSpecContainer(String serverInfo, String name);
+
+    ResultVo getContainerLogs(String serverInfo, String name);
 }

@@ -4,134 +4,132 @@
 <mapper namespace="com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper">
 
 
-    <insert id="insertContainerInfo"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertContainerInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `container_info`
         (
         <trim suffixOverrides=",">
-                    <if test="id!=null">
-                        `id`,
-                    </if>
-                    <if test="deployId!=null">
-                        `deploy_id`,
-                    </if>
-                    <if test="containerId!=null">
-                        `container_id`,
-                    </if>
-                    <if test="containerName!=null">
-                        `container_name`,
-                    </if>
-                    <if test="imageName!=null">
-                        `image_name`,
-                    </if>
-                    <if test="imageTag!=null">
-                        `image_tag`,
-                    </if>
-                    <if test="imageId!=null">
-                        `image_id`,
-                    </if>
-                    <if test="command!=null">
-                        `command`,
-                    </if>
-                    <if test="containerCreateTime!=null">
-                        `container_create_time`,
-                    </if>
-                    <if test="contianerPorts!=null">
-                        `contianer_ports`,
-                    </if>
-                    <if test="state!=null">
-                        `state`,
-                    </if>
-                    <if test="status!=null">
-                        `status`,
-                    </if>
-                    <if test="networkMode!=null">
-                        `network_mode`,
-                    </if>
-                    <if test="isValid!=null">
-                        `is_valid`,
-                    </if>
-                    <if test="isDelete!=null">
-                        `is_delete`,
-                    </if>
-                    <if test="createTime!=null">
-                        `create_time`,
-                    </if>
-                    <if test="createUser!=null">
-                        `create_user`,
-                    </if>
-                    <if test="updateTime!=null">
-                        `update_time`,
-                    </if>
-                    <if test="updateUser!=null">
-                        `update_user`,
-                    </if>
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="deployId!=null">
+                `deploy_id`,
+            </if>
+            <if test="containerId!=null">
+                `container_id`,
+            </if>
+            <if test="containerName!=null">
+                `container_name`,
+            </if>
+            <if test="imageName!=null">
+                `image_name`,
+            </if>
+            <if test="imageTag!=null">
+                `image_tag`,
+            </if>
+            <if test="imageId!=null">
+                `image_id`,
+            </if>
+            <if test="command!=null">
+                `command`,
+            </if>
+            <if test="containerCreateTime!=null">
+                `container_create_time`,
+            </if>
+            <if test="containerPorts!=null">
+                `container_ports`,
+            </if>
+            <if test="state!=null">
+                `state`,
+            </if>
+            <if test="status!=null">
+                `status`,
+            </if>
+            <if test="networkMode!=null">
+                `network_mode`,
+            </if>
+            <if test="isValid!=null">
+                `is_valid`,
+            </if>
+            <if test="isDelete!=null">
+                `is_delete`,
+            </if>
+            <if test="createTime!=null">
+                `create_time`,
+            </if>
+            <if test="createUser!=null">
+                `create_user`,
+            </if>
+            <if test="updateTime!=null">
+                `update_time`,
+            </if>
+            <if test="updateUser!=null">
+                `update_user`,
+            </if>
         </trim>
         )
         VALUES
         (
         <trim suffixOverrides=",">
-                <if test="id!=null">
-                    #{id},
-                </if>
-                <if test="deployId!=null">
-                    #{deployId},
-                </if>
-                <if test="containerId!=null">
-                    #{containerId},
-                </if>
-                <if test="containerName!=null">
-                    #{containerName},
-                </if>
-                <if test="imageName!=null">
-                    #{imageName},
-                </if>
-                <if test="imageTag!=null">
-                    #{imageTag},
-                </if>
-                <if test="imageId!=null">
-                    #{imageId},
-                </if>
-                <if test="command!=null">
-                    #{command},
-                </if>
-                <if test="containerCreateTime!=null">
-                    #{containerCreateTime},
-                </if>
-                <if test="contianerPorts!=null">
-                    #{contianerPorts},
-                </if>
-                <if test="state!=null">
-                    #{state},
-                </if>
-                <if test="status!=null">
-                    #{status},
-                </if>
-                <if test="networkMode!=null">
-                    #{networkMode},
-                </if>
-                <if test="isValid!=null">
-                    #{isValid},
-                </if>
-                <if test="isDelete!=null">
-                    #{isDelete},
-                </if>
-                <if test="createTime!=null">
-                    #{createTime},
-                </if>
-                <if test="createUser!=null">
-                    #{createUser},
-                </if>
-                <if test="updateTime!=null">
-                    #{updateTime},
-                </if>
-                <if test="updateUser!=null">
-                    #{updateUser},
-                </if>
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="deployId!=null">
+                #{deployId},
+            </if>
+            <if test="containerId!=null">
+                #{containerId},
+            </if>
+            <if test="containerName!=null">
+                #{containerName},
+            </if>
+            <if test="imageName!=null">
+                #{imageName},
+            </if>
+            <if test="imageTag!=null">
+                #{imageTag},
+            </if>
+            <if test="imageId!=null">
+                #{imageId},
+            </if>
+            <if test="command!=null">
+                #{command},
+            </if>
+            <if test="containerCreateTime!=null">
+                #{containerCreateTime},
+            </if>
+            <if test="containerPorts!=null">
+                #{containerPorts},
+            </if>
+            <if test="state!=null">
+                #{state},
+            </if>
+            <if test="status!=null">
+                #{status},
+            </if>
+            <if test="networkMode!=null">
+                #{networkMode},
+            </if>
+            <if test="isValid!=null">
+                #{isValid},
+            </if>
+            <if test="isDelete!=null">
+                #{isDelete},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="createUser!=null">
+                #{createUser},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime},
+            </if>
+            <if test="updateUser!=null">
+                #{updateUser},
+            </if>
         </trim>
         )
     </insert>
-
-
 
 
     <update id="updateContainerInfo">
@@ -162,8 +160,8 @@
             <if test="containerCreateTime != null">
                 `container_create_time` = #{containerCreateTime},
             </if>
-            <if test="contianerPorts != null and contianerPorts!=''">
-                `contianer_ports` = #{contianerPorts},
+            <if test="containerPorts != null and containerPorts!=''">
+                `container_ports` = #{containerPorts},
             </if>
             <if test="state != null and state!=''">
                 `state` = #{state},
@@ -195,7 +193,7 @@
         </trim>
         WHERE
         <trim suffixOverrides="and">
-                `id` = #{id} and
+            `id` = #{id} and
         </trim>
     </update>
 
@@ -203,382 +201,401 @@
         UPDATE `container_info`
         SET
         <trim suffixOverrides=",">
-        <if test="set.deployId != null">
-            `deploy_id` = #{set.deployId},
-        </if>
-        <if test="set.containerId != null and set.containerId!=''">
-            `container_id` = #{set.containerId},
-        </if>
-        <if test="set.containerName != null and set.containerName!=''">
-            `container_name` = #{set.containerName},
-        </if>
-        <if test="set.imageName != null and set.imageName!=''">
-            `image_name` = #{set.imageName},
-        </if>
-        <if test="set.imageTag != null and set.imageTag!=''">
-            `image_tag` = #{set.imageTag},
-        </if>
-        <if test="set.imageId != null and set.imageId!=''">
-            `image_id` = #{set.imageId},
-        </if>
-        <if test="set.command != null and set.command!=''">
-            `command` = #{set.command},
-        </if>
-        <if test="set.containerCreateTime != null">
-            `container_create_time` = #{set.containerCreateTime},
-        </if>
-        <if test="set.contianerPorts != null and set.contianerPorts!=''">
-            `contianer_ports` = #{set.contianerPorts},
-        </if>
-        <if test="set.state != null and set.state!=''">
-            `state` = #{set.state},
-        </if>
-        <if test="set.status != null and set.status!=''">
-            `status` = #{set.status},
-        </if>
-        <if test="set.networkMode != null and set.networkMode!=''">
-            `network_mode` = #{set.networkMode},
-        </if>
-        <if test="set.isValid != null">
-            `is_valid` = #{set.isValid},
-        </if>
-        <if test="set.isDelete != null">
-            `is_delete` = #{set.isDelete},
-        </if>
-        <if test="set.createTime != null">
-            `create_time` = #{set.createTime},
-        </if>
-        <if test="set.createUser != null and set.createUser!=''">
-            `create_user` = #{set.createUser},
-        </if>
-        <if test="set.updateTime != null">
-            `update_time` = #{set.updateTime},
-        </if>
-        <if test="set.updateUser != null and set.updateUser!=''">
-            `update_user` = #{set.updateUser},
-        </if>
+            <if test="set.deployId != null">
+                `deploy_id` = #{set.deployId},
+            </if>
+            <if test="set.containerId != null and set.containerId!=''">
+                `container_id` = #{set.containerId},
+            </if>
+            <if test="set.containerName != null and set.containerName!=''">
+                `container_name` = #{set.containerName},
+            </if>
+            <if test="set.imageName != null and set.imageName!=''">
+                `image_name` = #{set.imageName},
+            </if>
+            <if test="set.imageTag != null and set.imageTag!=''">
+                `image_tag` = #{set.imageTag},
+            </if>
+            <if test="set.imageId != null and set.imageId!=''">
+                `image_id` = #{set.imageId},
+            </if>
+            <if test="set.command != null and set.command!=''">
+                `command` = #{set.command},
+            </if>
+            <if test="set.containerCreateTime != null">
+                `container_create_time` = #{set.containerCreateTime},
+            </if>
+            <if test="set.containerPorts != null and set.containerPorts!=''">
+                `container_ports` = #{set.containerPorts},
+            </if>
+            <if test="set.state != null and set.state!=''">
+                `state` = #{set.state},
+            </if>
+            <if test="set.status != null and set.status!=''">
+                `status` = #{set.status},
+            </if>
+            <if test="set.networkMode != null and set.networkMode!=''">
+                `network_mode` = #{set.networkMode},
+            </if>
+            <if test="set.isValid != null">
+                `is_valid` = #{set.isValid},
+            </if>
+            <if test="set.isDelete != null">
+                `is_delete` = #{set.isDelete},
+            </if>
+            <if test="set.createTime != null">
+                `create_time` = #{set.createTime},
+            </if>
+            <if test="set.createUser != null and set.createUser!=''">
+                `create_user` = #{set.createUser},
+            </if>
+            <if test="set.updateTime != null">
+                `update_time` = #{set.updateTime},
+            </if>
+            <if test="set.updateUser != null and set.updateUser!=''">
+                `update_user` = #{set.updateUser},
+            </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
-                <if test="where.idList != null">
-                    `id` in
-                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.idList != null">
+                `id` in
+                <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.idSt !=null">
                 `id` >= #{where.idSt} and
             </if>
             <if test="where.idEd!=null">
                 `id` &lt;= #{where.idEd} and
             </if>
-                <if test="where.deployIdList != null">
-                    `deploy_id` in
-                    <foreach collection="where.deployIdList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.deployIdList != null">
+                `deploy_id` in
+                <foreach collection="where.deployIdList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.deployIdSt !=null">
                 `deploy_id` >= #{where.deployIdSt} and
             </if>
             <if test="where.deployIdEd!=null">
                 `deploy_id` &lt;= #{where.deployIdEd} and
             </if>
-                <if test="where.containerIdList != null">
-                    `container_id` in
-                    <foreach collection="where.containerIdList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyContainerId!=null and where.fuzzyContainerId.size()>0">
+            <if test="where.containerIdList != null">
+                `container_id` in
+                <foreach collection="where.containerIdList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyContainerId!=null and where.fuzzyContainerId.size()>0">
                 (
-                <foreach collection="where.fuzzyContainerId"  separator="or" item="item">
+                <foreach collection="where.fuzzyContainerId" separator="or" item="item">
                     `Container_id` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyContainerId!=null and where.rightFuzzyContainerId.size()>0">
+            <if test="where.rightFuzzyContainerId!=null and where.rightFuzzyContainerId.size()>0">
                 (
-                <foreach collection="where.rightFuzzyContainerId"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyContainerId" separator="or" item="item">
                     `Container_id` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.containerNameList != null">
-                    `container_name` in
-                    <foreach collection="where.containerNameList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyContainerName!=null and where.fuzzyContainerName.size()>0">
+            <if test="where.containerNameList != null">
+                `container_name` in
+                <foreach collection="where.containerNameList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyContainerName!=null and where.fuzzyContainerName.size()>0">
                 (
-                <foreach collection="where.fuzzyContainerName"  separator="or" item="item">
+                <foreach collection="where.fuzzyContainerName" separator="or" item="item">
                     `Container_name` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyContainerName!=null and where.rightFuzzyContainerName.size()>0">
+            <if test="where.rightFuzzyContainerName!=null and where.rightFuzzyContainerName.size()>0">
                 (
-                <foreach collection="where.rightFuzzyContainerName"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyContainerName" separator="or" item="item">
                     `Container_name` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.imageNameList != null">
-                    `image_name` in
-                    <foreach collection="where.imageNameList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyImageName!=null and where.fuzzyImageName.size()>0">
+            <if test="where.imageNameList != null">
+                `image_name` in
+                <foreach collection="where.imageNameList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyImageName!=null and where.fuzzyImageName.size()>0">
                 (
-                <foreach collection="where.fuzzyImageName"  separator="or" item="item">
+                <foreach collection="where.fuzzyImageName" separator="or" item="item">
                     `Image_name` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyImageName!=null and where.rightFuzzyImageName.size()>0">
+            <if test="where.rightFuzzyImageName!=null and where.rightFuzzyImageName.size()>0">
                 (
-                <foreach collection="where.rightFuzzyImageName"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyImageName" separator="or" item="item">
                     `Image_name` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.imageTagList != null">
-                    `image_tag` in
-                    <foreach collection="where.imageTagList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyImageTag!=null and where.fuzzyImageTag.size()>0">
+            <if test="where.imageTagList != null">
+                `image_tag` in
+                <foreach collection="where.imageTagList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyImageTag!=null and where.fuzzyImageTag.size()>0">
                 (
-                <foreach collection="where.fuzzyImageTag"  separator="or" item="item">
+                <foreach collection="where.fuzzyImageTag" separator="or" item="item">
                     `Image_tag` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyImageTag!=null and where.rightFuzzyImageTag.size()>0">
+            <if test="where.rightFuzzyImageTag!=null and where.rightFuzzyImageTag.size()>0">
                 (
-                <foreach collection="where.rightFuzzyImageTag"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyImageTag" separator="or" item="item">
                     `Image_tag` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.imageIdList != null">
-                    `image_id` in
-                    <foreach collection="where.imageIdList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyImageId!=null and where.fuzzyImageId.size()>0">
+            <if test="where.imageIdList != null">
+                `image_id` in
+                <foreach collection="where.imageIdList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyImageId!=null and where.fuzzyImageId.size()>0">
                 (
-                <foreach collection="where.fuzzyImageId"  separator="or" item="item">
+                <foreach collection="where.fuzzyImageId" separator="or" item="item">
                     `Image_id` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyImageId!=null and where.rightFuzzyImageId.size()>0">
+            <if test="where.rightFuzzyImageId!=null and where.rightFuzzyImageId.size()>0">
                 (
-                <foreach collection="where.rightFuzzyImageId"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyImageId" separator="or" item="item">
                     `Image_id` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.commandList != null">
-                    `command` in
-                    <foreach collection="where.commandList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyCommand!=null and where.fuzzyCommand.size()>0">
+            <if test="where.commandList != null">
+                `command` in
+                <foreach collection="where.commandList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyCommand!=null and where.fuzzyCommand.size()>0">
                 (
-                <foreach collection="where.fuzzyCommand"  separator="or" item="item">
+                <foreach collection="where.fuzzyCommand" separator="or" item="item">
                     `Command` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyCommand!=null and where.rightFuzzyCommand.size()>0">
+            <if test="where.rightFuzzyCommand!=null and where.rightFuzzyCommand.size()>0">
                 (
-                <foreach collection="where.rightFuzzyCommand"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyCommand" separator="or" item="item">
                     `Command` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.containerCreateTimeList != null">
-                    `container_create_time` in
-                    <foreach collection="where.containerCreateTimeList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.containerCreateTimeList != null">
+                `container_create_time` in
+                <foreach collection="where.containerCreateTimeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.containerCreateTimeSt !=null">
                 `container_create_time` >= #{where.containerCreateTimeSt} and
             </if>
             <if test="where.containerCreateTimeEd!=null">
                 `container_create_time` &lt;= #{where.containerCreateTimeEd} and
             </if>
-                <if test="where.contianerPortsList != null">
-                    `contianer_ports` in
-                    <foreach collection="where.contianerPortsList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyContianerPorts!=null and where.fuzzyContianerPorts.size()>0">
+            <if test="where.containerPortsList != null">
+                `container_ports` in
+                <foreach collection="where.containerPortsList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyContainerPorts!=null and where.fuzzyContainerPorts.size()>0">
                 (
-                <foreach collection="where.fuzzyContianerPorts"  separator="or" item="item">
-                    `Contianer_ports` like concat('%',#{item},'%')
+                <foreach collection="where.fuzzyContainerPorts" separator="or" item="item">
+                    `Container_ports` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyContianerPorts!=null and where.rightFuzzyContianerPorts.size()>0">
+            <if test="where.rightFuzzyContainerPorts!=null and where.rightFuzzyContainerPorts.size()>0">
                 (
-                <foreach collection="where.rightFuzzyContianerPorts"  separator="or" item="item">
-                    `Contianer_ports` like concat(#{item},'%')
+                <foreach collection="where.rightFuzzyContainerPorts" separator="or" item="item">
+                    `Container_ports` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.stateList != null">
-                    `state` in
-                    <foreach collection="where.stateList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyState!=null and where.fuzzyState.size()>0">
+            <if test="where.stateList != null">
+                `state` in
+                <foreach collection="where.stateList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyState!=null and where.fuzzyState.size()>0">
                 (
-                <foreach collection="where.fuzzyState"  separator="or" item="item">
+                <foreach collection="where.fuzzyState" separator="or" item="item">
                     `State` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyState!=null and where.rightFuzzyState.size()>0">
+            <if test="where.rightFuzzyState!=null and where.rightFuzzyState.size()>0">
                 (
-                <foreach collection="where.rightFuzzyState"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyState" separator="or" item="item">
                     `State` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.statusList != null">
-                    `status` in
-                    <foreach collection="where.statusList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyStatus!=null and where.fuzzyStatus.size()>0">
+            <if test="where.statusList != null">
+                `status` in
+                <foreach collection="where.statusList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyStatus!=null and where.fuzzyStatus.size()>0">
                 (
-                <foreach collection="where.fuzzyStatus"  separator="or" item="item">
+                <foreach collection="where.fuzzyStatus" separator="or" item="item">
                     `Status` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyStatus!=null and where.rightFuzzyStatus.size()>0">
+            <if test="where.rightFuzzyStatus!=null and where.rightFuzzyStatus.size()>0">
                 (
-                <foreach collection="where.rightFuzzyStatus"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyStatus" separator="or" item="item">
                     `Status` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.networkModeList != null">
-                    `network_mode` in
-                    <foreach collection="where.networkModeList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyNetworkMode!=null and where.fuzzyNetworkMode.size()>0">
+            <if test="where.networkModeList != null">
+                `network_mode` in
+                <foreach collection="where.networkModeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyNetworkMode!=null and where.fuzzyNetworkMode.size()>0">
                 (
-                <foreach collection="where.fuzzyNetworkMode"  separator="or" item="item">
+                <foreach collection="where.fuzzyNetworkMode" separator="or" item="item">
                     `Network_mode` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyNetworkMode!=null and where.rightFuzzyNetworkMode.size()>0">
+            <if test="where.rightFuzzyNetworkMode!=null and where.rightFuzzyNetworkMode.size()>0">
                 (
-                <foreach collection="where.rightFuzzyNetworkMode"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyNetworkMode" separator="or" item="item">
                     `Network_mode` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.isValidList != null">
-                    `is_valid` in
-                    <foreach collection="where.isValidList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.isValidList != null">
+                `is_valid` in
+                <foreach collection="where.isValidList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.isValidSt !=null">
                 `is_valid` >= #{where.isValidSt} and
             </if>
             <if test="where.isValidEd!=null">
                 `is_valid` &lt;= #{where.isValidEd} and
             </if>
-                <if test="where.isDeleteList != null">
-                    `is_delete` in
-                    <foreach collection="where.isDeleteList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.isDeleteList != null">
+                `is_delete` in
+                <foreach collection="where.isDeleteList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.isDeleteSt !=null">
                 `is_delete` >= #{where.isDeleteSt} and
             </if>
             <if test="where.isDeleteEd!=null">
                 `is_delete` &lt;= #{where.isDeleteEd} and
             </if>
-                <if test="where.createTimeList != null">
-                    `create_time` in
-                    <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.createTimeList != null">
+                `create_time` in
+                <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.createTimeSt !=null">
                 `create_time` >= #{where.createTimeSt} and
             </if>
             <if test="where.createTimeEd!=null">
                 `create_time` &lt;= #{where.createTimeEd} and
             </if>
-                <if test="where.createUserList != null">
-                    `create_user` in
-                    <foreach collection="where.createUserList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyCreateUser!=null and where.fuzzyCreateUser.size()>0">
+            <if test="where.createUserList != null">
+                `create_user` in
+                <foreach collection="where.createUserList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyCreateUser!=null and where.fuzzyCreateUser.size()>0">
                 (
-                <foreach collection="where.fuzzyCreateUser"  separator="or" item="item">
+                <foreach collection="where.fuzzyCreateUser" separator="or" item="item">
                     `Create_user` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyCreateUser!=null and where.rightFuzzyCreateUser.size()>0">
+            <if test="where.rightFuzzyCreateUser!=null and where.rightFuzzyCreateUser.size()>0">
                 (
-                <foreach collection="where.rightFuzzyCreateUser"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyCreateUser" separator="or" item="item">
                     `Create_user` like concat(#{item},'%')
                 </foreach>
                 ) and
             </if>
-                <if test="where.updateTimeList != null">
-                    `update_time` in
-                    <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
+            <if test="where.updateTimeList != null">
+                `update_time` in
+                <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
             <if test="where.updateTimeSt !=null">
                 `update_time` >= #{where.updateTimeSt} and
             </if>
             <if test="where.updateTimeEd!=null">
                 `update_time` &lt;= #{where.updateTimeEd} and
             </if>
-                <if test="where.updateUserList != null">
-                    `update_user` in
-                    <foreach collection="where.updateUserList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyUpdateUser!=null and where.fuzzyUpdateUser.size()>0">
+            <if test="where.updateUserList != null">
+                `update_user` in
+                <foreach collection="where.updateUserList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach>
+                and
+            </if>
+            <if test="where.fuzzyUpdateUser!=null and where.fuzzyUpdateUser.size()>0">
                 (
-                <foreach collection="where.fuzzyUpdateUser"  separator="or" item="item">
+                <foreach collection="where.fuzzyUpdateUser" separator="or" item="item">
                     `Update_user` like concat('%',#{item},'%')
                 </foreach>
                 ) and
             </if>
-            <if test ="where.rightFuzzyUpdateUser!=null and where.rightFuzzyUpdateUser.size()>0">
+            <if test="where.rightFuzzyUpdateUser!=null and where.rightFuzzyUpdateUser.size()>0">
                 (
-                <foreach collection="where.rightFuzzyUpdateUser"  separator="or" item="item">
+                <foreach collection="where.rightFuzzyUpdateUser" separator="or" item="item">
                     `Update_user` like concat(#{item},'%')
                 </foreach>
                 ) and
@@ -597,7 +614,7 @@
         <result property="imageId" column="image_id"/>
         <result property="command" column="command"/>
         <result property="containerCreateTime" column="container_create_time"/>
-        <result property="contianerPorts" column="contianer_ports"/>
+        <result property="containerPorts" column="container_ports"/>
         <result property="state" column="state"/>
         <result property="status" column="status"/>
         <result property="networkMode" column="network_mode"/>
@@ -609,11 +626,31 @@
         <result property="updateUser" column="update_user"/>
     </resultMap>
 
+    <resultMap type="com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo" id="ContainerDetailInfoMap">
+        <result property="id" column="id"/>
+        <result property="deployId" column="deploy_id"/>
+        <result property="containerId" column="container_id"/>
+        <result property="containerName" column="container_name"/>
+        <result property="imageName" column="image_name"/>
+        <result property="imageTag" column="image_tag"/>
+        <result property="imageId" column="image_id"/>
+        <result property="command" column="command"/>
+        <result property="containerCreateTime" column="container_create_time"/>
+        <result property="containerPorts" column="container_ports"/>
+        <result property="state" column="state"/>
+        <result property="status" column="status"/>
+        <result property="networkMode" column="network_mode"/>
+        <result property="containerIp" column="container_ip"/>
+        <result property="env" column="env"/>
+        <result property="deployMode" column="deploy_mode"/>
+        <result property="projectName" column="project_name"/>
+        <result property="projectGroup" column="project_group"/>
+    </resultMap>
 
     <select id="queryContainerInfo" resultMap="ContainerInfoMap">
         select
         <include refid="baseResult"></include>
-        from  `container_info`
+        from `container_info`
         <trim prefix="where" suffixOverrides="and | or">
             <if test="id != null">
                 `id` = #{id} and
@@ -642,8 +679,8 @@
             <if test="containerCreateTime != null">
                 `container_create_time` = #{containerCreateTime} and
             </if>
-            <if test="contianerPorts != null and contianerPorts!=''">
-                `contianer_ports` = #{contianerPorts} and
+            <if test="containerPorts != null and containerPorts!=''">
+                `container_ports` = #{containerPorts} and
             </if>
             <if test="state != null and state!=''">
                 `state` = #{state} and
@@ -672,12 +709,13 @@
             <if test="updateUser != null and updateUser!=''">
                 `update_user` = #{updateUser} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
                 <if test="idList != null">
                     `id` in
                     <foreach collection="idList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="idSt !=null">
                     `id` >= #{idSt} and
@@ -689,7 +727,8 @@
                     `deploy_id` in
                     <foreach collection="deployIdList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="deployIdSt !=null">
                     `deploy_id` >= #{deployIdSt} and
@@ -701,18 +740,19 @@
                     `container_id` in
                     <foreach collection="containerIdList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyContainerId!=null and fuzzyContainerId.size()>0">
+                <if test="fuzzyContainerId!=null and fuzzyContainerId.size()>0">
                     (
-                    <foreach collection="fuzzyContainerId"  separator="or" item="item">
+                    <foreach collection="fuzzyContainerId" separator="or" item="item">
                         `Container_id` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerId!=null and rightFuzzyContainerId.size()>0">
+                <if test="rightFuzzyContainerId!=null and rightFuzzyContainerId.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerId"  separator="or" item="item">
+                    <foreach collection="rightFuzzyContainerId" separator="or" item="item">
                         `Container_id` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -721,18 +761,19 @@
                     `container_name` in
                     <foreach collection="containerNameList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyContainerName!=null and fuzzyContainerName.size()>0">
+                <if test="fuzzyContainerName!=null and fuzzyContainerName.size()>0">
                     (
-                    <foreach collection="fuzzyContainerName"  separator="or" item="item">
+                    <foreach collection="fuzzyContainerName" separator="or" item="item">
                         `Container_name` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerName!=null and rightFuzzyContainerName.size()>0">
+                <if test="rightFuzzyContainerName!=null and rightFuzzyContainerName.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerName"  separator="or" item="item">
+                    <foreach collection="rightFuzzyContainerName" separator="or" item="item">
                         `Container_name` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -741,18 +782,19 @@
                     `image_name` in
                     <foreach collection="imageNameList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyImageName!=null and fuzzyImageName.size()>0">
+                <if test="fuzzyImageName!=null and fuzzyImageName.size()>0">
                     (
-                    <foreach collection="fuzzyImageName"  separator="or" item="item">
+                    <foreach collection="fuzzyImageName" separator="or" item="item">
                         `Image_name` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageName!=null and rightFuzzyImageName.size()>0">
+                <if test="rightFuzzyImageName!=null and rightFuzzyImageName.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageName"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageName" separator="or" item="item">
                         `Image_name` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -761,18 +803,19 @@
                     `image_tag` in
                     <foreach collection="imageTagList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyImageTag!=null and fuzzyImageTag.size()>0">
+                <if test="fuzzyImageTag!=null and fuzzyImageTag.size()>0">
                     (
-                    <foreach collection="fuzzyImageTag"  separator="or" item="item">
+                    <foreach collection="fuzzyImageTag" separator="or" item="item">
                         `Image_tag` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageTag!=null and rightFuzzyImageTag.size()>0">
+                <if test="rightFuzzyImageTag!=null and rightFuzzyImageTag.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageTag"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageTag" separator="or" item="item">
                         `Image_tag` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -781,18 +824,19 @@
                     `image_id` in
                     <foreach collection="imageIdList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyImageId!=null and fuzzyImageId.size()>0">
+                <if test="fuzzyImageId!=null and fuzzyImageId.size()>0">
                     (
-                    <foreach collection="fuzzyImageId"  separator="or" item="item">
+                    <foreach collection="fuzzyImageId" separator="or" item="item">
                         `Image_id` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageId!=null and rightFuzzyImageId.size()>0">
+                <if test="rightFuzzyImageId!=null and rightFuzzyImageId.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageId"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageId" separator="or" item="item">
                         `Image_id` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -801,18 +845,19 @@
                     `command` in
                     <foreach collection="commandList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyCommand!=null and fuzzyCommand.size()>0">
+                <if test="fuzzyCommand!=null and fuzzyCommand.size()>0">
                     (
-                    <foreach collection="fuzzyCommand"  separator="or" item="item">
+                    <foreach collection="fuzzyCommand" separator="or" item="item">
                         `Command` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyCommand!=null and rightFuzzyCommand.size()>0">
+                <if test="rightFuzzyCommand!=null and rightFuzzyCommand.size()>0">
                     (
-                    <foreach collection="rightFuzzyCommand"  separator="or" item="item">
+                    <foreach collection="rightFuzzyCommand" separator="or" item="item">
                         `Command` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -821,7 +866,8 @@
                     `container_create_time` in
                     <foreach collection="containerCreateTimeList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="containerCreateTimeSt !=null">
                     `container_create_time` >= #{containerCreateTimeSt} and
@@ -829,23 +875,24 @@
                 <if test="containerCreateTimeEd!=null">
                     `container_create_time` &lt;= #{containerCreateTimeEd} and
                 </if>
-                <if test="contianerPortsList != null">
-                    `contianer_ports` in
-                    <foreach collection="contianerPortsList" close=")" open="(" separator="," item="item">
+                <if test="containerPortsList != null">
+                    `container_ports` in
+                    <foreach collection="containerPortsList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyContianerPorts!=null and fuzzyContianerPorts.size()>0">
+                <if test="fuzzyContainerPorts!=null and fuzzyContainerPorts.size()>0">
                     (
-                    <foreach collection="fuzzyContianerPorts"  separator="or" item="item">
-                        `Contianer_ports` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyContainerPorts" separator="or" item="item">
+                        `Container_ports` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContianerPorts!=null and rightFuzzyContianerPorts.size()>0">
+                <if test="rightFuzzyContainerPorts!=null and rightFuzzyContainerPorts.size()>0">
                     (
-                    <foreach collection="rightFuzzyContianerPorts"  separator="or" item="item">
-                        `Contianer_ports` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyContainerPorts" separator="or" item="item">
+                        `Container_ports` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
@@ -853,18 +900,19 @@
                     `state` in
                     <foreach collection="stateList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyState!=null and fuzzyState.size()>0">
+                <if test="fuzzyState!=null and fuzzyState.size()>0">
                     (
-                    <foreach collection="fuzzyState"  separator="or" item="item">
+                    <foreach collection="fuzzyState" separator="or" item="item">
                         `State` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyState!=null and rightFuzzyState.size()>0">
+                <if test="rightFuzzyState!=null and rightFuzzyState.size()>0">
                     (
-                    <foreach collection="rightFuzzyState"  separator="or" item="item">
+                    <foreach collection="rightFuzzyState" separator="or" item="item">
                         `State` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -873,18 +921,19 @@
                     `status` in
                     <foreach collection="statusList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyStatus!=null and fuzzyStatus.size()>0">
+                <if test="fuzzyStatus!=null and fuzzyStatus.size()>0">
                     (
-                    <foreach collection="fuzzyStatus"  separator="or" item="item">
+                    <foreach collection="fuzzyStatus" separator="or" item="item">
                         `Status` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
+                <if test="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
                     (
-                    <foreach collection="rightFuzzyStatus"  separator="or" item="item">
+                    <foreach collection="rightFuzzyStatus" separator="or" item="item">
                         `Status` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -893,18 +942,19 @@
                     `network_mode` in
                     <foreach collection="networkModeList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyNetworkMode!=null and fuzzyNetworkMode.size()>0">
+                <if test="fuzzyNetworkMode!=null and fuzzyNetworkMode.size()>0">
                     (
-                    <foreach collection="fuzzyNetworkMode"  separator="or" item="item">
+                    <foreach collection="fuzzyNetworkMode" separator="or" item="item">
                         `Network_mode` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyNetworkMode!=null and rightFuzzyNetworkMode.size()>0">
+                <if test="rightFuzzyNetworkMode!=null and rightFuzzyNetworkMode.size()>0">
                     (
-                    <foreach collection="rightFuzzyNetworkMode"  separator="or" item="item">
+                    <foreach collection="rightFuzzyNetworkMode" separator="or" item="item">
                         `Network_mode` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -913,7 +963,8 @@
                     `is_valid` in
                     <foreach collection="isValidList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="isValidSt !=null">
                     `is_valid` >= #{isValidSt} and
@@ -925,7 +976,8 @@
                     `is_delete` in
                     <foreach collection="isDeleteList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="isDeleteSt !=null">
                     `is_delete` >= #{isDeleteSt} and
@@ -937,7 +989,8 @@
                     `create_time` in
                     <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="createTimeSt !=null">
                     `create_time` >= #{createTimeSt} and
@@ -949,18 +1002,19 @@
                     `create_user` in
                     <foreach collection="createUserList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
+                <if test="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
                     (
-                    <foreach collection="fuzzyCreateUser"  separator="or" item="item">
+                    <foreach collection="fuzzyCreateUser" separator="or" item="item">
                         `Create_user` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
+                <if test="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
                     (
-                    <foreach collection="rightFuzzyCreateUser"  separator="or" item="item">
+                    <foreach collection="rightFuzzyCreateUser" separator="or" item="item">
                         `Create_user` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -969,7 +1023,8 @@
                     `update_time` in
                     <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
                 <if test="updateTimeSt !=null">
                     `update_time` >= #{updateTimeSt} and
@@ -981,18 +1036,19 @@
                     `update_user` in
                     <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
                         #{item}
-                    </foreach> and
+                    </foreach>
+                    and
                 </if>
-                <if test ="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
+                <if test="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
                     (
-                    <foreach collection="fuzzyUpdateUser"  separator="or" item="item">
+                    <foreach collection="fuzzyUpdateUser" separator="or" item="item">
                         `Update_user` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
+                <if test="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
                     (
-                    <foreach collection="rightFuzzyUpdateUser"  separator="or" item="item">
+                    <foreach collection="rightFuzzyUpdateUser" separator="or" item="item">
                         `Update_user` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -1004,7 +1060,7 @@
     <select id="queryContainerInfoLimit1" resultMap="ContainerInfoMap">
         select
         <include refid="baseResult"></include>
-        from  `container_info`
+        from `container_info`
         <trim prefix="where" suffixOverrides="and | or">
             <if test="id != null">
                 `id` = #{id} and
@@ -1033,8 +1089,8 @@
             <if test="containerCreateTime != null">
                 `container_create_time` = #{containerCreateTime} and
             </if>
-            <if test="contianerPorts != null and contianerPorts!=''">
-                `contianer_ports` = #{contianerPorts} and
+            <if test="containerPorts != null and containerPorts!=''">
+                `container_ports` = #{containerPorts} and
             </if>
             <if test="state != null and state!=''">
                 `state` = #{state} and
@@ -1063,327 +1119,346 @@
             <if test="updateUser != null and updateUser!=''">
                 `update_user` = #{updateUser} and
             </if>
-            <if test = "(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
-                    <if test="idList != null">
-                        `id` in
-                        <foreach collection="idList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="idSt !=null">
                     `id` >= #{idSt} and
                 </if>
                 <if test="idEd!=null">
                     `id` &lt;= #{idEd} and
                 </if>
-                    <if test="deployIdList != null">
-                        `deploy_id` in
-                        <foreach collection="deployIdList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="deployIdList != null">
+                    `deploy_id` in
+                    <foreach collection="deployIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="deployIdSt !=null">
                     `deploy_id` >= #{deployIdSt} and
                 </if>
                 <if test="deployIdEd!=null">
                     `deploy_id` &lt;= #{deployIdEd} and
                 </if>
-                    <if test="containerIdList != null">
-                        `container_id` in
-                        <foreach collection="containerIdList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyContainerId!=null and fuzzyContainerId.size()>0">
+                <if test="containerIdList != null">
+                    `container_id` in
+                    <foreach collection="containerIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyContainerId!=null and fuzzyContainerId.size()>0">
                     (
-                    <foreach collection="fuzzyContainerId"  separator="or" item="item">
+                    <foreach collection="fuzzyContainerId" separator="or" item="item">
                         `Container_id` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerId!=null and rightFuzzyContainerId.size()>0">
+                <if test="rightFuzzyContainerId!=null and rightFuzzyContainerId.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerId"  separator="or" item="item">
+                    <foreach collection="rightFuzzyContainerId" separator="or" item="item">
                         `Container_id` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="containerNameList != null">
-                        `container_name` in
-                        <foreach collection="containerNameList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyContainerName!=null and fuzzyContainerName.size()>0">
+                <if test="containerNameList != null">
+                    `container_name` in
+                    <foreach collection="containerNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyContainerName!=null and fuzzyContainerName.size()>0">
                     (
-                    <foreach collection="fuzzyContainerName"  separator="or" item="item">
+                    <foreach collection="fuzzyContainerName" separator="or" item="item">
                         `Container_name` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContainerName!=null and rightFuzzyContainerName.size()>0">
+                <if test="rightFuzzyContainerName!=null and rightFuzzyContainerName.size()>0">
                     (
-                    <foreach collection="rightFuzzyContainerName"  separator="or" item="item">
+                    <foreach collection="rightFuzzyContainerName" separator="or" item="item">
                         `Container_name` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="imageNameList != null">
-                        `image_name` in
-                        <foreach collection="imageNameList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyImageName!=null and fuzzyImageName.size()>0">
+                <if test="imageNameList != null">
+                    `image_name` in
+                    <foreach collection="imageNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyImageName!=null and fuzzyImageName.size()>0">
                     (
-                    <foreach collection="fuzzyImageName"  separator="or" item="item">
+                    <foreach collection="fuzzyImageName" separator="or" item="item">
                         `Image_name` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageName!=null and rightFuzzyImageName.size()>0">
+                <if test="rightFuzzyImageName!=null and rightFuzzyImageName.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageName"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageName" separator="or" item="item">
                         `Image_name` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="imageTagList != null">
-                        `image_tag` in
-                        <foreach collection="imageTagList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyImageTag!=null and fuzzyImageTag.size()>0">
+                <if test="imageTagList != null">
+                    `image_tag` in
+                    <foreach collection="imageTagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyImageTag!=null and fuzzyImageTag.size()>0">
                     (
-                    <foreach collection="fuzzyImageTag"  separator="or" item="item">
+                    <foreach collection="fuzzyImageTag" separator="or" item="item">
                         `Image_tag` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageTag!=null and rightFuzzyImageTag.size()>0">
+                <if test="rightFuzzyImageTag!=null and rightFuzzyImageTag.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageTag"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageTag" separator="or" item="item">
                         `Image_tag` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="imageIdList != null">
-                        `image_id` in
-                        <foreach collection="imageIdList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyImageId!=null and fuzzyImageId.size()>0">
+                <if test="imageIdList != null">
+                    `image_id` in
+                    <foreach collection="imageIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyImageId!=null and fuzzyImageId.size()>0">
                     (
-                    <foreach collection="fuzzyImageId"  separator="or" item="item">
+                    <foreach collection="fuzzyImageId" separator="or" item="item">
                         `Image_id` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyImageId!=null and rightFuzzyImageId.size()>0">
+                <if test="rightFuzzyImageId!=null and rightFuzzyImageId.size()>0">
                     (
-                    <foreach collection="rightFuzzyImageId"  separator="or" item="item">
+                    <foreach collection="rightFuzzyImageId" separator="or" item="item">
                         `Image_id` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="commandList != null">
-                        `command` in
-                        <foreach collection="commandList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyCommand!=null and fuzzyCommand.size()>0">
+                <if test="commandList != null">
+                    `command` in
+                    <foreach collection="commandList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyCommand!=null and fuzzyCommand.size()>0">
                     (
-                    <foreach collection="fuzzyCommand"  separator="or" item="item">
+                    <foreach collection="fuzzyCommand" separator="or" item="item">
                         `Command` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyCommand!=null and rightFuzzyCommand.size()>0">
+                <if test="rightFuzzyCommand!=null and rightFuzzyCommand.size()>0">
                     (
-                    <foreach collection="rightFuzzyCommand"  separator="or" item="item">
+                    <foreach collection="rightFuzzyCommand" separator="or" item="item">
                         `Command` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="containerCreateTimeList != null">
-                        `container_create_time` in
-                        <foreach collection="containerCreateTimeList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="containerCreateTimeList != null">
+                    `container_create_time` in
+                    <foreach collection="containerCreateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="containerCreateTimeSt !=null">
                     `container_create_time` >= #{containerCreateTimeSt} and
                 </if>
                 <if test="containerCreateTimeEd!=null">
                     `container_create_time` &lt;= #{containerCreateTimeEd} and
                 </if>
-                    <if test="contianerPortsList != null">
-                        `contianer_ports` in
-                        <foreach collection="contianerPortsList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyContianerPorts!=null and fuzzyContianerPorts.size()>0">
+                <if test="containerPortsList != null">
+                    `container_ports` in
+                    <foreach collection="containerPortsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyContainerPorts!=null and fuzzyContainerPorts.size()>0">
                     (
-                    <foreach collection="fuzzyContianerPorts"  separator="or" item="item">
-                        `Contianer_ports` like concat('%',#{item},'%')
+                    <foreach collection="fuzzyContainerPorts" separator="or" item="item">
+                        `Container_ports` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyContianerPorts!=null and rightFuzzyContianerPorts.size()>0">
+                <if test="rightFuzzyContainerPorts!=null and rightFuzzyContainerPorts.size()>0">
                     (
-                    <foreach collection="rightFuzzyContianerPorts"  separator="or" item="item">
-                        `Contianer_ports` like concat(#{item},'%')
+                    <foreach collection="rightFuzzyContainerPorts" separator="or" item="item">
+                        `Container_ports` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="stateList != null">
-                        `state` in
-                        <foreach collection="stateList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyState!=null and fuzzyState.size()>0">
+                <if test="stateList != null">
+                    `state` in
+                    <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyState!=null and fuzzyState.size()>0">
                     (
-                    <foreach collection="fuzzyState"  separator="or" item="item">
+                    <foreach collection="fuzzyState" separator="or" item="item">
                         `State` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyState!=null and rightFuzzyState.size()>0">
+                <if test="rightFuzzyState!=null and rightFuzzyState.size()>0">
                     (
-                    <foreach collection="rightFuzzyState"  separator="or" item="item">
+                    <foreach collection="rightFuzzyState" separator="or" item="item">
                         `State` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="statusList != null">
-                        `status` in
-                        <foreach collection="statusList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyStatus!=null and fuzzyStatus.size()>0">
+                <if test="statusList != null">
+                    `status` in
+                    <foreach collection="statusList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyStatus!=null and fuzzyStatus.size()>0">
                     (
-                    <foreach collection="fuzzyStatus"  separator="or" item="item">
+                    <foreach collection="fuzzyStatus" separator="or" item="item">
                         `Status` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
+                <if test="rightFuzzyStatus!=null and rightFuzzyStatus.size()>0">
                     (
-                    <foreach collection="rightFuzzyStatus"  separator="or" item="item">
+                    <foreach collection="rightFuzzyStatus" separator="or" item="item">
                         `Status` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="networkModeList != null">
-                        `network_mode` in
-                        <foreach collection="networkModeList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyNetworkMode!=null and fuzzyNetworkMode.size()>0">
+                <if test="networkModeList != null">
+                    `network_mode` in
+                    <foreach collection="networkModeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyNetworkMode!=null and fuzzyNetworkMode.size()>0">
                     (
-                    <foreach collection="fuzzyNetworkMode"  separator="or" item="item">
+                    <foreach collection="fuzzyNetworkMode" separator="or" item="item">
                         `Network_mode` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyNetworkMode!=null and rightFuzzyNetworkMode.size()>0">
+                <if test="rightFuzzyNetworkMode!=null and rightFuzzyNetworkMode.size()>0">
                     (
-                    <foreach collection="rightFuzzyNetworkMode"  separator="or" item="item">
+                    <foreach collection="rightFuzzyNetworkMode" separator="or" item="item">
                         `Network_mode` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="isValidList != null">
-                        `is_valid` in
-                        <foreach collection="isValidList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="isValidList != null">
+                    `is_valid` in
+                    <foreach collection="isValidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="isValidSt !=null">
                     `is_valid` >= #{isValidSt} and
                 </if>
                 <if test="isValidEd!=null">
                     `is_valid` &lt;= #{isValidEd} and
                 </if>
-                    <if test="isDeleteList != null">
-                        `is_delete` in
-                        <foreach collection="isDeleteList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="isDeleteList != null">
+                    `is_delete` in
+                    <foreach collection="isDeleteList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="isDeleteSt !=null">
                     `is_delete` >= #{isDeleteSt} and
                 </if>
                 <if test="isDeleteEd!=null">
                     `is_delete` &lt;= #{isDeleteEd} and
                 </if>
-                    <if test="createTimeList != null">
-                        `create_time` in
-                        <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="createTimeSt !=null">
                     `create_time` >= #{createTimeSt} and
                 </if>
                 <if test="createTimeEd!=null">
                     `create_time` &lt;= #{createTimeEd} and
                 </if>
-                    <if test="createUserList != null">
-                        `create_user` in
-                        <foreach collection="createUserList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
+                <if test="createUserList != null">
+                    `create_user` in
+                    <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyCreateUser!=null and fuzzyCreateUser.size()>0">
                     (
-                    <foreach collection="fuzzyCreateUser"  separator="or" item="item">
+                    <foreach collection="fuzzyCreateUser" separator="or" item="item">
                         `Create_user` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
+                <if test="rightFuzzyCreateUser!=null and rightFuzzyCreateUser.size()>0">
                     (
-                    <foreach collection="rightFuzzyCreateUser"  separator="or" item="item">
+                    <foreach collection="rightFuzzyCreateUser" separator="or" item="item">
                         `Create_user` like concat(#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                    <if test="updateTimeList != null">
-                        `update_time` in
-                        <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
                 <if test="updateTimeSt !=null">
                     `update_time` >= #{updateTimeSt} and
                 </if>
                 <if test="updateTimeEd!=null">
                     `update_time` &lt;= #{updateTimeEd} and
                 </if>
-                    <if test="updateUserList != null">
-                        `update_user` in
-                        <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
+                <if test="updateUserList != null">
+                    `update_user` in
+                    <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach>
+                    and
+                </if>
+                <if test="fuzzyUpdateUser!=null and fuzzyUpdateUser.size()>0">
                     (
-                    <foreach collection="fuzzyUpdateUser"  separator="or" item="item">
+                    <foreach collection="fuzzyUpdateUser" separator="or" item="item">
                         `Update_user` like concat('%',#{item},'%')
                     </foreach>
                     ) and
                 </if>
-                <if test ="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
+                <if test="rightFuzzyUpdateUser!=null and rightFuzzyUpdateUser.size()>0">
                     (
-                    <foreach collection="rightFuzzyUpdateUser"  separator="or" item="item">
+                    <foreach collection="rightFuzzyUpdateUser" separator="or" item="item">
                         `Update_user` like concat(#{item},'%')
                     </foreach>
                     ) and
@@ -1395,33 +1470,37 @@
 
     <sql id="allResult">
         <trim suffixOverrides=",">
-        `id`,
-        `deploy_id`,
-        `container_id`,
-        `container_name`,
-        `image_name`,
-        `image_tag`,
-        `image_id`,
-        `command`,
-        `container_create_time`,
-        `contianer_ports`,
-        `state`,
-        `status`,
-        `network_mode`,
-        `is_valid`,
-        `is_delete`,
-        `create_time`,
-        `create_user`,
-        `update_time`,
-        `update_user`,
+            `id`,
+            `deploy_id`,
+            `container_id`,
+            `container_name`,
+            `image_name`,
+            `image_tag`,
+            `image_id`,
+            `command`,
+            `container_create_time`,
+            `container_ports`,
+            `state`,
+            `status`,
+            `network_mode`,
+            `is_valid`,
+            `is_delete`,
+            `create_time`,
+            `create_user`,
+            `update_time`,
+            `update_user`,
         </trim>
     </sql>
 
-
+    <select id="queryContainerDetailInfo" resultMap="ContainerDetailInfoMap">
+        SELECT c.`deploy_id`,c.`container_id`,c.`container_name`,c.`image_name`,c.`image_tag`,c.`image_id`,c.`command`,c.`container_create_time`,
+        c.`container_ports`,c.`state`,c.`status`,c.`network_mode`,p.`deploy_mode`,p.container_ip,p.`env`,pro.`project_name`,pro.`project_group` FROM `container_info` c LEFT JOIN `project_deploy_info` p ON c.`deploy_id` = p.`id`
+        LEFT JOIN `project_mgr` pro ON p.`project_id` = pro.`project_id`
+    </select>
 
     <sql id="baseResult">
         <trim suffixOverrides=",">
-            <if test = "(_parameter instanceof .ContainerInfo$QueryBuilder) == true">
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == true">
 
                 <if test="fetchFields==null">
                     <include refid="allResult"></include>
@@ -1434,134 +1513,133 @@
                         <include refid="allResult"></include>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
-                    <if test="fetchFields.fetchFields.id==true">
-                        `id`,
-                    </if>
-                    <if test="fetchFields.fetchFields.deployId==true">
-                        `deploy_id`,
-                    </if>
-                    <if test="fetchFields.fetchFields.containerId==true">
-                        `container_id`,
-                    </if>
-                    <if test="fetchFields.fetchFields.containerName==true">
-                        `container_name`,
-                    </if>
-                    <if test="fetchFields.fetchFields.imageName==true">
-                        `image_name`,
-                    </if>
-                    <if test="fetchFields.fetchFields.imageTag==true">
-                        `image_tag`,
-                    </if>
-                    <if test="fetchFields.fetchFields.imageId==true">
-                        `image_id`,
-                    </if>
-                    <if test="fetchFields.fetchFields.command==true">
-                        `command`,
-                    </if>
-                    <if test="fetchFields.fetchFields.containerCreateTime==true">
-                        `container_create_time`,
-                    </if>
-                    <if test="fetchFields.fetchFields.contianerPorts==true">
-                        `contianer_ports`,
-                    </if>
-                    <if test="fetchFields.fetchFields.state==true">
-                        `state`,
-                    </if>
-                    <if test="fetchFields.fetchFields.status==true">
-                        `status`,
-                    </if>
-                    <if test="fetchFields.fetchFields.networkMode==true">
-                        `network_mode`,
-                    </if>
-                    <if test="fetchFields.fetchFields.isValid==true">
-                        `is_valid`,
-                    </if>
-                    <if test="fetchFields.fetchFields.isDelete==true">
-                        `is_delete`,
-                    </if>
-                    <if test="fetchFields.fetchFields.createTime==true">
-                        `create_time`,
-                    </if>
-                    <if test="fetchFields.fetchFields.createUser==true">
-                        `create_user`,
-                    </if>
-                    <if test="fetchFields.fetchFields.updateTime==true">
-                        `update_time`,
-                    </if>
-                    <if test="fetchFields.fetchFields.updateUser==true">
-                        `update_user`,
-                    </if>
+                        <if test="fetchFields.fetchFields.id==true">
+                            `id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.deployId==true">
+                            `deploy_id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.containerId==true">
+                            `container_id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.containerName==true">
+                            `container_name`,
+                        </if>
+                        <if test="fetchFields.fetchFields.imageName==true">
+                            `image_name`,
+                        </if>
+                        <if test="fetchFields.fetchFields.imageTag==true">
+                            `image_tag`,
+                        </if>
+                        <if test="fetchFields.fetchFields.imageId==true">
+                            `image_id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.command==true">
+                            `command`,
+                        </if>
+                        <if test="fetchFields.fetchFields.containerCreateTime==true">
+                            `container_create_time`,
+                        </if>
+                        <if test="fetchFields.fetchFields.containerPorts==true">
+                            `container_ports`,
+                        </if>
+                        <if test="fetchFields.fetchFields.state==true">
+                            `state`,
+                        </if>
+                        <if test="fetchFields.fetchFields.status==true">
+                            `status`,
+                        </if>
+                        <if test="fetchFields.fetchFields.networkMode==true">
+                            `network_mode`,
+                        </if>
+                        <if test="fetchFields.fetchFields.isValid==true">
+                            `is_valid`,
+                        </if>
+                        <if test="fetchFields.fetchFields.isDelete==true">
+                            `is_delete`,
+                        </if>
+                        <if test="fetchFields.fetchFields.createTime==true">
+                            `create_time`,
+                        </if>
+                        <if test="fetchFields.fetchFields.createUser==true">
+                            `create_user`,
+                        </if>
+                        <if test="fetchFields.fetchFields.updateTime==true">
+                            `update_time`,
+                        </if>
+                        <if test="fetchFields.fetchFields.updateUser==true">
+                            `update_user`,
+                        </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
-                    <if test="fetchFields.excludeFields.id==null">
-                        `id`,
-                    </if>
-                    <if test="fetchFields.excludeFields.deployId==null">
-                        `deploy_id`,
-                    </if>
-                    <if test="fetchFields.excludeFields.containerId==null">
-                        `container_id`,
-                    </if>
-                    <if test="fetchFields.excludeFields.containerName==null">
-                        `container_name`,
-                    </if>
-                    <if test="fetchFields.excludeFields.imageName==null">
-                        `image_name`,
-                    </if>
-                    <if test="fetchFields.excludeFields.imageTag==null">
-                        `image_tag`,
-                    </if>
-                    <if test="fetchFields.excludeFields.imageId==null">
-                        `image_id`,
-                    </if>
-                    <if test="fetchFields.excludeFields.command==null">
-                        `command`,
-                    </if>
-                    <if test="fetchFields.excludeFields.containerCreateTime==null">
-                        `container_create_time`,
-                    </if>
-                    <if test="fetchFields.excludeFields.contianerPorts==null">
-                        `contianer_ports`,
-                    </if>
-                    <if test="fetchFields.excludeFields.state==null">
-                        `state`,
-                    </if>
-                    <if test="fetchFields.excludeFields.status==null">
-                        `status`,
-                    </if>
-                    <if test="fetchFields.excludeFields.networkMode==null">
-                        `network_mode`,
-                    </if>
-                    <if test="fetchFields.excludeFields.isValid==null">
-                        `is_valid`,
-                    </if>
-                    <if test="fetchFields.excludeFields.isDelete==null">
-                        `is_delete`,
-                    </if>
-                    <if test="fetchFields.excludeFields.createTime==null">
-                        `create_time`,
-                    </if>
-                    <if test="fetchFields.excludeFields.createUser==null">
-                        `create_user`,
-                    </if>
-                    <if test="fetchFields.excludeFields.updateTime==null">
-                        `update_time`,
-                    </if>
-                    <if test="fetchFields.excludeFields.updateUser==null">
-                        `update_user`,
-                    </if>
+                        <if test="fetchFields.excludeFields.id==null">
+                            `id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.deployId==null">
+                            `deploy_id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.containerId==null">
+                            `container_id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.containerName==null">
+                            `container_name`,
+                        </if>
+                        <if test="fetchFields.excludeFields.imageName==null">
+                            `image_name`,
+                        </if>
+                        <if test="fetchFields.excludeFields.imageTag==null">
+                            `image_tag`,
+                        </if>
+                        <if test="fetchFields.excludeFields.imageId==null">
+                            `image_id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.command==null">
+                            `command`,
+                        </if>
+                        <if test="fetchFields.excludeFields.containerCreateTime==null">
+                            `container_create_time`,
+                        </if>
+                        <if test="fetchFields.excludeFields.containerPorts==null">
+                            `container_ports`,
+                        </if>
+                        <if test="fetchFields.excludeFields.state==null">
+                            `state`,
+                        </if>
+                        <if test="fetchFields.excludeFields.status==null">
+                            `status`,
+                        </if>
+                        <if test="fetchFields.excludeFields.networkMode==null">
+                            `network_mode`,
+                        </if>
+                        <if test="fetchFields.excludeFields.isValid==null">
+                            `is_valid`,
+                        </if>
+                        <if test="fetchFields.excludeFields.isDelete==null">
+                            `is_delete`,
+                        </if>
+                        <if test="fetchFields.excludeFields.createTime==null">
+                            `create_time`,
+                        </if>
+                        <if test="fetchFields.excludeFields.createUser==null">
+                            `create_user`,
+                        </if>
+                        <if test="fetchFields.excludeFields.updateTime==null">
+                            `update_time`,
+                        </if>
+                        <if test="fetchFields.excludeFields.updateUser==null">
+                            `update_user`,
+                        </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
                         <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
-                        `#{item}`
+                            `#{item}`
                         </foreach>
                     </if>
                 </if>
             </if>
-            <if test="(_parameter instanceof .ContainerInfo$QueryBuilder) == false" >
+            <if test="(_parameter instanceof com.jdddata.dockermgr.dao.modle.ContainerInfo$QueryBuilder) == false">
                 <include refid="allResult"></include>
             </if>
-
         </trim>
     </sql>
 

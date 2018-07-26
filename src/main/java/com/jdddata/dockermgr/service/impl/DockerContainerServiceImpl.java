@@ -56,6 +56,11 @@ public class DockerContainerServiceImpl implements DockerContainerService {
     }
 
     @Override
+    public ResultVo restartContainer(String serverInfo, String name) {
+        return ResultGenerator.getByDockerResponse(DockerClient.restartContainer(serverInfo, name));
+    }
+
+    @Override
     public ResultVo stopContainer(String serverInfo, String name) {
         return ResultGenerator.getByDockerResponse(DockerClient.stopContainer(serverInfo, name));
     }
@@ -68,6 +73,14 @@ public class DockerContainerServiceImpl implements DockerContainerService {
     @Override
     public ResultVo getSpecContainer(String serverInfo, String name) {
         return ResultGenerator.getByDockerResponse(DockerClient.getSpecContainer(serverInfo, name));
+    }
+
+    @Override
+    public ResultVo getContainerLogs(String serverInfo, String name) {
+        Map<String,Object> params =new HashMap<>(16);
+        params.put("follow",true);
+        params.put("stdout",true);
+        return ResultGenerator.getByDockerResponse(DockerClient.getContainerLogs(serverInfo, name,params));
     }
 
     private ContainerCreateDto getContainerCreateDto(ContainerCreatePyDto containerCreatePyDto) {

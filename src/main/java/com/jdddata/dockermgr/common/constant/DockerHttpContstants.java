@@ -28,14 +28,24 @@ public class DockerHttpContstants {
     public static final String DOCKER_CONTAINER_START = "https://{0}:2376/containers/{1}/start";
 
     /**
+     * docker restart container
+     */
+    public static final String DOCKER_CONTAINER_RESTART = "https://{0}:2376/containers/{1}/restart";
+    /**
      * docker stop container
      */
     public static final String DOCKER_CONTAINER_STOP = "https://{0}:2376/containers/{1}/stop";
 
     /**
+     * 获取容器日志信息
+     */
+    public static final String DOCKER_CONTAINER_LOGS = "https://{0}:2376/containers/{1}/logs";
+
+    /**
      * 删除一个container
      */
     public static final String DOCKER_CONTAINER_DELETE = "https://{0}:2376/containers/{1}";
+
 
     /**
      * @author zhangheng(赛事)
