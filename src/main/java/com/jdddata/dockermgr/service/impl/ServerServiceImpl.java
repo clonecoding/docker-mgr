@@ -4,7 +4,7 @@ import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
 import com.jdddata.dockermgr.dao.mapper.ServerMgrMapper;
 import com.jdddata.dockermgr.dao.modle.ServerMgr;
-import com.jdddata.dockermgr.northbound.dto.ServerInfoDto;
+import com.jdddata.dockermgr.northbound.dto.server.ServerInfoDto;
 import com.jdddata.dockermgr.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.northbound.dto;
+package com.jdddata.dockermgr.northbound.dto.server;
 
 import com.jdddata.dockermgr.common.util.CryptoUtil;
 import com.jdddata.dockermgr.dao.modle.ServerMgr;

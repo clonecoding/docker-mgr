@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.northbound.dto;
+package com.jdddata.dockermgr.northbound.dto.git;
 
 public class GitDto {
     private String url;

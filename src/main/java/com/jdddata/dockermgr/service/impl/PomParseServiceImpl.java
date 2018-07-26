@@ -4,7 +4,7 @@ import com.jdddata.dockermgr.common.constant.GitConstants;
 import com.jdddata.dockermgr.common.pom.PomParseModel;
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.northbound.dto.GitDto;
+import com.jdddata.dockermgr.northbound.dto.git.GitDto;
 import com.jdddata.dockermgr.service.GitService;
 import com.jdddata.dockermgr.service.PomParseService;
 import org.apache.commons.lang3.StringUtils;
