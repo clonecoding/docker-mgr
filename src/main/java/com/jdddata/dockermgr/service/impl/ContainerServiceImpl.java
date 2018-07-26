@@ -2,7 +2,8 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.dao.modle.ContainerInfo;
+import com.jdddata.dockermgr.dao.entity.ContainerInfo;
+import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
 import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
 import com.jdddata.dockermgr.service.ContainerService;
 import lombok.extern.log4j.Log4j;
@@ -27,8 +28,9 @@ public class ContainerServiceImpl implements ContainerService {
 
     @Override
     public ResultVo<ContainerDetailInfo> list() {
-        List<ContainerDetailInfo> containerDetailInfos = containerInfoMapper.queryContainerDetailInfo();
-        return ResultGenerator.getSuccess(containerDetailInfos);
+        //TODO
+//        List<ContainerDetailInfo> containerDetailInfos = containerInfoMapper.selectByPrimaryKey();
+        return ResultGenerator.getSuccess(null);
     }
 
     /**
@@ -39,18 +41,20 @@ public class ContainerServiceImpl implements ContainerService {
      */
     @Override
     public boolean saveOrUpdateContainerInfo(ContainerInfo containerInfo) {
-        if (Objects.isNull(containerInfo) ) {
+        if (Objects.isNull(containerInfo)) {
             log.error("请求参数不能为空");
             return false;
         }
-        List<ContainerInfo>  containerInfos =containerInfoMapper.queryContainerInfo(ContainerInfo.Build().deployId(containerInfo.getDeployId()).build());
-        if(Objects.isNull(containerInfos) || containerInfos.size() == 0){
-            containerInfoMapper.insertContainerInfo(containerInfo);
-        }else {
-            ContainerInfo cf =  containerInfos.get(0);
+
+        //TODO
+        List<ContainerInfo> containerInfos = containerInfoMapper.selectByDeployId(containerInfo.getDeployId());
+        if (Objects.isNull(containerInfos) || containerInfos.size() == 0) {
+            containerInfoMapper.insertSelective(containerInfo);
+        } else {
+            ContainerInfo cf = containerInfos.get(0);
             cf.setState(containerInfo.getState());
             cf.setStatus(containerInfo.getStatus());
-            containerInfoMapper.updateContainerInfo(cf);
+            containerInfoMapper.updateByPrimaryKeySelective(cf);
         }
         return true;
     }

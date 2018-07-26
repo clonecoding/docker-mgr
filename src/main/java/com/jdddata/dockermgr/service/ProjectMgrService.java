@@ -1,7 +1,7 @@
 package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.dao.modle.ProjectMgr;
+import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 
 /**
  * @Author: zhangheng(赛事)

@@ -2,13 +2,16 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.dao.modle.ProjectMgr;
+import com.jdddata.dockermgr.dao.entity.ProjectMgr;
+import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
+import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
+import com.jdddata.dockermgr.dao.mapper.ProjectMgrMapper;
 import com.jdddata.dockermgr.service.ProjectMgrService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,17 +36,16 @@ public class ProjectMgrServiceImpl implements ProjectMgrService {
 
     @Override
     public ResultVo<ProjectMgr> listProject() {
-        List<ProjectMgr> mgrList = projectMgrMapper.queryProjectMgr(ProjectMgr.Build().isDelete(0).build());
+        List<ProjectMgr> mgrList = projectMgrMapper.selectProjectIsExist(0);
         return ResultGenerator.getSuccess(mgrList);
     }
 
     @Override
     public ResultVo<ProjectMgr> saveOrUpdate(ProjectMgr projectMgr) {
         if (Objects.isNull(projectMgr.getId())) {
-            projectMgrMapper.insertProjectMgr(projectMgr);
+            projectMgrMapper.insertSelective(projectMgr);
         } else {
-            ProjectMgr projectMgr2 = projectMgrMapper.queryProjectMgrLimit1(
-                    ProjectMgr.Build().id(projectMgr.getId()).build());
+            ProjectMgr projectMgr2 = projectMgrMapper.selectByPrimaryKey(projectMgr.getId());
             projectMgr2.setProjectName(projectMgr.getProjectName());
             projectMgr2.setProjectGroup(projectMgr.getProjectGroup());
             projectMgr2.setContactName(projectMgr.getContactName());
@@ -51,8 +53,8 @@ public class ProjectMgrServiceImpl implements ProjectMgrService {
             projectMgr2.setContactEmail(projectMgr.getContactEmail());
             projectMgr2.setAlarmEmailAddress(projectMgr.getAlarmEmailAddress());
             projectMgr2.setGitUrl(projectMgr.getGitUrl());
-            projectMgr2.setUpdateTime(LocalDateTime.now());
-            projectMgrMapper.updateProjectMgr(projectMgr2);
+            projectMgr2.setUpdateTime(new Date());
+            projectMgrMapper.updateByPrimaryKey(projectMgr2);
         }
         return ResultGenerator.getSuccess();
     }
@@ -65,11 +67,10 @@ public class ProjectMgrServiceImpl implements ProjectMgrService {
      */
     @Override
     public ResultVo delete(Long id) {
-        ProjectMgr projectMgr2 = projectMgrMapper.queryProjectMgrLimit1(
-                ProjectMgr.Build().id(id).build());
+        ProjectMgr projectMgr2 = projectMgrMapper.selectByPrimaryKey(id);
         if (Objects.nonNull(projectMgr2)) {
             projectMgr2.setIsDelete(1);
-            projectMgrMapper.updateProjectMgr(projectMgr2);
+            projectMgrMapper.updateByPrimaryKeySelective(projectMgr2);
         }
         return ResultGenerator.getSuccess();
     }

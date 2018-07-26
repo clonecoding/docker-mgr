@@ -1,9 +1,9 @@
 package com.jdddata.dockermgr.northbound.dto.server;
 
 import com.jdddata.dockermgr.common.util.CryptoUtil;
-import com.jdddata.dockermgr.dao.modle.ServerMgr;
+import com.jdddata.dockermgr.dao.entity.ServerMgr;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 public class ServerInfoDto {
@@ -80,8 +80,8 @@ public class ServerInfoDto {
     public ServerMgr convert() {
         ServerMgr serverMgr = new ServerMgr();
         serverMgr.setId(UUID.randomUUID().toString());
-        serverMgr.setTypeName(this.typeName);
-        serverMgr.setAddTime(LocalDateTime.now());
+        serverMgr.setTypename(typeName);
+        serverMgr.setAddtime(new Date());
         serverMgr.setBelong(this.belong);
         serverMgr.setIp(this.ip);
         serverMgr.setPort(this.port);

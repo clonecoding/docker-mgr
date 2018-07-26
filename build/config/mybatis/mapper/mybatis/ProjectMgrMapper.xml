@@ -185,4 +185,10 @@
       update_user = #{updateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectProjectIsExist" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    from project_mgr
+    where isDelete = #{i,jdbcType=INTEGER}
+  </select>
 </mapper>

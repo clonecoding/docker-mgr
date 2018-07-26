@@ -1,5 +1,7 @@
 package com.jdddata.dockermgr.dao.entity;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+
 import java.util.Date;
 
 public class ProjectMgr {

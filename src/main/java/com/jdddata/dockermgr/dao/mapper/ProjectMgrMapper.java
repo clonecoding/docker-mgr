@@ -2,6 +2,8 @@ package com.jdddata.dockermgr.dao.mapper;
 
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 
+import java.util.List;
+
 public interface ProjectMgrMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface ProjectMgrMapper {
     int updateByPrimaryKeySelective(ProjectMgr record);
 
     int updateByPrimaryKey(ProjectMgr record);
+
+    List<ProjectMgr> selectProjectIsExist(int i);
 }
