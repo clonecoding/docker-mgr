@@ -2,8 +2,6 @@ package com.jdddata.dockermgr.dao.mapper;
 
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 
-import java.util.List;
-
 public interface ContainerInfoMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,6 +14,4 @@ public interface ContainerInfoMapper {
     int updateByPrimaryKeySelective(ContainerInfo record);
 
     int updateByPrimaryKey(ContainerInfo record);
-
-    List<ContainerInfo> selectByDeployId(Long deployId);
 }

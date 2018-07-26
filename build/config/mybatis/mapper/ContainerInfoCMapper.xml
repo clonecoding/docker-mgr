@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper">
+    <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ContainerInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="deploy_id" property="deployId" jdbcType="BIGINT"/>
+        <result column="container_id" property="containerId" jdbcType="VARCHAR"/>
+        <result column="container_name" property="containerName" jdbcType="VARCHAR"/>
+        <result column="image_name" property="imageName" jdbcType="VARCHAR"/>
+        <result column="image_tag" property="imageTag" jdbcType="VARCHAR"/>
+        <result column="image_id" property="imageId" jdbcType="VARCHAR"/>
+        <result column="command" property="command" jdbcType="VARCHAR"/>
+        <result column="container_create_time" property="containerCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="container_ports" property="containerPorts" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="network_mode" property="networkMode" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, deploy_id, container_id, container_name, image_name, image_tag, image_id, command,
+    container_create_time, container_ports, state, status, network_mode, is_valid, is_delete,
+    create_time, create_user, update_time, update_user
+  </sql>
+    <select id="selectByDeployId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from container_info
+        where id = #{deployId,jdbcType=BIGINT}
+    </select>
+    <select id="listAll"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from container_info
+        where 1=1
+    </select>
+</mapper>

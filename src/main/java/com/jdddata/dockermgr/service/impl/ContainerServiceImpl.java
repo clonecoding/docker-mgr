@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
 import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
@@ -26,11 +27,14 @@ public class ContainerServiceImpl implements ContainerService {
     @Autowired
     ContainerInfoMapper containerInfoMapper;
 
+    @Autowired
+    ContainerInfoCMapper containerInfoCMapper;
+
     @Override
     public ResultVo<ContainerDetailInfo> list() {
         //TODO
-//        List<ContainerDetailInfo> containerDetailInfos = containerInfoMapper.selectByPrimaryKey();
-        return ResultGenerator.getSuccess(null);
+        List<ContainerDetailInfo> containerDetailInfos = containerInfoCMapper.listAll();
+        return ResultGenerator.getSuccess(containerDetailInfos);
     }
 
     /**
@@ -47,7 +51,7 @@ public class ContainerServiceImpl implements ContainerService {
         }
 
         //TODO
-        List<ContainerInfo> containerInfos = containerInfoMapper.selectByDeployId(containerInfo.getDeployId());
+        List<ContainerInfo> containerInfos = containerInfoCMapper.selectByDeployId(containerInfo.getDeployId());
         if (Objects.isNull(containerInfos) || containerInfos.size() == 0) {
             containerInfoMapper.insertSelective(containerInfo);
         } else {

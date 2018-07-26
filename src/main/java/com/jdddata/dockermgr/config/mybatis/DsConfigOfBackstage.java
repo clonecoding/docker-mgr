@@ -10,6 +10,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -19,7 +20,7 @@ import javax.sql.DataSource;
  * @author Magoo
  */
 @Configuration
-@MapperScan(basePackages = "com.jdddata.dockermgr.dao.mapper",
+@MapperScan(basePackages = "com.jdddata.dockermgr.dao",
         sqlSessionTemplateRef = "storeSqlSessionTemplate")
 public class DsConfigOfBackstage {
 
@@ -36,8 +37,14 @@ public class DsConfigOfBackstage {
             @Qualifier("storeDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
-                "classpath:mybatis/mapper/mybatis/*.xml"));
+        PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources1 = pathMatchingResourcePatternResolver.getResources("classpath:mybatis/mapper/*.xml");
+        Resource[] resources2 = pathMatchingResourcePatternResolver.getResources("classpath:mybatis/mapper/generater/mybatis/*.xml");
+        Resource[] resources = new Resource[resources1.length + resources2.length];
+
+        System.arraycopy(resources1, 0, resources, 0, resources1.length);
+        System.arraycopy(resources2, 0, resources, resources1.length, resources2.length);
+        bean.setMapperLocations(resources);
         return bean.getObject();
 
     }

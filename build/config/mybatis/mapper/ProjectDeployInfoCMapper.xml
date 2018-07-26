@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper">
+    <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="deploy_id" property="deployId" jdbcType="BIGINT"/>
+        <result column="container_id" property="containerId" jdbcType="VARCHAR"/>
+        <result column="container_name" property="containerName" jdbcType="VARCHAR"/>
+        <result column="image_name" property="imageName" jdbcType="VARCHAR"/>
+        <result column="image_tag" property="imageTag" jdbcType="VARCHAR"/>
+        <result column="image_id" property="imageId" jdbcType="VARCHAR"/>
+        <result column="command" property="command" jdbcType="VARCHAR"/>
+        <result column="container_create_time" property="containerCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="container_ports" property="containerPorts" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="network_mode" property="networkMode" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, project_id, host_ip, docker_env, deploy_mode, git_version, nexus_target_url,
+    docker_container_name, docker_image_name, docker_entrypoint, docker_mount, docker_link,
+    docker_cpuset_cpus, docker_memory, docker_memory_swap, docker_memory_reservation,
+    docker_memory_swappiness, is_valid, is_delete, create_time, create_user, update_time,
+    update_user
+  </sql>
+    <select id="listAll"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from project_deploy_info
+        where 1=1
+    </select>
+</mapper>

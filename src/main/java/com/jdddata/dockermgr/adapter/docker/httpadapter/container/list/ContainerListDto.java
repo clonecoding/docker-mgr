@@ -1,7 +1,7 @@
 package com.jdddata.dockermgr.adapter.docker.httpadapter.container.list;
 
 import com.alibaba.fastjson.JSON;
-import com.jdddata.dockermgr.dao.modle.ContainerInfo;
+import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -159,7 +159,7 @@ public class ContainerListDto {
         this.mounts = mounts;
     }
 
-    public ContainerInfo convert(){
+    public ContainerInfo convert() {
         ContainerInfo containerInfo = new ContainerInfo();
         containerInfo.setContainerId(getId());
         containerInfo.setContainerName(getNames().get(0).substring(1));
