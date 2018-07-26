@@ -39,7 +39,7 @@ public class DsConfigOfBackstage {
         bean.setDataSource(dataSource);
         PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources1 = pathMatchingResourcePatternResolver.getResources("classpath:mybatis/mapper/*.xml");
-        Resource[] resources2 = pathMatchingResourcePatternResolver.getResources("classpath:mybatis/mapper/generater/mybatis/*.xml");
+        Resource[] resources2 = pathMatchingResourcePatternResolver.getResources("classpath:mybatis/generater/mybatis/*.xml");
         Resource[] resources = new Resource[resources1.length + resources2.length];
 
         System.arraycopy(resources1, 0, resources, 0, resources1.length);

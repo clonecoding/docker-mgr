@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.cmapper.ProjectMgrCMapper;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
@@ -33,10 +34,12 @@ public class ProjectMgrServiceImpl implements ProjectMgrService {
 
     @Autowired
     private ProjectMgrMapper projectMgrMapper;
+    @Autowired
+    private ProjectMgrCMapper projectMgrCMapper;
 
     @Override
     public ResultVo<ProjectMgr> listProject() {
-        List<ProjectMgr> mgrList = projectMgrMapper.selectProjectIsExist(0);
+        List<ProjectMgr> mgrList = projectMgrCMapper.selectProjectIsExist(0);
         return ResultGenerator.getSuccess(mgrList);
     }
 

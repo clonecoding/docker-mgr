@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper">
-    <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ContainerInfo">
+    <resultMap id="BaseResultMaps" type="com.jdddata.dockermgr.dao.entity.ContainerInfo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="deploy_id" property="deployId" jdbcType="BIGINT"/>
         <result column="container_id" property="containerId" jdbcType="VARCHAR"/>
@@ -27,13 +27,13 @@
     container_create_time, container_ports, state, status, network_mode, is_valid, is_delete,
     create_time, create_user, update_time, update_user
   </sql>
-    <select id="selectByDeployId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByDeployId" parameterType="java.lang.Long" resultMap="BaseResultMaps">
         select
         <include refid="Base_Column_List"/>
         from container_info
         where id = #{deployId,jdbcType=BIGINT}
     </select>
-    <select id="listAll"  resultMap="BaseResultMap">
+    <select id="listAll"  resultMap="BaseResultMaps">
         select
         <include refid="Base_Column_List"/>
         from container_info
