@@ -2,8 +2,6 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
-import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
-import com.jdddata.dockermgr.dao.mapper.ProjectMgrMapper;
 import com.jdddata.dockermgr.dao.modle.ProjectMgr;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.service.DeployService;

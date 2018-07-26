@@ -1,102 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jdddata.dockermgr.dao.mapper.CounterMapper">
-  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.Counter">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="pipelineGroup" jdbcType="VARCHAR" property="pipelinegroup" />
-    <result column="pipelineName" jdbcType="VARCHAR" property="pipelinename" />
-    <result column="pipelineCounter" jdbcType="VARCHAR" property="pipelinecounter" />
-    <result column="stageName" jdbcType="VARCHAR" property="stagename" />
-    <result column="stageCounter" jdbcType="VARCHAR" property="stagecounter" />
-    <result column="jobName" jdbcType="VARCHAR" property="jobname" />
-    <result column="classfiler" jdbcType="VARCHAR" property="classfiler" />
-    <result column="imagePushed" jdbcType="BIT" property="imagepushed" />
-    <result column="envId" jdbcType="VARCHAR" property="envid" />
-    <result column="imageMgrId" jdbcType="VARCHAR" property="imagemgrid" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.CounterMapper" >
+  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.Counter" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="pipelineGroup" property="pipelinegroup" jdbcType="VARCHAR" />
+    <result column="pipelineName" property="pipelinename" jdbcType="VARCHAR" />
+    <result column="pipelineCounter" property="pipelinecounter" jdbcType="VARCHAR" />
+    <result column="stageName" property="stagename" jdbcType="VARCHAR" />
+    <result column="stageCounter" property="stagecounter" jdbcType="VARCHAR" />
+    <result column="jobName" property="jobname" jdbcType="VARCHAR" />
+    <result column="classfiler" property="classfiler" jdbcType="VARCHAR" />
+    <result column="imagePushed" property="imagepushed" jdbcType="BIT" />
+    <result column="envId" property="envid" jdbcType="VARCHAR" />
+    <result column="imageMgrId" property="imagemgrid" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, pipelineGroup, pipelineName, pipelineCounter, stageName, stageCounter, jobName, 
-    classfiler, imagePushed, envId, imageMgrId
-  </sql>
-  <select id="selectByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample">
-    delete from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.Counter">
+  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.Counter" >
     insert into counter (id, pipelineGroup, pipelineName, 
       pipelineCounter, stageName, stageCounter, 
       jobName, classfiler, imagePushed, 
@@ -106,383 +24,77 @@
       #{jobname,jdbcType=VARCHAR}, #{classfiler,jdbcType=VARCHAR}, #{imagepushed,jdbcType=BIT}, 
       #{envid,jdbcType=VARCHAR}, #{imagemgrid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.Counter">
+  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.Counter" >
     insert into counter
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="pipelinegroup != null">
+      <if test="pipelinegroup != null" >
         pipelineGroup,
       </if>
-      <if test="pipelinename != null">
+      <if test="pipelinename != null" >
         pipelineName,
       </if>
-      <if test="pipelinecounter != null">
+      <if test="pipelinecounter != null" >
         pipelineCounter,
       </if>
-      <if test="stagename != null">
+      <if test="stagename != null" >
         stageName,
       </if>
-      <if test="stagecounter != null">
+      <if test="stagecounter != null" >
         stageCounter,
       </if>
-      <if test="jobname != null">
+      <if test="jobname != null" >
         jobName,
       </if>
-      <if test="classfiler != null">
+      <if test="classfiler != null" >
         classfiler,
       </if>
-      <if test="imagepushed != null">
+      <if test="imagepushed != null" >
         imagePushed,
       </if>
-      <if test="envid != null">
+      <if test="envid != null" >
         envId,
       </if>
-      <if test="imagemgrid != null">
+      <if test="imagemgrid != null" >
         imageMgrId,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="pipelinegroup != null">
+      <if test="pipelinegroup != null" >
         #{pipelinegroup,jdbcType=VARCHAR},
       </if>
-      <if test="pipelinename != null">
+      <if test="pipelinename != null" >
         #{pipelinename,jdbcType=VARCHAR},
       </if>
-      <if test="pipelinecounter != null">
+      <if test="pipelinecounter != null" >
         #{pipelinecounter,jdbcType=VARCHAR},
       </if>
-      <if test="stagename != null">
+      <if test="stagename != null" >
         #{stagename,jdbcType=VARCHAR},
       </if>
-      <if test="stagecounter != null">
+      <if test="stagecounter != null" >
         #{stagecounter,jdbcType=VARCHAR},
       </if>
-      <if test="jobname != null">
+      <if test="jobname != null" >
         #{jobname,jdbcType=VARCHAR},
       </if>
-      <if test="classfiler != null">
+      <if test="classfiler != null" >
         #{classfiler,jdbcType=VARCHAR},
       </if>
-      <if test="imagepushed != null">
+      <if test="imagepushed != null" >
         #{imagepushed,jdbcType=BIT},
       </if>
-      <if test="envid != null">
+      <if test="envid != null" >
         #{envid,jdbcType=VARCHAR},
       </if>
-      <if test="imagemgrid != null">
+      <if test="imagemgrid != null" >
         #{imagemgrid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample" resultType="java.lang.Integer">
-    select count(*) from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update counter
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinegroup != null">
-        pipelineGroup = #{record.pipelinegroup,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinename != null">
-        pipelineName = #{record.pipelinename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinecounter != null">
-        pipelineCounter = #{record.pipelinecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stagename != null">
-        stageName = #{record.stagename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stagecounter != null">
-        stageCounter = #{record.stagecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jobname != null">
-        jobName = #{record.jobname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.classfiler != null">
-        classfiler = #{record.classfiler,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imagepushed != null">
-        imagePushed = #{record.imagepushed,jdbcType=BIT},
-      </if>
-      <if test="record.envid != null">
-        envId = #{record.envid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imagemgrid != null">
-        imageMgrId = #{record.imagemgrid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update counter
-    set id = #{record.id,jdbcType=VARCHAR},
-      pipelineGroup = #{record.pipelinegroup,jdbcType=VARCHAR},
-      pipelineName = #{record.pipelinename,jdbcType=VARCHAR},
-      pipelineCounter = #{record.pipelinecounter,jdbcType=VARCHAR},
-      stageName = #{record.stagename,jdbcType=VARCHAR},
-      stageCounter = #{record.stagecounter,jdbcType=VARCHAR},
-      jobName = #{record.jobname,jdbcType=VARCHAR},
-      classfiler = #{record.classfiler,jdbcType=VARCHAR},
-      imagePushed = #{record.imagepushed,jdbcType=BIT},
-      envId = #{record.envid,jdbcType=VARCHAR},
-      imageMgrId = #{record.imagemgrid,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.Counter">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="pipelineGroup" jdbcType="VARCHAR" property="pipelinegroup" />
-    <result column="pipelineName" jdbcType="VARCHAR" property="pipelinename" />
-    <result column="pipelineCounter" jdbcType="VARCHAR" property="pipelinecounter" />
-    <result column="stageName" jdbcType="VARCHAR" property="stagename" />
-    <result column="stageCounter" jdbcType="VARCHAR" property="stagecounter" />
-    <result column="jobName" jdbcType="VARCHAR" property="jobname" />
-    <result column="classfiler" jdbcType="VARCHAR" property="classfiler" />
-    <result column="imagePushed" jdbcType="BIT" property="imagepushed" />
-    <result column="envId" jdbcType="VARCHAR" property="envid" />
-    <result column="imageMgrId" jdbcType="VARCHAR" property="imagemgrid" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, pipelineGroup, pipelineName, pipelineCounter, stageName, stageCounter, jobName, 
-    classfiler, imagePushed, envId, imageMgrId
-  </sql>
-  <select id="selectByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample">
-    delete from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.Counter">
-    insert into counter (id, pipelineGroup, pipelineName, 
-      pipelineCounter, stageName, stageCounter, 
-      jobName, classfiler, imagePushed, 
-      envId, imageMgrId)
-    values (#{id,jdbcType=VARCHAR}, #{pipelinegroup,jdbcType=VARCHAR}, #{pipelinename,jdbcType=VARCHAR}, 
-      #{pipelinecounter,jdbcType=VARCHAR}, #{stagename,jdbcType=VARCHAR}, #{stagecounter,jdbcType=VARCHAR}, 
-      #{jobname,jdbcType=VARCHAR}, #{classfiler,jdbcType=VARCHAR}, #{imagepushed,jdbcType=BIT}, 
-      #{envid,jdbcType=VARCHAR}, #{imagemgrid,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.Counter">
-    insert into counter
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="pipelinegroup != null">
-        pipelineGroup,
-      </if>
-      <if test="pipelinename != null">
-        pipelineName,
-      </if>
-      <if test="pipelinecounter != null">
-        pipelineCounter,
-      </if>
-      <if test="stagename != null">
-        stageName,
-      </if>
-      <if test="stagecounter != null">
-        stageCounter,
-      </if>
-      <if test="jobname != null">
-        jobName,
-      </if>
-      <if test="classfiler != null">
-        classfiler,
-      </if>
-      <if test="imagepushed != null">
-        imagePushed,
-      </if>
-      <if test="envid != null">
-        envId,
-      </if>
-      <if test="imagemgrid != null">
-        imageMgrId,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="pipelinegroup != null">
-        #{pipelinegroup,jdbcType=VARCHAR},
-      </if>
-      <if test="pipelinename != null">
-        #{pipelinename,jdbcType=VARCHAR},
-      </if>
-      <if test="pipelinecounter != null">
-        #{pipelinecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="stagename != null">
-        #{stagename,jdbcType=VARCHAR},
-      </if>
-      <if test="stagecounter != null">
-        #{stagecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="jobname != null">
-        #{jobname,jdbcType=VARCHAR},
-      </if>
-      <if test="classfiler != null">
-        #{classfiler,jdbcType=VARCHAR},
-      </if>
-      <if test="imagepushed != null">
-        #{imagepushed,jdbcType=BIT},
-      </if>
-      <if test="envid != null">
-        #{envid,jdbcType=VARCHAR},
-      </if>
-      <if test="imagemgrid != null">
-        #{imagemgrid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jdddata.dockermgr.dao.entity.CounterExample" resultType="java.lang.Integer">
-    select count(*) from counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update counter
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinegroup != null">
-        pipelineGroup = #{record.pipelinegroup,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinename != null">
-        pipelineName = #{record.pipelinename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pipelinecounter != null">
-        pipelineCounter = #{record.pipelinecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stagename != null">
-        stageName = #{record.stagename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stagecounter != null">
-        stageCounter = #{record.stagecounter,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jobname != null">
-        jobName = #{record.jobname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.classfiler != null">
-        classfiler = #{record.classfiler,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imagepushed != null">
-        imagePushed = #{record.imagepushed,jdbcType=BIT},
-      </if>
-      <if test="record.envid != null">
-        envId = #{record.envid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imagemgrid != null">
-        imageMgrId = #{record.imagemgrid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update counter
-    set id = #{record.id,jdbcType=VARCHAR},
-      pipelineGroup = #{record.pipelinegroup,jdbcType=VARCHAR},
-      pipelineName = #{record.pipelinename,jdbcType=VARCHAR},
-      pipelineCounter = #{record.pipelinecounter,jdbcType=VARCHAR},
-      stageName = #{record.stagename,jdbcType=VARCHAR},
-      stageCounter = #{record.stagecounter,jdbcType=VARCHAR},
-      jobName = #{record.jobname,jdbcType=VARCHAR},
-      classfiler = #{record.classfiler,jdbcType=VARCHAR},
-      imagePushed = #{record.imagepushed,jdbcType=BIT},
-      envId = #{record.envid,jdbcType=VARCHAR},
-      imageMgrId = #{record.imagemgrid,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>
