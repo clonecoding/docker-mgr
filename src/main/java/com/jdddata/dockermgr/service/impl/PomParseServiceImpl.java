@@ -37,7 +37,7 @@ public class PomParseServiceImpl implements PomParseService {
         try {
             String codePath = gitService.gitClone(gitDto.getUrl(), gitDto.getVersion());
             List<File> files = findPom(codePath);
-            List<PomParseModel> pomParseModels = new ArrayList<>();
+            BlockingQueue<PomParseModel> pomParseModels = new ArrayBlockingQueue<PomParseModel>(10);
             for (File file : files) {
                 Future<PomParseModel> f = executorService.submit(new CallableTask(file));
                 pomParseModels.add(f.get());
@@ -187,7 +187,9 @@ public class PomParseServiceImpl implements PomParseService {
                 Node node = artifactIds.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element child = (Element) node;
-                    return child.getTextContent().equalsIgnoreCase("maven-assembly-plugin") ? child.getTextContent() : null;
+                    if (child.getTextContent().equalsIgnoreCase("maven-assembly-plugin")) {
+                        return child.getTextContent();
+                    }
                 }
             }
             return null;
