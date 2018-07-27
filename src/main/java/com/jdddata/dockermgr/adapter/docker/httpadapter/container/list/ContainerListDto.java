@@ -3,6 +3,8 @@ package com.jdddata.dockermgr.adapter.docker.httpadapter.container.list;
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -168,8 +170,9 @@ public class ContainerListDto {
         containerInfo.setImageId(getImageID());
         containerInfo.setCommand(getCommand());
         containerInfo.setContainerPorts(JSON.toJSONString(getPorts()));
-        containerInfo.setState(getState());
+        containerInfo.setContainerState(getState());
         containerInfo.setStatus(getStatus());
+        containerInfo.setUpdateTime(new Date());
         return containerInfo;
     }
 }

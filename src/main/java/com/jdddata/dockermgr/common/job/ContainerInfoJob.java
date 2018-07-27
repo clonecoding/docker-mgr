@@ -33,6 +33,10 @@ public class ContainerInfoJob {
     @Autowired
     private ContainerInfoCMapper containerInfoCMapper;
 
+
+    @Autowired
+    ContainerService containerService;
+
     @Autowired
     private ServerMgrCMapper serverMgrCMapper;
 
@@ -42,40 +46,39 @@ public class ContainerInfoJob {
         List<String> ips = serverMgrCMapper.getIps();
         Map<String, ContainerListDto> containerListDtoMap = new HashMap<>(16);
         List<ContainerInfo> containerInfos = containerInfoCMapper.listAll();
-        LinkedHashMap map = new LinkedHashMap(16);
+        LinkedHashMap<String,ContainerInfo> map = new LinkedHashMap(16);
         if (!CollectionUtils.isEmpty(containerInfos)) {
             containerInfos.forEach(item -> {
-
+                map.put(item.getHostIp() + item.getContainerName(), item);
             });
 
         }
-        for (ProjectDeployInfo item : deployInfos) {
-            ContainerListDto dto = containerListDtoMap.get(item.getHostIp() + item.getDockerContainerName());
-            if (Objects.isNull(dto)) {
-                String ip = item.getHostIp();
-                HttpResponse httpResponse = DockerClient.listContainers(ip);
-                if (httpResponse != null && httpResponse.getStatusCode() == 200) {
-                    String body = httpResponse.getBody();
-                    List<ContainerListDto> obj = JSON.parseArray(body, ContainerListDto.class);
-                    for (ContainerListDto containerListDto : obj) {
-                        String containerName = containerListDto.getNames().get(0).substring(1);
-                        if (Objects.equals(item.getDockerContainerName(), containerName)) {
-                            ContainerInfo containerInfo = containerListDto.convert();
-                            containerInfo.setDeployId(item.getId());
-                            containerService.saveOrUpdateContainerInfo(containerInfo);
-                        } else {
-                            containerListDtoMap.put(ip + containerName, containerListDto);
-                        }
+        for (String ip : ips) {
+            HttpResponse httpResponse = DockerClient.listContainers(ip);
+            if (httpResponse != null && httpResponse.getStatusCode() == 200) {
+                String body = httpResponse.getBody();
+                List<ContainerListDto> obj = JSON.parseArray(body, ContainerListDto.class);
+                for (ContainerListDto containerListDto : obj) {
+                    String containerName = containerListDto.getNames().get(0).substring(1);
+                    if (Objects.nonNull(map.get(ip + containerName))) {
+                        ContainerInfo containerInfo = containerListDto.convert();
+                        containerInfo.setId((map.get(ip + containerName).getId()));
+                        containerService.saveOrUpdateContainerInfo(containerInfo);
+                        //移除
+                        map.remove(ip + containerName);
+                    } else {
+                        ContainerInfo containerInfo = containerListDto.convert();
+                        containerService.saveOrUpdateContainerInfo(containerInfo);
                     }
-                } else {
-                    log.error("=====>>>>>获取dockerApi信息失败");
                 }
             } else {
-                ContainerInfo containerInfo = dto.convert();
-                containerInfo.setDeployId(item.getId());
-                containerService.saveOrUpdateContainerInfo(containerInfo);
+                log.error("=====>>>>>获取dockerApi信息失败");
             }
-
+        }
+        if(map.size() >0){
+            map.forEach((key,value) -> {
+                containerInfoCMapper.updateValid(value.getId(),1);
+            });
         }
         log.info("=====>>>>>同步docker message");
     }

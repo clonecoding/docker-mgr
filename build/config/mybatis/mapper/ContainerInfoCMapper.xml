@@ -33,10 +33,13 @@
         from container_info
         where id = #{deployId,jdbcType=BIGINT}
     </select>
-    <select id="listAll"  resultMap="BaseResultMaps">
+    <select id="listAll" resultMap="BaseResultMaps">
         select
         <include refid="Base_Column_List"/>
         from container_info
         where 1=1
     </select>
+    <update id="updateValid" parameterType="java.lang.Integer">
+        update container_info set is_delete = #{valid} where id ={id}
+    </update>
 </mapper>

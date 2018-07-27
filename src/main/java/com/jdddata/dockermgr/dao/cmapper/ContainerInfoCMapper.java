@@ -11,4 +11,6 @@ public interface ContainerInfoCMapper {
     List<ContainerInfo> selectByDeployId(@Param("deployId") Long deployId);
 
     List<ContainerInfo> listAll();
+
+    int updateValid(Long id,Integer valid);
 }

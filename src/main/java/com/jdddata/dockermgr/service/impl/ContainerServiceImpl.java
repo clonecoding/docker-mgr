@@ -5,7 +5,6 @@ import com.jdddata.dockermgr.common.vo.ResultVo;
 import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
-import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
 import com.jdddata.dockermgr.service.ContainerService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class ContainerServiceImpl implements ContainerService {
     @Override
     public ResultVo<ContainerInfo> list() {
         List<ContainerInfo> containerInfos = containerInfoCMapper.listAll();
-        return ResultGenerator.getSuccessDto(containerDetailInfos);
+        return ResultGenerator.getSuccessDto(containerInfos);
     }
 
     /**
@@ -48,13 +47,11 @@ public class ContainerServiceImpl implements ContainerService {
             log.error("请求参数不能为空");
             return false;
         }
-
-        List<ContainerInfo> containerInfos = containerInfoCMapper.selectByDeployId(containerInfo.getDeployId());
-        if (Objects.isNull(containerInfos) || containerInfos.size() == 0) {
+        if (Objects.isNull(containerInfo.getId())) {
             containerInfoMapper.insertSelective(containerInfo);
         } else {
-            ContainerInfo cf = containerInfos.get(0);
-            cf.setState(containerInfo.getState());
+            ContainerInfo cf = containerInfoMapper.selectByPrimaryKey(containerInfo.getId());
+            cf.setContainerState(containerInfo.getStatus());
             cf.setStatus(containerInfo.getStatus());
             containerInfoMapper.updateByPrimaryKeySelective(cf);
         }
