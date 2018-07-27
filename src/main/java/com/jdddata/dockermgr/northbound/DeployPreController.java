@@ -34,8 +34,8 @@ public class DeployPreController {
         return pomParseService.parseFromGit(gitDto);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/saveOrUpdate")
     public ResultVo create(@RequestBody DeployInfoDto deployInfoDto) {
-        return deployService.create(deployInfoDto);
+        return deployService.saveOrUpdate(deployInfoDto);
     }
 }

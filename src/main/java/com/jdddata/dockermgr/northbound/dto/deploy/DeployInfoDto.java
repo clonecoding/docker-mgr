@@ -1,10 +1,11 @@
 package com.jdddata.dockermgr.northbound.dto.deploy;
 
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
+import org.springframework.beans.BeanUtils;
 
 public class DeployInfoDto {
 
-    private String id;
+    private Long id;
     /**
      * docker / not docker
      */
@@ -46,11 +47,11 @@ public class DeployInfoDto {
 
     private String gitVersion;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -193,8 +194,7 @@ public class DeployInfoDto {
     //TODO
     public ProjectDeployInfo convert() {
         ProjectDeployInfo projectDeployInfo = new ProjectDeployInfo();
-
-
-        return null;
+        BeanUtils.copyProperties(this,projectDeployInfo);
+        return projectDeployInfo;
     }
 }

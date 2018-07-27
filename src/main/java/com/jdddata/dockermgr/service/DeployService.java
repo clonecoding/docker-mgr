@@ -14,4 +14,7 @@ public interface DeployService {
     ResultVo fetchPreInfo(String projectId);
 
     ResultVo create(DeployInfoDto deployInfoDto);
+
+    ResultVo saveOrUpdate(DeployInfoDto deployInfoDto);
+
 }

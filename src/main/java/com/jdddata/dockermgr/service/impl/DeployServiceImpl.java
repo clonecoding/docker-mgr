@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectMgrMapper;
@@ -10,6 +11,8 @@ import com.jdddata.dockermgr.service.DeployService;
 import com.jdddata.dockermgr.service.GitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class DeployServiceImpl implements DeployService {
@@ -38,5 +41,17 @@ public class DeployServiceImpl implements DeployService {
     public ResultVo create(DeployInfoDto deployInfoDto) {
         projectDeployInfoMapper.insertSelective(deployInfoDto.convert());
         return null;
+    }
+
+    @Override
+    public ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) {
+        if (Objects.isNull(deployInfoDto.getId())) {
+            projectDeployInfoMapper.insertSelective(deployInfoDto.convert());
+        } else {
+            //ProjectDeployInfo deployInfo = projectDeployInfoMapper.selectByPrimaryKey(deployInfoDto.getId());
+            //todo
+            projectDeployInfoMapper.updateByPrimaryKeySelective(deployInfoDto.convert());
+        }
+        return ResultGenerator.getSuccess();
     }
 }
