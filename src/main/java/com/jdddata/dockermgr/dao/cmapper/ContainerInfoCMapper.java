@@ -10,5 +10,5 @@ public interface ContainerInfoCMapper {
 
     List<ContainerInfo> selectByDeployId(@Param("deployId") Long deployId);
 
-    List<ContainerDetailInfo> listAll();
+    List<ContainerInfo> listAll();
 }

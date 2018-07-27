@@ -1,12 +1,16 @@
 package com.jdddata.dockermgr.service.impl;
 
 
+import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
+import com.jdddata.dockermgr.dao.mapper.ServerMgrMapper;
 import com.jdddata.dockermgr.service.ProjectMgrService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @Author: zhangheng(赛事)
@@ -20,8 +24,12 @@ public class ProjectMgrServiceImplTest {
     @Autowired
     ProjectMgrService projectMgrService;
 
+
+    @Autowired
+    ServerMgrCMapper serverMgrCMapper;
     @Test
     public void findAll(){
-
+        List<String> ips= serverMgrCMapper.getIps();
+        System.out.println(ips);
     }
 }

@@ -24,7 +24,7 @@ public class ContainerMgrController {
     ContainerService containerService;
 
     @GetMapping("/list")
-    public ResultVo list() {
+    public ResultVo listAll() {
         return containerService.list();
     }
 

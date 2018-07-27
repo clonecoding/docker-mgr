@@ -4,20 +4,21 @@ import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.adapter.docker.DockerClient;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
+import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
+import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
+import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.service.ContainerService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Author: zhangheng(赛事)
@@ -30,19 +31,24 @@ import java.util.Objects;
 public class ContainerInfoJob {
 
     @Autowired
-    private ProjectDeployInfoMapper projectDeployInfoMapper;
+    private ContainerInfoCMapper containerInfoCMapper;
 
     @Autowired
-    private ProjectDeployInfoCMapper projectDeployInfoCMapper;
-
-    @Autowired
-    private ContainerService containerService;
+    private ServerMgrCMapper serverMgrCMapper;
 
     @Scheduled(cron = "0 0/5 * * * *")
     public void updateContainerInfo() {
         /*ip+containerName*/
+        List<String> ips = serverMgrCMapper.getIps();
         Map<String, ContainerListDto> containerListDtoMap = new HashMap<>(16);
-        List<ProjectDeployInfo> deployInfos = projectDeployInfoCMapper.listAll();
+        List<ContainerInfo> containerInfos = containerInfoCMapper.listAll();
+        LinkedHashMap map = new LinkedHashMap(16);
+        if (!CollectionUtils.isEmpty(containerInfos)) {
+            containerInfos.forEach(item -> {
+
+            });
+
+        }
         for (ProjectDeployInfo item : deployInfos) {
             ContainerListDto dto = containerListDtoMap.get(item.getHostIp() + item.getDockerContainerName());
             if (Objects.isNull(dto)) {

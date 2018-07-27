@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ServerMgrCMapper {
     List<ServerMgr> listAll();
+
+    List<String> getIps();
 }

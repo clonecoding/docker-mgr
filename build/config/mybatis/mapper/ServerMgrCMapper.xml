@@ -20,5 +20,7 @@
         from server_mgr
         where 1=1
     </select>
-
+    <select id="getIps" resultType="java.lang.String" parameterType="java.lang.String">
+        select ip from server_mgr where 1=1 group  by ip
+    </select>
 </mapper>

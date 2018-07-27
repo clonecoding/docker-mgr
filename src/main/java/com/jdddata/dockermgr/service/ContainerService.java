@@ -12,7 +12,7 @@ import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
  */
 public interface ContainerService {
 
-    ResultVo<ContainerDetailInfo> list();
+    ResultVo<ContainerInfo> list();
 
     /**
      * 保存或更新
