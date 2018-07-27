@@ -20,4 +20,6 @@ public interface DeployService {
     ResultVo clone(DeployInfoDto deployInfoDto);
 
     ResultVo delete(String id);
+
+    ResultVo list();
 }

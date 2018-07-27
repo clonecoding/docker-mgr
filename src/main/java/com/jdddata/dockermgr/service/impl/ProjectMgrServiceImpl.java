@@ -40,7 +40,7 @@ public class ProjectMgrServiceImpl implements ProjectMgrService {
     @Override
     public ResultVo<ProjectMgr> listProject() {
         List<ProjectMgr> mgrList = projectMgrCMapper.selectProjectIsExist(0);
-        return ResultGenerator.getSuccess(mgrList);
+        return ResultGenerator.getSuccessDto(mgrList);
     }
 
     @Override

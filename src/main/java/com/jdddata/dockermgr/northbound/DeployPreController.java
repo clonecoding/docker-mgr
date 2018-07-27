@@ -29,6 +29,11 @@ public class DeployPreController {
         return deployService.fetchPreInfo(projectId);
     }
 
+    @GetMapping("/list")
+    public ResultVo list() {
+        return deployService.list();
+    }
+
     @PostMapping("/nexus")
     public ResultVo nexus(@RequestBody GitDto gitDto) {
         return pomParseService.parseFromGit(gitDto);
@@ -48,5 +53,7 @@ public class DeployPreController {
     public ResultVo delete(@PathVariable("id") String id) {
         return deployService.delete(id);
     }
+
+
 
 }

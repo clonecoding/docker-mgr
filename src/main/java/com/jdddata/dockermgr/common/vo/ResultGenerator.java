@@ -23,10 +23,6 @@ public class ResultGenerator {
         return new ResultVo(SUCCESS_CODE, null);
     }
 
-    public static ResultVo getSuccess(Object data) {
-        return new ResultVo(SUCCESS_CODE, SUCCESS_MESSAGE, data);
-    }
-
     public static ResultVo getSuccess(String message) {
         return new ResultVo(SUCCESS_CODE, message);
     }

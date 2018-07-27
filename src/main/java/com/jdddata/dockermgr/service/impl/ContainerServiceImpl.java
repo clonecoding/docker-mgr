@@ -33,7 +33,7 @@ public class ContainerServiceImpl implements ContainerService {
     @Override
     public ResultVo<ContainerDetailInfo> list() {
         List<ContainerDetailInfo> containerDetailInfos = containerInfoCMapper.listAll();
-        return ResultGenerator.getSuccess(containerDetailInfos);
+        return ResultGenerator.getSuccessDto(containerDetailInfos);
     }
 
     /**
