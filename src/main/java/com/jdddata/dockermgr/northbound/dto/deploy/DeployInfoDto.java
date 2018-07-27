@@ -1,15 +1,14 @@
 package com.jdddata.dockermgr.northbound.dto.deploy;
 
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
-import org.springframework.beans.BeanUtils;
 
 public class DeployInfoDto {
 
     private Long id;
     /**
-     * docker / not docker
+     * 1.docker / 2.not docker
      */
-    private String deployMode;
+    private Integer deployMode;
 
     /**
      * 宿主机
@@ -47,6 +46,8 @@ public class DeployInfoDto {
 
     private String gitVersion;
 
+    private String nexusTargetUrl;
+
     public Long getId() {
         return id;
     }
@@ -55,11 +56,11 @@ public class DeployInfoDto {
         this.id = id;
     }
 
-    public String getDeployMode() {
+    public Integer getDeployMode() {
         return deployMode;
     }
 
-    public void setDeployMode(String deployMode) {
+    public void setDeployMode(Integer deployMode) {
         this.deployMode = deployMode;
     }
 
@@ -191,10 +192,40 @@ public class DeployInfoDto {
         this.gitVersion = gitVersion;
     }
 
-    //TODO
     public ProjectDeployInfo convert() {
         ProjectDeployInfo projectDeployInfo = new ProjectDeployInfo();
-        BeanUtils.copyProperties(this,projectDeployInfo);
+        projectDeployInfo.setId(null != this.id ? this.id : null);
+        projectDeployInfo.setProjectId(this.projectId);
+        projectDeployInfo.setHostIp(this.hostIp);
+        projectDeployInfo.setDockerEnv(this.dockerEnv);
+        projectDeployInfo.setDeployMode(this.deployMode);
+        projectDeployInfo.setGitVersion(this.gitVersion);
+        projectDeployInfo.setNexusTargetUrl(this.nexusTargetUrl);
+        projectDeployInfo.setDockerContainerName(this.dockerContainerName);
+        projectDeployInfo.setDockerImageName(this.dockerImageName);
+        projectDeployInfo.setDockerEntrypoint(this.dockerEntrypoint);
+        projectDeployInfo.setDockerMount(this.dockerMount);
+        projectDeployInfo.setDockerLink(this.dockerLink);
+        projectDeployInfo.setDockerCpusetCpus(this.dockerCpusetCpus);
+        projectDeployInfo.setDockerMemory(this.dockerMemory);
+        projectDeployInfo.setDockerMemorySwap(this.getDockerMemorySwap);
+        projectDeployInfo.setDockerMemoryReservation(this.dockerMemoryReservation);
+        projectDeployInfo.setDockerMemorySwappiness(this.dockerMemorySwappiness);
+//        projectDeployInfo.setIsValid(this.);
+//        projectDeployInfo.setIsDelete();
+//        projectDeployInfo.setCreateTime();
+//        projectDeployInfo.setCreateUser();
+//        projectDeployInfo.setUpdateTime();
+//        projectDeployInfo.setUpdateUser();
+
         return projectDeployInfo;
+    }
+
+    public String getNexusTargetUrl() {
+        return nexusTargetUrl;
+    }
+
+    public void setNexusTargetUrl(String nexusTargetUrl) {
+        this.nexusTargetUrl = nexusTargetUrl;
     }
 }

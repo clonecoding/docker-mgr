@@ -38,4 +38,15 @@ public class DeployPreController {
     public ResultVo create(@RequestBody DeployInfoDto deployInfoDto) {
         return deployService.saveOrUpdate(deployInfoDto);
     }
+
+    @PostMapping("/clone")
+    public ResultVo clone(@RequestBody DeployInfoDto deployInfoDto) {
+        return deployService.clone(deployInfoDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResultVo delete(@PathVariable("id") String id) {
+        return deployService.delete(id);
+    }
+
 }

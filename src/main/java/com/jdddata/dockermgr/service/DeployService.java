@@ -17,4 +17,7 @@ public interface DeployService {
 
     ResultVo saveOrUpdate(DeployInfoDto deployInfoDto);
 
+    ResultVo clone(DeployInfoDto deployInfoDto);
+
+    ResultVo delete(String id);
 }

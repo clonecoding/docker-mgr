@@ -38,7 +38,6 @@ public class ContainerInfoJob {
     @Autowired
     private ContainerService containerService;
 
-    //TODO
     @Scheduled(cron = "0 0/5 * * * *")
     public void updateContainerInfo() {
         /*ip+containerName*/

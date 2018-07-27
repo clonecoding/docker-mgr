@@ -48,10 +48,27 @@ public class DeployServiceImpl implements DeployService {
         if (Objects.isNull(deployInfoDto.getId())) {
             projectDeployInfoMapper.insertSelective(deployInfoDto.convert());
         } else {
-            //ProjectDeployInfo deployInfo = projectDeployInfoMapper.selectByPrimaryKey(deployInfoDto.getId());
-            //todo
             projectDeployInfoMapper.updateByPrimaryKeySelective(deployInfoDto.convert());
         }
         return ResultGenerator.getSuccess();
+    }
+
+    @Override
+    public ResultVo clone(DeployInfoDto deployInfoDto) {
+        ProjectDeployInfo projectDeployInfo = projectDeployInfoMapper.selectByPrimaryKey(deployInfoDto.getId());
+
+        projectDeployInfo.setId(null);
+        projectDeployInfo.setDockerContainerName(deployInfoDto.getDockerContainerName());
+        int i = projectDeployInfoMapper.insertSelective(projectDeployInfo);
+        if (i < 0) {
+            return ResultGenerator.getSuccess("failed");
+        }
+        return ResultGenerator.getSuccess("ok");
+    }
+
+    @Override
+    public ResultVo delete(String id) {
+        projectDeployInfoMapper.deleteByPrimaryKey(Long.valueOf(id));
+        return ResultGenerator.getSuccess("ok");
     }
 }
