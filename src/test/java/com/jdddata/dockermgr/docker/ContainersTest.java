@@ -1,11 +1,11 @@
 package com.jdddata.dockermgr.docker;
 
 import com.alibaba.fastjson.JSON;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
+import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.ContainerCreateDto;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.HostConfig;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
-import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
-import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -50,11 +50,20 @@ public class ContainersTest {
 
 
     @Test
+    public void stats() {
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("stream", false);
+        HttpResponse httpResponse = HttpClientUtils.getWithCert("https://10.33.94.34:2376/containers/webdav/stats", params);
+        System.out.println(httpResponse.getBody());
+    }
+
+
+    @Test
     public void getContainerLogs() {
-        Map<String,Object> params =new HashMap<>(16);
-        params.put("follow",true);
-        params.put("stdout",true);
-        HttpResponse response = HttpClientUtils.getWithCert("https://10.33.94.5:2376/containers/dac-download-core/logs",params);
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("follow", true);
+        params.put("stdout", true);
+        HttpResponse response = HttpClientUtils.getWithCert("https://10.33.94.5:2376/containers/dac-download-core/logs", params);
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
         String body = response.getBody();
