@@ -3,7 +3,7 @@
 <mapper namespace="com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper" >
   <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="deploy_id" property="deployId" jdbcType="BIGINT" />
+    <result column="host_ip" property="hostIp" jdbcType="VARCHAR" />
     <result column="container_id" property="containerId" jdbcType="VARCHAR" />
     <result column="container_name" property="containerName" jdbcType="VARCHAR" />
     <result column="image_name" property="imageName" jdbcType="VARCHAR" />
@@ -12,7 +12,7 @@
     <result column="command" property="command" jdbcType="VARCHAR" />
     <result column="container_create_time" property="containerCreateTime" jdbcType="TIMESTAMP" />
     <result column="container_ports" property="containerPorts" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="container_state" property="containerState" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="network_mode" property="networkMode" jdbcType="VARCHAR" />
     <result column="is_valid" property="isValid" jdbcType="INTEGER" />
@@ -23,9 +23,9 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, deploy_id, container_id, container_name, image_name, image_tag, image_id, command, 
-    container_create_time, container_ports, state, status, network_mode, is_valid, is_delete, 
-    create_time, create_user, update_time, update_user
+    id, host_ip, container_id, container_name, image_name, image_tag, image_id, command, 
+    container_create_time, container_ports, container_state, status, network_mode, is_valid, 
+    is_delete, create_time, create_user, update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -38,17 +38,17 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
-    insert into container_info (id, deploy_id, container_id, 
+    insert into container_info (id, host_ip, container_id, 
       container_name, image_name, image_tag, 
       image_id, command, container_create_time, 
-      container_ports, state, status, 
+      container_ports, container_state, status, 
       network_mode, is_valid, is_delete, 
       create_time, create_user, update_time, 
       update_user)
-    values (#{id,jdbcType=BIGINT}, #{deployId,jdbcType=BIGINT}, #{containerId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, #{containerId,jdbcType=VARCHAR}, 
       #{containerName,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR}, #{imageTag,jdbcType=VARCHAR}, 
       #{imageId,jdbcType=VARCHAR}, #{command,jdbcType=VARCHAR}, #{containerCreateTime,jdbcType=TIMESTAMP}, 
-      #{containerPorts,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{containerPorts,jdbcType=VARCHAR}, #{containerState,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{networkMode,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateUser,jdbcType=VARCHAR})
@@ -59,8 +59,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="deployId != null" >
-        deploy_id,
+      <if test="hostIp != null" >
+        host_ip,
       </if>
       <if test="containerId != null" >
         container_id,
@@ -86,8 +86,8 @@
       <if test="containerPorts != null" >
         container_ports,
       </if>
-      <if test="state != null" >
-        state,
+      <if test="containerState != null" >
+        container_state,
       </if>
       <if test="status != null" >
         status,
@@ -118,8 +118,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="deployId != null" >
-        #{deployId,jdbcType=BIGINT},
+      <if test="hostIp != null" >
+        #{hostIp,jdbcType=VARCHAR},
       </if>
       <if test="containerId != null" >
         #{containerId,jdbcType=VARCHAR},
@@ -145,8 +145,8 @@
       <if test="containerPorts != null" >
         #{containerPorts,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=VARCHAR},
+      <if test="containerState != null" >
+        #{containerState,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
@@ -177,8 +177,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
     update container_info
     <set >
-      <if test="deployId != null" >
-        deploy_id = #{deployId,jdbcType=BIGINT},
+      <if test="hostIp != null" >
+        host_ip = #{hostIp,jdbcType=VARCHAR},
       </if>
       <if test="containerId != null" >
         container_id = #{containerId,jdbcType=VARCHAR},
@@ -204,8 +204,8 @@
       <if test="containerPorts != null" >
         container_ports = #{containerPorts,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=VARCHAR},
+      <if test="containerState != null" >
+        container_state = #{containerState,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
@@ -236,7 +236,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
     update container_info
-    set deploy_id = #{deployId,jdbcType=BIGINT},
+    set host_ip = #{hostIp,jdbcType=VARCHAR},
       container_id = #{containerId,jdbcType=VARCHAR},
       container_name = #{containerName,jdbcType=VARCHAR},
       image_name = #{imageName,jdbcType=VARCHAR},
@@ -245,7 +245,7 @@
       command = #{command,jdbcType=VARCHAR},
       container_create_time = #{containerCreateTime,jdbcType=TIMESTAMP},
       container_ports = #{containerPorts,jdbcType=VARCHAR},
-      state = #{state,jdbcType=VARCHAR},
+      container_state = #{containerState,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       network_mode = #{networkMode,jdbcType=VARCHAR},
       is_valid = #{isValid,jdbcType=INTEGER},

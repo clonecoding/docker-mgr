@@ -19,6 +19,12 @@ public class ServerMgr {
 
     private String password;
 
+    private Integer vcpus;
+
+    private Integer memory;
+
+    private Integer swap;
+
     public String getId() {
         return id;
     }
@@ -81,5 +87,29 @@ public class ServerMgr {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public Integer getVcpus() {
+        return vcpus;
+    }
+
+    public void setVcpus(Integer vcpus) {
+        this.vcpus = vcpus;
+    }
+
+    public Integer getMemory() {
+        return memory;
+    }
+
+    public void setMemory(Integer memory) {
+        this.memory = memory;
+    }
+
+    public Integer getSwap() {
+        return swap;
+    }
+
+    public void setSwap(Integer swap) {
+        this.swap = swap;
     }
 }
