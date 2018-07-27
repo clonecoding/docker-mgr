@@ -36,6 +36,11 @@ public class DeployPreController {
         return deployService.fetchPreInfo(projectId);
     }
 
+    @GetMapping("/list")
+    public ResultVo list() {
+        return deployService.list();
+    }
+
     @PostMapping("/nexus")
     public ResultVo nexus(@RequestBody GitDto gitDto) {
         return pomParseService.parseFromGit(gitDto);

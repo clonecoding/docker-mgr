@@ -30,7 +30,7 @@ public class DeployInfoDto {
 
     private String dockerMemory;
 
-    private String getDockerMemorySwap;
+    private String dockerMemorySwap;
 
     private String dockerMemoryReservation;
 
@@ -128,12 +128,12 @@ public class DeployInfoDto {
         this.dockerMemory = dockerMemory;
     }
 
-    public String getGetDockerMemorySwap() {
-        return getDockerMemorySwap;
+    public String getDockerMemorySwap() {
+        return dockerMemorySwap;
     }
 
-    public void setGetDockerMemorySwap(String getDockerMemorySwap) {
-        this.getDockerMemorySwap = getDockerMemorySwap;
+    public void setDockerMemorySwap(String dockerMemorySwap) {
+        this.dockerMemorySwap = dockerMemorySwap;
     }
 
     public String getDockerMemoryReservation() {
@@ -208,7 +208,7 @@ public class DeployInfoDto {
         projectDeployInfo.setDockerLink(this.dockerLink);
         projectDeployInfo.setDockerCpusetCpus(this.dockerCpusetCpus);
         projectDeployInfo.setDockerMemory(this.dockerMemory);
-        projectDeployInfo.setDockerMemorySwap(this.getDockerMemorySwap);
+        projectDeployInfo.setDockerMemorySwap(this.dockerMemorySwap);
         projectDeployInfo.setDockerMemoryReservation(this.dockerMemoryReservation);
         projectDeployInfo.setDockerMemorySwappiness(this.dockerMemorySwappiness);
 //        projectDeployInfo.setIsValid(this.);

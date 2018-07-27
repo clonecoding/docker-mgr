@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
@@ -22,6 +23,9 @@ public class DeployServiceImpl implements DeployService {
 
     @Autowired
     private ProjectDeployInfoMapper projectDeployInfoMapper;
+
+    @Autowired
+    private ProjectDeployInfoCMapper projectDeployInfoCMapper;
 
     @Autowired
     private GitService gitService;
@@ -70,5 +74,10 @@ public class DeployServiceImpl implements DeployService {
     public ResultVo delete(String id) {
         projectDeployInfoMapper.deleteByPrimaryKey(Long.valueOf(id));
         return ResultGenerator.getSuccess("ok");
+    }
+
+    @Override
+    public ResultVo list() {
+        return ResultGenerator.getSuccessDto(projectDeployInfoCMapper.listAll());
     }
 }
