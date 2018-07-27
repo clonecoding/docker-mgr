@@ -5,7 +5,7 @@ import java.util.Date;
 public class ContainerInfo {
     private Long id;
 
-    private Long deployId;
+    private String hostIp;
 
     private String containerId;
 
@@ -23,7 +23,7 @@ public class ContainerInfo {
 
     private String containerPorts;
 
-    private String state;
+    private String containerState;
 
     private String status;
 
@@ -49,12 +49,12 @@ public class ContainerInfo {
         this.id = id;
     }
 
-    public Long getDeployId() {
-        return deployId;
+    public String getHostIp() {
+        return hostIp;
     }
 
-    public void setDeployId(Long deployId) {
-        this.deployId = deployId;
+    public void setHostIp(String hostIp) {
+        this.hostIp = hostIp == null ? null : hostIp.trim();
     }
 
     public String getContainerId() {
@@ -121,12 +121,12 @@ public class ContainerInfo {
         this.containerPorts = containerPorts == null ? null : containerPorts.trim();
     }
 
-    public String getState() {
-        return state;
+    public String getContainerState() {
+        return containerState;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setContainerState(String containerState) {
+        this.containerState = containerState == null ? null : containerState.trim();
     }
 
     public String getStatus() {
