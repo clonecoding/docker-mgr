@@ -18,6 +18,11 @@ public class DeployPreController {
     @Autowired
     private PomParseService pomParseService;
 
+    /**
+     * 获取版本分支信息
+     * @param projectId
+     * @return
+     */
     @GetMapping("/{projectId}/info")
     public ResultVo info(@PathVariable String projectId) {
 

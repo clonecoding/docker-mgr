@@ -43,7 +43,7 @@ public class ContainerInfoJob {
     public void updateContainerInfo() {
         /*ip+containerName*/
         Map<String, ContainerListDto> containerListDtoMap = new HashMap<>(16);
-        List<ProjectDeployInfo> deployInfos = projectDeployInfoCMapper.list();
+        List<ProjectDeployInfo> deployInfos = projectDeployInfoCMapper.listAll();
         for (ProjectDeployInfo item : deployInfos) {
             ContainerListDto dto = containerListDtoMap.get(item.getHostIp() + item.getDockerContainerName());
             if (Objects.isNull(dto)) {
