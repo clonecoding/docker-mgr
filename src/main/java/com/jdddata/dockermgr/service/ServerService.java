@@ -7,4 +7,5 @@ public interface ServerService {
     ResultVo addServer(ServerInfoDto serverInfoDto);
 
     ResultVo list();
+
 }

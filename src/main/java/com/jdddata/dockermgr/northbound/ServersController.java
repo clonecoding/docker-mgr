@@ -25,4 +25,5 @@ public class ServersController {
     public ResultVo getList() {
         return serverService.list();
     }
+
 }
