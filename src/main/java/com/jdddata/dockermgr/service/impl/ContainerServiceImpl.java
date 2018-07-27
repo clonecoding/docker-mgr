@@ -32,7 +32,6 @@ public class ContainerServiceImpl implements ContainerService {
 
     @Override
     public ResultVo<ContainerDetailInfo> list() {
-        //TODO
         List<ContainerDetailInfo> containerDetailInfos = containerInfoCMapper.listAll();
         return ResultGenerator.getSuccess(containerDetailInfos);
     }
@@ -50,7 +49,6 @@ public class ContainerServiceImpl implements ContainerService {
             return false;
         }
 
-        //TODO
         List<ContainerInfo> containerInfos = containerInfoCMapper.selectByDeployId(containerInfo.getDeployId());
         if (Objects.isNull(containerInfos) || containerInfos.size() == 0) {
             containerInfoMapper.insertSelective(containerInfo);

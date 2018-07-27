@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,6 +94,7 @@ public class GitServiceImpl implements GitService {
             Map<String, List<String>> stringListMap = new ConcurrentHashMap<>();
             stringListMap.put("branch", convert(JSONObject.parseArray(branchstr, Branch.class)));
             stringListMap.put("tag", convert(JSONObject.parseArray(tagStr, Branch.class)));
+            stringListMap.put("url", Arrays.asList(url));
             return ResultGenerator.getSuccessDto(stringListMap);
         } catch (InterruptedException e) {
             e.printStackTrace();
