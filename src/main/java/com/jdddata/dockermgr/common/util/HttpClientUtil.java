@@ -1,15 +1,12 @@
 package com.jdddata.dockermgr.common.util;
 
-import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ssl.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,15 +23,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.security.*;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @Author: zhangheng(赛事)
@@ -90,7 +88,7 @@ public class HttpClientUtil {
     }
 
     public static String doPostWithHttps(String apiUrl, String context) {
-        return doPostWithHttps(apiUrl, context, "UTF-8", null);
+        return doPostWithHttps(apiUrl, context, null);
     }
 
     /**
@@ -130,16 +128,16 @@ public class HttpClientUtil {
      * @param context
      * @return
      */
-    public static String doPostWithHttps(String apiUrl, String context, String charset, String contentType) {
+    public static String doPostWithHttps(String apiUrl, String context, String contentType) {
         CloseableHttpClient httpClient = createClientSSLDefault();
         String httpStr = null;
         CloseableHttpResponse response = null;
         HttpPost httpPost = new HttpPost(apiUrl);
         try {
             httpPost.setConfig(requestConfig);
-            String encoding = DatatypeConverter.printBase64Binary("gezhiwei:123456".getBytes("UTF-8"));
+            String encoding = DatatypeConverter.printBase64Binary("gezhiwei:123456".getBytes(DEFAULTCHARSET));
             httpPost.setHeader("Authorization", "Basic " + encoding);
-            StringEntity stringEntity = new StringEntity(context, Charset.forName(charset));
+            StringEntity stringEntity = new StringEntity(context, Charset.forName(DEFAULTCHARSET));
             if (!StringUtils.isEmpty(contentType)) {
                 //post传输是json格式数据
                 stringEntity.setContentType(contentType);
@@ -147,7 +145,7 @@ public class HttpClientUtil {
             httpPost.setEntity(stringEntity);
             response = httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, charset);
+            httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -298,5 +296,5 @@ public class HttpClientUtil {
         }
         return pairList;
     }
-    
+
 }
