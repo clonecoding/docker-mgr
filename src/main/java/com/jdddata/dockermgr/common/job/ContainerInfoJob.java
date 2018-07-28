@@ -77,7 +77,7 @@ public class ContainerInfoJob {
         }
         if(map.size() >0){
             map.forEach((key,value) -> {
-                containerInfoCMapper.updateValid(value.getId(),1);
+                containerInfoCMapper.updateDelete(value.getId(),1);
             });
         }
         log.info("=====>>>>>同步docker message");

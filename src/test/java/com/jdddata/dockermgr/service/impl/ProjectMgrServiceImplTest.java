@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.service.impl;
 
 
+import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
 import com.jdddata.dockermgr.dao.mapper.ServerMgrMapper;
 import com.jdddata.dockermgr.service.ProjectMgrService;
@@ -23,13 +24,19 @@ import java.util.List;
 public class ProjectMgrServiceImplTest {
     @Autowired
     ProjectMgrService projectMgrService;
-
-
+    @Autowired
+    ContainerInfoCMapper containerInfoCMapper;
     @Autowired
     ServerMgrCMapper serverMgrCMapper;
     @Test
     public void findAll(){
         List<String> ips= serverMgrCMapper.getIps();
         System.out.println(ips);
+    }
+
+    @Test
+    public void test2(){
+        containerInfoCMapper.updateDelete(3L,1);
+
     }
 }

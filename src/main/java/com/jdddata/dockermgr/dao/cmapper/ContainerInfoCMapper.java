@@ -12,5 +12,5 @@ public interface ContainerInfoCMapper {
 
     List<ContainerInfo> listAll();
 
-    int updateValid(Long id,Integer valid);
+    int updateDelete(@Param("id")Long id,@Param("delete")Integer delete);
 }
