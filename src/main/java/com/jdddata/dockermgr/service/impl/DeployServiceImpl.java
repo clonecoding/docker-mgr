@@ -114,4 +114,15 @@ public class DeployServiceImpl implements DeployService {
     public ResultVo list() {
         return ResultGenerator.getSuccessDto(projectDeployInfoCMapper.listAll());
     }
+
+    /**
+     * @return
+     * @author zhangheng(赛事)
+     * @description 关联详情表
+     */
+    @Override
+    public ResultVo listDetail() {
+        projectDeployInfoCMapper.listDetail();
+        return null;
+    }
 }

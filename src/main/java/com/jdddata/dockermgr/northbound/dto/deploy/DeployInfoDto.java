@@ -23,6 +23,8 @@ public class DeployInfoDto {
 
     private String gitVersion;
 
+    private Integer isValid;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +87,13 @@ public class DeployInfoDto {
 
     public void setDeployEnv(Integer deployEnv) {
         this.deployEnv = deployEnv;
+    }
+
+    public Integer getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(Integer isValid) {
+        this.isValid = isValid;
     }
 }

@@ -79,7 +79,6 @@ public class ServerInfoDto {
 
     public ServerMgr convert() {
         ServerMgr serverMgr = new ServerMgr();
-        serverMgr.setId(UUID.randomUUID().toString());
         serverMgr.setTypename(typeName);
         serverMgr.setAddtime(new Date());
         serverMgr.setBelong(this.belong);

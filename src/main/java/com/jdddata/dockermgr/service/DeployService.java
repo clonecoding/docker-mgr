@@ -22,4 +22,11 @@ public interface DeployService {
     ResultVo delete(String id);
 
     ResultVo list();
+
+    /**
+     * @author zhangheng(赛事)
+     * @description 关联详情表
+     * @return
+     */
+    ResultVo listDetail();
 }
