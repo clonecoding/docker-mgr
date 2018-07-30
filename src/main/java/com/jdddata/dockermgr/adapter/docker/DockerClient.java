@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public final class DockerClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DockerClient.class);
 
     public static HttpResponse createContainer(String serverInfo, String name, ContainerCreateDto containerCreateDto) {
         String url = MessageFormat.format(DockerHttpContstants.DOCKER_CONTAINER_CREATE, serverInfo, name);

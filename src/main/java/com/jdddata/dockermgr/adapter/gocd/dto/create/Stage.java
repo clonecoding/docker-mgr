@@ -1,5 +1,5 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto;
+package com.jdddata.dockermgr.adapter.gocd.dto.create;
 
 import java.util.List;
 

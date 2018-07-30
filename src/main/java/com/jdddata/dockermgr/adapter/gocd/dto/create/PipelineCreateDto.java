@@ -1,9 +1,9 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto;
+package com.jdddata.dockermgr.adapter.gocd.dto.create;
 
 import java.util.List;
 
-public class PipelineDto {
+public class PipelineCreateDto {
 
     private String labelTemplate;
     private String lockBehavior;

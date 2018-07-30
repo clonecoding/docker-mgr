@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface ContainerInfoCMapper {
+public interface ContainerInfoCMapper  {
 
     List<ContainerInfo> selectByDeployId(@Param("deployId") Long deployId);
 
