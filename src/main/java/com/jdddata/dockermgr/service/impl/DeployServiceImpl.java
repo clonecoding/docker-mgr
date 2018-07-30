@@ -1,8 +1,11 @@
 package com.jdddata.dockermgr.service.impl;
 
+import com.jdddata.dockermgr.adapter.gocd.GocdDeployPool;
 import com.jdddata.dockermgr.common.vo.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.ResultVo;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoDetailMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
@@ -14,6 +17,8 @@ import com.jdddata.dockermgr.service.GitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -57,17 +62,29 @@ public class DeployServiceImpl implements DeployService {
     @Override
     public ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) {
         // 如果部署id不为空，表示是更新操作。
+        ProjectDeployInfo projectDeployInfo = null;
+        List<ProjectDeployInfoDetail> projectDeployInfoDetails = new ArrayList<>();
         if (Objects.isNull(deployInfoDto.getId())) {
             for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDto.getDeployInfoDetailDtoList()) {
-                projectDeployInfoDetailMapper.updateByPrimaryKeySelective(deployInfoDetailDto.convertoEntity(deployInfoDto.getId()));
+                ProjectDeployInfoDetail projectDeployInfoDetail = deployInfoDetailDto.convertoEntity(deployInfoDto.getId());
+                projectDeployInfoDetails.add(projectDeployInfoDetail);
+                projectDeployInfoDetailMapper.updateByPrimaryKeySelective(projectDeployInfoDetail);
             }
-            projectDeployInfoMapper.updateByPrimaryKeySelective(deployInfoDto.convert());
+            ProjectDeployInfo deployInfo = deployInfoDto.convert();
+            projectDeployInfo = deployInfo;
+            projectDeployInfoMapper.updateByPrimaryKeySelective(deployInfo);
         } else {
-            int i = projectDeployInfoMapper.insertSelective(deployInfoDto.convert());
+            ProjectDeployInfo deployInfo = deployInfoDto.convert();
+            int i = projectDeployInfoMapper.insertSelective(deployInfo);
+            deployInfo.setId(Long.valueOf(i));
             for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDto.getDeployInfoDetailDtoList()) {
-                projectDeployInfoDetailMapper.insertSelective(deployInfoDetailDto.convertoEntity(Long.valueOf(i)));
+                ProjectDeployInfoDetail projectDeployInfoDetail = deployInfoDetailDto.convertoEntity(Long.valueOf(i));
+                projectDeployInfoDetails.add(projectDeployInfoDetail);
+                projectDeployInfoDetailMapper.insertSelective(projectDeployInfoDetail);
             }
         }
+
+        GocdDeployPool.initProject(projectDeployInfo,projectDeployInfoDetails);
         return ResultGenerator.getSuccess();
     }
 
