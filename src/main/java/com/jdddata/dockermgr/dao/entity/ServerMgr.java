@@ -3,7 +3,7 @@ package com.jdddata.dockermgr.dao.entity;
 import java.util.Date;
 
 public class ServerMgr {
-    private String id;
+    private Long id;
 
     private String typename;
 
@@ -25,12 +25,12 @@ public class ServerMgr {
 
     private Integer swap;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTypename() {
