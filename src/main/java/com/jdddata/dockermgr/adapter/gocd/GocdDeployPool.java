@@ -1,5 +1,6 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
+import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
@@ -30,6 +31,7 @@ public class GocdDeployPool {
 
     private static void processTest(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
         //创建maven pipeline
+        MavenPipeline mavenPipeline = new MavenPipeline(projectDeployInfo,projectDeployInfoDetails,projectMgr);
 
     }
 
