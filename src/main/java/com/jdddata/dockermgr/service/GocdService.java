@@ -1,7 +1,5 @@
 package com.jdddata.dockermgr.service;
 
-import com.jdddata.dockermgr.adapter.gocd.dto.create.PipelineCreateDto;
-
 /**
  * @Author: zhangheng(赛事)
  * @Description:

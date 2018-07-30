@@ -1,5 +1,6 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto.create;
+package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
+
 
 public class Approval {
 

@@ -83,8 +83,9 @@ public class DeployServiceImpl implements DeployService {
                 projectDeployInfoDetailMapper.insertSelective(projectDeployInfoDetail);
             }
         }
-
-        GocdDeployPool.initProject(projectDeployInfo,projectDeployInfoDetails);
+        Long projectId = projectDeployInfo.getProjectId();
+        ProjectMgr projectMgr = projectMgrMapper.selectByPrimaryKey(projectId);
+        GocdDeployPool.initProject(projectDeployInfo,projectDeployInfoDetails,projectMgr);
         return ResultGenerator.getSuccess();
     }
 

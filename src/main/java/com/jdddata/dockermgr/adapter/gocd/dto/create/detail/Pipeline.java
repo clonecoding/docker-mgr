@@ -1,9 +1,9 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto.create;
+package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
 
 import java.util.List;
 
-public class PipelineCreateDto {
+public class Pipeline {
 
     private String labelTemplate;
     private String lockBehavior;
@@ -13,8 +13,6 @@ public class PipelineCreateDto {
     private List<EnvironmentVariable> environmentVariables = null;
     private List<Material> materials = null;
     private List<Stage> stages = null;
-    private Object trackingTool;
-    private Object timer;
 
     public String getLabelTemplate() {
         return labelTemplate;
@@ -78,22 +76,6 @@ public class PipelineCreateDto {
 
     public void setStages(List<Stage> stages) {
         this.stages = stages;
-    }
-
-    public Object getTrackingTool() {
-        return trackingTool;
-    }
-
-    public void setTrackingTool(Object trackingTool) {
-        this.trackingTool = trackingTool;
-    }
-
-    public Object getTimer() {
-        return timer;
-    }
-
-    public void setTimer(Object timer) {
-        this.timer = timer;
     }
 
 }

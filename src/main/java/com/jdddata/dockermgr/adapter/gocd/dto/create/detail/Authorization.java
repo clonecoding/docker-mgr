@@ -1,13 +1,12 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto.create;
+package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Authorization {
 
-    private List<Object> roles = new ArrayList<>();
-    private List<Object> users = new ArrayList<>();
+    private List<Object> roles = null;
+    private List<Object> users = null;
 
     public List<Object> getRoles() {
         return roles;

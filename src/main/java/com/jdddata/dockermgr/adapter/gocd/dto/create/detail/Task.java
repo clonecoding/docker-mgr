@@ -1,10 +1,11 @@
 
-package com.jdddata.dockermgr.adapter.gocd.dto.create;
+package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
 
-public class Material {
+
+public class Task {
 
     private String type;
-    private Attributes attributes;
+    private Attributes_ attributes;
 
     public String getType() {
         return type;
@@ -14,11 +15,11 @@ public class Material {
         this.type = type;
     }
 
-    public Attributes getAttributes() {
+    public Attributes_ getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Attributes attributes) {
+    public void setAttributes(Attributes_ attributes) {
         this.attributes = attributes;
     }
 
