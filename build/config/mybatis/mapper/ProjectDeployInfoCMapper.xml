@@ -3,22 +3,9 @@
 <mapper namespace="com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper">
     <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-        <result column="host_ip" property="hostIp" jdbcType="VARCHAR" />
-        <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR" />
-        <result column="deploy_mode" property="deployMode" jdbcType="INTEGER" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
         <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
-        <result column="nexus_target_url" property="nexusTargetUrl" jdbcType="VARCHAR" />
-        <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR" />
-        <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR" />
-        <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR" />
-        <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR" />
-        <result column="docker_link" property="dockerLink" jdbcType="VARCHAR" />
-        <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR" />
-        <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR" />
-        <result column="docker_memory_swap" property="dockerMemorySwap" jdbcType="VARCHAR" />
-        <result column="docker_memory_reservation" property="dockerMemoryReservation" jdbcType="VARCHAR" />
-        <result column="docker_memory_swappiness" property="dockerMemorySwappiness" jdbcType="VARCHAR" />
+        <result column="deploy_env" property="deployEnv" jdbcType="INTEGER" />
         <result column="is_valid" property="isValid" jdbcType="INTEGER" />
         <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -27,11 +14,7 @@
         <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, project_id, host_ip, docker_env, deploy_mode, git_version, nexus_target_url,
-    docker_container_name, docker_image_name, docker_entrypoint, docker_mount, docker_link,
-    docker_cpuset_cpus, docker_memory, docker_memory_swap, docker_memory_reservation,
-    docker_memory_swappiness, is_valid, is_delete, create_time, create_user, update_time,
-    update_user
+    id, project_id, git_version, deploy_env,is_valid, is_delete, create_time, create_user, update_time,update_user
   </sql>
     <select id="listAll"  resultMap="BaseResultMap">
         select
