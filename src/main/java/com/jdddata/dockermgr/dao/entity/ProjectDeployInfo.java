@@ -9,6 +9,8 @@ public class ProjectDeployInfo {
 
     private String gitVersion;
 
+    private Integer deployEnv;
+
     private Integer isValid;
 
     private Integer isDelete;
@@ -43,6 +45,14 @@ public class ProjectDeployInfo {
 
     public void setGitVersion(String gitVersion) {
         this.gitVersion = gitVersion == null ? null : gitVersion.trim();
+    }
+
+    public Integer getDeployEnv() {
+        return deployEnv;
+    }
+
+    public void setDeployEnv(Integer deployEnv) {
+        this.deployEnv = deployEnv;
     }
 
     public Integer getIsValid() {

@@ -223,6 +223,7 @@ public class DeployInfoDetailDto {
         projectDeployInfoDetail.setDockerMemorySwap(this.dockerMemorySwap);
         projectDeployInfoDetail.setDockerMemoryReservation(this.dockerMemoryReservation);
         projectDeployInfoDetail.setDockerMemorySwappiness(this.dockerMemorySwappiness);
+        projectDeployInfoDetail.setDockerfileId(Long.valueOf(this.dockerfileId));
 //        projectDeployInfoDetail.setIsValid(this.dis);
 //        projectDeployInfoDetail.setIsDelete();
 //        projectDeployInfoDetail.setCreateTime();
@@ -231,5 +232,13 @@ public class DeployInfoDetailDto {
 //        projectDeployInfoDetail.setUpdateUser();
 //        projectDeployInfoDetail.
         return projectDeployInfoDetail;
+    }
+
+    public String getDockerfileId() {
+        return dockerfileId;
+    }
+
+    public void setDockerfileId(String dockerfileId) {
+        this.dockerfileId = dockerfileId;
     }
 }

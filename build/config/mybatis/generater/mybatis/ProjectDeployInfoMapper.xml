@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="project_id" property="projectId" jdbcType="BIGINT" />
     <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
+    <result column="deploy_env" property="deployEnv" jdbcType="INTEGER" />
     <result column="is_valid" property="isValid" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -13,8 +14,8 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, project_id, git_version, is_valid, is_delete, create_time, create_user, update_time, 
-    update_user
+    id, project_id, git_version, deploy_env, is_valid, is_delete, create_time, create_user, 
+    update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -28,13 +29,13 @@
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
     insert into project_deploy_info (id, project_id, git_version, 
-      is_valid, is_delete, create_time, 
-      create_user, update_time, update_user
-      )
+      deploy_env, is_valid, is_delete, 
+      create_time, create_user, update_time, 
+      update_user)
     values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{gitVersion,jdbcType=VARCHAR}, 
-      #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
-      )
+      #{deployEnv,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
     insert into project_deploy_info
@@ -47,6 +48,9 @@
       </if>
       <if test="gitVersion != null" >
         git_version,
+      </if>
+      <if test="deployEnv != null" >
+        deploy_env,
       </if>
       <if test="isValid != null" >
         is_valid,
@@ -77,6 +81,9 @@
       <if test="gitVersion != null" >
         #{gitVersion,jdbcType=VARCHAR},
       </if>
+      <if test="deployEnv != null" >
+        #{deployEnv,jdbcType=INTEGER},
+      </if>
       <if test="isValid != null" >
         #{isValid,jdbcType=INTEGER},
       </if>
@@ -106,6 +113,9 @@
       <if test="gitVersion != null" >
         git_version = #{gitVersion,jdbcType=VARCHAR},
       </if>
+      <if test="deployEnv != null" >
+        deploy_env = #{deployEnv,jdbcType=INTEGER},
+      </if>
       <if test="isValid != null" >
         is_valid = #{isValid,jdbcType=INTEGER},
       </if>
@@ -131,6 +141,7 @@
     update project_deploy_info
     set project_id = #{projectId,jdbcType=BIGINT},
       git_version = #{gitVersion,jdbcType=VARCHAR},
+      deploy_env = #{deployEnv,jdbcType=INTEGER},
       is_valid = #{isValid,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

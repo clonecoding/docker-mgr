@@ -10,6 +10,12 @@ public class DeployInfoDto {
 
     private List<DeployInfoDetailDto> deployInfoDetailDtoList;
 
+    /**
+     * 0:测试
+     * 1：生产
+     */
+    private Integer deployEnv;
+
     private String projectId;
 
 
@@ -62,6 +68,7 @@ public class DeployInfoDto {
         projectDeployInfo.setId(this.id);
         projectDeployInfo.setProjectId(Long.valueOf(this.projectId));
         projectDeployInfo.setGitVersion(this.gitVersion);
+        projectDeployInfo.setDeployEnv(this.deployEnv);
 //        projectDeployInfo.setIsValid();
 //        projectDeployInfo.setIsDelete();
 //        projectDeployInfo.setCreateTime();
@@ -70,5 +77,13 @@ public class DeployInfoDto {
 //        projectDeployInfo.setUpdateUser();
         return projectDeployInfo;
 
+    }
+
+    public Integer getDeployEnv() {
+        return deployEnv;
+    }
+
+    public void setDeployEnv(Integer deployEnv) {
+        this.deployEnv = deployEnv;
     }
 }
