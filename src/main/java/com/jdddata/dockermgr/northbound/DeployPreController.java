@@ -48,45 +48,41 @@ public class DeployPreController {
 
     @PostMapping("/saveOrUpdate")
     public ResultVo create(@RequestBody DeployInfoDto deployInfoDto) {
-        try {
-            checkDto(deployInfoDto);
-            return deployService.saveOrUpdate(deployInfoDto);
-        } catch (ValidatorException e) {
-            return ExceptionUtil.getFail(e);
-        }
+        //            checkDto(deployInfoDto);
+        return deployService.saveOrUpdate(deployInfoDto);
     }
 
 
-    @PostMapping("/clone")
-    public ResultVo clone(@RequestBody DeployInfoDto deployInfoDto) {
-        return deployService.clone(deployInfoDto);
-    }
+//    @PostMapping("/clone")
+//    public ResultVo clone(@RequestBody DeployInfoDto deployInfoDto) {
+//        return deployService.clone(deployInfoDto);
+//    }
 
     @DeleteMapping("/delete/{id}")
     public ResultVo delete(@PathVariable("id") String id) {
         return deployService.delete(id);
     }
 
-    private void checkDto(DeployInfoDto deployInfoDto) throws ValidatorException {
-        if (!deployInfoDto.getDockerContainerName().matches(CONTAINER_NAME_REX)) {
-            throw new ValidatorException("docker容器名称不允许特殊字符 长度在4-25个字符之间");
-        }
-
-        /**
-         * 这里最好结合server的info来看
-         */
-        if (null != deployInfoDto.getDockerCpusetCpus() && !(deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_1) || deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_2))) {
-            throw new ValidatorException("docker指定cpu运行参数不合法");
-        }
-        if (deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_2)) {
-            String[] split = deployInfoDto.getDockerCpusetCpus().split("-");
-            if (Integer.parseInt(split[0]) > Integer.parseInt(split[1])) {
-                throw new ValidatorException("docker指定cpu运行参数不合法");
-            }
-        }
-
-        if (!DigitUtil.isDigit(deployInfoDto.getDockerMemory())) {
-            throw new ValidatorException("docker指定内存运行参数不合法");
-        }
-    }
+//    private void checkDto(DeployInfoDto deployInfoDto) throws ValidatorException {
+//        if (!deployInfoDto.getDockerContainerName().matches(CONTAINER_NAME_REX)) {
+//            throw new ValidatorException("docker容器名称不允许特殊字符 长度在4-25个字符之间");
+//        }
+//
+//        /**
+//         * 这里最好结合server的info来看
+//         */
+//        if (null != deployInfoDto.getDockerCpusetCpus() && !(deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_1) || deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_2))) {
+//            throw new ValidatorException("docker指定cpu运行参数不合法");
+//        }
+//        if (deployInfoDto.getDockerCpusetCpus().matches(CPUS_REX_2)) {
+//            String[] split = deployInfoDto.getDockerCpusetCpus().split("-");
+//            if (Integer.parseInt(split[0]) > Integer.parseInt(split[1])) {
+//                throw new ValidatorException("docker指定cpu运行参数不合法");
+//            }
+//        }
+//
+//        if (!DigitUtil.isDigit(deployInfoDto.getDockerMemory())) {
+//            throw new ValidatorException("docker指定内存运行参数不合法");
+//        }
+//    }
 }

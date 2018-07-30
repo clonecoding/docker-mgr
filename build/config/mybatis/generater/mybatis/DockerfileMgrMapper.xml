@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.DockerfileMgrMapper" >
+  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dockerfile_name" property="dockerfileName" jdbcType="VARCHAR" />
+    <result column="dockerfile_url" property="dockerfileUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dockerfile_name, dockerfile_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dockerfile_mgr
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dockerfile_mgr
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    insert into dockerfile_mgr (id, dockerfile_name, dockerfile_url
+      )
+    values (#{id,jdbcType=BIGINT}, #{dockerfileName,jdbcType=VARCHAR}, #{dockerfileUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    insert into dockerfile_mgr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dockerfileName != null" >
+        dockerfile_name,
+      </if>
+      <if test="dockerfileUrl != null" >
+        dockerfile_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dockerfileName != null" >
+        #{dockerfileName,jdbcType=VARCHAR},
+      </if>
+      <if test="dockerfileUrl != null" >
+        #{dockerfileUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    update dockerfile_mgr
+    <set >
+      <if test="dockerfileName != null" >
+        dockerfile_name = #{dockerfileName,jdbcType=VARCHAR},
+      </if>
+      <if test="dockerfileUrl != null" >
+        dockerfile_url = #{dockerfileUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    update dockerfile_mgr
+    set dockerfile_name = #{dockerfileName,jdbcType=VARCHAR},
+      dockerfile_url = #{dockerfileUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

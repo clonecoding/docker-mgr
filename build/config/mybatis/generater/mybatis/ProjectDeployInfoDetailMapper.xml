@@ -10,6 +10,7 @@
     <result column="deploy_mode" property="deployMode" jdbcType="INTEGER" />
     <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
     <result column="nexus_target_url" property="nexusTargetUrl" jdbcType="VARCHAR" />
+    <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT" />
     <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR" />
     <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR" />
     <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR" />
@@ -29,10 +30,10 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, project_id, project_deploy_info_id, host_ip, docker_env, deploy_mode, git_version, 
-    nexus_target_url, docker_container_name, docker_image_name, docker_entrypoint, docker_mount, 
-    docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap, docker_memory_reservation, 
-    docker_memory_swappiness, is_valid, is_delete, create_time, create_user, update_time, 
-    update_user
+    nexus_target_url, dockerfile_id, docker_container_name, docker_image_name, docker_entrypoint, 
+    docker_mount, docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap, 
+    docker_memory_reservation, docker_memory_swappiness, is_valid, is_delete, create_time, 
+    create_user, update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -47,19 +48,19 @@
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     insert into project_deploy_info_detail (id, project_id, project_deploy_info_id, 
       host_ip, docker_env, deploy_mode, 
-      git_version, nexus_target_url, docker_container_name, 
-      docker_image_name, docker_entrypoint, docker_mount, 
-      docker_link, docker_cpuset_cpus, docker_memory, 
-      docker_memory_swap, docker_memory_reservation, 
+      git_version, nexus_target_url, dockerfile_id, 
+      docker_container_name, docker_image_name, docker_entrypoint, 
+      docker_mount, docker_link, docker_cpuset_cpus, 
+      docker_memory, docker_memory_swap, docker_memory_reservation, 
       docker_memory_swappiness, is_valid, is_delete, 
       create_time, create_user, update_time, 
       update_user)
     values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{projectDeployInfoId,jdbcType=BIGINT}, 
       #{hostIp,jdbcType=VARCHAR}, #{dockerEnv,jdbcType=VARCHAR}, #{deployMode,jdbcType=INTEGER}, 
-      #{gitVersion,jdbcType=VARCHAR}, #{nexusTargetUrl,jdbcType=VARCHAR}, #{dockerContainerName,jdbcType=VARCHAR}, 
-      #{dockerImageName,jdbcType=VARCHAR}, #{dockerEntrypoint,jdbcType=VARCHAR}, #{dockerMount,jdbcType=VARCHAR}, 
-      #{dockerLink,jdbcType=VARCHAR}, #{dockerCpusetCpus,jdbcType=VARCHAR}, #{dockerMemory,jdbcType=VARCHAR}, 
-      #{dockerMemorySwap,jdbcType=VARCHAR}, #{dockerMemoryReservation,jdbcType=VARCHAR}, 
+      #{gitVersion,jdbcType=VARCHAR}, #{nexusTargetUrl,jdbcType=VARCHAR}, #{dockerfileId,jdbcType=BIGINT}, 
+      #{dockerContainerName,jdbcType=VARCHAR}, #{dockerImageName,jdbcType=VARCHAR}, #{dockerEntrypoint,jdbcType=VARCHAR}, 
+      #{dockerMount,jdbcType=VARCHAR}, #{dockerLink,jdbcType=VARCHAR}, #{dockerCpusetCpus,jdbcType=VARCHAR}, 
+      #{dockerMemory,jdbcType=VARCHAR}, #{dockerMemorySwap,jdbcType=VARCHAR}, #{dockerMemoryReservation,jdbcType=VARCHAR}, 
       #{dockerMemorySwappiness,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateUser,jdbcType=VARCHAR})
@@ -90,6 +91,9 @@
       </if>
       <if test="nexusTargetUrl != null" >
         nexus_target_url,
+      </if>
+      <if test="dockerfileId != null" >
+        dockerfile_id,
       </if>
       <if test="dockerContainerName != null" >
         docker_container_name,
@@ -165,6 +169,9 @@
       <if test="nexusTargetUrl != null" >
         #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
+      <if test="dockerfileId != null" >
+        #{dockerfileId,jdbcType=BIGINT},
+      </if>
       <if test="dockerContainerName != null" >
         #{dockerContainerName,jdbcType=VARCHAR},
       </if>
@@ -239,6 +246,9 @@
       <if test="nexusTargetUrl != null" >
         nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
+      <if test="dockerfileId != null" >
+        dockerfile_id = #{dockerfileId,jdbcType=BIGINT},
+      </if>
       <if test="dockerContainerName != null" >
         docker_container_name = #{dockerContainerName,jdbcType=VARCHAR},
       </if>
@@ -299,6 +309,7 @@
       deploy_mode = #{deployMode,jdbcType=INTEGER},
       git_version = #{gitVersion,jdbcType=VARCHAR},
       nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
+      dockerfile_id = #{dockerfileId,jdbcType=BIGINT},
       docker_container_name = #{dockerContainerName,jdbcType=VARCHAR},
       docker_image_name = #{dockerImageName,jdbcType=VARCHAR},
       docker_entrypoint = #{dockerEntrypoint,jdbcType=VARCHAR},

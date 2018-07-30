@@ -2,51 +2,20 @@ package com.jdddata.dockermgr.northbound.dto.deploy;
 
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 
+import java.util.List;
+
 public class DeployInfoDto {
 
     private Long id;
-    /**
-     * 1.docker / 2.not docker
-     */
-    private Integer deployMode;
 
-    /**
-     * 宿主机
-     * 即分配到哪台机器上
-     */
-    private String hostIp;
-
-    private String dockerContainerName;
-
-    private String dockerImageName;
-
-    private String dockerEntrypoint;
-
-    private String dockerMount;
-
-    private String dockerLink;
-
-    private String dockerCpusetCpus;
-
-    private String dockerMemory;
-
-    private String dockerMemorySwap;
-
-    private String dockerMemoryReservation;
-
-    private String dockerMemorySwappiness;
-
-    private String dockerCmd;
-
-    private String dockerEnv;
+    private List<DeployInfoDetailDto> deployInfoDetailDtoList;
 
     private String projectId;
+
 
     private String gitUrl;
 
     private String gitVersion;
-
-    private String nexusTargetUrl;
 
     public Long getId() {
         return id;
@@ -56,116 +25,12 @@ public class DeployInfoDto {
         this.id = id;
     }
 
-    public Integer getDeployMode() {
-        return deployMode;
+    public List<DeployInfoDetailDto> getDeployInfoDetailDtoList() {
+        return deployInfoDetailDtoList;
     }
 
-    public void setDeployMode(Integer deployMode) {
-        this.deployMode = deployMode;
-    }
-
-    public String getHostIp() {
-        return hostIp;
-    }
-
-    public void setHostIp(String hostIp) {
-        this.hostIp = hostIp;
-    }
-
-    public String getDockerContainerName() {
-        return dockerContainerName;
-    }
-
-    public void setDockerContainerName(String dockerContainerName) {
-        this.dockerContainerName = dockerContainerName;
-    }
-
-    public String getDockerImageName() {
-        return dockerImageName;
-    }
-
-    public void setDockerImageName(String dockerImageName) {
-        this.dockerImageName = dockerImageName;
-    }
-
-    public String getDockerEntrypoint() {
-        return dockerEntrypoint;
-    }
-
-    public void setDockerEntrypoint(String dockerEntrypoint) {
-        this.dockerEntrypoint = dockerEntrypoint;
-    }
-
-    public String getDockerMount() {
-        return dockerMount;
-    }
-
-    public void setDockerMount(String dockerMount) {
-        this.dockerMount = dockerMount;
-    }
-
-    public String getDockerLink() {
-        return dockerLink;
-    }
-
-    public void setDockerLink(String dockerLink) {
-        this.dockerLink = dockerLink;
-    }
-
-    public String getDockerCpusetCpus() {
-        return dockerCpusetCpus;
-    }
-
-    public void setDockerCpusetCpus(String dockerCpusetCpus) {
-        this.dockerCpusetCpus = dockerCpusetCpus;
-    }
-
-    public String getDockerMemory() {
-        return dockerMemory;
-    }
-
-    public void setDockerMemory(String dockerMemory) {
-        this.dockerMemory = dockerMemory;
-    }
-
-    public String getDockerMemorySwap() {
-        return dockerMemorySwap;
-    }
-
-    public void setDockerMemorySwap(String dockerMemorySwap) {
-        this.dockerMemorySwap = dockerMemorySwap;
-    }
-
-    public String getDockerMemoryReservation() {
-        return dockerMemoryReservation;
-    }
-
-    public void setDockerMemoryReservation(String dockerMemoryReservation) {
-        this.dockerMemoryReservation = dockerMemoryReservation;
-    }
-
-    public String getDockerMemorySwappiness() {
-        return dockerMemorySwappiness;
-    }
-
-    public void setDockerMemorySwappiness(String dockerMemorySwappiness) {
-        this.dockerMemorySwappiness = dockerMemorySwappiness;
-    }
-
-    public String getDockerCmd() {
-        return dockerCmd;
-    }
-
-    public void setDockerCmd(String dockerCmd) {
-        this.dockerCmd = dockerCmd;
-    }
-
-    public String getDockerEnv() {
-        return dockerEnv;
-    }
-
-    public void setDockerEnv(String dockerEnv) {
-        this.dockerEnv = dockerEnv;
+    public void setDeployInfoDetailDtoList(List<DeployInfoDetailDto> deployInfoDetailDtoList) {
+        this.deployInfoDetailDtoList = deployInfoDetailDtoList;
     }
 
     public String getProjectId() {
@@ -194,38 +59,16 @@ public class DeployInfoDto {
 
     public ProjectDeployInfo convert() {
         ProjectDeployInfo projectDeployInfo = new ProjectDeployInfo();
-        projectDeployInfo.setId(null != this.id ? this.id : null);
-        projectDeployInfo.setProjectId(this.projectId);
-        projectDeployInfo.setHostIp(this.hostIp);
-        projectDeployInfo.setDockerEnv(this.dockerEnv);
-        projectDeployInfo.setDeployMode(this.deployMode);
+        projectDeployInfo.setId(this.id);
+        projectDeployInfo.setProjectId(Long.valueOf(this.projectId));
         projectDeployInfo.setGitVersion(this.gitVersion);
-        projectDeployInfo.setNexusTargetUrl(this.nexusTargetUrl);
-        projectDeployInfo.setDockerContainerName(this.dockerContainerName);
-        projectDeployInfo.setDockerImageName(this.dockerImageName);
-        projectDeployInfo.setDockerEntrypoint(this.dockerEntrypoint);
-        projectDeployInfo.setDockerMount(this.dockerMount);
-        projectDeployInfo.setDockerLink(this.dockerLink);
-        projectDeployInfo.setDockerCpusetCpus(this.dockerCpusetCpus);
-        projectDeployInfo.setDockerMemory(this.dockerMemory);
-        projectDeployInfo.setDockerMemorySwap(this.dockerMemorySwap);
-        projectDeployInfo.setDockerMemoryReservation(this.dockerMemoryReservation);
-        projectDeployInfo.setDockerMemorySwappiness(this.dockerMemorySwappiness);
-//        projectDeployInfo.setIsValid(this.);
+//        projectDeployInfo.setIsValid();
 //        projectDeployInfo.setIsDelete();
 //        projectDeployInfo.setCreateTime();
 //        projectDeployInfo.setCreateUser();
 //        projectDeployInfo.setUpdateTime();
 //        projectDeployInfo.setUpdateUser();
-
         return projectDeployInfo;
-    }
 
-    public String getNexusTargetUrl() {
-        return nexusTargetUrl;
-    }
-
-    public void setNexusTargetUrl(String nexusTargetUrl) {
-        this.nexusTargetUrl = nexusTargetUrl;
     }
 }
