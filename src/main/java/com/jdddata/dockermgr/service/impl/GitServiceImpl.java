@@ -2,10 +2,10 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jdddata.dockermgr.common.constant.GitConstants;
-import com.jdddata.dockermgr.common.gitlab.Branch;
+import com.jdddata.dockermgr.common.vo.gitlab.Branch;
 import com.jdddata.dockermgr.common.util.NHttpClient;
-import com.jdddata.dockermgr.common.vo.ResultGenerator;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.util.ResultGenerator;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.service.GitService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;

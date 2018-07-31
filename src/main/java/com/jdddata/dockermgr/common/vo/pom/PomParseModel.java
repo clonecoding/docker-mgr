@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.pom;
+package com.jdddata.dockermgr.common.vo.pom;
 
 public class PomParseModel {
     private String groupId;

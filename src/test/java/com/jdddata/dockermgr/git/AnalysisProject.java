@@ -1,6 +1,6 @@
 package com.jdddata.dockermgr.git;
 
-import com.jdddata.dockermgr.common.pom.PomParseModel;
+import com.jdddata.dockermgr.common.vo.pom.PomParseModel;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;

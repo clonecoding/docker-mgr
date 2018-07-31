@@ -1,7 +1,7 @@
 package com.jdddata.dockermgr.service.impl;
 
-import com.jdddata.dockermgr.common.vo.ResultGenerator;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.util.ResultGenerator;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.dao.cmapper.ProjectMgrCMapper;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;

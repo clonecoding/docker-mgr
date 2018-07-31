@@ -1,16 +1,12 @@
-package com.jdddata.dockermgr.common.job;
+package com.jdddata.dockermgr.common.vo.job;
 
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.adapter.docker.DockerClient;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
 import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
-import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
-import com.jdddata.dockermgr.dao.mapper.ContainerInfoMapper;
-import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.service.ContainerService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.adapter.gocd.GocdDeployPool;
-import com.jdddata.dockermgr.common.vo.ResultGenerator;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.util.ResultGenerator;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
