@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.gitlab;
+package com.jdddata.dockermgr.common.vo.gitlab;
 
 public class Branch {
     private String name;

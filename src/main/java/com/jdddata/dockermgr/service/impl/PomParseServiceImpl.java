@@ -1,9 +1,9 @@
 package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.common.constant.GitConstants;
-import com.jdddata.dockermgr.common.pom.PomParseModel;
-import com.jdddata.dockermgr.common.vo.ResultGenerator;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.pom.PomParseModel;
+import com.jdddata.dockermgr.common.util.ResultGenerator;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.northbound.dto.git.GitDto;
 import com.jdddata.dockermgr.service.GitService;
 import com.jdddata.dockermgr.service.PomParseService;

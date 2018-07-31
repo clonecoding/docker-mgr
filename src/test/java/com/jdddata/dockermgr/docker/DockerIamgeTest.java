@@ -4,7 +4,7 @@ import com.jdddata.dockermgr.service.DockerImageService;
 import com.jdddata.dockermgr.service.impl.DockerImageServiceImpl;
 import com.jdddata.dockermgr.adapter.docker.DockerClient;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import org.junit.Test;
 
 /**

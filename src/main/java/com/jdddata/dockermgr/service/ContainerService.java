@@ -1,8 +1,7 @@
 package com.jdddata.dockermgr.service;
 
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.dao.entity.ContainerInfo;
-import com.jdddata.dockermgr.northbound.dto.front.ContainerDetailInfo;
 
 /**
  * @Author: zhangheng(赛事)

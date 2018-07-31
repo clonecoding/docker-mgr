@@ -1,6 +1,6 @@
 package com.jdddata.dockermgr.northbound;
 
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.northbound.dto.git.GitDto;
 import com.jdddata.dockermgr.service.GitService;
 import com.jdddata.dockermgr.service.PomParseService;

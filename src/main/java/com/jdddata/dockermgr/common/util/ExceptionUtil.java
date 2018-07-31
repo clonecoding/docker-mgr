@@ -1,8 +1,7 @@
 package com.jdddata.dockermgr.common.util;
 
 import com.jdddata.dockermgr.common.exception.ValidatorException;
-import com.jdddata.dockermgr.common.vo.ResultGenerator;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 
 public final class ExceptionUtil {
     public static ResultVo getFail(ValidatorException e) {

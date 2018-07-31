@@ -2,7 +2,7 @@ package com.jdddata.dockermgr.northbound;
 
 import com.jdddata.dockermgr.northbound.dto.image.DockerImageDto;
 import com.jdddata.dockermgr.service.DockerImageService;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

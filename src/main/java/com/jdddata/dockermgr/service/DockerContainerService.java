@@ -1,7 +1,7 @@
 package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.northbound.dto.container.ContainerCreatePyDto;
-import com.jdddata.dockermgr.common.vo.ResultVo;
+import com.jdddata.dockermgr.common.vo.response.ResultVo;
 
 /**
  * @Author: zhangheng(赛事)

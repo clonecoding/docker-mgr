@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.vo;
+package com.jdddata.dockermgr.common.vo.response;
 
 /**
  * @Author: zhangheng(赛事)
