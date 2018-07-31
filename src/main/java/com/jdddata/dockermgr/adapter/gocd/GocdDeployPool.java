@@ -3,6 +3,7 @@ package com.jdddata.dockermgr.adapter.gocd;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
+import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
@@ -66,4 +67,6 @@ public class GocdDeployPool {
     }
 
 
+    public static void initProject(GocdBO gocdBo) {
+    }
 }

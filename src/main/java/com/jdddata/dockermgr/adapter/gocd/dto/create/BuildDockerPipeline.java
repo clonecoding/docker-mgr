@@ -125,7 +125,7 @@ public class BuildDockerPipeline {
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", projectDeployInfoDetail.getHostIp()));
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", projectDeployInfoDetail.getDockerEnv()));
         environmentVariables.add(createEnvVariableLocal(false, "GIT_BRANCH", projectDeployInfoDetail.getGitVersion()));
-        environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", projectDeployInfoDetail.getNexusTargetUrl()));
+//        environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", projectDeployInfoDetail.getNexusTargetUrl()));
         environmentVariables.add(createEnvVariableLocal(false, "DOCKER_FILE_URL", projectDeployInfoDetail.getDockerfileUrl()));
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_CONTAINER_NAME", projectDeployInfoDetail.getDockerContainerName()));
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_IMAGE_NAME", projectDeployInfoDetail.getDockerImageName()));

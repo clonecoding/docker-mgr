@@ -5,9 +5,7 @@ import java.util.Date;
 public class ProjectDeployInfoDetail {
     private Long id;
 
-    private Long projectId;
-
-    private Long projectDeployInfoId;
+    private Long projectDeployInfoArtifactId;
 
     private String hostIp;
 
@@ -16,8 +14,6 @@ public class ProjectDeployInfoDetail {
     private Integer deployMode;
 
     private String gitVersion;
-
-    private String nexusTargetUrl;
 
     private String dockerfileUrl;
 
@@ -28,6 +24,8 @@ public class ProjectDeployInfoDetail {
     private String dockerImageName;
 
     private String dockerEntrypoint;
+
+    private String dockerCmd;
 
     private String dockerMount;
 
@@ -63,20 +61,12 @@ public class ProjectDeployInfoDetail {
         this.id = id;
     }
 
-    public Long getProjectId() {
-        return projectId;
+    public Long getProjectDeployInfoArtifactId() {
+        return projectDeployInfoArtifactId;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
-    public Long getProjectDeployInfoId() {
-        return projectDeployInfoId;
-    }
-
-    public void setProjectDeployInfoId(Long projectDeployInfoId) {
-        this.projectDeployInfoId = projectDeployInfoId;
+    public void setProjectDeployInfoArtifactId(Long projectDeployInfoArtifactId) {
+        this.projectDeployInfoArtifactId = projectDeployInfoArtifactId;
     }
 
     public String getHostIp() {
@@ -109,14 +99,6 @@ public class ProjectDeployInfoDetail {
 
     public void setGitVersion(String gitVersion) {
         this.gitVersion = gitVersion == null ? null : gitVersion.trim();
-    }
-
-    public String getNexusTargetUrl() {
-        return nexusTargetUrl;
-    }
-
-    public void setNexusTargetUrl(String nexusTargetUrl) {
-        this.nexusTargetUrl = nexusTargetUrl == null ? null : nexusTargetUrl.trim();
     }
 
     public String getDockerfileUrl() {
@@ -157,6 +139,14 @@ public class ProjectDeployInfoDetail {
 
     public void setDockerEntrypoint(String dockerEntrypoint) {
         this.dockerEntrypoint = dockerEntrypoint == null ? null : dockerEntrypoint.trim();
+    }
+
+    public String getDockerCmd() {
+        return dockerCmd;
+    }
+
+    public void setDockerCmd(String dockerCmd) {
+        this.dockerCmd = dockerCmd == null ? null : dockerCmd.trim();
     }
 
     public String getDockerMount() {

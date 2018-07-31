@@ -1,12 +1,8 @@
 package com.jdddata.dockermgr.list;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.TreeSet;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toCollection;
+import java.util.stream.Collectors;
 
 public class ListTest {
 
@@ -19,11 +15,14 @@ public class ListTest {
     }
 
     public static void main(String[] args) {
-        ArrayList<Personal> collect = personalList.stream().collect(
-                collectingAndThen(
-                        toCollection(() -> new TreeSet<>(Comparator.comparing(Personal::getSex))), ArrayList::new)
-        );
-        collect.forEach(c -> System.out.println(c.toString()));
+//        ArrayList<Personal> collect = personalList.stream().collect(
+//                collectingAndThen(
+//                        toCollection(() -> new TreeSet<>(Comparator.comparing(Personal::getSex))), ArrayList::new)
+//        );
+//        collect.forEach(c -> System.out.println(c.toString()));
+
+        List<Personal> erwt = personalList.stream().filter(p -> p.getName().equalsIgnoreCase("erwt")).collect(Collectors.toList());
+        erwt.forEach(e-> System.out.println(e.toString()));
     }
 
     private static class Personal {

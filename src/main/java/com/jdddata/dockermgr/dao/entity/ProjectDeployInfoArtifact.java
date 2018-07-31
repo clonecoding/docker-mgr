@@ -2,16 +2,14 @@ package com.jdddata.dockermgr.dao.entity;
 
 import java.util.Date;
 
-public class ProjectDeployInfo {
+public class ProjectDeployInfoArtifact {
     private Long id;
 
-    private Long projectId;
+    private Long projectDeployInfoId;
 
-    private String gitUrl;
+    private String artifactId;
 
-    private String gitVersion;
-
-    private Integer deployEnv;
+    private String nexusTargetUrl;
 
     private Integer isValid;
 
@@ -33,36 +31,28 @@ public class ProjectDeployInfo {
         this.id = id;
     }
 
-    public Long getProjectId() {
-        return projectId;
+    public Long getProjectDeployInfoId() {
+        return projectDeployInfoId;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProjectDeployInfoId(Long projectDeployInfoId) {
+        this.projectDeployInfoId = projectDeployInfoId;
     }
 
-    public String getGitUrl() {
-        return gitUrl;
+    public String getArtifactId() {
+        return artifactId;
     }
 
-    public void setGitUrl(String gitUrl) {
-        this.gitUrl = gitUrl == null ? null : gitUrl.trim();
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId == null ? null : artifactId.trim();
     }
 
-    public String getGitVersion() {
-        return gitVersion;
+    public String getNexusTargetUrl() {
+        return nexusTargetUrl;
     }
 
-    public void setGitVersion(String gitVersion) {
-        this.gitVersion = gitVersion == null ? null : gitVersion.trim();
-    }
-
-    public Integer getDeployEnv() {
-        return deployEnv;
-    }
-
-    public void setDeployEnv(Integer deployEnv) {
-        this.deployEnv = deployEnv;
+    public void setNexusTargetUrl(String nexusTargetUrl) {
+        this.nexusTargetUrl = nexusTargetUrl == null ? null : nexusTargetUrl.trim();
     }
 
     public Integer getIsValid() {

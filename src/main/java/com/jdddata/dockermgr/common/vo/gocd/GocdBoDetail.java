@@ -1,10 +1,15 @@
-package com.jdddata.dockermgr.northbound.dto.deploy;
+package com.jdddata.dockermgr.common.vo.gocd;
 
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
+public class GocdBoDetail {
+    private String projectName;
 
-public class DeployInfoDetailDto {
+    private String gitUrl;
 
-    private Long id;
+    private String gitVersion;
+
+    private String artifactIdName;
+
+    private String nexusUrl;
 
     /**
      * 1.docker / 2.not docker
@@ -47,12 +52,44 @@ public class DeployInfoDetailDto {
 
     private String dockerfileUrl;
 
-    public Long getId() {
-        return id;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getGitUrl() {
+        return gitUrl;
+    }
+
+    public void setGitUrl(String gitUrl) {
+        this.gitUrl = gitUrl;
+    }
+
+    public String getGitVersion() {
+        return gitVersion;
+    }
+
+    public void setGitVersion(String gitVersion) {
+        this.gitVersion = gitVersion;
+    }
+
+    public String getArtifactIdName() {
+        return artifactIdName;
+    }
+
+    public void setArtifactIdName(String artifactIdName) {
+        this.artifactIdName = artifactIdName;
+    }
+
+    public String getNexusUrl() {
+        return nexusUrl;
+    }
+
+    public void setNexusUrl(String nexusUrl) {
+        this.nexusUrl = nexusUrl;
     }
 
     public Integer getDeployMode() {
@@ -189,35 +226,5 @@ public class DeployInfoDetailDto {
 
     public void setDockerfileUrl(String dockerfileUrl) {
         this.dockerfileUrl = dockerfileUrl;
-    }
-
-    public ProjectDeployInfoDetail convertEntityWithId(int artifactId) {
-        ProjectDeployInfoDetail deployInfoDetail = new ProjectDeployInfoDetail();
-        deployInfoDetail.setId(this.id);
-        deployInfoDetail.setProjectDeployInfoArtifactId(Long.valueOf(artifactId));
-        deployInfoDetail.setHostIp(this.hostIp);
-        deployInfoDetail.setDockerEnv(this.dockerEnv);
-        deployInfoDetail.setDeployMode(this.deployMode);
-//        deployInfoDetail.setGitVersion(this.G);
-        deployInfoDetail.setDockerfileUrl(this.dockerfileUrl);
-        deployInfoDetail.setDockerfileId(Long.valueOf(this.dockerfileId));
-        deployInfoDetail.setDockerContainerName(this.dockerContainerName);
-        deployInfoDetail.setDockerImageName(this.dockerImageName);
-        deployInfoDetail.setDockerEntrypoint(this.dockerEntrypoint);
-        deployInfoDetail.setDockerMount(this.dockerMount);
-        deployInfoDetail.setDockerLink(this.dockerLink);
-        deployInfoDetail.setDockerCpusetCpus(this.dockerCpusetCpus);
-        deployInfoDetail.setDockerMemory(this.dockerMemory);
-        deployInfoDetail.setDockerMemorySwap(this.dockerMemorySwap);
-        deployInfoDetail.setDockerMemoryReservation(this.dockerMemoryReservation);
-        deployInfoDetail.setDockerMemorySwappiness(this.dockerMemorySwappiness);
-        deployInfoDetail.setDockerCmd(this.dockerCmd);
-//        deployInfoDetail.setIsValid();
-//        deployInfoDetail.setIsDelete();
-//        deployInfoDetail.setCreateTime();
-//        deployInfoDetail.setCreateUser();
-//        deployInfoDetail.setUpdateTime();
-//        deployInfoDetail.setUpdateUser();
-        return deployInfoDetail;
     }
 }

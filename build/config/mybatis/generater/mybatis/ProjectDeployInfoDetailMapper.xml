@@ -3,18 +3,17 @@
 <mapper namespace="com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoDetailMapper" >
   <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="project_id" property="projectId" jdbcType="BIGINT" />
-    <result column="project_deploy_info_id" property="projectDeployInfoId" jdbcType="BIGINT" />
+    <result column="project_deploy_info_artifact_id" property="projectDeployInfoArtifactId" jdbcType="BIGINT" />
     <result column="host_ip" property="hostIp" jdbcType="VARCHAR" />
     <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR" />
     <result column="deploy_mode" property="deployMode" jdbcType="INTEGER" />
     <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
-    <result column="nexus_target_url" property="nexusTargetUrl" jdbcType="VARCHAR" />
     <result column="dockerfile_url" property="dockerfileUrl" jdbcType="VARCHAR" />
     <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT" />
     <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR" />
     <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR" />
     <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR" />
+    <result column="docker_cmd" property="dockerCmd" jdbcType="VARCHAR" />
     <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR" />
     <result column="docker_link" property="dockerLink" jdbcType="VARCHAR" />
     <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR" />
@@ -30,11 +29,11 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, project_id, project_deploy_info_id, host_ip, docker_env, deploy_mode, git_version, 
-    nexus_target_url, dockerfile_url, dockerfile_id, docker_container_name, docker_image_name, 
-    docker_entrypoint, docker_mount, docker_link, docker_cpuset_cpus, docker_memory, 
-    docker_memory_swap, docker_memory_reservation, docker_memory_swappiness, is_valid, 
-    is_delete, create_time, create_user, update_time, update_user
+    id, project_deploy_info_artifact_id, host_ip, docker_env, deploy_mode, git_version, 
+    dockerfile_url, dockerfile_id, docker_container_name, docker_image_name, docker_entrypoint, 
+    docker_cmd, docker_mount, docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap, 
+    docker_memory_reservation, docker_memory_swappiness, is_valid, is_delete, create_time, 
+    create_user, update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -47,26 +46,24 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
-    insert into project_deploy_info_detail (id, project_id, project_deploy_info_id, 
-      host_ip, docker_env, deploy_mode, 
-      git_version, nexus_target_url, dockerfile_url, 
-      dockerfile_id, docker_container_name, docker_image_name, 
-      docker_entrypoint, docker_mount, docker_link, 
-      docker_cpuset_cpus, docker_memory, docker_memory_swap, 
-      docker_memory_reservation, docker_memory_swappiness, 
-      is_valid, is_delete, create_time, 
-      create_user, update_time, update_user
-      )
-    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{projectDeployInfoId,jdbcType=BIGINT}, 
-      #{hostIp,jdbcType=VARCHAR}, #{dockerEnv,jdbcType=VARCHAR}, #{deployMode,jdbcType=INTEGER}, 
-      #{gitVersion,jdbcType=VARCHAR}, #{nexusTargetUrl,jdbcType=VARCHAR}, #{dockerfileUrl,jdbcType=VARCHAR}, 
-      #{dockerfileId,jdbcType=BIGINT}, #{dockerContainerName,jdbcType=VARCHAR}, #{dockerImageName,jdbcType=VARCHAR}, 
-      #{dockerEntrypoint,jdbcType=VARCHAR}, #{dockerMount,jdbcType=VARCHAR}, #{dockerLink,jdbcType=VARCHAR}, 
-      #{dockerCpusetCpus,jdbcType=VARCHAR}, #{dockerMemory,jdbcType=VARCHAR}, #{dockerMemorySwap,jdbcType=VARCHAR}, 
-      #{dockerMemoryReservation,jdbcType=VARCHAR}, #{dockerMemorySwappiness,jdbcType=VARCHAR}, 
-      #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
-      )
+    insert into project_deploy_info_detail (id, project_deploy_info_artifact_id, host_ip, 
+      docker_env, deploy_mode, git_version, 
+      dockerfile_url, dockerfile_id, docker_container_name, 
+      docker_image_name, docker_entrypoint, docker_cmd, 
+      docker_mount, docker_link, docker_cpuset_cpus, 
+      docker_memory, docker_memory_swap, docker_memory_reservation, 
+      docker_memory_swappiness, is_valid, is_delete, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{id,jdbcType=BIGINT}, #{projectDeployInfoArtifactId,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, 
+      #{dockerEnv,jdbcType=VARCHAR}, #{deployMode,jdbcType=INTEGER}, #{gitVersion,jdbcType=VARCHAR}, 
+      #{dockerfileUrl,jdbcType=VARCHAR}, #{dockerfileId,jdbcType=BIGINT}, #{dockerContainerName,jdbcType=VARCHAR}, 
+      #{dockerImageName,jdbcType=VARCHAR}, #{dockerEntrypoint,jdbcType=VARCHAR}, #{dockerCmd,jdbcType=VARCHAR}, 
+      #{dockerMount,jdbcType=VARCHAR}, #{dockerLink,jdbcType=VARCHAR}, #{dockerCpusetCpus,jdbcType=VARCHAR}, 
+      #{dockerMemory,jdbcType=VARCHAR}, #{dockerMemorySwap,jdbcType=VARCHAR}, #{dockerMemoryReservation,jdbcType=VARCHAR}, 
+      #{dockerMemorySwappiness,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     insert into project_deploy_info_detail
@@ -74,11 +71,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="projectDeployInfoId != null" >
-        project_deploy_info_id,
+      <if test="projectDeployInfoArtifactId != null" >
+        project_deploy_info_artifact_id,
       </if>
       <if test="hostIp != null" >
         host_ip,
@@ -91,9 +85,6 @@
       </if>
       <if test="gitVersion != null" >
         git_version,
-      </if>
-      <if test="nexusTargetUrl != null" >
-        nexus_target_url,
       </if>
       <if test="dockerfileUrl != null" >
         dockerfile_url,
@@ -109,6 +100,9 @@
       </if>
       <if test="dockerEntrypoint != null" >
         docker_entrypoint,
+      </if>
+      <if test="dockerCmd != null" >
+        docker_cmd,
       </if>
       <if test="dockerMount != null" >
         docker_mount,
@@ -154,11 +148,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=BIGINT},
-      </if>
-      <if test="projectDeployInfoId != null" >
-        #{projectDeployInfoId,jdbcType=BIGINT},
+      <if test="projectDeployInfoArtifactId != null" >
+        #{projectDeployInfoArtifactId,jdbcType=BIGINT},
       </if>
       <if test="hostIp != null" >
         #{hostIp,jdbcType=VARCHAR},
@@ -171,9 +162,6 @@
       </if>
       <if test="gitVersion != null" >
         #{gitVersion,jdbcType=VARCHAR},
-      </if>
-      <if test="nexusTargetUrl != null" >
-        #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
       <if test="dockerfileUrl != null" >
         #{dockerfileUrl,jdbcType=VARCHAR},
@@ -189,6 +177,9 @@
       </if>
       <if test="dockerEntrypoint != null" >
         #{dockerEntrypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="dockerCmd != null" >
+        #{dockerCmd,jdbcType=VARCHAR},
       </if>
       <if test="dockerMount != null" >
         #{dockerMount,jdbcType=VARCHAR},
@@ -234,11 +225,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     update project_deploy_info_detail
     <set >
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=BIGINT},
-      </if>
-      <if test="projectDeployInfoId != null" >
-        project_deploy_info_id = #{projectDeployInfoId,jdbcType=BIGINT},
+      <if test="projectDeployInfoArtifactId != null" >
+        project_deploy_info_artifact_id = #{projectDeployInfoArtifactId,jdbcType=BIGINT},
       </if>
       <if test="hostIp != null" >
         host_ip = #{hostIp,jdbcType=VARCHAR},
@@ -251,9 +239,6 @@
       </if>
       <if test="gitVersion != null" >
         git_version = #{gitVersion,jdbcType=VARCHAR},
-      </if>
-      <if test="nexusTargetUrl != null" >
-        nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
       <if test="dockerfileUrl != null" >
         dockerfile_url = #{dockerfileUrl,jdbcType=VARCHAR},
@@ -269,6 +254,9 @@
       </if>
       <if test="dockerEntrypoint != null" >
         docker_entrypoint = #{dockerEntrypoint,jdbcType=VARCHAR},
+      </if>
+      <if test="dockerCmd != null" >
+        docker_cmd = #{dockerCmd,jdbcType=VARCHAR},
       </if>
       <if test="dockerMount != null" >
         docker_mount = #{dockerMount,jdbcType=VARCHAR},
@@ -314,18 +302,17 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     update project_deploy_info_detail
-    set project_id = #{projectId,jdbcType=BIGINT},
-      project_deploy_info_id = #{projectDeployInfoId,jdbcType=BIGINT},
+    set project_deploy_info_artifact_id = #{projectDeployInfoArtifactId,jdbcType=BIGINT},
       host_ip = #{hostIp,jdbcType=VARCHAR},
       docker_env = #{dockerEnv,jdbcType=VARCHAR},
       deploy_mode = #{deployMode,jdbcType=INTEGER},
       git_version = #{gitVersion,jdbcType=VARCHAR},
-      nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
       dockerfile_url = #{dockerfileUrl,jdbcType=VARCHAR},
       dockerfile_id = #{dockerfileId,jdbcType=BIGINT},
       docker_container_name = #{dockerContainerName,jdbcType=VARCHAR},
       docker_image_name = #{dockerImageName,jdbcType=VARCHAR},
       docker_entrypoint = #{dockerEntrypoint,jdbcType=VARCHAR},
+      docker_cmd = #{dockerCmd,jdbcType=VARCHAR},
       docker_mount = #{dockerMount,jdbcType=VARCHAR},
       docker_link = #{dockerLink,jdbcType=VARCHAR},
       docker_cpuset_cpus = #{dockerCpusetCpus,jdbcType=VARCHAR},

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoArtifactMapper" >
+  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="project_id" property="projectId" jdbcType="BIGINT" />
-    <result column="git_url" property="gitUrl" jdbcType="VARCHAR" />
-    <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
-    <result column="deploy_env" property="deployEnv" jdbcType="INTEGER" />
+    <result column="project_deploy_info_id" property="projectDeployInfoId" jdbcType="BIGINT" />
+    <result column="artifact_id" property="artifactId" jdbcType="VARCHAR" />
+    <result column="nexus_target_url" property="nexusTargetUrl" jdbcType="VARCHAR" />
     <result column="is_valid" property="isValid" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -15,46 +14,43 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, project_id, git_url, git_version, deploy_env, is_valid, is_delete, create_time, 
+    id, project_deploy_info_id, artifact_id, nexus_target_url, is_valid, is_delete, create_time, 
     create_user, update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from project_deploy_info
+    from project_deploy_info_artifact
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from project_deploy_info
+    delete from project_deploy_info_artifact
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
-    insert into project_deploy_info (id, project_id, git_url, 
-      git_version, deploy_env, is_valid, 
-      is_delete, create_time, create_user, 
-      update_time, update_user)
-    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{gitUrl,jdbcType=VARCHAR}, 
-      #{gitVersion,jdbcType=VARCHAR}, #{deployEnv,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact" >
+    insert into project_deploy_info_artifact (id, project_deploy_info_id, artifact_id, 
+      nexus_target_url, is_valid, is_delete, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{id,jdbcType=BIGINT}, #{projectDeployInfoId,jdbcType=BIGINT}, #{artifactId,jdbcType=VARCHAR}, 
+      #{nexusTargetUrl,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
-    insert into project_deploy_info
+  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact" >
+    insert into project_deploy_info_artifact
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="projectId != null" >
-        project_id,
+      <if test="projectDeployInfoId != null" >
+        project_deploy_info_id,
       </if>
-      <if test="gitUrl != null" >
-        git_url,
+      <if test="artifactId != null" >
+        artifact_id,
       </if>
-      <if test="gitVersion != null" >
-        git_version,
-      </if>
-      <if test="deployEnv != null" >
-        deploy_env,
+      <if test="nexusTargetUrl != null" >
+        nexus_target_url,
       </if>
       <if test="isValid != null" >
         is_valid,
@@ -79,17 +75,14 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=BIGINT},
+      <if test="projectDeployInfoId != null" >
+        #{projectDeployInfoId,jdbcType=BIGINT},
       </if>
-      <if test="gitUrl != null" >
-        #{gitUrl,jdbcType=VARCHAR},
+      <if test="artifactId != null" >
+        #{artifactId,jdbcType=VARCHAR},
       </if>
-      <if test="gitVersion != null" >
-        #{gitVersion,jdbcType=VARCHAR},
-      </if>
-      <if test="deployEnv != null" >
-        #{deployEnv,jdbcType=INTEGER},
+      <if test="nexusTargetUrl != null" >
+        #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
       <if test="isValid != null" >
         #{isValid,jdbcType=INTEGER},
@@ -111,20 +104,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
-    update project_deploy_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact" >
+    update project_deploy_info_artifact
     <set >
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=BIGINT},
+      <if test="projectDeployInfoId != null" >
+        project_deploy_info_id = #{projectDeployInfoId,jdbcType=BIGINT},
       </if>
-      <if test="gitUrl != null" >
-        git_url = #{gitUrl,jdbcType=VARCHAR},
+      <if test="artifactId != null" >
+        artifact_id = #{artifactId,jdbcType=VARCHAR},
       </if>
-      <if test="gitVersion != null" >
-        git_version = #{gitVersion,jdbcType=VARCHAR},
-      </if>
-      <if test="deployEnv != null" >
-        deploy_env = #{deployEnv,jdbcType=INTEGER},
+      <if test="nexusTargetUrl != null" >
+        nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
       </if>
       <if test="isValid != null" >
         is_valid = #{isValid,jdbcType=INTEGER},
@@ -147,12 +137,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
-    update project_deploy_info
-    set project_id = #{projectId,jdbcType=BIGINT},
-      git_url = #{gitUrl,jdbcType=VARCHAR},
-      git_version = #{gitVersion,jdbcType=VARCHAR},
-      deploy_env = #{deployEnv,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact" >
+    update project_deploy_info_artifact
+    set project_deploy_info_id = #{projectDeployInfoId,jdbcType=BIGINT},
+      artifact_id = #{artifactId,jdbcType=VARCHAR},
+      nexus_target_url = #{nexusTargetUrl,jdbcType=VARCHAR},
       is_valid = #{isValid,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
