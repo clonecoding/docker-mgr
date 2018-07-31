@@ -6,6 +6,7 @@ import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
 import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
+import com.jdddata.dockermgr.dao.entity.ContainerInfo;
 import com.jdddata.dockermgr.service.ContainerService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
