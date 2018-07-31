@@ -12,7 +12,7 @@
         <result column="command" property="command" jdbcType="VARCHAR"/>
         <result column="container_create_time" property="containerCreateTime" jdbcType="TIMESTAMP"/>
         <result column="container_ports" property="containerPorts" jdbcType="VARCHAR"/>
-        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="container_state" property="containerState" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
         <result column="network_mode" property="networkMode" jdbcType="VARCHAR"/>
         <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
@@ -24,7 +24,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, container_id, container_name, image_name, image_tag, image_id, command,
-    container_create_time, container_ports, state, status, network_mode, is_valid, is_delete,
+    container_create_time, container_ports, container_state, status, network_mode, is_valid, is_delete,
     create_time, create_user, update_time, update_user
   </sql>
     <select id="selectByDeployId" parameterType="java.lang.Long" resultMap="BaseResultMaps">

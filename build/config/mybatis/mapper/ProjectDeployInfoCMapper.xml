@@ -22,6 +22,7 @@
         <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
         <collection property="deployInfoDetailDtoList"
                     ofType="com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto">
+            <result column="detail_id" property="id" jdbcType="BIGINT"/>
             <result column="host_ip" property="hostIp" jdbcType="VARCHAR"/>
             <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR"/>
             <result column="deploy_mode" property="deployMode" jdbcType="INTEGER"/>
@@ -42,11 +43,8 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-    id, project_id, git_version, deploy_env,is_valid,host_ip, docker_env, deploy_mode, git_version,
-    nexus_target_url, dockerfile_id, docker_container_name, docker_image_name, docker_entrypoint,
-    docker_mount, docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap,
-    docker_memory_reservation, docker_memory_swappiness
-  </sql>
+      id, project_id, git_version, deploy_env,is_valid,is_delete
+    </sql>
 
     <select id="listAll" resultMap="BaseResultMap">
         select
@@ -54,12 +52,11 @@
         from project_deploy_info
         where 1=1
     </select>
-    <select id="listDetail" resultType="DeployDetail">
-        select pdi.id, pdi.project_id, pdi.git_version, pdi.deploy_env,pdi.is_valid, pdid.host_ip, pdid.docker_env, pdid.deploy_mode, pdid.git_version,
+    <select id="listDetail" resultMap="DeployDetail">
+        select pdi.id, pdi.project_id, pdi.git_version, pdi.deploy_env,pdi.is_valid,pdid.id as detail_id,pdid.host_ip, pdid.docker_env, pdid.deploy_mode, pdid.git_version,
         pdid.nexus_target_url, pdid.dockerfile_id, pdid.docker_container_name, pdid.docker_image_name, pdid.docker_entrypoint,
         pdid.docker_mount, pdid.docker_link, pdid.docker_cpuset_cpus, pdid.docker_memory, pdid.docker_memory_swap,
         pdid.docker_memory_reservation, pdid.docker_memory_swappiness
-        <include refid="detail_Column_List"/>
         from project_deploy_info pdi left join project_deploy_info_detail pdid on pdi.id =pdid.project_deploy_info_id
         where 1=1 and pdi.is_delete=0
     </select>

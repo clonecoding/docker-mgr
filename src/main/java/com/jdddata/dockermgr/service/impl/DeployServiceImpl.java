@@ -68,7 +68,11 @@ public class DeployServiceImpl implements DeployService {
             for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDto.getDeployInfoDetailDtoList()) {
                 ProjectDeployInfoDetail projectDeployInfoDetail = deployInfoDetailDto.convertoEntity(deployInfoDto.getId());
                 projectDeployInfoDetails.add(projectDeployInfoDetail);
-                projectDeployInfoDetailMapper.updateByPrimaryKeySelective(projectDeployInfoDetail);
+                if(Objects.nonNull(deployInfoDetailDto.getId())){
+                    projectDeployInfoDetailMapper.updateByPrimaryKeySelective(projectDeployInfoDetail);
+                }else {
+                    projectDeployInfoDetailMapper.insertSelective(projectDeployInfoDetail);
+                }
             }
             ProjectDeployInfo deployInfo = deployInfoDto.convert();
             projectDeployInfo = deployInfo;
