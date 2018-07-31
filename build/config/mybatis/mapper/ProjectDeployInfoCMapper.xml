@@ -17,30 +17,37 @@
     <resultMap id="DeployDetail" type="com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="git_url" property="gitUrl" jdbcType="VARCHAR"/>
         <result column="git_version" property="gitVersion" jdbcType="VARCHAR"/>
         <result column="deploy_env" property="deployEnv" jdbcType="INTEGER"/>
-        <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
-        <collection property="deployInfoDetailDtoList"
-                    ofType="com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto">
-            <result column="detail_id" property="id" jdbcType="BIGINT"/>
-            <result column="host_ip" property="hostIp" jdbcType="VARCHAR"/>
-            <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR"/>
-            <result column="deploy_mode" property="deployMode" jdbcType="INTEGER"/>
-            <result column="git_version" property="gitVersion" jdbcType="VARCHAR"/>
-            <result column="nexus_target_url" property="nexusTargetUrl" jdbcType="VARCHAR"/>
-            <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT"/>
-            <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR"/>
-            <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR"/>
-            <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR"/>
-            <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR"/>
-            <result column="docker_link" property="dockerLink" jdbcType="VARCHAR"/>
-            <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR"/>
-            <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR"/>
-            <result column="docker_memory_swap" property="dockerMemorySwap" jdbcType="VARCHAR"/>
-            <result column="docker_memory_reservation" property="dockerMemoryReservation" jdbcType="VARCHAR"/>
-            <result column="docker_memory_swappiness" property="dockerMemorySwappiness" jdbcType="VARCHAR"/>
+        <collection property="artifactDtoList" ofType="com.jdddata.dockermgr.northbound.dto.deploy.ArtifactDto">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="project_deploy_info_id" property="projectDeployInfoId" jdbcType="BIGINT"/>
+            <result column="artifact_id" property="name" jdbcType="VARCHAR"/>
+            <result column="nexus_target_url" property="nexusUrl" jdbcType="VARCHAR"/>
+            <collection property="deployInfoDetailDtoList"
+                        ofType="com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto">
+                <id column="id" property="id" jdbcType="BIGINT"/>
+                <result column="project_deploy_info_artifact_id" property="projectDeployInfoArtifactId"
+                        jdbcType="BIGINT"/>
+                <result column="host_ip" property="hostIp" jdbcType="VARCHAR"/>
+                <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR"/>
+                <result column="deploy_mode" property="deployMode" jdbcType="INTEGER"/>
+                <result column="dockerfile_url" property="dockerfileUrl" jdbcType="VARCHAR"/>
+                <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT"/>
+                <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR"/>
+                <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR"/>
+                <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR"/>
+                <result column="docker_cmd" property="dockerCmd" jdbcType="VARCHAR"/>
+                <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR"/>
+                <result column="docker_link" property="dockerLink" jdbcType="VARCHAR"/>
+                <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR"/>
+                <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR"/>
+                <result column="docker_memory_swap" property="dockerMemorySwap" jdbcType="VARCHAR"/>
+                <result column="docker_memory_reservation" property="dockerMemoryReservation" jdbcType="VARCHAR"/>
+                <result column="docker_memory_swappiness" property="dockerMemorySwappiness" jdbcType="VARCHAR"/>
+            </collection>
         </collection>
-
     </resultMap>
     <sql id="Base_Column_List">
       id, project_id, git_version, deploy_env,is_valid,is_delete
@@ -53,11 +60,38 @@
         where 1=1
     </select>
     <select id="listDetail" resultMap="DeployDetail">
-        select pdi.id, pdi.project_id, pdi.git_version, pdi.deploy_env,pdi.is_valid,pdid.id as detail_id,pdid.host_ip, pdid.docker_env, pdid.deploy_mode, pdid.git_version,
-        pdid.nexus_target_url, pdid.dockerfile_id, pdid.docker_container_name, pdid.docker_image_name, pdid.docker_entrypoint,
-        pdid.docker_mount, pdid.docker_link, pdid.docker_cpuset_cpus, pdid.docker_memory, pdid.docker_memory_swap,
-        pdid.docker_memory_reservation, pdid.docker_memory_swappiness
-        from project_deploy_info pdi left join project_deploy_info_detail pdid on pdi.id =pdid.project_deploy_info_id
-        where 1=1 and pdi.is_delete=0
+SELECT
+	pdi.id,
+	pdi.project_id,
+	pdi.git_url,
+	pdi.git_version,
+	pdi.deploy_env,
+	pdia.id,
+	pdia.project_deploy_info_id,
+	pdia.artifact_id,
+	pdia.nexus_target_url,
+	pdid.id,
+	pdid.project_deploy_info_artifact_id,
+	pdid.host_ip,
+	pdid.docker_env,
+	pdid.deploy_mode,
+	pdid.dockerfile_url,
+	pdid.dockerfile_id,
+	pdid.docker_container_name,
+	pdid.docker_image_name,
+	pdid.docker_entrypoint,
+	pdid.docker_cmd,
+	pdid.docker_mount,
+	pdid.docker_link,
+	pdid.docker_cpuset_cpus,
+	pdid.docker_memory,
+	pdid.docker_memory_swap,
+	pdid.docker_memory_reservation,
+	pdid.docker_memory_swappiness
+FROM
+	project_deploy_info pdi
+LEFT JOIN project_deploy_info_artifact pdia ON pdia.id = pdi.project_deploy_info_id
+LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
+WHERE 1=1
     </select>
 </mapper>

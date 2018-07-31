@@ -6,6 +6,8 @@ public class DeployInfoDetailDto {
 
     private Long id;
 
+    private Long projectDeployInfoArtifactId;
+
     /**
      * 1.docker / 2.not docker
      */
@@ -219,5 +221,13 @@ public class DeployInfoDetailDto {
 //        deployInfoDetail.setUpdateTime();
 //        deployInfoDetail.setUpdateUser();
         return deployInfoDetail;
+    }
+
+    public Long getProjectDeployInfoArtifactId() {
+        return projectDeployInfoArtifactId;
+    }
+
+    public void setProjectDeployInfoArtifactId(Long projectDeployInfoArtifactId) {
+        this.projectDeployInfoArtifactId = projectDeployInfoArtifactId;
     }
 }

@@ -7,6 +7,8 @@ import java.util.List;
 public class ArtifactDto {
     private Long id;
 
+    private Long projectDeployInfoId;
+
     /**
      * project artifect_id
      */
@@ -61,5 +63,13 @@ public class ArtifactDto {
 //        projectDeployInfoArtifact.setUpdateTime();
 //        projectDeployInfoArtifact.setUpdateUser();
         return projectDeployInfoArtifact;
+    }
+
+    public Long getProjectDeployInfoId() {
+        return projectDeployInfoId;
+    }
+
+    public void setProjectDeployInfoId(Long projectDeployInfoId) {
+        this.projectDeployInfoId = projectDeployInfoId;
     }
 }
