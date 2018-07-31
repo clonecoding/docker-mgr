@@ -50,13 +50,20 @@ public class GocdDeployPool {
 
     }
 
+    /**
+     * @param projectDeployInfoDetails
+     * @return
+     * @Auther 葛志伟
+     * <p>
+     * 这个方法很厉害，根据某个字段去重
+     * 这个方法的意思是 根据镜像名字去重，因为打镜像包的时候主要打一个，可以根据这个起多个容器
+     */
     private static List<ProjectDeployInfoDetail> computeImages(List<ProjectDeployInfoDetail> projectDeployInfoDetails) {
         return projectDeployInfoDetails.stream().collect(
                 collectingAndThen(
                         toCollection(() -> new TreeSet<>(Comparator.comparing(ProjectDeployInfoDetail::getDockerImageName))), ArrayList::new)
         );
     }
-
 
 
 }

@@ -43,7 +43,7 @@ public class BuildDockerPipeline {
         Pipeline pipeline = new Pipeline();
         pipeline.setLabelTemplate(PipelineConstants.LABEL_TEMPLATE);
         pipeline.setLockBehavior("none");
-        pipeline.setName(projectDeployInfoDetail.getDockerContainerName() + "-buildDocker");
+        pipeline.setName(DeployEnvConvert.fetchAttrNameFromImage(projectDeployInfoDetail.getDockerImageName()) + "-buildDocker");
 //        pipeline.setTemplate(null);
 //        pipeline.setParameters();
         pipeline.setEnvironmentVariables(createEnvLocal(projectDeployInfo, projectDeployInfoDetail, projectMgr));
