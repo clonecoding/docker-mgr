@@ -19,6 +19,8 @@ public class ProjectDeployInfoDetail {
 
     private String nexusTargetUrl;
 
+    private String dockerfileUrl;
+
     private Long dockerfileId;
 
     private String dockerContainerName;
@@ -115,6 +117,14 @@ public class ProjectDeployInfoDetail {
 
     public void setNexusTargetUrl(String nexusTargetUrl) {
         this.nexusTargetUrl = nexusTargetUrl == null ? null : nexusTargetUrl.trim();
+    }
+
+    public String getDockerfileUrl() {
+        return dockerfileUrl;
+    }
+
+    public void setDockerfileUrl(String dockerfileUrl) {
+        this.dockerfileUrl = dockerfileUrl == null ? null : dockerfileUrl.trim();
     }
 
     public Long getDockerfileId() {

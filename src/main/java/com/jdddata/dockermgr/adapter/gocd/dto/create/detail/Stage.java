@@ -1,11 +1,14 @@
 
 package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.List;
 
 public class Stage {
 
     private String name;
+    @JSONField(name = "fetch_materials")
     private Boolean fetchMaterials;
     private Boolean cleanWorkingDirectory;
     private Boolean neverCleanupArtifacts;
