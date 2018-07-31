@@ -29,21 +29,24 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
-    insert into project_deploy_info (id, project_id, git_url, 
-      git_version, deploy_env, is_valid, 
-      is_delete, create_time, create_user, 
-      update_time, update_user)
-    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{gitUrl,jdbcType=VARCHAR}, 
-      #{gitVersion,jdbcType=VARCHAR}, #{deployEnv,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into project_deploy_info (project_id, git_url, git_version, 
+      deploy_env, is_valid, is_delete, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{projectId,jdbcType=BIGINT}, #{gitUrl,jdbcType=VARCHAR}, #{gitVersion,jdbcType=VARCHAR}, 
+      #{deployEnv,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into project_deploy_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="projectId != null" >
         project_id,
       </if>
@@ -76,9 +79,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="projectId != null" >
         #{projectId,jdbcType=BIGINT},
       </if>

@@ -38,27 +38,30 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
-    insert into container_info (id, host_ip, container_id, 
-      container_name, image_name, image_tag, 
-      image_id, command, container_create_time, 
-      container_ports, container_state, status, 
-      network_mode, is_valid, is_delete, 
-      create_time, create_user, update_time, 
-      update_user)
-    values (#{id,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, #{containerId,jdbcType=VARCHAR}, 
-      #{containerName,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR}, #{imageTag,jdbcType=VARCHAR}, 
-      #{imageId,jdbcType=VARCHAR}, #{command,jdbcType=VARCHAR}, #{containerCreateTime,jdbcType=TIMESTAMP}, 
-      #{containerPorts,jdbcType=VARCHAR}, #{containerState,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{networkMode,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into container_info (host_ip, container_id, container_name, 
+      image_name, image_tag, image_id, 
+      command, container_create_time, container_ports, 
+      container_state, status, network_mode, 
+      is_valid, is_delete, create_time, 
+      create_user, update_time, update_user
+      )
+    values (#{hostIp,jdbcType=VARCHAR}, #{containerId,jdbcType=VARCHAR}, #{containerName,jdbcType=VARCHAR}, 
+      #{imageName,jdbcType=VARCHAR}, #{imageTag,jdbcType=VARCHAR}, #{imageId,jdbcType=VARCHAR}, 
+      #{command,jdbcType=VARCHAR}, #{containerCreateTime,jdbcType=TIMESTAMP}, #{containerPorts,jdbcType=VARCHAR}, 
+      #{containerState,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{networkMode,jdbcType=VARCHAR}, 
+      #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ContainerInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into container_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="hostIp != null" >
         host_ip,
       </if>
@@ -115,9 +118,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="hostIp != null" >
         #{hostIp,jdbcType=VARCHAR},
       </if>

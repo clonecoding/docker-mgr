@@ -17,10 +17,15 @@
     id, project_deploy_info_id, artifact_id, nexus_target_url, is_valid, is_delete, create_time, 
     create_user, update_time, update_user
   </sql>
-    <select id="selectByDeployId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByDeployId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from project_deploy_info_artifact
         where project_deploy_info_id = #{deployId,jdbcType=INTEGER}
     </select>
+
+    <delete id="deleteByDeployId" parameterType="java.lang.Long">
+      delete from project_deploy_info_artifact
+        where project_deploy_info_id = #{deployId,jdbcType=BIGINT}
+    </delete>
 </mapper>

@@ -46,7 +46,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
-    insert into project_deploy_info_detail (id, project_deploy_info_artifact_id, host_ip, 
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into project_deploy_info_detail (project_deploy_info_artifact_id, host_ip, 
       docker_env, deploy_mode, git_version, 
       dockerfile_url, dockerfile_id, docker_container_name, 
       docker_image_name, docker_entrypoint, docker_cmd, 
@@ -55,7 +58,7 @@
       docker_memory_swappiness, is_valid, is_delete, 
       create_time, create_user, update_time, 
       update_user)
-    values (#{id,jdbcType=BIGINT}, #{projectDeployInfoArtifactId,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, 
+    values (#{projectDeployInfoArtifactId,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, 
       #{dockerEnv,jdbcType=VARCHAR}, #{deployMode,jdbcType=INTEGER}, #{gitVersion,jdbcType=VARCHAR}, 
       #{dockerfileUrl,jdbcType=VARCHAR}, #{dockerfileId,jdbcType=BIGINT}, #{dockerContainerName,jdbcType=VARCHAR}, 
       #{dockerImageName,jdbcType=VARCHAR}, #{dockerEntrypoint,jdbcType=VARCHAR}, #{dockerCmd,jdbcType=VARCHAR}, 
@@ -66,11 +69,11 @@
       #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into project_deploy_info_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="projectDeployInfoArtifactId != null" >
         project_deploy_info_artifact_id,
       </if>
@@ -145,9 +148,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="projectDeployInfoArtifactId != null" >
         #{projectDeployInfoArtifactId,jdbcType=BIGINT},
       </if>

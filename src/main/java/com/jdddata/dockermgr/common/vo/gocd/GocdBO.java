@@ -49,6 +49,7 @@ public class GocdBO {
             gocdBoDetail.setProjectId(String.valueOf(projectMgr.getId()));
             gocdBoDetail.setDockerfileId(String.valueOf(projectDeployInfoDetail.getDockerfileId()));
             gocdBoDetail.setDockerfileUrl(projectDeployInfoDetail.getDockerfileUrl());
+            gocdBoDetails.add(gocdBoDetail);
         }
         return gocdBoDetails;
     }

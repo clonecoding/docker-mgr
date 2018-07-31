@@ -3,7 +3,6 @@ package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.dao.cmapper.ContainerInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ServerMgrCMapper;
-import com.jdddata.dockermgr.dao.mapper.ServerMgrMapper;
 import com.jdddata.dockermgr.service.ProjectMgrService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

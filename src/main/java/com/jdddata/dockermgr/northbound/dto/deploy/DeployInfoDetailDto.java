@@ -191,10 +191,10 @@ public class DeployInfoDetailDto {
         this.dockerfileUrl = dockerfileUrl;
     }
 
-    public ProjectDeployInfoDetail convertEntityWithId(int artifactId) {
+    public ProjectDeployInfoDetail convertEntityWithId(Long artifactId) {
         ProjectDeployInfoDetail deployInfoDetail = new ProjectDeployInfoDetail();
         deployInfoDetail.setId(this.id);
-        deployInfoDetail.setProjectDeployInfoArtifactId(Long.valueOf(artifactId));
+        deployInfoDetail.setProjectDeployInfoArtifactId(artifactId);
         deployInfoDetail.setHostIp(this.hostIp);
         deployInfoDetail.setDockerEnv(this.dockerEnv);
         deployInfoDetail.setDeployMode(this.deployMode);

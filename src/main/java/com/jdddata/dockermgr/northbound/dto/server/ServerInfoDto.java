@@ -4,7 +4,6 @@ import com.jdddata.dockermgr.common.util.CryptoUtil;
 import com.jdddata.dockermgr.dao.entity.ServerMgr;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class ServerInfoDto {
 

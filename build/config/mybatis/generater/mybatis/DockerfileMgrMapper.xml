@@ -20,17 +20,18 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
-    insert into dockerfile_mgr (id, dockerfile_name, dockerfile_url
-      )
-    values (#{id,jdbcType=BIGINT}, #{dockerfileName,jdbcType=VARCHAR}, #{dockerfileUrl,jdbcType=VARCHAR}
-      )
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dockerfile_mgr (dockerfile_name, dockerfile_url)
+    values (#{dockerfileName,jdbcType=VARCHAR}, #{dockerfileUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.DockerfileMgr" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into dockerfile_mgr
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="dockerfileName != null" >
         dockerfile_name,
       </if>
@@ -39,9 +40,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="dockerfileName != null" >
         #{dockerfileName,jdbcType=VARCHAR},
       </if>

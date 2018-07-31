@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="project_deploy_info_artifact_id" property="projectDeployInfoArtifactId" jdbcType="BIGINT" />
-    <result column="host_ip" property="hostIp" jdbcType="VARCHAR" />
-    <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR" />
-    <result column="deploy_mode" property="deployMode" jdbcType="INTEGER" />
-    <result column="git_version" property="gitVersion" jdbcType="VARCHAR" />
-    <result column="dockerfile_url" property="dockerfileUrl" jdbcType="VARCHAR" />
-    <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT" />
-    <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR" />
-    <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR" />
-    <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR" />
-    <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR" />
-    <result column="docker_link" property="dockerLink" jdbcType="VARCHAR" />
-    <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR" />
-    <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR" />
-    <result column="docker_memory_swap" property="dockerMemorySwap" jdbcType="VARCHAR" />
-    <result column="docker_memory_reservation" property="dockerMemoryReservation" jdbcType="VARCHAR" />
-    <result column="docker_memory_swappiness" property="dockerMemorySwappiness" jdbcType="VARCHAR" />
-    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
-    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoDetailMapper">
+    <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="project_deploy_info_artifact_id" property="projectDeployInfoArtifactId" jdbcType="BIGINT"/>
+        <result column="host_ip" property="hostIp" jdbcType="VARCHAR"/>
+        <result column="docker_env" property="dockerEnv" jdbcType="VARCHAR"/>
+        <result column="deploy_mode" property="deployMode" jdbcType="INTEGER"/>
+        <result column="git_version" property="gitVersion" jdbcType="VARCHAR"/>
+        <result column="dockerfile_url" property="dockerfileUrl" jdbcType="VARCHAR"/>
+        <result column="dockerfile_id" property="dockerfileId" jdbcType="BIGINT"/>
+        <result column="docker_container_name" property="dockerContainerName" jdbcType="VARCHAR"/>
+        <result column="docker_image_name" property="dockerImageName" jdbcType="VARCHAR"/>
+        <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR"/>
+        <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR"/>
+        <result column="docker_link" property="dockerLink" jdbcType="VARCHAR"/>
+        <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR"/>
+        <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR"/>
+        <result column="docker_memory_swap" property="dockerMemorySwap" jdbcType="VARCHAR"/>
+        <result column="docker_memory_reservation" property="dockerMemoryReservation" jdbcType="VARCHAR"/>
+        <result column="docker_memory_swappiness" property="dockerMemorySwappiness" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, project_deploy_info_artifact_id, host_ip, docker_env, deploy_mode, git_version, 
     dockerfile_url, dockerfile_id, docker_container_name, docker_image_name, docker_entrypoint, 
     docker_mount, docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap, 
     docker_memory_reservation, docker_memory_swappiness, is_valid, is_delete, create_time, 
     create_user, update_time, update_user
   </sql>
-  <select id="selectByArtiIdIn" resultMap="BaseResultMap" parameterType="java.util.List" >
-    select 
-    <include refid="Base_Column_List" />
-    from project_deploy_info_detail
-    where project_deploy_info_artifact_id in
-    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
-  </select>
+    <select id="selectByArtiIdIn" resultMap="BaseResultMap" parameterType="java.util.List">
+        select
+        <include refid="Base_Column_List"/>
+        from project_deploy_info_detail
+        where project_deploy_info_artifact_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+    <delete id="deleteByArtiIdIn"  parameterType="java.util.List">
+        delete
+        <include refid="Base_Column_List"/>
+        from project_deploy_info_detail
+        where project_deploy_info_artifact_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
+
+
 </mapper>

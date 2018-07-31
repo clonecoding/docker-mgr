@@ -28,21 +28,24 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ServerMgr" >
-    insert into server_mgr (id, typeName, addTime, 
-      belong, ip, port, username, 
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into server_mgr (typeName, addTime, belong, 
+      ip, port, username, 
       password, vcpus, memory, 
       swap)
-    values (#{id,jdbcType=BIGINT}, #{typename,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, 
-      #{belong,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+    values (#{typename,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{belong,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{vcpus,jdbcType=INTEGER}, #{memory,jdbcType=INTEGER}, 
       #{swap,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ServerMgr" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into server_mgr
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="typename != null" >
         typeName,
       </if>
@@ -75,9 +78,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="typename != null" >
         #{typename,jdbcType=VARCHAR},
       </if>

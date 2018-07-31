@@ -51,6 +51,8 @@
         <!-- 指定数据库表 -->
         <table schema="" tableName="%" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               enableUpdateByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
     </context>
 </generatorConfiguration>

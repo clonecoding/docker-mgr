@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProjectDeployInfoDetailCMapper {
 
     List<ProjectDeployInfoDetail> selectByArtiIdIn(List<Long> longs);
+
+    void deleteByArtiIdIn(List<Long> longs);
 }

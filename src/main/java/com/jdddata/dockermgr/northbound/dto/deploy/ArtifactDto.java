@@ -1,6 +1,5 @@
 package com.jdddata.dockermgr.northbound.dto.deploy;
 
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact;
 
 import java.util.List;
@@ -49,10 +48,10 @@ public class ArtifactDto {
         this.deployInfoDetailDtoList = deployInfoDetailDtoList;
     }
 
-    public ProjectDeployInfoArtifact convertEntityWithId(int deployId) {
+    public ProjectDeployInfoArtifact convertEntityWithId(Long deployId) {
         ProjectDeployInfoArtifact projectDeployInfoArtifact = new ProjectDeployInfoArtifact();
         projectDeployInfoArtifact.setId(this.id);
-        projectDeployInfoArtifact.setProjectDeployInfoId(Long.valueOf(deployId));
+        projectDeployInfoArtifact.setProjectDeployInfoId(deployId);
         projectDeployInfoArtifact.setArtifactId(this.name);
         projectDeployInfoArtifact.setNexusTargetUrl(this.nexusUrl);
 //        projectDeployInfoArtifact.setIsValid();

@@ -1,15 +1,8 @@
 package com.jdddata.dockermgr.service.impl;
 
-import com.jdddata.dockermgr.adapter.gocd.dto.create.*;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.service.GocdService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: zhangheng(赛事)

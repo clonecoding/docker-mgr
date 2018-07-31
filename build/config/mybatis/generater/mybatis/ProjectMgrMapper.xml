@@ -31,23 +31,26 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.ProjectMgr" >
-    insert into project_mgr (id, project_name, project_group, 
-      contact_name, contact_mobile, contact_email, 
-      alarm_email_address, git_url, is_delete, 
-      create_time, create_user, update_time, 
-      update_user)
-    values (#{id,jdbcType=BIGINT}, #{projectName,jdbcType=VARCHAR}, #{projectGroup,jdbcType=VARCHAR}, 
-      #{contactName,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR}, 
-      #{alarmEmailAddress,jdbcType=VARCHAR}, #{gitUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into project_mgr (project_name, project_group, contact_name, 
+      contact_mobile, contact_email, alarm_email_address, 
+      git_url, is_delete, create_time, 
+      create_user, update_time, update_user
+      )
+    values (#{projectName,jdbcType=VARCHAR}, #{projectGroup,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, 
+      #{contactMobile,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR}, #{alarmEmailAddress,jdbcType=VARCHAR}, 
+      #{gitUrl,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectMgr" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into project_mgr
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="projectName != null" >
         project_name,
       </if>
@@ -86,9 +89,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="projectName != null" >
         #{projectName,jdbcType=VARCHAR},
       </if>
