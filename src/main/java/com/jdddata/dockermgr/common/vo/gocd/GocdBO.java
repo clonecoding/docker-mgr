@@ -13,10 +13,13 @@ public class GocdBO {
 
     private Integer deployEnv;
 
+    private String projectName;
+
     private List<GocdBoDetail> gocdBoDetailList;
 
     public GocdBO(ProjectMgr projectMgr, ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoArtifact> projectDeployInfoArtifacts, List<ProjectDeployInfoDetail> projectDeployInfoDetails) {
         this.deployEnv = projectDeployInfo.getDeployEnv();
+        this.projectName = projectMgr.getProjectName();
         this.gocdBoDetailList = createGocdDetailList(projectMgr, projectDeployInfo, projectDeployInfoArtifacts, projectDeployInfoDetails);
     }
 
@@ -27,6 +30,7 @@ public class GocdBO {
             List<ProjectDeployInfoArtifact> infoArtifacts = projectDeployInfoArtifacts.stream().filter(p -> p.getId() == projectDeployInfoArtifactId).collect(Collectors.toList());
             ProjectDeployInfoArtifact projectDeployInfoArtifact = infoArtifacts.get(0);
             GocdBoDetail gocdBoDetail = new GocdBoDetail();
+            gocdBoDetail.setDeployEnv(this.deployEnv);
             gocdBoDetail.setProjectName(projectMgr.getProjectName());
             gocdBoDetail.setGitUrl(projectMgr.getGitUrl());
             gocdBoDetail.setGitVersion(projectDeployInfo.getGitVersion());
@@ -70,4 +74,11 @@ public class GocdBO {
         this.gocdBoDetailList = gocdBoDetailList;
     }
 
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 }

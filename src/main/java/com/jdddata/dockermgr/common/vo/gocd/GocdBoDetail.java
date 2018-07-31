@@ -3,6 +3,8 @@ package com.jdddata.dockermgr.common.vo.gocd;
 public class GocdBoDetail {
     private String projectName;
 
+    private Integer deployEnv;
+
     private String gitUrl;
 
     private String gitVersion;
@@ -226,5 +228,13 @@ public class GocdBoDetail {
 
     public void setDockerfileUrl(String dockerfileUrl) {
         this.dockerfileUrl = dockerfileUrl;
+    }
+
+    public Integer getDeployEnv() {
+        return deployEnv;
+    }
+
+    public void setDeployEnv(Integer deployEnv) {
+        this.deployEnv = deployEnv;
     }
 }

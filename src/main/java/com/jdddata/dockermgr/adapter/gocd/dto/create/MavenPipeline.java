@@ -1,8 +1,12 @@
 package com.jdddata.dockermgr.adapter.gocd.dto.create;
 
+import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.detail.*;
 import com.jdddata.dockermgr.common.constant.PipelineConstants;
 import com.jdddata.dockermgr.common.util.DeployEnvConvert;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
+import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
+import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +18,12 @@ public class MavenPipeline {
 
     public MavenPipeline(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
         this.group = projectMgr.getProjectName() + DeployEnvConvert.toStr(projectDeployInfo.getDeployEnv());
+        Pipeline pipeline = createPipelineLocal(projectDeployInfo, projectDeployInfoDetails, projectMgr);
+        this.pipeline = pipeline;
+    }
+
+    public MavenPipeline(String projectName, String gitUrl, String gitVersion, Integer deployEnv) {
+        this.group = GocdStrCommon.pipelineGroup(projectName,deployEnv);
         Pipeline pipeline = createPipelineLocal(projectDeployInfo, projectDeployInfoDetails, projectMgr);
         this.pipeline = pipeline;
     }
