@@ -90,7 +90,7 @@ SELECT
 	pdid.docker_memory_swappiness
 FROM
 	project_deploy_info pdi
-LEFT JOIN project_deploy_info_artifact pdia ON pdia.id = pdi.project_deploy_info_id
+LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi.id
 LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
 WHERE 1=1
     </select>
