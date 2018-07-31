@@ -51,6 +51,8 @@ public class DeployInfoDetailDto {
 
     private String dockerfileId;
 
+    private String dockerfileUrl;
+
     public Long getId() {
         return id;
     }
@@ -224,6 +226,7 @@ public class DeployInfoDetailDto {
         projectDeployInfoDetail.setDockerMemoryReservation(this.dockerMemoryReservation);
         projectDeployInfoDetail.setDockerMemorySwappiness(this.dockerMemorySwappiness);
         projectDeployInfoDetail.setDockerfileId(Long.valueOf(this.dockerfileId));
+        projectDeployInfoDetail.setDockerfileUrl(this.dockerfileUrl);
 //        projectDeployInfoDetail.setIsValid(this.dis);
 //        projectDeployInfoDetail.setIsDelete();
 //        projectDeployInfoDetail.setCreateTime();
@@ -240,5 +243,13 @@ public class DeployInfoDetailDto {
 
     public void setDockerfileId(String dockerfileId) {
         this.dockerfileId = dockerfileId;
+    }
+
+    public String getDockerfileUrl() {
+        return dockerfileUrl;
+    }
+
+    public void setDockerfileUrl(String dockerfileUrl) {
+        this.dockerfileUrl = dockerfileUrl;
     }
 }

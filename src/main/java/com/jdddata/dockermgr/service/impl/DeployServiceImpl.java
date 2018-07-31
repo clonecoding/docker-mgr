@@ -7,6 +7,7 @@ import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
 import com.jdddata.dockermgr.dao.entity.ProjectMgr;
+import com.jdddata.dockermgr.dao.mapper.DockerfileMgrMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoDetailMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectDeployInfoMapper;
 import com.jdddata.dockermgr.dao.mapper.ProjectMgrMapper;
@@ -41,6 +42,9 @@ public class DeployServiceImpl implements DeployService {
 
     @Autowired
     private ProjectDeployInfoDetailMapper projectDeployInfoDetailMapper;
+
+    @Autowired
+    private DockerfileMgrMapper dockerfileMgrMapper;
 
     @Override
     public ResultVo fetchPreInfo(String projectId) {
