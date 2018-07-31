@@ -2,7 +2,6 @@ package com.jdddata.dockermgr.adapter.gocd;
 
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
-import com.jdddata.dockermgr.common.util.DeployEnvConvert;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 
