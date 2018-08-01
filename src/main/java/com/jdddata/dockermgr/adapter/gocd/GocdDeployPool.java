@@ -1,6 +1,8 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
@@ -11,6 +13,7 @@ import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,6 +35,7 @@ public class GocdDeployPool {
     private static final String HOST = "https://192.168.136.158:8154";
 
     private static final String PIPELINE_CREATE = HOST + "/go/api/admin/pipelines";
+    private static final String PIPELINE_GOURP_GET = HOST + "/go/api/config/pipeline_groups";
 //    public static void initProject(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
 //        //判断测试还是生产部署
 //        switch (projectDeployInfo.getDeployEnv().intValue()) {
@@ -162,5 +166,21 @@ public class GocdDeployPool {
      */
     private static void initPipelineGroup(String pipelineGroup) {
         LOGGER.info("step into the #initPipelineGroup");
+        String json = HttpClientUtil.getWithHttps(PIPELINE_GOURP_GET);
+        List<JSONObject> jsonObjects = JSON.parseArray(json,JSONObject.class);
+        List<String> strings = new ArrayList<>();
+        for (JSONObject jsonObject : jsonObjects) {
+            if (jsonObject.getString("name").equalsIgnoreCase(pipelineGroup)) {
+                JSONArray pipelines = jsonObject.getJSONArray("pipelines");
+                for (int i = 0; i < pipelines.size(); i++) {
+                    JSONObject jobj = pipelines.getJSONObject(i);
+                    strings.add(jobj.getString("name"));
+                }
+            }
+        }
+        if (CollectionUtils.isEmpty(strings)) {
+            return;
+        }
+//        HttpClientUtil
     }
 }
