@@ -1,6 +1,6 @@
 package com.jdddata.dockermgr.adapter.gocd.dto.create;
 
-import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.detail.*;
 import com.jdddata.dockermgr.common.constant.PipelineConstants;
 

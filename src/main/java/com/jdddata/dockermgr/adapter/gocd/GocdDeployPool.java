@@ -1,12 +1,12 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
 import com.alibaba.fastjson.JSON;
-import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.GitPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
-import com.jdddata.dockermgr.common.util.HttpClientUtil;
+import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 

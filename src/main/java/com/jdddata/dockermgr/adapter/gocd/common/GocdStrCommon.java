@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon;
+package com.jdddata.dockermgr.adapter.gocd.common;
 
 import com.jdddata.dockermgr.adapter.gocd.dto.create.detail.EnvironmentVariable;
 import com.jdddata.dockermgr.common.util.DeployEnvConvert;
