@@ -1,6 +1,8 @@
 
 package com.jdddata.dockermgr.adapter.gocd.dto.create.detail;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.List;
 
 public class Pipeline {
@@ -10,6 +12,7 @@ public class Pipeline {
     private String name;
     private Object template;
     private List<Object> parameters = null;
+    @JSONField(name = "environment_variables")
     private List<EnvironmentVariable> environmentVariables = null;
     private List<Material> materials = null;
     private List<Stage> stages = null;
