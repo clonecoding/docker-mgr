@@ -28,7 +28,7 @@ public class GocdStrCommon {
         List<EnvironmentVariable> environmentVariables = new ArrayList<>();
 
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", gocdBoDetail.getHostIp()));
-        environmentVariables.add(createEnvVariableLocal(true, "GIT_BRANCH", secure(gocdBoDetail.getGitUrl())));
+        environmentVariables.add(createEnvVariableLocal(true, "GIT_URL", secure(gocdBoDetail.getGitUrl())));
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", gocdBoDetail.getDockerEnv()));
         environmentVariables.add(createEnvVariableLocal(false, "GIT_BRANCH", gocdBoDetail.getGitVersion()));
         environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", gocdBoDetail.getNexusUrl()));
