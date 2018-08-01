@@ -43,7 +43,6 @@
     </select>
     <delete id="deleteByArtiIdIn"  parameterType="java.util.List">
         delete
-        <include refid="Base_Column_List"/>
         from project_deploy_info_detail
         where project_deploy_info_artifact_id in
         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>

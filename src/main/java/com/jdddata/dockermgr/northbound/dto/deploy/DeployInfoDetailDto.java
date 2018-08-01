@@ -11,7 +11,7 @@ public class DeployInfoDetailDto {
     /**
      * 1.docker / 2.not docker
      */
-    private Integer deployMode;
+    private String deployMode;
 
     /**
      * 宿主机
@@ -57,11 +57,11 @@ public class DeployInfoDetailDto {
         this.id = id;
     }
 
-    public Integer getDeployMode() {
+    public String getDeployMode() {
         return deployMode;
     }
 
-    public void setDeployMode(Integer deployMode) {
+    public void setDeployMode(String deployMode) {
         this.deployMode = deployMode;
     }
 
@@ -199,7 +199,7 @@ public class DeployInfoDetailDto {
         deployInfoDetail.setProjectDeployInfoArtifactId(artifactId);
         deployInfoDetail.setHostIp(this.hostIp);
         deployInfoDetail.setDockerEnv(this.dockerEnv);
-        deployInfoDetail.setDeployMode(this.deployMode);
+        deployInfoDetail.setDeployMode(Integer.valueOf(this.deployMode));
 //        deployInfoDetail.setGitVersion(this.G);
         deployInfoDetail.setDockerfileUrl(dockerfileUrl);
         deployInfoDetail.setDockerfileId(this.dockerfileId);

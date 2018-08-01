@@ -26,7 +26,7 @@ public class DeployInfoDto {
      * 0:测试
      * 1：生产
      */
-    private Integer deployEnv;
+    private String deployEnv;
 
     /**
      * git 参数
@@ -53,11 +53,11 @@ public class DeployInfoDto {
         this.projectId = projectId;
     }
 
-    public Integer getDeployEnv() {
+    public String getDeployEnv() {
         return deployEnv;
     }
 
-    public void setDeployEnv(Integer deployEnv) {
+    public void setDeployEnv(String deployEnv) {
         this.deployEnv = deployEnv;
     }
 
@@ -99,7 +99,7 @@ public class DeployInfoDto {
         projectDeployInfo.setProjectId(this.projectId);
         projectDeployInfo.setGitUrl(this.gitUrl);
         projectDeployInfo.setGitVersion(this.gitVersion);
-        projectDeployInfo.setDeployEnv(this.deployEnv);
+        projectDeployInfo.setDeployEnv(Integer.valueOf(this.deployEnv));
 //        projectDeployInfo.setIsValid();
 //        projectDeployInfo.setIsDelete();
 //        projectDeployInfo.setCreateTime();
