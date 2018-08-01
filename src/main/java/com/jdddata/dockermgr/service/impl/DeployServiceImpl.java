@@ -7,10 +7,7 @@ import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoArtifactCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoCMapper;
 import com.jdddata.dockermgr.dao.cmapper.ProjectDeployInfoDetailCMapper;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
-import com.jdddata.dockermgr.dao.entity.ProjectMgr;
+import com.jdddata.dockermgr.dao.entity.*;
 import com.jdddata.dockermgr.dao.mapper.*;
 import com.jdddata.dockermgr.northbound.dto.deploy.ArtifactDto;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto;
@@ -100,7 +97,10 @@ public class DeployServiceImpl implements DeployService {
             projectDeployInfoArtifactMapper.insertSelective(projectDeployInfoArtifact);
             Long artifactId = projectDeployInfoArtifact.getId();
             for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDetailDtoList) {
-                projectDeployInfoDetailMapper.insertSelective(deployInfoDetailDto.convertEntityWithId(artifactId));
+                Long dockerfileId = deployInfoDetailDto.getDockerfileId();
+                DockerfileMgr dockerfileMgr = dockerfileMgrMapper.selectByPrimaryKey(dockerfileId);
+                String dockerfileUrl = dockerfileMgr.getDockerfileUrl();
+                projectDeployInfoDetailMapper.insertSelective(deployInfoDetailDto.convertEntityWithId(artifactId, dockerfileUrl));
             }
         }
         GocdBO gocdBo = computeFrom(deployId);
