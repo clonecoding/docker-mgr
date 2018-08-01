@@ -14,7 +14,6 @@ import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.service.DeployService;
 import com.jdddata.dockermgr.service.GitService;
-import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
