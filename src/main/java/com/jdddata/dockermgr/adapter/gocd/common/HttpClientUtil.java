@@ -5,6 +5,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.*;
@@ -158,6 +159,42 @@ public class HttpClientUtil {
                     EntityUtils.consume(response.getEntity());
                 } catch (IOException e) {
 
+                }
+            }
+        }
+        return httpStr;
+    }
+
+
+    /**
+     * @author zhangheng(赛事)
+     * @description delete 方法
+     * @param apiUrl
+     * @return
+     */
+    public static String delete(String apiUrl) {
+        CloseableHttpClient httpClient = createClientSSLDefault();
+        String httpStr = null;
+        CloseableHttpResponse response = null;
+        HttpDelete httpDelete= new HttpDelete(apiUrl);
+        try {
+            httpDelete.setConfig(requestConfig);
+            String encoding = DatatypeConverter.printBase64Binary("gezhiwei:123456".getBytes(DEFAULTCHARSET));
+            httpDelete.setHeader("Authorization", "Basic " + encoding);
+            httpDelete.setHeader("Accept", "application/vnd.go.cd.v5+json");
+            httpDelete.setHeader("Content-Type", "application/json");
+            response = httpClient.execute(httpDelete);
+            HttpEntity entity = response.getEntity();
+            httpStr = EntityUtils.toString(entity, DEFAULTCHARSET);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                try {
+                    EntityUtils.consume(response.getEntity());
+                } catch (IOException e) {
                 }
             }
         }
