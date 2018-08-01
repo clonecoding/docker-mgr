@@ -45,7 +45,7 @@ public class DeployInfoDetailDto {
 
     private String projectId;
 
-    private String dockerfileId;
+    private Long dockerfileId;
 
     private String dockerfileUrl;
 
@@ -177,11 +177,11 @@ public class DeployInfoDetailDto {
         this.projectId = projectId;
     }
 
-    public String getDockerfileId() {
+    public Long getDockerfileId() {
         return dockerfileId;
     }
 
-    public void setDockerfileId(String dockerfileId) {
+    public void setDockerfileId(Long dockerfileId) {
         this.dockerfileId = dockerfileId;
     }
 
@@ -202,7 +202,7 @@ public class DeployInfoDetailDto {
         deployInfoDetail.setDeployMode(this.deployMode);
 //        deployInfoDetail.setGitVersion(this.G);
         deployInfoDetail.setDockerfileUrl(this.dockerfileUrl);
-        deployInfoDetail.setDockerfileId(Long.valueOf(this.dockerfileId));
+        deployInfoDetail.setDockerfileId(this.dockerfileId);
         deployInfoDetail.setDockerContainerName(this.dockerContainerName);
         deployInfoDetail.setDockerImageName(this.dockerImageName);
         deployInfoDetail.setDockerEntrypoint(this.dockerEntrypoint);
