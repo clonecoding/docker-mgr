@@ -112,7 +112,7 @@ public class GocdStrCommon {
     }
 
     public static String deployDockerPipelineName(GocdBoDetail gocdBoDetail) {
-        return gocdBoDetail.getDockerImageName() + "-deployDocker" + DeployEnvConvert.toStr(gocdBoDetail.getDeployEnv());
+        return gocdBoDetail.getDockerContainerName() + "-deployDocker" + DeployEnvConvert.toStr(gocdBoDetail.getDeployEnv());
     }
 
 
