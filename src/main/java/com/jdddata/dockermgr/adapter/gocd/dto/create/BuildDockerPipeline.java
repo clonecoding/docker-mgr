@@ -41,7 +41,7 @@ public class BuildDockerPipeline {
         Pipeline pipeline = new Pipeline();
         pipeline.setLabelTemplate(PipelineConstants.LABEL_TEMPLATE);
         pipeline.setLockBehavior("none");
-        pipeline.setName(GocdStrCommon.buildDockerPipelineName(gocdBoDetail.getDockerImageName()));
+        pipeline.setName(GocdStrCommon.buildDockerPipelineName(gocdBoDetail));
 //        pipeline.setTemplate(null);
 //        pipeline.setParameters();
         pipeline.setEnvironmentVariables(GocdStrCommon.createEnvVariables(gocdBoDetail));
@@ -110,9 +110,9 @@ public class BuildDockerPipeline {
 
     private Attributes creatLocalAttr(GocdBoDetail gocdBoDetail) {
         Attributes attributes = new Attributes();
-        attributes.setPipeline(GocdStrCommon.mavenPipelineName(gocdBoDetail));
+        attributes.setPipeline(GocdStrCommon.buildDockerDependencyPipeline(gocdBoDetail));
         attributes.setAutoUpdate(true);
-        attributes.setName(GocdStrCommon.mavenPipelineName(gocdBoDetail));
+        attributes.setName(GocdStrCommon.buildDockerDependencyPipeline(gocdBoDetail));
         attributes.setStage(GocdStrCommon.buildDockerDependencyStage(gocdBoDetail));
         return attributes;
     }

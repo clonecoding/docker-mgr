@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.adapter.gocd;
 
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
@@ -90,17 +91,26 @@ public class GocdDeployPool {
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
         MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList);
-        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipelineTest(gocdBoDetailList, testExecutableFile);
+        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, testExecutableFile);
+        List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, testExecutableFile);
     }
 
-    private static List<BuildDockerPipeline> createBuildDockerPipelineTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
+    private static List<DeployDockerPipeline> createDeployDockerPipeline(List<GocdBoDetail> gocdBoDetailList, String execFile) {
+        List<DeployDockerPipeline> deployDockerPipelines = new ArrayList<>();
+        for (GocdBoDetail gocdBoDetail : gocdBoDetailList) {
+            deployDockerPipelines.add(new DeployDockerPipeline(gocdBoDetail, execFile));
+        }
+        return deployDockerPipelines;
+    }
+
+    private static List<BuildDockerPipeline> createBuildDockerPipeline(List<GocdBoDetail> gocdBoDetailList, String execFile) {
         List<BuildDockerPipeline> buildDockerPipelines = new ArrayList<>();
         List<GocdBoDetail> gocdBoDetails = gocdBoDetailList.stream().collect(
                 collectingAndThen(
                         toCollection(() -> new TreeSet<>(Comparator.comparing(GocdBoDetail::getDockerImageName))), ArrayList::new)
         );
         for (GocdBoDetail gocdBoDetail : gocdBoDetails) {
-            buildDockerPipelines.add(new BuildDockerPipeline(gocdBoDetail, testExecutableFile));
+            buildDockerPipelines.add(new BuildDockerPipeline(gocdBoDetail, execFile));
         }
         return buildDockerPipelines;
     }

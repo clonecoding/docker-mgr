@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GocdStrCommon {
 
-    // ###########################################################################
+    // ########################### 公共部分 ####################################
     public static String pipelineGroup(String projectName, Integer deployEnv) {
         return projectName + "-" + DeployEnvConvert.toStr(deployEnv);
     }
@@ -41,7 +41,8 @@ public class GocdStrCommon {
         return environmentVariables;
 
     }
-    // ###############################################################
+
+    // #################### maven pipeline 部分 #################################
 
     public static String mavenPipelineName(GocdBoDetail gocdBoDetail) {
         return mavenPipelineName(gocdBoDetail.getProjectName());
@@ -51,13 +52,19 @@ public class GocdStrCommon {
         return projectName + "-maven";
     }
 
-    //######################################################################
+    //#################  build docker 部分  ###################################
 
-    public static String buildDockerPipelineName(String dockerImageName) {
-        return DeployEnvConvert.fetchAttrNameFromImage(dockerImageName) + "-buildDocker";
+    public static String buildDockerPipelineName(GocdBoDetail gocdBoDetail) {
+        return DeployEnvConvert.fetchAttrNameFromImage(gocdBoDetail.getDockerImageName()) + "-buildDocker" + DeployEnvConvert.toStr(gocdBoDetail.getDeployEnv());
 
     }
 
+    public static String buildDockerDependencyPipeline(GocdBoDetail gocdBoDetail) {
+        if (gocdBoDetail.getDeployEnv().intValue() == 0) {
+            return mavenPipelineName(gocdBoDetail);
+        }
+        return gitPipelineName(gocdBoDetail);
+    }
 
     public static String buildDockerDependencyStage(GocdBoDetail gocdBoDetail) {
         if (gocdBoDetail.getDeployEnv().intValue() == 0) {
@@ -78,6 +85,44 @@ public class GocdStrCommon {
         return Arrays.asList(testExecutableFile, "create_docker");
     }
 
+    // ########################### deploy docker    ##########################################
+
+    public static String deployDockerDependencyPipeline(GocdBoDetail gocdBoDetail) {
+
+        return buildDockerPipelineName(gocdBoDetail);
+    }
+
+
+    public static String deployDockerDependencyStage(GocdBoDetail gocdBoDetail) {
+        return buildDockerStageName();
+    }
+
+    public static String deployDockerPullStageName(GocdBoDetail gocdBoDetail) {
+        return "pullDockerImageStage";
+    }
+
+    public static String deployDockerPipelineName(GocdBoDetail gocdBoDetail) {
+        return gocdBoDetail.getDockerImageName() + "-deployDocker" + DeployEnvConvert.toStr(gocdBoDetail.getDeployEnv());
+    }
+
+
+    public static String deployDockerStartStageName(GocdBoDetail gocdBoDetail) {
+        return "startDockerContainerStage";
+    }
+
+    public static List<String> deployDockerPullImageArguments(String execFile) {
+        return Arrays.asList(execFile, "pull_docker");
+    }
+
+
+    public static List<String> deployDockerStartContainerArguments(String execFile) {
+        return Arrays.asList(execFile, "start_docker_container");
+    }
+
+    //#############################   git deploy   #######################################
+    public static String gitPipelineName(GocdBoDetail gocdBoDetail) {
+        return gocdBoDetail.getProjectName() + "-git";
+    }
     //-------------------------------------------------------------------------------------
 
     private static EnvironmentVariable createEnvVariableLocal(boolean b, String name, String value) {
@@ -87,4 +132,6 @@ public class GocdStrCommon {
         environmentVariable.setValue(value);
         return environmentVariable;
     }
+
+
 }
