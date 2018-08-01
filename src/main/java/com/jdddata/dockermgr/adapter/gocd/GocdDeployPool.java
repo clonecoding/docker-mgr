@@ -2,13 +2,15 @@ package com.jdddata.dockermgr.adapter.gocd;
 
 import com.alibaba.fastjson.JSON;
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.GitPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
-import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,6 +21,8 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
 public class GocdDeployPool {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GocdDeployPool.class);
 
     private static final int TEST = 0;
     private static final int PROD = 1;
@@ -78,6 +82,7 @@ public class GocdDeployPool {
 
 
     public static void initProject(GocdBO gocdBo) {
+        LOGGER.info("step into the #initProject");
         String pipelineGroup = GocdStrCommon.pipelineGroup(gocdBo);
         initPipelineGroup(pipelineGroup);
         switch (gocdBo.getDeployEnv().intValue()) {
@@ -155,5 +160,6 @@ public class GocdDeployPool {
      * @param pipelineGroup
      */
     private static void initPipelineGroup(String pipelineGroup) {
+        LOGGER.info("step into the #initPipelineGroup");
     }
 }
