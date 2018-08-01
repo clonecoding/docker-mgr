@@ -1,11 +1,22 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
-import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
+import com.alibaba.fastjson.JSON;
+import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.GitPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
+import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
 
 public class GocdDeployPool {
 
@@ -13,6 +24,10 @@ public class GocdDeployPool {
     private static final int PROD = 1;
     private static final String TEST_EXECUTABLE_FILE = "/data/gocd-scripts/cicd/deploy-python/jdd_test_deploy.py";
     private static final String PROD_EXECUTABLE_FILE = "/data/gocd-scripts/cicd/deploy-python/jdd_prod_deploy.py";
+
+    private static final String HOST = "http://192.168.136.158:8153";
+
+    private static final String PIPELINE_CREATE = HOST + "/go/api/admin/pipelines";
 //    public static void initProject(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
 //        //判断测试还是生产部署
 //        switch (projectDeployInfo.getDeployEnv().intValue()) {
@@ -79,19 +94,57 @@ public class GocdDeployPool {
     }
 
     private static void processProd(List<GocdBoDetail> gocdBoDetailList, String prodExecutableFile) {
+
+        GitPipeline gitPipeline = createGitPipeline(gocdBoDetailList, prodExecutableFile);
+        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, prodExecutableFile);
+        List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, prodExecutableFile);
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(gitPipeline));
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(buildDockerPipelines));
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(deployDockerPipelines));
     }
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
-        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList, testExecutableFile);
+        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList);
+        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, testExecutableFile);
+        List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, testExecutableFile);
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(mavenPipeline));
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(buildDockerPipelines));
+        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(deployDockerPipelines));
     }
 
-    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
+    private static GitPipeline createGitPipeline(List<GocdBoDetail> gocdBoDetailList, String prodExecutableFile) {
+        GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
+        return new GitPipeline(gocdBoDetail, prodExecutableFile);
+    }
+
+
+    private static List<DeployDockerPipeline> createDeployDockerPipeline(List<GocdBoDetail> gocdBoDetailList, String execFile) {
+        List<DeployDockerPipeline> deployDockerPipelines = new ArrayList<>();
+        for (GocdBoDetail gocdBoDetail : gocdBoDetailList) {
+            deployDockerPipelines.add(new DeployDockerPipeline(gocdBoDetail, execFile));
+        }
+        return deployDockerPipelines;
+    }
+
+    private static List<BuildDockerPipeline> createBuildDockerPipeline(List<GocdBoDetail> gocdBoDetailList, String execFile) {
+        List<BuildDockerPipeline> buildDockerPipelines = new ArrayList<>();
+        List<GocdBoDetail> gocdBoDetails = gocdBoDetailList.stream().collect(
+                collectingAndThen(
+                        toCollection(() -> new TreeSet<>(Comparator.comparing(GocdBoDetail::getDockerImageName))), ArrayList::new)
+        );
+        for (GocdBoDetail gocdBoDetail : gocdBoDetails) {
+            buildDockerPipelines.add(new BuildDockerPipeline(gocdBoDetail, execFile));
+        }
+        return buildDockerPipelines;
+    }
+
+
+    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList) {
         GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
         String projectName = gocdBoDetail.getProjectName();
         String gitUrl = gocdBoDetail.getGitUrl();
         String gitVersion = gocdBoDetail.getGitVersion();
         Integer deployEnv = gocdBoDetail.getDeployEnv();
-
         return new MavenPipeline(projectName, gitUrl, gitVersion, deployEnv);
     }
 

@@ -3,7 +3,7 @@ package com.jdddata.dockermgr;
 
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpClientUtils;
 import com.jdddata.dockermgr.adapter.docker.httpadapter.HttpResponse;
-import com.jdddata.dockermgr.common.util.HttpClientUtil;
+import com.jdddata.dockermgr.adapter.gocd.common.HttpClientUtil;
 import org.junit.Test;
 
 /**

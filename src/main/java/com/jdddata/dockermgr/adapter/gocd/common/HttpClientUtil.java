@@ -1,4 +1,4 @@
-package com.jdddata.dockermgr.common.util;
+package com.jdddata.dockermgr.adapter.gocd.common;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
