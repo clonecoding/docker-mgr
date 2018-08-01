@@ -1,11 +1,18 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
 
 public class GocdDeployPool {
 
@@ -82,16 +89,29 @@ public class GocdDeployPool {
     }
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
-        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList, testExecutableFile);
+        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList);
+        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipelineTest(gocdBoDetailList, testExecutableFile);
     }
 
-    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
+    private static List<BuildDockerPipeline> createBuildDockerPipelineTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
+        List<BuildDockerPipeline> buildDockerPipelines = new ArrayList<>();
+        List<GocdBoDetail> gocdBoDetails = gocdBoDetailList.stream().collect(
+                collectingAndThen(
+                        toCollection(() -> new TreeSet<>(Comparator.comparing(GocdBoDetail::getDockerImageName))), ArrayList::new)
+        );
+        for (GocdBoDetail gocdBoDetail : gocdBoDetails) {
+            buildDockerPipelines.add(new BuildDockerPipeline(gocdBoDetail, testExecutableFile));
+        }
+        return buildDockerPipelines;
+    }
+
+
+    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList) {
         GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
         String projectName = gocdBoDetail.getProjectName();
         String gitUrl = gocdBoDetail.getGitUrl();
         String gitVersion = gocdBoDetail.getGitVersion();
         Integer deployEnv = gocdBoDetail.getDeployEnv();
-
         return new MavenPipeline(projectName, gitUrl, gitVersion, deployEnv);
     }
 
