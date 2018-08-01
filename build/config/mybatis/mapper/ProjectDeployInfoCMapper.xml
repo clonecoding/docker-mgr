@@ -17,6 +17,7 @@
     <resultMap id="DeployDetail" type="com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
         <result column="git_url" property="gitUrl" jdbcType="VARCHAR"/>
         <result column="git_version" property="gitVersion" jdbcType="VARCHAR"/>
         <result column="deploy_env" property="deployEnv" jdbcType="INTEGER"/>
@@ -63,6 +64,7 @@
 SELECT
 	pdi.id,
 	pdi.project_id,
+	pm.project_name,
 	pdi.git_url,
 	pdi.git_version,
 	pdi.deploy_env,
@@ -92,6 +94,7 @@ FROM
 	project_deploy_info pdi
 LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi.id
 LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
+LEFT JOIN project_mgr pm ON pdi.project_id = pm.id
 WHERE 1=1
     </select>
 

@@ -14,7 +14,13 @@ public class DeployInfoDto {
     /**
      * 项目id
      */
-    private String projectId;
+    private Long projectId;
+
+    /**
+     * 项目名，冗余
+     */
+    private String projectName;
+
 
     /**
      * 0:测试
@@ -39,11 +45,11 @@ public class DeployInfoDto {
         this.id = id;
     }
 
-    public String getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 
@@ -79,10 +85,18 @@ public class DeployInfoDto {
         this.artifactDtoList = artifactDtoList;
     }
 
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public ProjectDeployInfo convertEntity() {
         ProjectDeployInfo projectDeployInfo = new ProjectDeployInfo();
         projectDeployInfo.setId(this.id);
-        projectDeployInfo.setProjectId(Long.valueOf(this.projectId));
+        projectDeployInfo.setProjectId(this.projectId);
         projectDeployInfo.setGitUrl(this.gitUrl);
         projectDeployInfo.setGitVersion(this.gitVersion);
         projectDeployInfo.setDeployEnv(this.deployEnv);

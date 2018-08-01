@@ -146,8 +146,7 @@ public class DeployServiceImpl implements DeployService {
      */
     @Override
     public ResultVo listDetail() {
-        projectDeployInfoCMapper.listDetail();
-        return null;
+        return ResultGenerator.getSuccessDto(projectDeployInfoCMapper.listDetail());
     }
 
     @Override
