@@ -137,6 +137,8 @@ public class HttpClientUtil {
             httpPost.setConfig(requestConfig);
             String encoding = DatatypeConverter.printBase64Binary("gezhiwei:123456".getBytes(DEFAULTCHARSET));
             httpPost.setHeader("Authorization", "Basic " + encoding);
+            httpPost.setHeader("Accept", "application/vnd.go.cd.v5+json");
+            httpPost.setHeader("Content-Type", "application/json");
             StringEntity stringEntity = new StringEntity(context, Charset.forName(DEFAULTCHARSET));
             if (!StringUtils.isEmpty(contentType)) {
                 //post传输是json格式数据

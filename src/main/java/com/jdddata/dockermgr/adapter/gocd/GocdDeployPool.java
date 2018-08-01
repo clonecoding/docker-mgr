@@ -29,7 +29,7 @@ public class GocdDeployPool {
     private static final String TEST_EXECUTABLE_FILE = "/data/gocd-scripts/cicd/deploy-python/jdd_test_deploy.py";
     private static final String PROD_EXECUTABLE_FILE = "/data/gocd-scripts/cicd/deploy-python/jdd_prod_deploy.py";
 
-    private static final String HOST = "http://192.168.136.158:8153";
+    private static final String HOST = "https://192.168.136.158:8154";
 
     private static final String PIPELINE_CREATE = HOST + "/go/api/admin/pipelines";
 //    public static void initProject(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
