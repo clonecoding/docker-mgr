@@ -104,17 +104,18 @@ public class GocdDeployPool {
         List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, prodExecutableFile);
         List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, prodExecutableFile);
         HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(gitPipeline));
-        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(buildDockerPipelines));
-        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(deployDockerPipelines));
+        buildDockerPipelines.forEach(b -> HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(b)));
+        deployDockerPipelines.forEach(b -> HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(b)));
     }
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
         MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList);
         List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, testExecutableFile);
         List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, testExecutableFile);
+
         HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(mavenPipeline));
-        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(buildDockerPipelines));
-        HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(deployDockerPipelines));
+        buildDockerPipelines.forEach(b -> HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(b)));
+        deployDockerPipelines.forEach(b -> HttpClientUtil.doPostWithHttps(PIPELINE_CREATE, JSON.toJSONString(b)));
     }
 
     private static GitPipeline createGitPipeline(List<GocdBoDetail> gocdBoDetailList, String prodExecutableFile) {
