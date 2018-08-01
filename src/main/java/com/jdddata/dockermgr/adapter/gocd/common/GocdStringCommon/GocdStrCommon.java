@@ -20,10 +20,15 @@ public class GocdStrCommon {
         return pipelineGroup(gocdBo.getProjectName(), gocdBo.getDeployEnv());
     }
 
+    public static String pipelineGroup(GocdBoDetail gocdBoDetail) {
+        return pipelineGroup(gocdBoDetail.getProjectName(), gocdBoDetail.getDeployEnv());
+    }
+
     public static List<EnvironmentVariable> createEnvVariables(GocdBoDetail gocdBoDetail) {
         List<EnvironmentVariable> environmentVariables = new ArrayList<>();
 
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", gocdBoDetail.getHostIp()));
+        environmentVariables.add(createEnvVariableLocal(true, "GIT_BRANCH", secure(gocdBoDetail.getGitUrl())));
         environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", gocdBoDetail.getDockerEnv()));
         environmentVariables.add(createEnvVariableLocal(false, "GIT_BRANCH", gocdBoDetail.getGitVersion()));
         environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", gocdBoDetail.getNexusUrl()));
@@ -42,6 +47,7 @@ public class GocdStrCommon {
 
     }
 
+
     // #################### maven pipeline 部分 #################################
 
     public static String mavenPipelineName(GocdBoDetail gocdBoDetail) {
@@ -52,6 +58,10 @@ public class GocdStrCommon {
         return projectName + "-maven";
     }
 
+    public static String mavenPipelineStageName() {
+        return "mvnDeployStage";
+    }
+
     //#################  build docker 部分  ###################################
 
     public static String buildDockerPipelineName(GocdBoDetail gocdBoDetail) {
@@ -60,7 +70,7 @@ public class GocdStrCommon {
     }
 
     public static String buildDockerDependencyPipeline(GocdBoDetail gocdBoDetail) {
-        if (gocdBoDetail.getDeployEnv().intValue() == 0) {
+        if (gocdBoDetail.getDeployEnv() == 0) {
             return mavenPipelineName(gocdBoDetail);
         }
         return gitPipelineName(gocdBoDetail);
@@ -68,9 +78,9 @@ public class GocdStrCommon {
 
     public static String buildDockerDependencyStage(GocdBoDetail gocdBoDetail) {
         if (gocdBoDetail.getDeployEnv().intValue() == 0) {
-            return "mvnDeployStage";
+            return mavenPipelineStageName();
         }
-        return "mvnGitStage";
+        return gitPipelineStageName();
     }
 
     public static String buildDockerStageName() {
@@ -121,7 +131,15 @@ public class GocdStrCommon {
 
     //#############################   git deploy   #######################################
     public static String gitPipelineName(GocdBoDetail gocdBoDetail) {
-        return gocdBoDetail.getProjectName() + "-git";
+        return gitPipelineName(gocdBoDetail.getProjectName());
+    }
+
+    public static String gitPipelineName(String projectName) {
+        return projectName + "-git";
+    }
+
+    public static String gitPipelineStageName() {
+        return "gitmvnStage";
     }
     //-------------------------------------------------------------------------------------
 
@@ -133,5 +151,8 @@ public class GocdStrCommon {
         return environmentVariable;
     }
 
+    private static String secure(String gitUrl) {
+        return gitUrl.replace("https://", "https://gezhiwei:12345678@");
+    }
 
 }

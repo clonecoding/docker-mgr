@@ -3,6 +3,7 @@ package com.jdddata.dockermgr.adapter.gocd;
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.BuildDockerPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.DeployDockerPipeline;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.GitPipeline;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
@@ -87,6 +88,16 @@ public class GocdDeployPool {
     }
 
     private static void processProd(List<GocdBoDetail> gocdBoDetailList, String prodExecutableFile) {
+
+        GitPipeline gitPipeline = createGitPipeline(gocdBoDetailList, prodExecutableFile);
+        List<BuildDockerPipeline> buildDockerPipelines = createBuildDockerPipeline(gocdBoDetailList, prodExecutableFile);
+        List<DeployDockerPipeline> deployDockerPipelines = createDeployDockerPipeline(gocdBoDetailList, prodExecutableFile);
+
+    }
+
+    private static GitPipeline createGitPipeline(List<GocdBoDetail> gocdBoDetailList, String prodExecutableFile) {
+        GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
+        return new GitPipeline(gocdBoDetail, prodExecutableFile);
     }
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {

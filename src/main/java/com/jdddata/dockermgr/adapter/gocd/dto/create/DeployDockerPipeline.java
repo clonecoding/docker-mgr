@@ -4,9 +4,6 @@ import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
 import com.jdddata.dockermgr.adapter.gocd.dto.create.detail.*;
 import com.jdddata.dockermgr.common.constant.PipelineConstants;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
-import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
-import com.jdddata.dockermgr.dao.entity.ProjectMgr;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -132,14 +129,14 @@ public class DeployDockerPipeline {
         job.setTimeout(null);
         job.setEnvironmentVariables(new ArrayList<>());
         job.setResources(new ArrayList<>());
-        job.setTasks(Arrays.asList(createLocalTask_pull_image(gocdBoDetail,execFile)));
+        job.setTasks(Arrays.asList(createLocalTask_pull_image(gocdBoDetail, execFile)));
         return job;
     }
 
     private Task createLocalTask_pull_image(GocdBoDetail gocdBoDetail, String execFile) {
         Task task = new Task();
         task.setType("exec");
-        task.setAttributes(createLocalAttr_pull_image(gocdBoDetail,execFile));
+        task.setAttributes(createLocalAttr_pull_image(gocdBoDetail, execFile));
         return task;
     }
 
