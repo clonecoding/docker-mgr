@@ -4,6 +4,7 @@ import com.jdddata.dockermgr.adapter.gocd.dto.create.detail.EnvironmentVariable;
 import com.jdddata.dockermgr.common.util.DeployEnvConvert;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,22 +28,51 @@ public class GocdStrCommon {
     public static List<EnvironmentVariable> createEnvVariables(GocdBoDetail gocdBoDetail) {
         List<EnvironmentVariable> environmentVariables = new ArrayList<>();
 
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", gocdBoDetail.getHostIp()));
-        environmentVariables.add(createEnvVariableLocal(true, "GIT_URL", secure(gocdBoDetail.getGitUrl())));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", gocdBoDetail.getDockerEnv()));
-        environmentVariables.add(createEnvVariableLocal(false, "GIT_BRANCH", gocdBoDetail.getGitVersion()));
-        environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", gocdBoDetail.getNexusUrl()));
-        environmentVariables.add(createEnvVariableLocal(false, "DOCKER_FILE_URL", gocdBoDetail.getDockerfileUrl()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_CONTAINER_NAME", gocdBoDetail.getDockerContainerName()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_IMAGE_NAME", gocdBoDetail.getDockerImageName()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_ENTRYPOINT", gocdBoDetail.getDockerEntrypoint()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_VOLUME_LIST", gocdBoDetail.getDockerMount()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_LINK", gocdBoDetail.getDockerLink()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_CPUSETS", gocdBoDetail.getDockerCpusetCpus()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM", gocdBoDetail.getDockerMemory()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM_SWAP", gocdBoDetail.getDockerMemorySwap()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM_RESERVATION", gocdBoDetail.getDockerMemoryReservation()));
-        environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM_SWAPPINESS", gocdBoDetail.getDockerMemorySwappiness()));
+        if (StringUtils.isNotBlank(gocdBoDetail.getHostIp())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", gocdBoDetail.getHostIp()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getGitUrl())) {
+            environmentVariables.add(createEnvVariableLocal(true, "GIT_URL", secure(gocdBoDetail.getGitUrl())));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerEnv())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", gocdBoDetail.getDockerEnv()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getGitVersion())) {
+            environmentVariables.add(createEnvVariableLocal(false, "GIT_BRANCH", gocdBoDetail.getGitVersion()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getNexusUrl())) {
+            environmentVariables.add(createEnvVariableLocal(false, "NEXUS_TARGET_URL", gocdBoDetail.getNexusUrl()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerfileUrl())) {
+            environmentVariables.add(createEnvVariableLocal(false, "DOCKER_FILE_URL", gocdBoDetail.getDockerfileUrl()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerContainerName())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_CONTAINER_NAME", gocdBoDetail.getDockerContainerName()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerImageName())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_IMAGE_NAME", gocdBoDetail.getDockerImageName()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerEntrypoint())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_ENTRYPOINT", gocdBoDetail.getDockerEntrypoint()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerMount())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_VOLUME_LIST", gocdBoDetail.getDockerMount()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerLink())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_LINK", gocdBoDetail.getDockerLink()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerCpusetCpus())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_CPUSETS", gocdBoDetail.getDockerCpusetCpus()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerMemory())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM", gocdBoDetail.getDockerMemory()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerMemorySwap())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM_SWAP", gocdBoDetail.getDockerMemorySwap()));
+        }
+        if (StringUtils.isNotBlank(gocdBoDetail.getDockerMemorySwappiness())) {
+            environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_MEM_SWAPPINESS", gocdBoDetail.getDockerMemorySwappiness()));
+        }
         return environmentVariables;
 
     }
