@@ -8,11 +8,17 @@ import java.util.List;
 public class Stage {
 
     private String name;
+
     @JSONField(name = "fetch_materials")
     private Boolean fetchMaterials;
+
     private Boolean cleanWorkingDirectory;
+
     private Boolean neverCleanupArtifacts;
+
     private Approval approval;
+
+    @JSONField(name = "environment_variables")
     private List<Object> environmentVariables = null;
     private List<Job> jobs = null;
 

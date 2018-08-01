@@ -99,6 +99,7 @@ public class DeployDockerPipeline {
 
     private Job createLocalJob_start_container(String execFile) {
         Job job = new Job();
+        job.setName(GocdStrCommon.deployDockerPipelineStartContainerJobName());
         job.setRunInstanceCount(null);
         job.setTimeout(null);
         job.setEnvironmentVariables(new ArrayList<>());
@@ -125,6 +126,7 @@ public class DeployDockerPipeline {
 
     private Job createLocalJob_pull_image(GocdBoDetail gocdBoDetail, String execFile) {
         Job job = new Job();
+        job.setName(GocdStrCommon.deployDockerPipelinePullImageJobName());
         job.setRunInstanceCount(null);
         job.setTimeout(null);
         job.setEnvironmentVariables(new ArrayList<>());
@@ -146,6 +148,7 @@ public class DeployDockerPipeline {
         attributes_.setOnCancel(null);
         attributes_.setCommand("/usr/bin/python");
         attributes_.setArguments(GocdStrCommon.deployDockerPullImageArguments(execFile));
+        attributes_.setWorkingDirectory(null);
         return attributes_;
     }
 

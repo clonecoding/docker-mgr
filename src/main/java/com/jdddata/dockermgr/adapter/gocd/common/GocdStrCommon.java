@@ -185,4 +185,11 @@ public class GocdStrCommon {
         return gitUrl.replace("https://", "https://gezhiwei:12345678@");
     }
 
+    public static String deployDockerPipelinePullImageJobName() {
+        return "deployDockerPullImageJob";
+    }
+
+    public static String deployDockerPipelineStartContainerJobName() {
+        return "deployDockerStartContainerJob";
+    }
 }
