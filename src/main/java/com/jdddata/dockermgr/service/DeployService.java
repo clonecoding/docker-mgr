@@ -29,4 +29,6 @@ public interface DeployService {
      * @return
      */
     ResultVo listDetail();
+
+    ResultVo find(String id);
 }

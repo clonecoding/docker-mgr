@@ -54,6 +54,11 @@ public class DeployPreController {
         return deployService.saveOrUpdate(deployInfoDto);
     }
 
+    @GetMapping("/find/{id}")
+    public ResultVo find(@PathVariable("id") String id){
+        return deployService.find(id);
+    }
+
 
 //    @PostMapping("/clone")
 //    public ResultVo clone(@RequestBody DeployInfoDto deployInfoDto) {

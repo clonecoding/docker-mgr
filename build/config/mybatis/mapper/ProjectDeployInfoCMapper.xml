@@ -94,4 +94,39 @@ LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi
 LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
 WHERE 1=1
     </select>
+
+    <select id="findByDeployId" resultMap="DeployDetail" parameterType="java.lang.Long">
+        	pdi.id,
+	pdi.project_id,
+	pdi.git_url,
+	pdi.git_version,
+	pdi.deploy_env,
+	pdia.id,
+	pdia.project_deploy_info_id,
+	pdia.artifact_id,
+	pdia.nexus_target_url,
+	pdid.id,
+	pdid.project_deploy_info_artifact_id,
+	pdid.host_ip,
+	pdid.docker_env,
+	pdid.deploy_mode,
+	pdid.dockerfile_url,
+	pdid.dockerfile_id,
+	pdid.docker_container_name,
+	pdid.docker_image_name,
+	pdid.docker_entrypoint,
+	pdid.docker_cmd,
+	pdid.docker_mount,
+	pdid.docker_link,
+	pdid.docker_cpuset_cpus,
+	pdid.docker_memory,
+	pdid.docker_memory_swap,
+	pdid.docker_memory_reservation,
+	pdid.docker_memory_swappiness
+FROM
+	project_deploy_info pdi
+LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi.id
+LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
+WHERE pdi.id =  #{id,jdbcType=BIGINT}
+    </select>
 </mapper>
