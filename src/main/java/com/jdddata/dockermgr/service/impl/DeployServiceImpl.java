@@ -129,6 +129,7 @@ public class DeployServiceImpl implements DeployService {
     @Override
     public ResultVo delete(String id) {
         projectDeployInfoMapper.deleteByPrimaryKey(Long.valueOf(id));
+        deleteAll(Long.valueOf(id));
         //TODO 具体delete所有操作
         return ResultGenerator.getSuccess("ok");
     }
