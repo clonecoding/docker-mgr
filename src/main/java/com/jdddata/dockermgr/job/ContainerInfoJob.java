@@ -47,7 +47,6 @@ public class ContainerInfoJob {
             containerInfos.forEach(item -> {
                 map.put(item.getHostIp() + item.getContainerName(), item);
             });
-
         }
         for (String ip : ips) {
             HttpResponse httpResponse = DockerClient.listContainers(ip);
@@ -58,12 +57,14 @@ public class ContainerInfoJob {
                     String containerName = containerListDto.getNames().get(0).substring(1);
                     if (Objects.nonNull(map.get(ip + containerName))) {
                         ContainerInfo containerInfo = containerListDto.convert();
+                        containerInfo.setHostIp(ip);
                         containerInfo.setId((map.get(ip + containerName).getId()));
                         containerService.saveOrUpdateContainerInfo(containerInfo);
                         //移除
                         map.remove(ip + containerName);
                     } else {
                         ContainerInfo containerInfo = containerListDto.convert();
+                        containerInfo.setHostIp(ip);
                         containerService.saveOrUpdateContainerInfo(containerInfo);
                     }
                 }
