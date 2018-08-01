@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class ServerInfoDto {
 
+    private Long id;
     /**
      * 生产、测试
      */
@@ -78,6 +79,7 @@ public class ServerInfoDto {
 
     public ServerMgr convert() {
         ServerMgr serverMgr = new ServerMgr();
+        serverMgr.setId(this.id);
         serverMgr.setTypename(typeName);
         serverMgr.setAddtime(new Date());
         serverMgr.setBelong(this.belong);
@@ -86,5 +88,13 @@ public class ServerInfoDto {
         serverMgr.setUsername(this.username);
         serverMgr.setPassword(CryptoUtil.encrypt(this.password));
         return serverMgr;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
