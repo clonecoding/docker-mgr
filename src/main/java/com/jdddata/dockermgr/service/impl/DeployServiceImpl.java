@@ -133,7 +133,7 @@ public class DeployServiceImpl implements DeployService {
         return ResultGenerator.getSuccess("ok");
     }
 
-    //TODO 把detail信息塞进去
+    @Deprecated
     @Override
     public ResultVo list() {
         return ResultGenerator.getSuccessDto(projectDeployInfoCMapper.listAll());

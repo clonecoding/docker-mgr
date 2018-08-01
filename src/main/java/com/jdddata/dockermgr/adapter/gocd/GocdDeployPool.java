@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.adapter.gocd;
 
 import com.jdddata.dockermgr.adapter.gocd.common.GocdStringCommon.GocdStrCommon;
+import com.jdddata.dockermgr.adapter.gocd.dto.create.MavenPipeline;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBoDetail;
 
@@ -81,18 +82,18 @@ public class GocdDeployPool {
     }
 
     private static void processTest(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
-//        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList, testExecutableFile);
+        MavenPipeline mavenPipeline = createMavenPipeline(gocdBoDetailList, testExecutableFile);
     }
 
-//    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
-//        GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
-//        String projectName = gocdBoDetail.getProjectName();
-//        String gitUrl = gocdBoDetail.getGitUrl();
-//        String gitVersion = gocdBoDetail.getGitVersion();
-//        Integer deployEnv = gocdBoDetail.getDeployEnv();
-//
-//        return new MavenPipeline(projectName, gitUrl, gitVersion, deployEnv);
-//    }
+    private static MavenPipeline createMavenPipeline(List<GocdBoDetail> gocdBoDetailList, String testExecutableFile) {
+        GocdBoDetail gocdBoDetail = gocdBoDetailList.get(0);
+        String projectName = gocdBoDetail.getProjectName();
+        String gitUrl = gocdBoDetail.getGitUrl();
+        String gitVersion = gocdBoDetail.getGitVersion();
+        Integer deployEnv = gocdBoDetail.getDeployEnv();
+
+        return new MavenPipeline(projectName, gitUrl, gitVersion, deployEnv);
+    }
 
 
     /**

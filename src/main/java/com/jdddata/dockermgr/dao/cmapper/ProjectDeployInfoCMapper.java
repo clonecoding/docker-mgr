@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ProjectDeployInfoCMapper extends ProjectDeployInfoMapper {
+    @Deprecated
     List<ProjectDeployInfo> listAll();
 
     List<DeployInfoDto> listDetail();

@@ -12,4 +12,8 @@ public class GocdStrCommon {
     public static String pipelineGroup(GocdBO gocdBo) {
         return gocdBo.getProjectName() + "-" + DeployEnvConvert.toStr(gocdBo.getDeployEnv());
     }
+
+    public static String mavenPipelineName(String projectName) {
+        return projectName + "-maven";
+    }
 }
