@@ -32,7 +32,7 @@ public class GocdStrCommon {
             environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_SERVER_INFO", gocdBoDetail.getHostIp()));
         }
         if (StringUtils.isNotBlank(gocdBoDetail.getGitUrl())) {
-            environmentVariables.add(createEnvVariableLocal(true, "GIT_URL", secure(gocdBoDetail.getGitUrl())));
+            environmentVariables.add(createEnvVariableLocal(true, "GIT_URL", gocdBoDetail.getGitUrl()));
         }
         if (StringUtils.isNotBlank(gocdBoDetail.getDockerEnv())) {
             environmentVariables.add(createEnvVariableLocal(false, "PARAMTER_DOCKER_ENV", gocdBoDetail.getDockerEnv()));
@@ -181,7 +181,7 @@ public class GocdStrCommon {
         return environmentVariable;
     }
 
-    private static String secure(String gitUrl) {
+    public static String secure(String gitUrl) {
         return gitUrl.replace("https://", "https://gezhiwei:12345678@");
     }
 

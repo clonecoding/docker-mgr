@@ -1,5 +1,6 @@
 package com.jdddata.dockermgr.common.vo.gocd;
 
+import com.jdddata.dockermgr.adapter.gocd.common.GocdStrCommon;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfo;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoArtifact;
 import com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail;
@@ -32,7 +33,7 @@ public class GocdBO {
             GocdBoDetail gocdBoDetail = new GocdBoDetail();
             gocdBoDetail.setDeployEnv(this.deployEnv);
             gocdBoDetail.setProjectName(projectMgr.getProjectName());
-            gocdBoDetail.setGitUrl(projectMgr.getGitUrl());
+            gocdBoDetail.setGitUrl(GocdStrCommon.secure(projectMgr.getGitUrl()));
             gocdBoDetail.setGitVersion(projectDeployInfo.getGitVersion());
             gocdBoDetail.setArtifactIdName(projectDeployInfoArtifact.getArtifactId());
             gocdBoDetail.setNexusUrl(projectDeployInfoArtifact.getNexusTargetUrl());
