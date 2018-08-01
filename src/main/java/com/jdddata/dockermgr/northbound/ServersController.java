@@ -16,7 +16,7 @@ public class ServersController {
     @Autowired
     private ServerService serverService;
 
-    @PostMapping("/add")
+    @PostMapping("/post")
     public ResultVo addServer(@RequestBody ServerInfoDto serverInfoDto) {
         return serverService.addServer(serverInfoDto);
     }

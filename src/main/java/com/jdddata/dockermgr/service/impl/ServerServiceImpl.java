@@ -9,6 +9,8 @@ import com.jdddata.dockermgr.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class ServerServiceImpl implements ServerService {
 
@@ -20,7 +22,10 @@ public class ServerServiceImpl implements ServerService {
 
     @Override
     public ResultVo addServer(ServerInfoDto serverInfoDto) {
-        serverMgrMapper.insertSelective(serverInfoDto.convert());
+        if (Objects.isNull(serverInfoDto.getId())) {
+            serverMgrMapper.insertSelective(serverInfoDto.convert());
+        }
+        serverMgrMapper.updateByPrimaryKey(serverInfoDto.convert());
         return ResultGenerator.getSuccess("success");
     }
 
@@ -28,8 +33,6 @@ public class ServerServiceImpl implements ServerService {
     public ResultVo list() {
         return ResultGenerator.getSuccessDto(serverMgrCMapper.listAll());
     }
-
-
 
 
 }

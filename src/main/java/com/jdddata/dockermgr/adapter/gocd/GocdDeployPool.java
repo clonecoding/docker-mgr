@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,6 +37,7 @@ public class GocdDeployPool {
 
     private static final String PIPELINE_CREATE = HOST + "/go/api/admin/pipelines";
     private static final String PIPELINE_GOURP_GET = HOST + "/go/api/config/pipeline_groups";
+    private static final String PIPELINE_DELETE = HOST + "/go/api/admin/pipelines/{0}";
 //    public static void initProject(ProjectDeployInfo projectDeployInfo, List<ProjectDeployInfoDetail> projectDeployInfoDetails, ProjectMgr projectMgr) {
 //        //判断测试还是生产部署
 //        switch (projectDeployInfo.getDeployEnv().intValue()) {
@@ -167,7 +169,7 @@ public class GocdDeployPool {
     private static void initPipelineGroup(String pipelineGroup) {
         LOGGER.info("step into the #initPipelineGroup");
         String json = HttpClientUtil.getWithHttps(PIPELINE_GOURP_GET);
-        List<JSONObject> jsonObjects = JSON.parseArray(json,JSONObject.class);
+        List<JSONObject> jsonObjects = JSON.parseArray(json, JSONObject.class);
         List<String> strings = new ArrayList<>();
         for (JSONObject jsonObject : jsonObjects) {
             if (jsonObject.getString("name").equalsIgnoreCase(pipelineGroup)) {
@@ -181,6 +183,7 @@ public class GocdDeployPool {
         if (CollectionUtils.isEmpty(strings)) {
             return;
         }
-//        HttpClientUtil
+
+        strings.forEach(s -> HttpClientUtil.delete(MessageFormat.format(PIPELINE_DELETE, s)));
     }
 }
