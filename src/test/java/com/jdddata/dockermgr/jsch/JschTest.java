@@ -16,7 +16,54 @@ public class JschTest {
     private static final String DOCKER_RPM = "C:\\Users\\gezhiwei\\Downloads\\docker-ce-18.06.0.ce-3.el7.x86_64.rpm";
     private static final String DOCKER_RPM_name = "docker-ce-18.06.0.ce-3.el7.x86_64.rpm";
 
+
+    public static void lscpu() throws IOException, JSchException {
+        SSHLinux sshLinux = new SSHLinux("root", "1234", "10.33.94.60", 22);
+        sshLinux.login();
+        String lscpu = sshLinux.execCommand("lscpu");
+        for (String line : lscpu.split("\n")) {
+            if (line.startsWith("CPU(s)")) {
+                char[] chars = line.trim().toCharArray();
+                for (char aChar : chars) {
+                    if (Character.isDigit(aChar)) {
+                        System.out.println(aChar);
+                    }
+                }
+            }
+        }
+        sshLinux.logout();
+    }
+
+    public static void freeh() throws IOException, JSchException {
+        SSHLinux sshLinux = new SSHLinux("root", "1234", "10.33.94.60", 22);
+        sshLinux.login();
+        String mem = sshLinux.execCommand("free -h");
+//        System.out.println(mem);
+        StringBuffer stringBuffer = new StringBuffer();
+        for (String line : mem.split("\n")) {
+            if (line.startsWith("Mem")) {
+                System.out.println(line);
+                String trim = line.trim().substring(0, line.indexOf("G"));
+                for (char c : trim.toCharArray()) {
+                    if (Character.isDigit(c)) {
+                        stringBuffer.append(c);
+                    }
+                    if (c == '.') {
+                        stringBuffer.append(c);
+                    }
+                }
+            }
+        }
+        System.out.println("mem is : " + stringBuffer.toString());
+
+        sshLinux.logout();
+    }
+
     public static void main(String[] args) throws IOException, JSchException, SftpException {
+        freeh();
+    }
+
+    private static void oldTest() throws JSchException, IOException, SftpException {
         SSHLinux sshLinux = new SSHLinux("root", "1234", "10.33.94.58", 22);
         sshLinux.login();
         String javastatus = sshLinux.execCommand("rpm -qa | grep docker");
@@ -33,7 +80,7 @@ public class JschTest {
         String dockerInstallStatus = sshLinux.execCommand("/usr/bin/yum install -y " + "/opt/install/docker/" + DOCKER_RPM_name);
         sshLinux.waitOn();
         String[] split = dockerInstallStatus.split("\\n");
-        for (String r : split) {
+        for (String ignored : split) {
 
         }
         System.out.println(dockerInstallStatus);

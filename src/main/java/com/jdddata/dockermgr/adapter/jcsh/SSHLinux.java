@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 public class SSHLinux {
 
@@ -63,28 +62,38 @@ public class SSHLinux {
         }
     }
 
-    public String execCommand(String command) throws JSchException, IOException {
-        ChannelExec channel = (ChannelExec) session.openChannel("exec");
-        channel.setCommand(command + "\n");
-        OutputStream out=channel.getOutputStream();
-        //channel.setInputStream(null);
-        channel.setErrStream(System.err);
-        channel.connect();
-        InputStream in = channel.getInputStream();
-        StringBuffer stringBuffer = new StringBuffer();
-        byte[] tmp=new byte[1024];
-        while(true){
-            while(in.available()>0){
-                int i=in.read(tmp, 0, 1024);
-                if(i<0)break;
-                stringBuffer.append(new String(tmp, 0, i));
+    public synchronized String execCommand(String command) throws JSchException, IOException {
+        InputStream in = null;
+        try {
+            channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand(command + "\n");
+            //channel.setInputStream(null);
+            channelExec.setErrStream(System.err);
+            channelExec.connect();
+            in = channelExec.getInputStream();
+            StringBuffer stringBuffer = new StringBuffer();
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) break;
+                    stringBuffer.append(new String(tmp, 0, i));
+                }
+                if (channelExec.isClosed()) {
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
             }
-            if(channel.isClosed()){
-                break;
+            return stringBuffer.toString();
+        } finally {
+            if (null != in) {
+                in.close();
             }
-            try{Thread.sleep(1000);}catch(Exception ee){ee.printStackTrace();}
         }
-        return stringBuffer.toString();
     }
 
     public String shellCommand(String commad) {
