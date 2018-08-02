@@ -137,7 +137,7 @@ public class SFTPUtil {
      *
      * @param directory    上传到该目录
      * @param sftpFileName sftp端文件名
-     * @param input           输入流
+     * @param input        输入流
      * @throws SftpException
      * @throws Exception
      */
@@ -146,8 +146,19 @@ public class SFTPUtil {
             sftp.cd(directory);
         } catch (SftpException e) {
             log.warn("directory is not exist");
-            sftp.mkdir(directory);
-            sftp.cd(directory);
+            String[] folders = directory.split("/");
+            String path = "";
+            for (String folder : folders) {
+                if (folder.length() > 0) {
+                    path = path + "/" + folder;
+                    try {
+                        sftp.cd(path);
+                    } catch (SftpException ee) {
+                        sftp.mkdir(path);
+                        sftp.cd(path);
+                    }
+                }
+            }
         }
         sftp.put(input, sftpFileName);
         log.info("file:{} is upload successful", sftpFileName);
@@ -171,10 +182,18 @@ public class SFTPUtil {
      */
     public void upload(String directory, String uploadFile) throws FileNotFoundException, SftpException {
         File file = new File(uploadFile);
-        try (InputStream in = new FileInputStream(file)) {
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
             upload(directory, file.getName(), in);
         } catch (IOException e) {
             log.error(e.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -264,11 +283,10 @@ public class SFTPUtil {
      * 列出目录下的文件
      *
      * @param directory 要列出的目录
-     * @param sftp
      * @return
      * @throws SftpException
      */
-    public Vector<?> listFiles(String directory) throws SftpException {
+    public Vector<ChannelSftp.LsEntry> listFiles(String directory) throws SftpException {
         return sftp.ls(directory);
     }
 
