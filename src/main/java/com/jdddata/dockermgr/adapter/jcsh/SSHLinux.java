@@ -5,7 +5,6 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,15 +62,42 @@ public class SSHLinux {
         }
     }
 
-    public String exeCommand(String command) throws JSchException, IOException {
-        channelExec = (ChannelExec) session.openChannel("exec");
-        InputStream in = channelExec.getInputStream();
-        channelExec.setCommand(command);
-        channelExec.setErrStream(System.err);
-        channelExec.connect();
-        String out = IOUtils.toString(in, "UTF-8");
-        channelExec.disconnect();
-        return out;
+    public synchronized String execCommand(String command) throws JSchException, IOException {
+        InputStream in = null;
+        try {
+            channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand(command + "\n");
+            //channel.setInputStream(null);
+            channelExec.setErrStream(System.err);
+            channelExec.connect();
+            in = channelExec.getInputStream();
+            StringBuffer stringBuffer = new StringBuffer();
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) break;
+                    stringBuffer.append(new String(tmp, 0, i));
+                }
+                if (channelExec.isClosed()) {
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+            }
+            return stringBuffer.toString();
+        } finally {
+            if (null != in) {
+                in.close();
+            }
+        }
+    }
+
+    public String shellCommand(String commad) {
+        return null;
     }
 
     public void logout() {
@@ -83,5 +109,9 @@ public class SSHLinux {
                 session.disconnect();
             }
         }
+    }
+
+    public void waitOn() {
+
     }
 }
