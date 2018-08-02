@@ -23,9 +23,9 @@
         <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, container_id, container_name, image_name, image_tag, image_id, command,
-    container_create_time, container_ports, container_state, status, network_mode, is_valid, is_delete,
-    create_time, create_user, update_time, update_user
+     id, host_ip, container_id, container_name, image_name, image_tag, image_id, command,
+    container_create_time, container_ports, container_state, status, network_mode, is_valid,
+    is_delete, create_time, create_user, update_time, update_user
   </sql>
     <select id="selectByDeployId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select

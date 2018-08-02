@@ -29,6 +29,27 @@ public class ServerInfoDto {
 
     private String password;
 
+    private Integer vcpus;
+
+    private Integer memory;
+
+    private Integer swap;
+
+    public ServerInfoDto() {
+    }
+    public ServerInfoDto(ServerMgr item) {
+        this.id =item.getId();
+        this.belong =item.getBelong();
+        this.typeName =item.getTypename();
+        this.ip=item.getIp();
+        this.port=item.getPort();
+        this.username=item.getUsername();
+        this.password= item.getPassword();
+        this.vcpus =item.getVcpus();
+        this.memory =item.getMemory();
+        this.swap=item.getSwap();
+    }
+
     public String getTypeName() {
         return typeName;
     }
@@ -77,6 +98,7 @@ public class ServerInfoDto {
         this.password = password;
     }
 
+    
     public ServerMgr convert() {
         ServerMgr serverMgr = new ServerMgr();
         serverMgr.setId(this.id);
@@ -90,11 +112,37 @@ public class ServerInfoDto {
         return serverMgr;
     }
 
+
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getVcpus() {
+        return vcpus;
+    }
+
+    public void setVcpus(Integer vcpus) {
+        this.vcpus = vcpus;
+    }
+
+    public Integer getMemory() {
+        return memory;
+    }
+
+    public void setMemory(Integer memory) {
+        this.memory = memory;
+    }
+
+    public Integer getSwap() {
+        return swap;
+    }
+
+    public void setSwap(Integer swap) {
+        this.swap = swap;
     }
 }

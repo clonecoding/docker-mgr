@@ -26,11 +26,11 @@
     <!--发布仓库-->
     <distributionManagement>
         <snapshotRepository>
-            <id>jdddataSnapshots</id>
+            <id>jddsjSnapshots</id>
             <url>http://maven-repository.jdddata.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>jdddataReleases</id>
+            <id>jddsjReleases</id>
             <url>http://maven-repository.jdddata.com/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>

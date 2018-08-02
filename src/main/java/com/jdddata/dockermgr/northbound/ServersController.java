@@ -16,7 +16,7 @@ public class ServersController {
     @Autowired
     private ServerService serverService;
 
-    @PostMapping("/post")
+    @PostMapping("/saveOrUpdate")
     public ResultVo addServer(@RequestBody ServerInfoDto serverInfoDto) {
         return serverService.addServer(serverInfoDto);
     }
@@ -24,6 +24,12 @@ public class ServersController {
     @GetMapping("/list")
     public ResultVo getList() {
         return serverService.list();
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResultVo deleteById(@PathVariable("id") Long id) {
+        return serverService.deleteById(id);
     }
 
 }

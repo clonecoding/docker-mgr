@@ -51,7 +51,7 @@ public class ContainerServiceImpl implements ContainerService {
             containerInfoMapper.insertSelective(containerInfo);
         } else {
             ContainerInfo cf = containerInfoMapper.selectByPrimaryKey(containerInfo.getId());
-            cf.setContainerState(containerInfo.getStatus());
+            cf.setContainerState(containerInfo.getContainerState());
             cf.setStatus(containerInfo.getStatus());
             containerInfoMapper.updateByPrimaryKeySelective(cf);
         }

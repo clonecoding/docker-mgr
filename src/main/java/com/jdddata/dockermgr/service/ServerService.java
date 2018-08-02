@@ -8,4 +8,5 @@ public interface ServerService {
 
     ResultVo list();
 
+    ResultVo deleteById(Long id);
 }
