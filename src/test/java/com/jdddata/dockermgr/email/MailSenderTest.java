@@ -28,6 +28,6 @@ public class MailSenderTest {
         message.setMessageStatus("Failed");
         message.setProjectName("loghub");
 
-        mailSender.sendMessageMail(message, "测试消息通知", "message.ftl");
+        mailSender.sendMessageMail(message, "测试消息通知", "message.ftl","justzhangheng@163.com");
     }
 }

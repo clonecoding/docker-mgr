@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
@@ -15,8 +14,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +27,11 @@ import java.util.Map;
 public class JddMailSender {
     @Value("${spring.mail.username}")
     private String from;
-
     /**
      * 注入MailSender
      */
     @Autowired
     private JavaMailSender mailSender;
-
     /**
      * 发送邮件的模板引擎
      */
@@ -44,21 +39,22 @@ public class JddMailSender {
     private FreeMarkerConfigurer configurer;
 
     /**
-     * @param params       发送邮件的主题对象 object
-     * @param title        邮件标题
-     * @param templateName 模板名称
+     * @param params
+     * @param emailName
+     * @param templateName
+     * @param toList
+     * @author zhangheng(赛事)
+     * @description
      */
-
-    public void sendMessageMail(Object params, String title, String templateName) {
-
+    public void sendMessageMail(Object params, String emailName, String templateName, String toList) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setFrom(from);
             /*发送给谁*/
-            helper.setTo(InternetAddress.parse("justzhangheng@163.com"));
+            helper.setTo(InternetAddress.parse(toList));
             /*邮件标题*/
-            helper.setSubject("【" + title + "-" + LocalDate.now() + " " + LocalTime.now().withNano(0) + "】");
+            helper.setSubject("【" + emailName + "】");
 
             Map<String, Object> model = new HashMap<>();
             model.put("params", params);
