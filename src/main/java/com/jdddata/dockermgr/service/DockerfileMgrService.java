@@ -2,6 +2,7 @@ package com.jdddata.dockermgr.service;
 
 import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.dao.entity.DockerfileMgr;
+import com.jdddata.dockermgr.northbound.dto.dockerfile.DockerfileVo;
 
 /**
  * @Author: zhangheng(赛事)
@@ -17,4 +18,6 @@ public interface DockerfileMgrService {
      * @return
      */
     ResultVo<DockerfileMgr> listAll();
+
+    ResultVo saveOrUpdate(DockerfileVo dockerfileVo);
 }

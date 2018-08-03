@@ -1,12 +1,11 @@
 package com.jdddata.dockermgr.northbound;
 
 import com.jdddata.dockermgr.common.vo.response.ResultVo;
+import com.jdddata.dockermgr.northbound.dto.dockerfile.DockerfileVo;
 import com.jdddata.dockermgr.service.ContainerService;
 import com.jdddata.dockermgr.service.DockerfileMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: zhangheng(赛事)
@@ -24,5 +23,10 @@ public class DockerfileMgrController {
     @GetMapping("/list")
     public ResultVo listAll() {
         return dockerfileMgrService.listAll();
+    }
+
+    @PostMapping("/saveOrUpdate")
+    public ResultVo saveOrUpdate(@RequestBody  DockerfileVo dockerfileVo) {
+        return dockerfileMgrService.saveOrUpdate(dockerfileVo);
     }
 }
