@@ -108,10 +108,10 @@ public class GitPipeline {
     private Attributes_ createLocalArtrTask(GocdBoDetail gocdBoDetail, String prodExecutableFile) {
         Attributes_ attributes_ = new Attributes_();
 //        attributes_.setRunIf();
-        attributes_.setCommand("/usr/local/maven/bin/mvn");
+        attributes_.setCommand("/usr/bin/python");
 //        attributes_.setWorkingDirectory();
 //        attributes_.setOnCancel();
-        attributes_.setArguments(Arrays.asList(prodExecutableFile, "git_deploy"));
+        attributes_.setArguments(Arrays.asList(prodExecutableFile, "git_prod_deploy"));
         return attributes_;
     }
 
