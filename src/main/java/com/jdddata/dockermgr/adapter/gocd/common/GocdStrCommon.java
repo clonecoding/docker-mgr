@@ -151,7 +151,7 @@ public class GocdStrCommon {
     }
 
     public static List<String> deployDockerPullImageArguments(String execFile) {
-        return Arrays.asList(execFile, "pull_docker");
+        return Arrays.asList(execFile, "pull_docker_image");
     }
 
 
