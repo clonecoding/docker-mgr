@@ -1,5 +1,6 @@
 package com.jdddata.dockermgr.service;
 
+import com.jdddata.dockermgr.common.exception.ValidatorException;
 import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 
@@ -15,7 +16,7 @@ public interface DeployService {
 
 //    ResultVo create(DeployInfoDto deployInfoDto);
 
-    ResultVo saveOrUpdate(DeployInfoDto deployInfoDto);
+    ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) throws ValidatorException;
 
 //    ResultVo clone(DeployInfoDto deployInfoDto);
 

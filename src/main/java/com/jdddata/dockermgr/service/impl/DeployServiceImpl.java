@@ -1,6 +1,7 @@
 package com.jdddata.dockermgr.service.impl;
 
 import com.jdddata.dockermgr.adapter.gocd.GocdDeployPool;
+import com.jdddata.dockermgr.common.exception.ValidatorException;
 import com.jdddata.dockermgr.common.util.ResultGenerator;
 import com.jdddata.dockermgr.common.vo.gocd.GocdBO;
 import com.jdddata.dockermgr.common.vo.response.ResultVo;
@@ -16,9 +17,12 @@ import com.jdddata.dockermgr.service.DeployService;
 import com.jdddata.dockermgr.service.GitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -59,6 +63,8 @@ public class DeployServiceImpl implements DeployService {
     @Autowired
     private ProjectDeployInfoDetailCMapper projectDeployInfoDetailCMapper;
 
+    private final Map<String, DeployInfoDto> map = new ConcurrentHashMap<>();
+
     @Override
     public ResultVo fetchPreInfo(String projectId) {
         ProjectMgr projectMgr = projectMgrMapper.selectByPrimaryKey(Long.valueOf(projectId));
@@ -77,35 +83,52 @@ public class DeployServiceImpl implements DeployService {
 //    }
 
     @Override
-    public ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) {
-        Long deployId = 0L;
-        //新增操作
-        if (!Objects.isNull(deployInfoDto.getId())) {
-            deployId = deployInfoDto.getId();
-            ProjectDeployInfo projectDeployInfo = deployInfoDto.convertEntity();
-            projectDeployInfoMapper.updateByPrimaryKeySelective(projectDeployInfo);
-            deleteAll(deployInfoDto.getId());
-        } else {
-            ProjectDeployInfo projectDeployInfo = deployInfoDto.convertEntity();
-            projectDeployInfoMapper.insertSelective(projectDeployInfo);
-            deployId = projectDeployInfo.getId();
+    @Transactional
+    public ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) throws ValidatorException {
+        ProjectMgr projectMgr = projectMgrMapper.selectByPrimaryKey(deployInfoDto.getProjectId());
+        deployInfoDto.setProjectName(projectMgr.getProjectName());
+        String proName = null;
+        DeployInfoDto infoDto = map.get(deployInfoDto.getProjectName());
+        if (null != infoDto) {
+            return ResultGenerator.getFail("当前项目正在执行中请稍后");
         }
-        List<ArtifactDto> artifactDtoList = deployInfoDto.getArtifactDtoList();
-        for (ArtifactDto artifactDto : artifactDtoList) {
-            List<DeployInfoDetailDto> deployInfoDetailDtoList = artifactDto.getDeployInfoDetailDtoList();
-            ProjectDeployInfoArtifact projectDeployInfoArtifact = artifactDto.convertEntityWithId(deployId);
-            projectDeployInfoArtifactMapper.insertSelective(projectDeployInfoArtifact);
-            Long artifactId = projectDeployInfoArtifact.getId();
-            for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDetailDtoList) {
-                Long dockerfileId = deployInfoDetailDto.getDockerfileId();
-                DockerfileMgr dockerfileMgr = dockerfileMgrMapper.selectByPrimaryKey(dockerfileId);
-                String dockerfileUrl = dockerfileMgr.getDockerfileUrl();
-                projectDeployInfoDetailMapper.insertSelective(deployInfoDetailDto.convertEntityWithId(artifactId, dockerfileUrl));
+        try {
+            Long deployId;
+            proName = deployInfoDto.getProjectName();
+            map.put(proName, deployInfoDto);
+            //新增操作
+            if (!Objects.isNull(deployInfoDto.getId())) {
+                deployId = deployInfoDto.getId();
+                ProjectDeployInfo projectDeployInfo = deployInfoDto.convertEntity();
+                projectDeployInfoMapper.updateByPrimaryKeySelective(projectDeployInfo);
+                deleteAll(deployInfoDto.getId());
+            } else {
+                ProjectDeployInfo projectDeployInfo = deployInfoDto.convertEntity();
+                projectDeployInfoMapper.insertSelective(projectDeployInfo);
+                deployId = projectDeployInfo.getId();
             }
+            List<ArtifactDto> artifactDtoList = deployInfoDto.getArtifactDtoList();
+            for (ArtifactDto artifactDto : artifactDtoList) {
+                List<DeployInfoDetailDto> deployInfoDetailDtoList = artifactDto.getDeployInfoDetailDtoList();
+                ProjectDeployInfoArtifact projectDeployInfoArtifact = artifactDto.convertEntityWithId(deployId);
+                projectDeployInfoArtifactMapper.insertSelective(projectDeployInfoArtifact);
+                Long artifactId = projectDeployInfoArtifact.getId();
+                for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDetailDtoList) {
+                    Long dockerfileId = deployInfoDetailDto.getDockerfileId();
+                    DockerfileMgr dockerfileMgr = dockerfileMgrMapper.selectByPrimaryKey(dockerfileId);
+                    if (null == dockerfileMgr) {
+                        throw new ValidatorException("dockerFile不存在");
+                    }
+                    String dockerfileUrl = dockerfileMgr.getDockerfileUrl();
+                    projectDeployInfoDetailMapper.insertSelective(deployInfoDetailDto.convertEntityWithId(artifactId, dockerfileUrl));
+                }
+            }
+            GocdBO gocdBo = computeFrom(deployId);
+            GocdDeployPool.initProject(gocdBo);
+            return ResultGenerator.getSuccess();
+        } finally {
+            map.remove(proName);
         }
-        GocdBO gocdBo = computeFrom(deployId);
-        GocdDeployPool.initProject(gocdBo);
-        return ResultGenerator.getSuccess();
     }
 
     private void deleteAll(Long id) {

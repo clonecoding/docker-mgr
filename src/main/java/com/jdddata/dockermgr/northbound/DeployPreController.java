@@ -1,5 +1,7 @@
 package com.jdddata.dockermgr.northbound;
 
+import com.jdddata.dockermgr.common.exception.ValidatorException;
+import com.jdddata.dockermgr.common.util.ExceptionUtil;
 import com.jdddata.dockermgr.common.vo.response.ResultVo;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.northbound.dto.git.GitDto;
@@ -51,7 +53,11 @@ public class DeployPreController {
     @PostMapping("/saveOrUpdate")
     public ResultVo create(@RequestBody DeployInfoDto deployInfoDto) {
         //            checkDto(deployInfoDto);
-        return deployService.saveOrUpdate(deployInfoDto);
+        try {
+            return deployService.saveOrUpdate(deployInfoDto);
+        } catch (ValidatorException e) {
+            return ExceptionUtil.getFail(e);
+        }
     }
 
     @GetMapping("/find/{id}")
