@@ -117,7 +117,7 @@ public class GitPipeline {
 
     private Approval createApprovalLocal() {
         Approval approval = new Approval();
-        approval.setType("success");
+        approval.setType("manual");
 //        approval.setAuthorization();
         return approval;
     }

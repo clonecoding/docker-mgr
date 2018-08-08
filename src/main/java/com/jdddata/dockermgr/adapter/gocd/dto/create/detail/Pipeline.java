@@ -8,6 +8,7 @@ import java.util.List;
 public class Pipeline {
 
     private String labelTemplate;
+    @JSONField(name = "lock_behavior")
     private String lockBehavior;
     private String name;
     private Object template;
