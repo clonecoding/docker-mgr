@@ -82,8 +82,8 @@ public class DeployServiceImpl implements DeployService {
 //        return null;
 //    }
 
-    @Override
     @Transactional
+    @Override
     public ResultVo saveOrUpdate(DeployInfoDto deployInfoDto) throws ValidatorException {
         ProjectMgr projectMgr = projectMgrMapper.selectByPrimaryKey(deployInfoDto.getProjectId());
         deployInfoDto.setProjectName(projectMgr.getProjectName());
