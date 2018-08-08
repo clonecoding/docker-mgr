@@ -183,7 +183,10 @@ public class GocdDeployPool {
         if (CollectionUtils.isEmpty(strings)) {
             return;
         }
-
-        strings.forEach(s -> HttpClientUtil.delete(MessageFormat.format(PIPELINE_DELETE, s)));
+        for (int i = strings.size() - 1; i >= 0; i--) {
+            for (String pipelineName : strings) {
+                HttpClientUtil.delete(MessageFormat.format(PIPELINE_DELETE, pipelineName));
+            }
+        }
     }
 }

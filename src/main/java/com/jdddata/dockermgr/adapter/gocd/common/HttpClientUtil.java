@@ -104,7 +104,7 @@ public class HttpClientUtil {
         try {
             httpGet.setConfig(requestConfig);
             httpGet.setHeader("Authorization", "Basic " + GOCD_AUTHER);
-            httpGet.setHeader("Accept", "application/vnd.go.cd.v5+json");
+//            httpGet.setHeader("Accept", "application/vnd.go.cd.v5+json");
             response = httpClient.execute(httpGet);
             HttpEntity entity = response.getEntity();
             httpStr = EntityUtils.toString(entity, "UTF-8");

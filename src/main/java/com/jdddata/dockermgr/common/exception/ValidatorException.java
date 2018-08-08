@@ -1,6 +1,6 @@
 package com.jdddata.dockermgr.common.exception;
 
-public class ValidatorException extends Exception {
+public class ValidatorException extends RuntimeException {
 
 
     public ValidatorException(String message, Throwable cause) {
