@@ -114,7 +114,9 @@ public class DeployServiceImpl implements DeployService {
                 projectDeployInfoArtifactMapper.insertSelective(projectDeployInfoArtifact);
                 Long artifactId = projectDeployInfoArtifact.getId();
                 for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDetailDtoList) {
-                    deployInfoDetailDto.setDockerImageName("docker-registry.jdddata.com/jdddata/" + deployInfoDetailDto.getDockerImageName());
+                    if (!deployInfoDetailDto.getDockerImageName().startsWith("docker-registry.jdddata.com")) {
+                        deployInfoDetailDto.setDockerImageName("docker-registry.jdddata.com/jdddata/" + deployInfoDetailDto.getDockerImageName());
+                    }
                     Long dockerfileId = deployInfoDetailDto.getDockerfileId();
                     DockerfileMgr dockerfileMgr = dockerfileMgrMapper.selectByPrimaryKey(dockerfileId);
                     if (null == dockerfileMgr) {
