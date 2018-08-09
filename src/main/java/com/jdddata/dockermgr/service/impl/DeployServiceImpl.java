@@ -33,8 +33,8 @@ import java.util.stream.Collectors;
 @Service
 public class DeployServiceImpl implements DeployService {
 
+    private static final String DOCKER_REGISTRY = "http://docker-registry.jdddata.com/v2/jdddata/";
     private static final ExecutorService executorService = Executors.newFixedThreadPool(10);
-
 
     @Autowired
     private GitService gitService;
@@ -177,4 +177,5 @@ public class DeployServiceImpl implements DeployService {
     public ResultVo find(String id) {
         return ResultGenerator.getSuccessDto(projectDeployInfoCMapper.findByDeployId(Long.valueOf(id)));
     }
+
 }

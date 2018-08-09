@@ -38,7 +38,7 @@ public class DockerIamgeTest {
     @Test
     public void imageNameOrIdExist() {
 
-        boolean flag = DockerClient.imageNameOrIdExist(ip, "nginx");
+        boolean flag = DockerClient.imageNameOrIdExist(ip, "docker-registry.jdddata.com/jdddata/docker-mgr:test-master");
         System.out.println(flag);
     }
 

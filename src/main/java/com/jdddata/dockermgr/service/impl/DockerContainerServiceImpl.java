@@ -23,25 +23,17 @@ import java.util.*;
 @Service
 public class DockerContainerServiceImpl implements DockerContainerService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DockerContainerServiceImpl.class);
 
     @Override
     public ResultVo createContainer(String serverInfo, String name, ContainerCreatePyDto containerCreatePyDto) {
-
-//        if (DockerClient.containerNameExist(serverInfo, name)) {
-//
-//            return ResultGenerator.getFail("容器命名已经存在，请更换");
-//        }
-        // 判断image在当前节点是否存在
+        /*判断当前镜像名是否存在，不存在-> 创建镜像 */
         if (!DockerClient.imageNameOrIdExist(serverInfo, name)) {
             String image = containerCreatePyDto.getImage();
             String[] split = image.split(":");
             DockerClient.createImage(split[0], split[1], serverInfo);
         }
-
         ContainerCreateDto containerCreateDto = getContainerCreateDto(containerCreatePyDto);
-
-
         return ResultGenerator.getByDockerResponse(DockerClient.createContainer(serverInfo, name, containerCreateDto));
     }
 
@@ -77,10 +69,10 @@ public class DockerContainerServiceImpl implements DockerContainerService {
 
     @Override
     public ResultVo getContainerLogs(String serverInfo, String name) {
-        Map<String,Object> params =new HashMap<>(16);
-        params.put("follow",true);
-        params.put("stdout",true);
-        return ResultGenerator.getByDockerResponse(DockerClient.getContainerLogs(serverInfo, name,params));
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("follow", true);
+        params.put("stdout", true);
+        return ResultGenerator.getByDockerResponse(DockerClient.getContainerLogs(serverInfo, name, params));
     }
 
     private ContainerCreateDto getContainerCreateDto(ContainerCreatePyDto containerCreatePyDto) {
@@ -129,7 +121,6 @@ public class DockerContainerServiceImpl implements DockerContainerService {
     private void setterHostConfig(ContainerCreateDto containerCreateDto, ContainerCreatePyDto containerCreatePyDto) {
         HostConfig hostConfig = new HostConfig();
 
-
 //        hostConfig.setPortBindings(value);
 
         String ports = containerCreatePyDto.getPorts();
@@ -166,7 +157,6 @@ public class DockerContainerServiceImpl implements DockerContainerService {
         }
         containerCreateDto.setExposedPorts(value);
     }
-
 
     private void setterCmd(ContainerCreateDto containerCreateDto, String cmd) {
         List<String> cmds = new ArrayList<>();
