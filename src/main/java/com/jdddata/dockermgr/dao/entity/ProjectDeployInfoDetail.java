@@ -29,6 +29,8 @@ public class ProjectDeployInfoDetail {
 
     private String dockerMount;
 
+    private String dockerPort;
+
     private String dockerLink;
 
     private String dockerCpusetCpus;
@@ -155,6 +157,14 @@ public class ProjectDeployInfoDetail {
 
     public void setDockerMount(String dockerMount) {
         this.dockerMount = dockerMount == null ? null : dockerMount.trim();
+    }
+
+    public String getDockerPort() {
+        return dockerPort;
+    }
+
+    public void setDockerPort(String dockerPort) {
+        this.dockerPort = dockerPort == null ? null : dockerPort.trim();
     }
 
     public String getDockerLink() {
