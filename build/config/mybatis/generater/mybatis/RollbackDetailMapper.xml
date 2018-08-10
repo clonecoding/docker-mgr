@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jdddata.dockermgr.dao.mapper.RollbackDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.jdddata.dockermgr.dao.entity.RollbackDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="rollback_status" property="rollbackStatus" jdbcType="INTEGER" />
+    <result column="rollback_version" property="rollbackVersion" jdbcType="VARCHAR" />
+    <result column="rollback_time" property="rollbackTime" jdbcType="TIMESTAMP" />
+    <result column="rollback_user" property="rollbackUser" jdbcType="VARCHAR" />
+    <result column="rollback_reason" property="rollbackReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_id, rollback_status, rollback_version, rollback_time, rollback_user, 
+    rollback_reason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rollback_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rollback_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jdddata.dockermgr.dao.entity.RollbackDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rollback_detail (project_id, rollback_status, rollback_version, 
+      rollback_time, rollback_user, rollback_reason
+      )
+    values (#{projectId,jdbcType=BIGINT}, #{rollbackStatus,jdbcType=INTEGER}, #{rollbackVersion,jdbcType=VARCHAR}, 
+      #{rollbackTime,jdbcType=TIMESTAMP}, #{rollbackUser,jdbcType=VARCHAR}, #{rollbackReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.RollbackDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rollback_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="rollbackStatus != null" >
+        rollback_status,
+      </if>
+      <if test="rollbackVersion != null" >
+        rollback_version,
+      </if>
+      <if test="rollbackTime != null" >
+        rollback_time,
+      </if>
+      <if test="rollbackUser != null" >
+        rollback_user,
+      </if>
+      <if test="rollbackReason != null" >
+        rollback_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="rollbackStatus != null" >
+        #{rollbackStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rollbackVersion != null" >
+        #{rollbackVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="rollbackTime != null" >
+        #{rollbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rollbackUser != null" >
+        #{rollbackUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rollbackReason != null" >
+        #{rollbackReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jdddata.dockermgr.dao.entity.RollbackDetail" >
+    update rollback_detail
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="rollbackStatus != null" >
+        rollback_status = #{rollbackStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rollbackVersion != null" >
+        rollback_version = #{rollbackVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="rollbackTime != null" >
+        rollback_time = #{rollbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rollbackUser != null" >
+        rollback_user = #{rollbackUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rollbackReason != null" >
+        rollback_reason = #{rollbackReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jdddata.dockermgr.dao.entity.RollbackDetail" >
+    update rollback_detail
+    set project_id = #{projectId,jdbcType=BIGINT},
+      rollback_status = #{rollbackStatus,jdbcType=INTEGER},
+      rollback_version = #{rollbackVersion,jdbcType=VARCHAR},
+      rollback_time = #{rollbackTime,jdbcType=TIMESTAMP},
+      rollback_user = #{rollbackUser,jdbcType=VARCHAR},
+      rollback_reason = #{rollbackReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

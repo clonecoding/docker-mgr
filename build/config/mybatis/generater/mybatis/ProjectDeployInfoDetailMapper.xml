@@ -15,6 +15,7 @@
     <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR" />
     <result column="docker_cmd" property="dockerCmd" jdbcType="VARCHAR" />
     <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR" />
+    <result column="docker_port" property="dockerPort" jdbcType="VARCHAR" />
     <result column="docker_link" property="dockerLink" jdbcType="VARCHAR" />
     <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR" />
     <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR" />
@@ -31,9 +32,9 @@
   <sql id="Base_Column_List" >
     id, project_deploy_info_artifact_id, host_ip, docker_env, deploy_mode, git_version, 
     dockerfile_url, dockerfile_id, docker_container_name, docker_image_name, docker_entrypoint, 
-    docker_cmd, docker_mount, docker_link, docker_cpuset_cpus, docker_memory, docker_memory_swap, 
-    docker_memory_reservation, docker_memory_swappiness, is_valid, is_delete, create_time, 
-    create_user, update_time, update_user
+    docker_cmd, docker_mount, docker_port, docker_link, docker_cpuset_cpus, docker_memory, 
+    docker_memory_swap, docker_memory_reservation, docker_memory_swappiness, is_valid, 
+    is_delete, create_time, create_user, update_time, update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -53,20 +54,22 @@
       docker_env, deploy_mode, git_version, 
       dockerfile_url, dockerfile_id, docker_container_name, 
       docker_image_name, docker_entrypoint, docker_cmd, 
-      docker_mount, docker_link, docker_cpuset_cpus, 
-      docker_memory, docker_memory_swap, docker_memory_reservation, 
-      docker_memory_swappiness, is_valid, is_delete, 
-      create_time, create_user, update_time, 
-      update_user)
+      docker_mount, docker_port, docker_link, 
+      docker_cpuset_cpus, docker_memory, docker_memory_swap, 
+      docker_memory_reservation, docker_memory_swappiness, 
+      is_valid, is_delete, create_time, 
+      create_user, update_time, update_user
+      )
     values (#{projectDeployInfoArtifactId,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, 
       #{dockerEnv,jdbcType=VARCHAR}, #{deployMode,jdbcType=INTEGER}, #{gitVersion,jdbcType=VARCHAR}, 
       #{dockerfileUrl,jdbcType=VARCHAR}, #{dockerfileId,jdbcType=BIGINT}, #{dockerContainerName,jdbcType=VARCHAR}, 
       #{dockerImageName,jdbcType=VARCHAR}, #{dockerEntrypoint,jdbcType=VARCHAR}, #{dockerCmd,jdbcType=VARCHAR}, 
-      #{dockerMount,jdbcType=VARCHAR}, #{dockerLink,jdbcType=VARCHAR}, #{dockerCpusetCpus,jdbcType=VARCHAR}, 
-      #{dockerMemory,jdbcType=VARCHAR}, #{dockerMemorySwap,jdbcType=VARCHAR}, #{dockerMemoryReservation,jdbcType=VARCHAR}, 
-      #{dockerMemorySwappiness,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=VARCHAR})
+      #{dockerMount,jdbcType=VARCHAR}, #{dockerPort,jdbcType=VARCHAR}, #{dockerLink,jdbcType=VARCHAR}, 
+      #{dockerCpusetCpus,jdbcType=VARCHAR}, #{dockerMemory,jdbcType=VARCHAR}, #{dockerMemorySwap,jdbcType=VARCHAR}, 
+      #{dockerMemoryReservation,jdbcType=VARCHAR}, #{dockerMemorySwappiness,jdbcType=VARCHAR}, 
+      #{isValid,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jdddata.dockermgr.dao.entity.ProjectDeployInfoDetail" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -109,6 +112,9 @@
       </if>
       <if test="dockerMount != null" >
         docker_mount,
+      </if>
+      <if test="dockerPort != null" >
+        docker_port,
       </if>
       <if test="dockerLink != null" >
         docker_link,
@@ -183,6 +189,9 @@
       </if>
       <if test="dockerMount != null" >
         #{dockerMount,jdbcType=VARCHAR},
+      </if>
+      <if test="dockerPort != null" >
+        #{dockerPort,jdbcType=VARCHAR},
       </if>
       <if test="dockerLink != null" >
         #{dockerLink,jdbcType=VARCHAR},
@@ -261,6 +270,9 @@
       <if test="dockerMount != null" >
         docker_mount = #{dockerMount,jdbcType=VARCHAR},
       </if>
+      <if test="dockerPort != null" >
+        docker_port = #{dockerPort,jdbcType=VARCHAR},
+      </if>
       <if test="dockerLink != null" >
         docker_link = #{dockerLink,jdbcType=VARCHAR},
       </if>
@@ -314,6 +326,7 @@
       docker_entrypoint = #{dockerEntrypoint,jdbcType=VARCHAR},
       docker_cmd = #{dockerCmd,jdbcType=VARCHAR},
       docker_mount = #{dockerMount,jdbcType=VARCHAR},
+      docker_port = #{dockerPort,jdbcType=VARCHAR},
       docker_link = #{dockerLink,jdbcType=VARCHAR},
       docker_cpuset_cpus = #{dockerCpusetCpus,jdbcType=VARCHAR},
       docker_memory = #{dockerMemory,jdbcType=VARCHAR},
