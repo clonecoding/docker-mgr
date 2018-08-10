@@ -24,5 +24,5 @@ public interface RollbackService {
      * @param branch
      * @return
      */
-    ResultVo commomRollback(Long projectDeployId, String branch);
+    ResultVo commonRollback(Long projectDeployId, String branch);
 }

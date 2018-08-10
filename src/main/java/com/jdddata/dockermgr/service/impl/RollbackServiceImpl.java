@@ -10,7 +10,9 @@ import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDetailDto;
 import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.service.DockerContainerService;
 import com.jdddata.dockermgr.service.RollbackService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,13 @@ import java.util.concurrent.ExecutorService;
  * @Date: 2018/8/9 15:26
  * @modified By:
  */
+@Service
 public class RollbackServiceImpl implements RollbackService {
 
     @Autowired
-    ProjectDeployInfoCMapper projectDeployInfoCMapper;
+    private ProjectDeployInfoCMapper projectDeployInfoCMapper;
     @Autowired
-    DockerContainerService dockerContainerService;
+    private DockerContainerService dockerContainerService;
 
     /**
      * @return
@@ -49,10 +52,10 @@ public class RollbackServiceImpl implements RollbackService {
         } else {
             return ResultGenerator.getFail("查询项目部署信息异常");
         }
-        String tag = (deployInfoDtos.get(0).getDeployEnv() == 0) ? "test" : "prod" + branch;
+        String tag = ((deployInfoDtos.get(0).getDeployEnv() == 0) ? "test" : "prod") + "-" + branch;
         CountDownLatch countDownLatch = new CountDownLatch(deployInfoDetailDtos.size());
         for (DeployInfoDetailDto deployInfoDetailDto : deployInfoDetailDtos) {
-            ThreadPoolUtils.getThreadPool().execute(new SubRollback(tag,deployInfoDetailDto,countDownLatch));
+            ThreadPoolUtils.getThreadPool().execute(new SubRollback(tag, deployInfoDetailDto, countDownLatch, dockerContainerService));
         }
         try {
             countDownLatch.await();
@@ -70,7 +73,7 @@ public class RollbackServiceImpl implements RollbackService {
      * @description 常规部署项目进行回滚操作
      */
     @Override
-    public ResultVo commomRollback(Long projectDeployId, String branch) {
+    public ResultVo commonRollback(Long projectDeployId, String branch) {
         return null;
     }
 
@@ -82,13 +85,17 @@ public class RollbackServiceImpl implements RollbackService {
 
         private CountDownLatch countDownLatch;
 
+        private DockerContainerService dockerContainerService;
+
         public SubRollback() {
         }
 
-        public SubRollback(String tag, DeployInfoDetailDto deployInfoDetailDto, CountDownLatch countDownLatch) {
+        public SubRollback(String tag, DeployInfoDetailDto deployInfoDetailDto,
+                           CountDownLatch countDownLatch, DockerContainerService dockerContainerService) {
             this.tag = tag;
             this.deployInfoDetailDto = deployInfoDetailDto;
             this.countDownLatch = countDownLatch;
+            this.dockerContainerService = dockerContainerService;
         }
 
         public DeployInfoDetailDto getDeployInfoDetailDto() {
@@ -114,16 +121,21 @@ public class RollbackServiceImpl implements RollbackService {
         public void setTag(String tag) {
             this.tag = tag;
         }
+
         @Override
         public void run() {
+            System.out.println("...........................................");
             String ip = deployInfoDetailDto.getHostIp();
             String imageName = deployInfoDetailDto.getDockerImageName();
             /*停止并删除容器*/
             DockerClient.stopContainer(ip, deployInfoDetailDto.getDockerContainerName());
             DockerClient.deleteContainer(ip, deployInfoDetailDto.getDockerContainerName());
             /*创建容器*/
-            dockerContainerService.createContainer(ip, imageName + ":" + tag, getCreatePyDto(deployInfoDetailDto));
+            System.out.println("End1...........................................");
+            deployInfoDetailDto.setDockerImageName(imageName + ":" + tag);
+            dockerContainerService.createContainer(ip, deployInfoDetailDto.getDockerContainerName(), getCreatePyDto(deployInfoDetailDto));
             countDownLatch.countDown();
+            System.out.println("End...........................................");
         }
 
         private ContainerCreatePyDto getCreatePyDto(DeployInfoDetailDto deployInfoDetailDto) {
@@ -133,9 +145,12 @@ public class RollbackServiceImpl implements RollbackService {
             containerCreatePyDto.setEntryPoint(deployInfoDetailDto.getDockerEntrypoint());
             containerCreatePyDto.setEnv(deployInfoDetailDto.getDockerEnv());
             //containerCreatePyDto.setHostConfig(deployInfoDetailDto.getHostIp());
-            containerCreatePyDto.setMemory(Integer.valueOf(deployInfoDetailDto.getDockerMemory()));
-            containerCreatePyDto.setMemorySwap(Integer.valueOf(deployInfoDetailDto.getDockerMemorySwappiness()));
-            containerCreatePyDto.setMemoryReservation(Integer.valueOf(deployInfoDetailDto.getDockerMemoryReservation()));
+            containerCreatePyDto.setMemory(StringUtils.isEmpty(deployInfoDetailDto.getDockerMemory()) ?
+                    null : Integer.valueOf(deployInfoDetailDto.getDockerMemory()));
+            containerCreatePyDto.setMemorySwap(StringUtils.isEmpty(deployInfoDetailDto.getDockerMemorySwappiness()) ?
+                    null : Integer.valueOf(deployInfoDetailDto.getDockerMemorySwappiness()));
+            containerCreatePyDto.setMemoryReservation(StringUtils.isEmpty(deployInfoDetailDto.getDockerMemoryReservation()) ?
+                    null : Integer.valueOf(deployInfoDetailDto.getDockerMemoryReservation()));
             containerCreatePyDto.setCpusetCpus(deployInfoDetailDto.getDockerCpusetCpus());
             return containerCreatePyDto;
         }

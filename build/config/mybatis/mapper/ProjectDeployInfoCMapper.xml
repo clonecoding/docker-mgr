@@ -97,9 +97,9 @@ LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_
 LEFT JOIN project_mgr pm ON pdi.project_id = pm.id
 WHERE 1=1
     </select>
-
     <select id="findByDeployId" resultMap="DeployDetail" parameterType="java.lang.Long">
-        	pdi.id,
+    select
+    pdi.id,
 	pdi.project_id,
 	pdi.git_url,
 	pdi.git_version,
@@ -126,10 +126,10 @@ WHERE 1=1
 	pdid.docker_memory_swap,
 	pdid.docker_memory_reservation,
 	pdid.docker_memory_swappiness
-FROM
-	project_deploy_info pdi
-LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi.id
-LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
-WHERE pdi.id =  #{id,jdbcType=BIGINT}
+    FROM
+        project_deploy_info pdi
+    LEFT JOIN project_deploy_info_artifact pdia ON pdia.project_deploy_info_id = pdi.id
+    LEFT JOIN project_deploy_info_detail pdid ON pdia.id = pdid.project_deploy_info_artifact_id
+    WHERE pdi.id = #{id}
     </select>
 </mapper>

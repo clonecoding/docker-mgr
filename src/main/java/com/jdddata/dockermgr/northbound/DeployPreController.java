@@ -7,6 +7,7 @@ import com.jdddata.dockermgr.northbound.dto.deploy.DeployInfoDto;
 import com.jdddata.dockermgr.northbound.dto.git.GitDto;
 import com.jdddata.dockermgr.service.DeployService;
 import com.jdddata.dockermgr.service.PomParseService;
+import com.jdddata.dockermgr.service.RollbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,9 @@ public class DeployPreController {
 
     @Autowired
     private PomParseService pomParseService;
+
+    @Autowired
+    private RollbackService rollbackService;
 
     /**
      * 获取版本分支信息
@@ -98,4 +102,9 @@ public class DeployPreController {
 //            throw new ValidatorException("docker指定内存运行参数不合法");
 //        }
 //    }
+
+    @PostMapping("/rollback/{id}/{branch}")
+    public ResultVo rollback(@PathVariable("id") Long id,@PathVariable("branch") String branch) {
+        return rollbackService.dockerRollback(id,branch);
+    }
 }
