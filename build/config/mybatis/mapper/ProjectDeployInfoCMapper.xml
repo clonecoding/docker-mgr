@@ -41,6 +41,7 @@
                 <result column="docker_entrypoint" property="dockerEntrypoint" jdbcType="VARCHAR"/>
                 <result column="docker_cmd" property="dockerCmd" jdbcType="VARCHAR"/>
                 <result column="docker_mount" property="dockerMount" jdbcType="VARCHAR"/>
+                <result column="docker_port" property="dockerPort" jdbcType="VARCHAR"/>
                 <result column="docker_link" property="dockerLink" jdbcType="VARCHAR"/>
                 <result column="docker_cpuset_cpus" property="dockerCpusetCpus" jdbcType="VARCHAR"/>
                 <result column="docker_memory" property="dockerMemory" jdbcType="VARCHAR"/>
@@ -84,6 +85,7 @@ SELECT
 	pdid.docker_entrypoint,
 	pdid.docker_cmd,
 	pdid.docker_mount,
+	pdid.docker_port,
 	pdid.docker_link,
 	pdid.docker_cpuset_cpus,
 	pdid.docker_memory,
@@ -120,6 +122,7 @@ WHERE 1=1
 	pdid.docker_entrypoint,
 	pdid.docker_cmd,
 	pdid.docker_mount,
+	pdid.docker_port,
 	pdid.docker_link,
 	pdid.docker_cpuset_cpus,
 	pdid.docker_memory,

@@ -27,6 +27,8 @@ public class DeployInfoDetailDto {
 
     private String dockerMount;
 
+    private String dockerPort;
+
     private String dockerLink;
 
     private String dockerCpusetCpus;
@@ -193,6 +195,14 @@ public class DeployInfoDetailDto {
         this.dockerfileUrl = dockerfileUrl;
     }
 
+    public String getDockerPort() {
+        return dockerPort;
+    }
+
+    public void setDockerPort(String dockerPort) {
+        this.dockerPort = dockerPort;
+    }
+
     public ProjectDeployInfoDetail convertEntityWithId(Long artifactId, String dockerfileUrl) {
         ProjectDeployInfoDetail deployInfoDetail = new ProjectDeployInfoDetail();
         deployInfoDetail.setId(this.id);
@@ -207,6 +217,7 @@ public class DeployInfoDetailDto {
         deployInfoDetail.setDockerImageName(this.dockerImageName);
         deployInfoDetail.setDockerEntrypoint(this.dockerEntrypoint);
         deployInfoDetail.setDockerMount(this.dockerMount);
+        deployInfoDetail.setDockerPort(this.dockerPort);
         deployInfoDetail.setDockerLink(this.dockerLink);
         deployInfoDetail.setDockerCpusetCpus(this.dockerCpusetCpus);
         deployInfoDetail.setDockerMemory(this.dockerMemory);

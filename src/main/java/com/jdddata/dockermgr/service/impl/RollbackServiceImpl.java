@@ -142,6 +142,7 @@ public class RollbackServiceImpl implements RollbackService {
             ContainerCreatePyDto containerCreatePyDto = new ContainerCreatePyDto();
             containerCreatePyDto.setImage(deployInfoDetailDto.getDockerImageName());
             containerCreatePyDto.setVolumes(deployInfoDetailDto.getDockerMount());
+            containerCreatePyDto.setPorts(deployInfoDetailDto.getDockerPort());
             containerCreatePyDto.setEntryPoint(deployInfoDetailDto.getDockerEntrypoint());
             containerCreatePyDto.setEnv(deployInfoDetailDto.getDockerEnv());
             //containerCreatePyDto.setHostConfig(deployInfoDetailDto.getHostIp());
