@@ -165,7 +165,9 @@ public class ContainerListDto {
         containerInfo.setContainerId(getId());
         containerInfo.setContainerName(getNames().get(0).substring(1));
         containerInfo.setImageName(getImage().split(":")[0]);
-        containerInfo.setImageTag(getImage().split(":")[1]);
+        if((getImage().split(":").length) >1){
+            containerInfo.setImageTag(getImage().split(":")[1]);
+        }
         containerInfo.setImageId(getImageID());
         containerInfo.setCommand(getCommand());
         containerInfo.setContainerPorts(JSON.toJSONString(getPorts()));
