@@ -20,18 +20,18 @@
     <repositories>
         <repository>
             <id>jdddata</id>
-            <url>http://maven-repository.jdddata.com/nexus/content/groups/public</url>
+            <url>http://maven.gezhiwei.com/nexus/content/groups/public</url>
         </repository>
     </repositories>
     <!--发布仓库-->
     <distributionManagement>
         <snapshotRepository>
             <id>jddsjSnapshots</id>
-            <url>http://maven-repository.jdddata.com/nexus/content/repositories/snapshots</url>
+            <url>http://maven.gezhiwei.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>jddsjReleases</id>
-            <url>http://maven-repository.jdddata.com/nexus/content/repositories/releases</url>
+            <url>http://maven.gezhiwei.com/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>
 

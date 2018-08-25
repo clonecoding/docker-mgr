@@ -18,10 +18,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import javax.net.ssl.SSLContext;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
@@ -334,5 +331,22 @@ public class HttpClientUtils {
         }
 
         return httpResponse;
+    }
+
+    public static DataInputStream getStreamWithcert(String url) {
+        try {
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.setConfig(requestConfig);
+            CloseableHttpClient httpClient = clientCustomPemSSL();
+            CloseableHttpResponse execute = httpClient.execute(httpGet);
+            HttpEntity entity = execute.getEntity();
+            InputStream content = entity.getContent();
+            DataInputStream dataInputStream = new DataInputStream(content);
+            return dataInputStream;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

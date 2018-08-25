@@ -8,12 +8,21 @@ import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.HostCon
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ContainersTest {
+
+    private static final BlockingQueue BLOCKING_QUEUE = new ArrayBlockingQueue<String>(10);
 
     @Test
     public void deleteContainer() {
@@ -40,7 +49,7 @@ public class ContainersTest {
 
     @Test
     public void fetchContainerInfo() {
-        HttpResponse response = HttpClientUtils.getWithCert("https://10.33.94.5:2376/containers/json?all=true");
+        HttpResponse response = HttpClientUtils.getWithCert("https://122.152.215.58:2376/containers/json?all=true");
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
         String body = response.getBody();
@@ -50,11 +59,27 @@ public class ContainersTest {
 
 
     @Test
-    public void stats() {
-        Map<String, Object> params = new HashMap<>(16);
-        params.put("stream", false);
-        HttpResponse httpResponse = HttpClientUtils.getWithCert("https://10.33.94.34:2376/containers/webdav/stats", params);
-        System.out.println(httpResponse.getBody());
+    public void stats() throws IOException {
+        DataInputStream httpResponse = HttpClientUtils.getStreamWithcert("https://132.232.105.146:2376/containers/webdav/stats");
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        try {
+            while (true) {
+                int b = httpResponse.read();
+                if (b < 0) {
+                    throw new IOException("Data truncated");
+                }
+                buffer.write(b);
+                if (b == 0x0A) {
+                    String s = new String(buffer.toByteArray(), "UTF-8");
+                    BLOCKING_QUEUE.add(s);
+                    System.out.println(s);
+                }
+
+            }
+        } catch (Exception e) {
+//            e.printStackTrace();
+            System.err.println("blocke queque size is: " + BLOCKING_QUEUE.size());
+        }
     }
 
 
