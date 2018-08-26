@@ -8,11 +8,9 @@ import com.jdddata.dockermgr.adapter.docker.httpadapter.container.create.HostCon
 import com.jdddata.dockermgr.adapter.docker.httpadapter.container.list.ContainerListDto;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -76,10 +74,13 @@ public class ContainersTest {
                 }
 
             }
+
         } catch (Exception e) {
 //            e.printStackTrace();
             System.err.println("blocke queque size is: " + BLOCKING_QUEUE.size());
         }
+        String poll = (String) BLOCKING_QUEUE.poll();
+        System.out.println("sadf");
     }
 
 
